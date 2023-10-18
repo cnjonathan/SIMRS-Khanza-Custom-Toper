@@ -1235,6 +1235,7 @@ public class koneksiDB {
         return var;
     }
     
+    // tambahan
     public static String ADDANTRIANAPIMOBILEJKN(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
