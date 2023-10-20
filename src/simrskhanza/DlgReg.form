@@ -53,14 +53,17 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnRMRawatJalan" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <SubComponents>
-                <Menu class="javax.swing.JMenu" name="MnAwalKeperawatan">
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalKeperawatanRalan">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="32" green="32" red="32" type="rgb"/>
@@ -68,180 +71,25 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Awal Keperawatan"/>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Umum"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="MnAwalKeperawatan" noResource="true"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanRalan" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[200, 26]"/>
+                      <Dimension value="[310, 26]"/>
                     </Property>
                   </Properties>
-                  <SubComponents>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalKeperawatanRalan">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Umum"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanRalan" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalKeperawatanRalanActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalKeperawatanGigi">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Gigi &amp; Mulut"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanGigi" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalKeperawatanGigiActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalKeperawatanKebidanan">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Kebidanan &amp; Kandungan"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanKebidanan" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalKeperawatanKebidananActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalKeperawatanBayiAnak">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Bayi/Anak"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanBayiAnak" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalKeperawatanBayiAnakActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalKeperawatanPsikiatri">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Psikiatri"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanPsikiatri" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalKeperawatanPsikiatriActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalKeperawatanRalanGeriatri">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Geriatri"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanRalanGeriatri" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalKeperawatanRalanGeriatriActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                  </SubComponents>
-                </Menu>
-                <Menu class="javax.swing.JMenu" name="MnAwalMedis">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalKeperawatanRalanActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalKeperawatanGigi">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="32" green="32" red="32" type="rgb"/>
@@ -249,410 +97,408 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Awal Medis"/>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Gigi &amp; Mulut"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanGigi" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalKeperawatanGigiActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalKeperawatanKebidanan">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="11" style="0"/>
                     </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Kebidanan &amp; Kandungan"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="MnAwalMedis" noResource="true"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanKebidanan" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[200, 26]"/>
+                      <Dimension value="[310, 26]"/>
                     </Property>
                   </Properties>
-                  <SubComponents>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalan">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Umum"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalan" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanKebidanan">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Kebidanan &amp; Kandungan"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanKebidanan" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanKebidananActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanBayi">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Bayi/Anak"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanBayi" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanBayiActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanTHT">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis THT"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanTHT" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanTHTActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanPsikiatri">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Psikiatri"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanPsikiatri" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanPsikiatriActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanPenyakitDalam">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Penyakit Dalam"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanPenyakitDalam" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanPenyakitDalamActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanMata">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Mata"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanMata" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanMataActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanNeurologi">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Neurologi"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanNeurologi" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanNeurologiActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanOrthopedi">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Orthopedi"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanOrthopedi" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanOrthopediActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanBedah">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Bedah"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanBedah" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanBedahActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanBedahMulut">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Bedah Mulut"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanBedahMulut" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanBedahMulutActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanGeriatri">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Geriatri"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanGeriatri" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanGeriatriActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanKulitKelamin">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Kulit &amp; Kelamin"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanKulitKelamin" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanKulitKelaminActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanFisikRehabilitasi">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Fisik &amp; Rehabilitasi"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanFisikRehabilitasi" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanFisikRehabilitasiActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisHemodialisa">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="11" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="32" green="32" red="32" type="rgb"/>
-                        </Property>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/category.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Hemodialisa"/>
-                        <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
-                        <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisHemodialisa" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[310, 26]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisHemodialisaActionPerformed"/>
-                      </Events>
-                    </MenuItem>
-                  </SubComponents>
-                </Menu>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalKeperawatanKebidananActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalKeperawatanBayiAnak">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Bayi/Anak"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanBayiAnak" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalKeperawatanBayiAnakActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalKeperawatanPsikiatri">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Keperawatan Psikiatri"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanPsikiatri" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalKeperawatanPsikiatriActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalan">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Umum"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalan" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanKebidanan">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Kebidanan &amp; Kandungan"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanKebidanan" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanKebidananActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanBayi">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Bayi/Anak"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanBayi" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanBayiActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanTHT">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis THT"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanTHT" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanTHTActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanPsikiatri">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Psikiatri"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanPsikiatri" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanPsikiatriActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanPenyakitDalam">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Penyakit Dalam"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanPenyakitDalam" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanPenyakitDalamActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanMata">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Mata"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanMata" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanMataActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanNeurologi">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Neurologi"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanNeurologi" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanNeurologiActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanOrthopedi">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Orthopedi"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanOrthopedi" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanOrthopediActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanBedah">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Bedah"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanBedah" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanBedahActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanBedahMulut">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Bedah Mulut"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanBedahMulut" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanBedahMulutActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisRalanGeriatri">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="32" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/category.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis Geriatri"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
+                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisRalanGeriatri" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[310, 26]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisRalanGeriatriActionPerformed"/>
+                  </Events>
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="MnHasilPemeriksaanUSG">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -672,37 +518,11 @@
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnHasilPemeriksaanUSG" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[200, 26]"/>
+                      <Dimension value="[250, 26]"/>
                     </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnHasilPemeriksaanUSGActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="MnDokumentasiTindakanESWL">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="32" green="32" red="32" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/category.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Dokumentasi Tindakan ESWL"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="MnDokumentasiTindakanESWL" noResource="true"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[200, 26]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnDokumentasiTindakanESWLActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
@@ -726,7 +546,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnRMIGD" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <SubComponents>
@@ -749,7 +569,7 @@
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnDataTriaseIGD" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[230, 26]"/>
+                      <Dimension value="[210, 26]"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -775,7 +595,7 @@
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianAwalKeperawatanIGD" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[230, 26]"/>
+                      <Dimension value="[210, 26]"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -801,37 +621,11 @@
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisIGD" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[230, 26]"/>
+                      <Dimension value="[210, 26]"/>
                     </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisIGDActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianAwalMedisIGDPsikiatri">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="32" green="32" red="32" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/category.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Awal Medis IGD Psikiatri"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="MnPenilaianAwalMedisIGDPsikiatri" noResource="true"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[230, 26]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianAwalMedisIGDPsikiatriActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianPasienKeracunan">
@@ -853,7 +647,7 @@
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianPasienKeracunan" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[230, 26]"/>
+                      <Dimension value="[210, 26]"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -879,7 +673,7 @@
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnCatatanObservasiIGD" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[230, 26]"/>
+                      <Dimension value="[210, 26]"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -905,7 +699,7 @@
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPemantauanPEWSAnak" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[230, 26]"/>
+                      <Dimension value="[210, 26]"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -931,7 +725,7 @@
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPemantauanPEWSDewasa" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[230, 26]"/>
+                      <Dimension value="[210, 26]"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -957,37 +751,11 @@
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPemantauanMEOWSObstetri" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[230, 26]"/>
+                      <Dimension value="[210, 26]"/>
                     </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPemantauanMEOWSObstetriActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="MnPemantauanEWSNeonatus">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="32" green="32" red="32" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/category.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Pemantauan EWS Neonatus"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="MnPemantauanEWSNeonatus" noResource="true"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[230, 26]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPemantauanEWSNeonatusActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
@@ -1011,7 +779,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnRMOperasi" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <SubComponents>
@@ -1199,83 +967,6 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="MnRMHCU">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="32" green="32" red="32" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/picture/category.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="RM HCU &amp; ICU"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="horizontalTextPosition" type="int" value="4"/>
-                <Property name="name" type="java.lang.String" value="MnRMHCU" noResource="true"/>
-                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
-                </Property>
-              </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="MnCheckListKriteriaMasukHCU">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="32" green="32" red="32" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/category.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Check List Kriteria Masuk HCU"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="MnCheckListKriteriaMasukHCU" noResource="true"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[200, 26]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnCheckListKriteriaMasukHCUActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="MnCheckListKriteriaMasukICU">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="32" green="32" red="32" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/category.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Check List Kriteria Masuk ICU"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="MnCheckListKriteriaMasukICU" noResource="true"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[200, 26]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnCheckListKriteriaMasukICUActionPerformed"/>
-                  </Events>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="MnUjiFungsiKFR">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -1295,7 +986,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnUjiFungsiKFR" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -1313,7 +1004,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/picture/category.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Risiko Jatuh &amp; Fungsional"/>
+                <Property name="text" type="java.lang.String" value="Risiko Jatuh"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="0"/>
                 </Property>
@@ -1321,7 +1012,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnRMRisikoJatuh" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <SubComponents>
@@ -1339,7 +1030,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Risiko Jatuh Dewasa"/>
+                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Resiko Jatuh Dewasa"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianRisikoJatuhDewasa" noResource="true"/>
@@ -1365,7 +1056,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Risiko Jatuh Anak"/>
+                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Resiko Jatuh Anak"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianRisikoJatuhAnak" noResource="true"/>
@@ -1391,7 +1082,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/picture/category.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Risiko Jatuh Lansia"/>
+                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Resiko Jatuh Lansia"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                     <Property name="name" type="java.lang.String" value="MnPenilaianRisikoJatuhLansia" noResource="true"/>
@@ -1401,110 +1092,6 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianRisikoJatuhLansiaActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianRisikoJatuhNeonatus">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="32" green="32" red="32" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/category.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Risiko Jatuh Neonatus"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="MnPenilaianRisikoJatuhNeonatus" noResource="true"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[250, 26]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianRisikoJatuhNeonatusActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianRisikoJatuhGeriatri">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="32" green="32" red="32" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/category.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Risiko Jatuh Geriatri"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="MnPenilaianRisikoJatuhGeriatri" noResource="true"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[250, 26]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianRisikoJatuhGeriatriActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianRisikoJatuhPsikiatri">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="32" green="32" red="32" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/category.png"/>
-                    </Property>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="label" type="java.lang.String" value="Penilaian Lanjutan Risiko Jatuh Psikiatri"/>
-                    <Property name="name" type="java.lang.String" value="MnPenilaianRisikoJatuhPsikiatri" noResource="true"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[250, 26]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianRisikoJatuhPsikiatriActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianLanjutanSkriningFungsional">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="32" green="32" red="32" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/category.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Lanjutan Skrining Fungsional"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="MnPenilaianLanjutanSkriningFungsional" noResource="true"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[250, 26]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianLanjutanSkriningFungsionalActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
@@ -1528,7 +1115,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnPenilaianLain" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <SubComponents>
@@ -1792,32 +1379,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianMCUActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="MnHemodialisa">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="32" green="32" red="32" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/category.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Hemodialisa"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="MnHemodialisa" noResource="true"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[220, 26]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnHemodialisaActionPerformed"/>
-                  </Events>
-                </MenuItem>
               </SubComponents>
             </Menu>
             <Menu class="javax.swing.JMenu" name="MnRMFarmasi">
@@ -1839,7 +1400,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnRMFarmasi" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <SubComponents>
@@ -1916,7 +1477,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnRMCatatanMonitoring" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <SubComponents>
@@ -1972,32 +1533,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnMonitoringReaksiTranfusiActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="MnPenilaianUlangNyeri">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="32" green="32" red="32" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/category.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Penilaian Ulang Nyeri"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="MnPenilaianUlangNyeri" noResource="true"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[210, 26]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenilaianUlangNyeriActionPerformed"/>
-                  </Events>
-                </MenuItem>
               </SubComponents>
             </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="MnDiagnosa">
@@ -2019,11 +1554,37 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnDiagnosa" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnDiagnosaActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MnHemodialisa">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="fe" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="32" green="32" red="32" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/picture/category.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Hemodialisa"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="horizontalTextPosition" type="int" value="4"/>
+                <Property name="name" type="java.lang.String" value="MnHemodialisa" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[250, 26]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnHemodialisaActionPerformed"/>
               </Events>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="MnGizi">
@@ -2045,7 +1606,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnGizi" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <SubComponents>
@@ -2205,32 +1766,6 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ppMonitoringAsuhanGiziBtnPrintActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="ppCatatanAdimeGizi">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="32" green="32" red="32" type="rgb"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/category.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Catatan ADIME Gizi"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                    <Property name="name" type="java.lang.String" value="ppCatatanAdimeGizi" noResource="true"/>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[210, 26]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ppCatatanAdimeGiziBtnPrintActionPerformed"/>
-                  </Events>
-                </MenuItem>
               </SubComponents>
             </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="MnTransferAntarRuang">
@@ -2252,7 +1787,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnTransferAntarRuang" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -2278,7 +1813,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnEdukasiPasienKeluarga" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -2304,7 +1839,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="ppResume" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -2330,7 +1865,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="ppRiwayat" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -2356,7 +1891,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="ppDeteksiDIniCorona" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[220, 26]"/>
+                  <Dimension value="[250, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -4121,32 +3656,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPersetujuanPenundaanPelayananActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MnPenolakanAnjuranMedis">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="32" green="32" red="32" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/picture/category.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Penolakan Anjuran Medis"/>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="horizontalTextPosition" type="int" value="4"/>
-                <Property name="name" type="java.lang.String" value="MnPenolakanAnjuranMedis" noResource="true"/>
-                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[170, 26]"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnPenolakanAnjuranMedisActionPerformed"/>
-              </Events>
-            </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenu8">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -5412,7 +4921,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnSEP" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
+                  <Dimension value="[230, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -5438,7 +4947,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="ppSuratKontrol" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
+                  <Dimension value="[230, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -5464,7 +4973,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="ppSuratPRI" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
+                  <Dimension value="[230, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -5490,7 +4999,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="ppProgramPRB" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
+                  <Dimension value="[230, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -5516,7 +5025,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="ppSuplesiJasaRaharja" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
+                  <Dimension value="[230, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -5542,37 +5051,11 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="ppDataIndukKecelakaan" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
+                  <Dimension value="[230, 26]"/>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ppDataIndukKecelakaanBtnPrintActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MnBelumTerbitSEP">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="32" green="32" red="32" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/picture/category.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Belum Terbit SEP BPJS"/>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="horizontalTextPosition" type="int" value="4"/>
-                <Property name="name" type="java.lang.String" value="MnBelumTerbitSEP" noResource="true"/>
-                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnBelumTerbitSEPActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MnSJP">
@@ -5594,7 +5077,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnSJP" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
+                  <Dimension value="[230, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -5620,7 +5103,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnPCare" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
+                  <Dimension value="[230, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -5646,7 +5129,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnRujukSisrute" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
+                  <Dimension value="[230, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -5672,7 +5155,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="ppPasienCorona" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
+                  <Dimension value="[230, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -5698,7 +5181,7 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="ppPerawatanCorona" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
+                  <Dimension value="[230, 26]"/>
                 </Property>
               </Properties>
               <Events>
@@ -5724,115 +5207,11 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="name" type="java.lang.String" value="MnTeridentifikasiTB" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
+                  <Dimension value="[230, 26]"/>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnTeridentifikasiTBActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MnRiwayatPerawatanICareNIK">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="32" green="32" red="32" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/picture/category.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cek Riwayat Perawatan ICare BPJS Via NIK FKTL"/>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="horizontalTextPosition" type="int" value="4"/>
-                <Property name="name" type="java.lang.String" value="MnRiwayatPerawatanICareNIK" noResource="true"/>
-                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnRiwayatPerawatanICareNIKActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MnRiwayatPerawatanICareNoKartu">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="32" green="32" red="32" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/picture/category.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cek Riwayat Perawatan ICare BPJS Via No.Kartu FKTL"/>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="horizontalTextPosition" type="int" value="4"/>
-                <Property name="name" type="java.lang.String" value="MnRiwayatPerawatanICareNoKartu" noResource="true"/>
-                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnRiwayatPerawatanICareNoKartuActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MnRiwayatPerawatanICareNIK1">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="32" green="32" red="32" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/picture/category.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cek Riwayat Perawatan ICare BPJS Via NIK FKTP"/>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="horizontalTextPosition" type="int" value="4"/>
-                <Property name="name" type="java.lang.String" value="MnRiwayatPerawatanICareNIK1" noResource="true"/>
-                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnRiwayatPerawatanICareNIK1ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MnRiwayatPerawatanICareNoKartu1">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="32" green="32" red="32" type="rgb"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/picture/category.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cek Riwayat Perawatan ICare BPJS Via No.Kartu FKTP"/>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="horizontalTextPosition" type="int" value="4"/>
-                <Property name="name" type="java.lang.String" value="MnRiwayatPerawatanICareNoKartu1" noResource="true"/>
-                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[320, 26]"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnRiwayatPerawatanICareNoKartu1ActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -6822,7 +6201,6 @@
                       <Color PropertyName="color" blue="e1" green="eb" red="e6" type="rgb"/>
                     </LineBorder>
                   </Border>
-                  <Font PropertyName="font" name="Tahoma" size="11" style="0"/>
                   <Color PropertyName="color" blue="32" green="46" red="32" type="rgb"/>
                 </TitledBorder>
               </Border>
@@ -7084,7 +6462,6 @@
                       <Color PropertyName="color" blue="e1" green="eb" red="e6" type="rgb"/>
                     </LineBorder>
                   </Border>
-                  <Font PropertyName="font" name="Tahoma" size="11" style="0"/>
                   <Color PropertyName="color" blue="32" green="46" red="32" type="rgb"/>
                 </TitledBorder>
               </Border>
@@ -8381,7 +7758,6 @@
                   <Color PropertyName="color" blue="eb" green="f5" red="f0" type="rgb"/>
                 </LineBorder>
               </Border>
-              <Font PropertyName="font" name="Tahoma" size="11" style="0"/>
               <Color PropertyName="color" blue="32" green="32" red="32" type="rgb"/>
             </TitledBorder>
           </Border>
@@ -8611,7 +7987,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="30-09-2023"/>
+                        <StringItem index="0" value="09-10-2023"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -8636,7 +8012,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="30-09-2023"/>
+                        <StringItem index="0" value="09-10-2023"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -8895,7 +8271,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="30-09-2023"/>
+                        <StringItem index="0" value="09-10-2023"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -9610,9 +8986,6 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="32" green="32" red="32" type="rgb"/>
             </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0"/>
-            </Property>
             <Property name="name" type="java.lang.String" value="TabRawat" noResource="true"/>
           </Properties>
           <Events>
@@ -9654,11 +9027,20 @@
               <SubComponents>
                 <Component class="widget.Table" name="tbPetugas">
                   <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="0" rowCount="0"/>
+                    </Property>
                     <Property name="toolTipText" type="java.lang.String" value="Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan"/>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0"/>
+                    </Property>
                     <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
                       <ComponentRef name="jPopupMenu1"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="tbPetugas" noResource="true"/>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbPetugasMouseClicked"/>

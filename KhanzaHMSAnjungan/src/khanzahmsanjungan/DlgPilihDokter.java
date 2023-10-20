@@ -319,14 +319,14 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                             DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                             pilih.setSize(this.getWidth(),this.getHeight());
                             pilih.setLocationRelativeTo(this);
-                            pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
+                            pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", "null");
                             pilih.setVisible(true);
                         }                    
                     }else{
                         DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                         pilih.setSize(this.getWidth(),this.getHeight());
                         pilih.setLocationRelativeTo(this);
-                        pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
+                        pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", "null");
                         pilih.setVisible(true);
                     } 
                 } catch (java.lang.NullPointerException e) {
@@ -337,6 +337,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
         if(tabmode.getRowCount()!=0){
+            System.out.println("LblNoRm: "+LblNoRm.getText()+", LblKdPoli: "+LblKdPoli.getText()+", kddokter: "+tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
             try {
                 if(aktifjadwal.equals("aktif")){
                     if(Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_dokter='"+tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString()+"' and reg_periksa.tgl_registrasi=CURRENT_DATE() ")>=Integer.parseInt(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),2).toString())){
@@ -346,14 +347,14 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                         DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                         pilih.setSize(this.getWidth(),this.getHeight());
                         pilih.setLocationRelativeTo(this);
-                        pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
+                        pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", "umum");
                         pilih.setVisible(true);
                     }                    
                 }else{
                     DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                     pilih.setSize(this.getWidth(),this.getHeight());
                     pilih.setLocationRelativeTo(this);
-                    pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
+                    pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", "umum");
                     pilih.setVisible(true);
                 } 
             } catch (java.lang.NullPointerException e) {

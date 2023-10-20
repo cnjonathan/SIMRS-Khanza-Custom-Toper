@@ -1163,7 +1163,7 @@ private void btnKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                    "bangsal.nm_bangsal,aplicare_ketersediaan_kamar.kelas,aplicare_ketersediaan_kamar.kapasitas,"+
                    "aplicare_ketersediaan_kamar.tersedia,aplicare_ketersediaan_kamar.tersediapria,"+
                    "aplicare_ketersediaan_kamar.tersediawanita,aplicare_ketersediaan_kamar.tersediapriawanita "+
-                   "from aplicare_ketersediaan_kamar inner join bangsal on aplicare_ketersediaan_kamar.kd_bangsal=bangsal.kd_bangsal where "+
+                   "from aplicare_ketersediaan_kamar left join bangsal on aplicare_ketersediaan_kamar.kd_bangsal=bangsal.kd_bangsal where "+
                    "aplicare_ketersediaan_kamar.kode_kelas_aplicare like ? or "+
                    "aplicare_ketersediaan_kamar.kd_bangsal like ? or "+
                    "bangsal.nm_bangsal like ? or "+

@@ -129,7 +129,9 @@ public final class DlgCariObat extends javax.swing.JDialog {
         for (i = 0; i < 19; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(20);
+                //column.setPreferredWidth(20);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             }else if(i==1){
                 column.setPreferredWidth(45);
             }else if(i==2){
@@ -529,6 +531,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
         TPasien = new widget.TextBox();
         TNoRM = new widget.TextBox();
         LblNoRawat = new widget.TextBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        asesText = new javax.swing.JTextArea();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -614,7 +618,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Obat, Alkes & BHP Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Obat, Alkes & BHP Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -846,7 +850,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         jLabel8.setBounds(4, 40, 65, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-04-2023" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-10-2023" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -979,12 +983,21 @@ public final class DlgCariObat extends javax.swing.JDialog {
         FormInput.add(LblNoRawat);
         LblNoRawat.setBounds(72, 10, 123, 23);
 
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        asesText.setColumns(20);
+        asesText.setRows(5);
+        asesText.setName("asesText"); // NOI18N
+        jScrollPane1.setViewportView(asesText);
+
+        FormInput.add(jScrollPane1);
+        jScrollPane1.setBounds(700, 10, 240, 86);
+
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
         TabRawat.setBackground(new java.awt.Color(255, 255, 253));
         TabRawat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(241, 246, 236)));
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
-        TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2040,6 +2053,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private widget.TextBox TPasien;
     private javax.swing.JTabbedPane TabRawat;
     private widget.TextBox Tanggal;
+    private javax.swing.JTextArea asesText;
     private widget.ComboBox cmbDtk;
     private widget.ComboBox cmbJam;
     private widget.ComboBox cmbMnt;
@@ -2052,6 +2066,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private widget.Label jLabel7;
     private widget.Label jLabel8;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private widget.TextBox kdgudang;
     private widget.Label label12;
     private widget.Label label13;
@@ -2070,7 +2085,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     public void tampilobat() {        
         z=0;
         for(i=0;i<tbObat.getRowCount();i++){
-            if(Valid.SetAngka(tbObat.getValueAt(i,1).toString())>0){
+            if(!tbObat.getValueAt(i,0).toString().equals("")){
                 z++;
             }
         }    
@@ -2112,7 +2127,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         kadaluarsa=new String[z];
         z=0;        
         for(i=0;i<tbObat.getRowCount();i++){
-            if(Valid.SetAngka(tbObat.getValueAt(i,1).toString())>0){
+            if(!tbObat.getValueAt(i,1).toString().equals("")){
                 pilih[z]=Boolean.parseBoolean(tbObat.getValueAt(i,0).toString());                
                 try {
                     jumlah[z]=Double.parseDouble(tbObat.getValueAt(i,1).toString());
@@ -3426,6 +3441,8 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         Jam.setText(jam);  
         KdPj.setText(Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",norwt));
         kenaikan=Sequel.cariIsiAngka("select (set_harga_obat_ralan.hargajual/100) from set_harga_obat_ralan where set_harga_obat_ralan.kd_pj=?",KdPj.getText());
+        String kode = Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",norwt);
+        Sequel.cariIsiText("select pemeriksaan_ralan.penilaian from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat=? and pemeriksaan_ralan.nip=? ",asesText,norwt,kode);
         TCari.requestFocus();
     }
     

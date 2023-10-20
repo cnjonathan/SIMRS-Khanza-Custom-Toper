@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="300" pageHeight="382" columnWidth="294" leftMargin="3" rightMargin="3" topMargin="3" bottomMargin="3" uuid="7dfc8716-95f5-43a2-8a45-5137aec55f9b">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="253"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[cmVnX3Blcmlrc2EgLDE1LDUzLDQyNTQwN2IyLTNlNmQtNDQyOS1hYTM1LTMyM2ViYjM5MzA3Mztw
+b2xpa2xpbmlrICwxNTgsMTUsZTQ0MWQyZWYtNTY2MS00MmVjLTliZTYtNmMzNDE3NjczMzVhO3Bh
+c2llbiAsMTU4LDEzMCw4ZjJjOTI3Zi01NTQxLTQ5ODQtYTI5ZS1lN2JmM2VkZTNhODE7]]>
+	</property>
+	<parameter name="namars" class="java.lang.String"/>
+	<parameter name="alamatrs" class="java.lang.String"/>
+	<parameter name="kotars" class="java.lang.String"/>
+	<parameter name="propinsirs" class="java.lang.String"/>
+	<parameter name="kontakrs" class="java.lang.String"/>
+	<parameter name="emailrs" class="java.lang.String"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="parameter" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT reg_periksa.no_reg,
+	reg_periksa.no_rkm_medis,
+	pasien.nm_pasien,
+	pasien.jk,
+	poliklinik.nm_poli,
+	reg_periksa.tgl_registrasi
+FROM reg_periksa
+	LEFT JOIN poliklinik ON 
+	 reg_periksa.kd_poli = poliklinik.kd_poli 
+	LEFT JOIN pasien ON 
+	 reg_periksa.no_rkm_medis = pasien.no_rkm_medis]]>
+	</queryString>
+	<field name="no_reg" class="java.lang.String"/>
+	<field name="no_rkm_medis" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_pasien" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jk" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_poli" class="java.lang.String"/>
+	<field name="tgl_registrasi" class="java.sql.Date"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="60">
+			<textField pattern="">
+				<reportElement mode="Transparent" x="23" y="10" width="100" height="11" uuid="446da730-2ccd-4926-8453-cd6936b3057e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement mode="Opaque" x="23" y="20" width="100" height="11" uuid="fc41c518-554d-461e-8b3f-30894b692a2e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_pasien}+" ("+$F{jk}+")"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Transparent" x="23" y="30" width="100" height="11" uuid="f1eed47b-9b8e-4fcc-a398-93b29325c285"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nama Poli: "+$F{nm_poli}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="39" width="100" height="11" uuid="2ec90801-ffdd-4b82-8cf0-e7f6995cb43a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Antrian ke: "+$F{no_reg}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement mode="Transparent" x="173" y="10" width="100" height="11" uuid="a52c2100-5b47-4074-8181-cfd19854f696"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement mode="Opaque" x="173" y="20" width="100" height="11" uuid="45631c1b-0e28-4d34-9c01-5e1528c95041"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_pasien}+" ("+$F{jk}+")"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Transparent" x="173" y="30" width="100" height="11" uuid="58bb5257-6da2-4180-9959-02680cc58e65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nama Poli: "+$F{nm_poli}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="173" y="39" width="100" height="11" uuid="b932aa90-80dd-4cbb-ae53-ea0dc3b019c5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Antrian ke: "+$F{no_reg}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

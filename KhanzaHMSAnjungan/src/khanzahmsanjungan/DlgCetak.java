@@ -78,6 +78,7 @@ public class DlgCetak extends javax.swing.JDialog {
         BtnAbout1 = new component.Button();
         BtnAbout3 = new component.Button();
         BtnAbout2 = new component.Button();
+        BtnAbout6MR = new component.Button();
         BtnKeluar = new component.Button();
 
         LblNoRw.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -110,7 +111,6 @@ public class DlgCetak extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(50, 23));
         jPanel4.add(jLabel4);
 
-        BtnAbout.setBorder(null);
         BtnAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485642_edit-notes.png"))); // NOI18N
         BtnAbout.setText("Bukti Register 1");
         BtnAbout.setBorderPainted(false);
@@ -128,7 +128,6 @@ public class DlgCetak extends javax.swing.JDialog {
         });
         jPanel4.add(BtnAbout);
 
-        BtnAbout4.setBorder(null);
         BtnAbout4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485642_edit-notes.png"))); // NOI18N
         BtnAbout4.setText("Bukti Register 2");
         BtnAbout4.setBorderPainted(false);
@@ -146,7 +145,6 @@ public class DlgCetak extends javax.swing.JDialog {
         });
         jPanel4.add(BtnAbout4);
 
-        BtnAbout5.setBorder(null);
         BtnAbout5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485642_edit-notes.png"))); // NOI18N
         BtnAbout5.setText("Bukti Register 3");
         BtnAbout5.setBorderPainted(false);
@@ -164,7 +162,6 @@ public class DlgCetak extends javax.swing.JDialog {
         });
         jPanel4.add(BtnAbout5);
 
-        BtnAbout1.setBorder(null);
         BtnAbout1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485642_edit-notes.png"))); // NOI18N
         BtnAbout1.setText("Lembar Periksa 1");
         BtnAbout1.setBorderPainted(false);
@@ -182,7 +179,6 @@ public class DlgCetak extends javax.swing.JDialog {
         });
         jPanel4.add(BtnAbout1);
 
-        BtnAbout3.setBorder(null);
         BtnAbout3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485642_edit-notes.png"))); // NOI18N
         BtnAbout3.setText("Lembar Periksa 2");
         BtnAbout3.setBorderPainted(false);
@@ -200,7 +196,6 @@ public class DlgCetak extends javax.swing.JDialog {
         });
         jPanel4.add(BtnAbout3);
 
-        BtnAbout2.setBorder(null);
         BtnAbout2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485642_edit-notes.png"))); // NOI18N
         BtnAbout2.setText("Barcode Perawatan");
         BtnAbout2.setBorderPainted(false);
@@ -218,7 +213,23 @@ public class DlgCetak extends javax.swing.JDialog {
         });
         jPanel4.add(BtnAbout2);
 
-        BtnKeluar.setBorder(null);
+        BtnAbout6MR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360485642_edit-notes.png"))); // NOI18N
+        BtnAbout6MR.setText("Label MR");
+        BtnAbout6MR.setBorderPainted(false);
+        BtnAbout6MR.setContentAreaFilled(false);
+        BtnAbout6MR.setFocusPainted(false);
+        BtnAbout6MR.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnAbout6MR.setIconTextGap(15);
+        BtnAbout6MR.setPreferredSize(new java.awt.Dimension(200, 110));
+        BtnAbout6MR.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/backup-restore.png"))); // NOI18N
+        BtnAbout6MR.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnAbout6MR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAbout6MRActionPerformed(evt);
+            }
+        });
+        jPanel4.add(BtnAbout6MR);
+
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/logout.png"))); // NOI18N
         BtnKeluar.setText("Selesai");
         BtnKeluar.setBorderPainted(false);
@@ -399,6 +410,32 @@ public class DlgCetak extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnAbout5ActionPerformed
 
+    private void BtnAbout6MRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAbout6MRActionPerformed
+        if(LblNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",nama_instansi);
+            param.put("alamatrs",alamat_instansi);
+            param.put("kotars",kabupaten);
+            param.put("propinsirs",propinsi);
+            param.put("kontakrs",kontak);
+            param.put("emailrs",email);
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            Valid.MyReportqry("rptBarcodeRM18.jasper","report","::[ Label Rekam Medis ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
+                "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
+                "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
+                "pasien.pnd, pasien.keluarga, pasien.namakeluarga,penjab.png_jawab,pasien.pekerjaanpj,"+
+                "concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj) as alamatpj from pasien "+
+                "inner join kelurahan inner join kecamatan inner join kabupaten "+
+                "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
+                "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+norm+"' ",param);
+            System.out.println(norm);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnAbout6MRActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -422,6 +459,7 @@ public class DlgCetak extends javax.swing.JDialog {
     private component.Button BtnAbout3;
     private component.Button BtnAbout4;
     private component.Button BtnAbout5;
+    private component.Button BtnAbout6MR;
     private component.Button BtnKeluar;
     private component.Label LblNoRw;
     private component.Label jLabel4;

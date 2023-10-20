@@ -5,12 +5,12 @@
     require_once('../conf/conf.php');
 
     function getKey() {
-       $keyRS = "7cc1173918078a8861cfe7c2cd56595b3abffa17cdedba978e414d42dfe3bf97";   
+       $keyRS = "a37291254bca23143f46b56c688e8f50f8f58b00fd297082711d6e16c06209c0";   
        return $keyRS;
     }
 
     function getUrlWS() {
-        $UrlWS = "http://transmedic.co.id:8181/E-Klaim/ws.php";
+        $UrlWS = "http://192.168.1.24/E-Klaim/ws.php";
         return $UrlWS;
     }
     
@@ -182,7 +182,7 @@
     function UpdateDataKlaim($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
                             $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,
-                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole){	
+                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$diastole,$sistole){	
         
         $prosedur_non_bedah=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ralan Dokter Paramedis' and nm_perawatan not like '%terapi%'")+
                             getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ranap Dokter Paramedis' and nm_perawatan not like '%terapi%'");

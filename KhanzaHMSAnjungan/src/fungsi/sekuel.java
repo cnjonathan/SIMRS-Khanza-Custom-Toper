@@ -1145,6 +1145,7 @@ public final class sekuel {
     
     public String cariIsi(String sql,String data){
         dicari="";
+        System.out.println();
         try {
             ps=connect.prepareStatement(sql);
             try{                            

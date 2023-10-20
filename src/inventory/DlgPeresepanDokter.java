@@ -30,9 +30,13 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
@@ -46,18 +50,18 @@ import widget.Button;
  * @author dosen
  */
 public final class DlgPeresepanDokter extends javax.swing.JDialog {
-    private final DefaultTableModel tabModeResep,tabModeDetailResepRacikan,tabModeResepRacikan;
+    private final DefaultTableModel tabModeResep,tabModeDetailResepRacikan,tabModeResepRacikan, tabObatTersubmit = null;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
-    private PreparedStatement psresep,pscarikapasitas,psresepasuransi,ps2;
-    private ResultSet rsobat,carikapasitas,rs2;
+    private PreparedStatement psresep,pscarikapasitas,psresepasuransi,ps2, ps_resep_obat_tersubmit;
+    private ResultSet rsobat,carikapasitas,rs2, rs_resep_obat_tersubmit;
     private double x=0,y=0,kenaikan=0,ttl=0,ppnobat=0,jumlahracik=0,persenracik=0,kapasitasracik=0;
     private int i=0,z=0,row2=0,r=0;
     private boolean ubah=false,copy=false,sukses=true;
     private boolean[] pilih; 
     private double[] jumlah,harga,beli,stok,kapasitas,p1,p2;
-    private String[] no,kodebarang,namabarang,kodesatuan,kandungan,letakbarang,namajenis,aturan,industri,komposisi;
+    private String[] no,kodebarang,namabarang,kodesatuan,kandungan,letakbarang,namajenis,aturan,industri,komposisi,noRMPasienArray;
     public DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
     private WarnaTable2 warna=new WarnaTable2();
     private WarnaTable2 warna2=new WarnaTable2();
@@ -65,7 +69,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private DlgCariMetodeRacik metoderacik=new DlgCariMetodeRacik(null,false);
     public DlgCariDokter dokter=new DlgCariDokter(null,false);
     private String noracik="",aktifkanbatch="no",STOKKOSONGRESEP="no",qrystokkosong="",tampilkan_ppnobat_ralan="",status="",bangsal="",resep="",DEPOAKTIFOBAT="",
-            kamar="",norawatibu="",kelas,bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),RESEPRAJALKEPLAN="no";
+            kamar="",norawatibu="",kelas,bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),RESEPRAJALKEPLAN="no", noRMPasien="", dialog_resep="";
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -288,12 +292,12 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 if(aturanpakai.getTable().getSelectedRow()!= -1){  
                     if(TabRawat.getSelectedIndex()==0){
                         tbResep.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbResep.getSelectedRow(),8);
-                        tbResep.requestFocus();
                     }else if(TabRawat.getSelectedIndex()==1){
                         tbObatResepRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatResepRacikan.getSelectedRow(),5);
                         tbObatResepRacikan.requestFocus();
                     }   
-                }
+                }   
+                tbResep.requestFocus();
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -441,6 +445,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         LTotal = new widget.Label();
         jLabel7 = new widget.Label();
         LTotalTagihan = new widget.Label();
+        jLabel12 = new widget.Label();
+        txtJadikanTemplateResep = new widget.TextBox();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbResep = new widget.Table();
@@ -746,7 +752,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-04-2023" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2023" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -850,6 +856,21 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         LTotalTagihan.setPreferredSize(new java.awt.Dimension(80, 23));
         FormInput.add(LTotalTagihan);
         LTotalTagihan.setBounds(588, 42, 95, 23);
+
+        jLabel12.setText("Jadikan Template Resep");
+        jLabel12.setName("jLabel12"); // NOI18N
+        FormInput.add(jLabel12);
+        jLabel12.setBounds(730, 70, 120, 23);
+
+        txtJadikanTemplateResep.setHighlighter(null);
+        txtJadikanTemplateResep.setName("txtJadikanTemplateResep"); // NOI18N
+        txtJadikanTemplateResep.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtJadikanTemplateResepKeyPressed(evt);
+            }
+        });
+        FormInput.add(txtJadikanTemplateResep);
+        txtJadikanTemplateResep.setBounds(860, 70, 280, 23);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -1062,13 +1083,17 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         this.setCursor(Cursor.getDefaultCursor());           
     }//GEN-LAST:event_BtnTambahActionPerformed
 
+//    template resep
 private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
+            System.out.println("text kosong pasien");
         }else if(KdDokter.getText().trim().equals("")||NmDokter.getText().trim().equals("")){
             Valid.textKosong(KdDokter,"Dokter");
+            System.out.println("text kosong Dokter");
         }else if(NoResep.getText().trim().equals("")){
             Valid.textKosong(NoResep,"No.Resep");
+            System.out.println("text kosong Resep");
         }else if(ttl<=0){
             JOptionPane.showMessageDialog(null,"Maaf, silahkan masukkan terlebih dahulu obat yang mau diberikan...!!!");
             TCari.requestFocus();
@@ -1079,28 +1104,32 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 Sequel.AutoComitFalse();
                 sukses=true;
                 if(ubah==false){
-                    if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
+                    if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
                         NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                        cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
+                        cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00",txtJadikanTemplateResep.getText()
                         })==true){
                             simpandata();
+                            System.out.println("if pertama");
                     }else{
                         emptTeksobat();
-                        if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
+                        if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
                             NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                            cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
+                            cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00",txtJadikanTemplateResep.getText()
                             })==true){
                                 simpandata();
+                                System.out.println("if kedua");
                         }else{
                             emptTeksobat();
-                            if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
+                            if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
                                 NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00"
+                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00",txtJadikanTemplateResep.getText()
                                 })==true){
                                     simpandata();
+                                    System.out.println("if ketiga");
                             }else{
                                 emptTeksobat();
                                 sukses=false;
+                                System.out.println("if keempat");
                             }
                         }
                     }
@@ -1110,7 +1139,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     Sequel.meghapus("resep_dokter_racikan_detail","no_resep",NoResep.getText());
                     ubah=false;
                     simpandata();
-                }                                                      
+                }
                 
                 if(sukses==true){
                     if(RESEPRAJALKEPLAN.equals("yes")&&status.equals("ralan")&&(ubah==false)){
@@ -1124,7 +1153,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 if(rs2.next()){
                                     resep="Resep : \n";
                                     psresep=koneksi.prepareStatement(
-                                           "select databarang.nama_brng,resep_dokter.jml,resep_dokter.aturan_pakai from databarang inner join resep_dokter on databarang.kode_brng=resep_dokter.kode_brng where resep_dokter.no_resep=?");
+                                           "select databarang.nama_brng,resep_dokter.jml,resep_dokter.aturan_pakai from databarang inner join resep_dokter on databarang.kode_brng=resep_dokter.kode_brng where resep_dokter.no_resep=?");                                   
                                     try {
                                         psresep.setString(1,NoResep.getText());
                                         rsobat=psresep.executeQuery();
@@ -1212,7 +1241,44 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     }
                     Valid.tabelKosong(tabModeResepRacikan);
                     Valid.tabelKosong(tabModeDetailResepRacikan);
-                    dispose();
+                    System.out.println("TPasien: "+TPasien.getText().split(" "));
+                    noRMPasienArray = TPasien.getText().split(" ");
+                    noRMPasien = noRMPasienArray[0];
+                    String kdPj = Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText());
+                    System.out.println("No RM Pasien: "+noRMPasien);
+                    System.out.println("No Resep: "+NoResep.getText());
+                    try {
+                        ps_resep_obat_tersubmit = koneksi.prepareStatement("SELECT r.*, d.nama_brng FROM resep_dokter r LEFT JOIN databarang d ON r.kode_brng = d.kode_brng where r.no_resep = ?");
+                        ps_resep_obat_tersubmit.setString(1, NoResep.getText());
+                        rs_resep_obat_tersubmit = ps_resep_obat_tersubmit.executeQuery();
+                        dialog_resep = "Data obat yang tersimpan : \n";
+                        int no = 1;
+                        while (rs_resep_obat_tersubmit.next()) {
+                            System.out.println(rs_resep_obat_tersubmit.getString("kode_brng"));
+                            System.out.println(rs_resep_obat_tersubmit.getString("nama_brng"));
+                            dialog_resep += no+". "+rs_resep_obat_tersubmit.getString("nama_brng")+", Jml: "+rs_resep_obat_tersubmit.getString("jml")+", Aturan pakai: "+rs_resep_obat_tersubmit.getString("aturan_pakai")+"\n";
+                            no++;
+                        }
+                    } catch (SQLException ex) {
+                        // Logger.getLogger(DlgPeresepanDokter.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println(ex);
+                    }
+                    String resep_tersubmit = "";
+                    int konfirm_resep = JOptionPane.showConfirmDialog(rootPane,dialog_resep,"Info No Resep: "+NoResep.getText(),JOptionPane.YES_NO_OPTION);
+                    if(konfirm_resep == JOptionPane.YES_OPTION){
+                        dispose();
+                    }else{
+                        dispose();
+                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                        DlgCopyResep daftar=new DlgCopyResep(null,false);
+                        daftar.isCek();
+                        daftar.setRM(TNoRw.getText(),noRMPasien,KdDokter.getText(),kdPj,"ralan");
+                        daftar.tampil();
+                        daftar.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+                        daftar.setLocationRelativeTo(internalFrame1);
+                        daftar.setVisible(true);
+                        this.setCursor(Cursor.getDefaultCursor());
+                    }
                 }else{
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     Sequel.RollBack();
@@ -1355,7 +1421,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
                 if(i==5){
                     akses.setform("DlgCariObat");
-                    aturanpakai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                    aturanpakai.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                     aturanpakai.setLocationRelativeTo(internalFrame1);
                     aturanpakai.setVisible(true);
                 }else if(i==3){
@@ -1364,7 +1430,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         tbObatResepRacikan.requestFocus();
                     }else{
                         metoderacik.isCek();
-                        metoderacik.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                        metoderacik.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                         metoderacik.setLocationRelativeTo(internalFrame1);
                         metoderacik.setVisible(true);
                     }
@@ -1473,6 +1539,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             
     }//GEN-LAST:event_DTPBeriItemStateChanged
 
+    private void txtJadikanTemplateResepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJadikanTemplateResepKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtJadikanTemplateResepKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1524,6 +1594,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.ComboBox cmbMnt;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel11;
+    private widget.Label jLabel12;
     private widget.Label jLabel13;
     private widget.Label jLabel3;
     private widget.Label jLabel5;
@@ -1539,12 +1610,13 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.Table tbDetailResepObatRacikan;
     private widget.Table tbObatResepRacikan;
     private widget.Table tbResep;
+    private widget.TextBox txtJadikanTemplateResep;
     // End of variables declaration//GEN-END:variables
 
     public void tampilobat() {        
         z=0;
         for(i=0;i<tbResep.getRowCount();i++){
-            if(!tbResep.getValueAt(i,1).toString().equals("")){
+            if(!tbResep.getValueAt(i,0).toString().equals("")){
                 z++;
             }
         }    
@@ -3790,7 +3862,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 }
             } 
 
-            for(i=0;i<tbObatResepRacikan.getRowCount();i++){ 
+            for(i=0;i<tbObatResepRacikan.getRowCount();i++){    
                 if(Valid.SetAngka(tbObatResepRacikan.getValueAt(i,4).toString())>0){ 
                     if(Sequel.menyimpantf2("resep_dokter_racikan","?,?,?,?,?,?,?","resep obat racikan",7,new String[]{
                        NoResep.getText(),tbObatResepRacikan.getValueAt(i,0).toString(),tbObatResepRacikan.getValueAt(i,1).toString(),

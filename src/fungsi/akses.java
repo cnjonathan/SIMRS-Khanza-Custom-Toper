@@ -206,7 +206,7 @@ public final class akses {
             penilaian_lanjutan_resiko_jatuh_lansia=false,mpp_skrining=false,penilaian_pasien_penyakit_menular=false,edukasi_pasien_keluarga_rj=false,pemantauan_pews_dewasa=false,
             penilaian_tambahan_bunuh_diri=false,bpjs_antrean_pertanggal=false,penilaian_tambahan_perilaku_kekerasan=false,penilaian_tambahan_beresiko_melarikan_diri=false,
             persetujuan_penundaan_pelayanan=false,sisa_diet_pasien=false,penilaian_awal_medis_ralan_bedah_mulut=false,penilaian_pasien_keracunan=false,
-            pemantauan_meows_obstetri=false,catatan_adime_gizi=false,pengajuan_biaya=false,penilaian_awal_keperawatan_ralan_geriatri=false,master_masalah_keperawatan_geriatri=false,
+            pemantauan_meows_obstetri=false, workstation=false, workstationconfiglist=false, workstationsetup=false, catatan_adime_gizi=false,pengajuan_biaya=false,penilaian_awal_keperawatan_ralan_geriatri=false,master_masalah_keperawatan_geriatri=false,
             master_rencana_keperawatan_geriatri=false,checklist_kriteria_masuk_hcu=false,checklist_kriteria_keluar_hcu=false,penilaian_risiko_dekubitus=false,
             master_menolak_anjuran_medis=false,penolakan_anjuran_medis=false,laporan_tahunan_penolakan_anjuran_medis=false,template_laporan_operasi=false,hasil_tindakan_eswl=false,
             checklist_kriteria_masuk_icu=false,checklist_kriteria_keluar_icu=false,akses_dokter_lain_rawat_jalan=false,follow_up_dbd=false,penilaian_risiko_jatuh_neonatus=false,
@@ -1181,6 +1181,9 @@ public final class akses {
                         akses.penilaian_awal_medis_ralan_bedah_mulut=true;
                         akses.penilaian_pasien_keracunan=true;
                         akses.pemantauan_meows_obstetri=true;
+                        akses.workstation=true;
+                        akses.workstationconfiglist=true;
+                        akses.workstationsetup=true;
                         akses.catatan_adime_gizi=true;
                         akses.pengajuan_biaya=true;
                         akses.penilaian_awal_keperawatan_ralan_geriatri=true;
@@ -2170,6 +2173,9 @@ public final class akses {
                         akses.penilaian_awal_medis_ralan_bedah_mulut=rs2.getBoolean("penilaian_awal_medis_ralan_bedah_mulut");
                         akses.penilaian_pasien_keracunan=rs2.getBoolean("penilaian_pasien_keracunan");
                         akses.pemantauan_meows_obstetri=rs2.getBoolean("pemantauan_meows_obstetri");
+                        akses.workstation=true;
+                        akses.workstationconfiglist=true;
+                        akses.workstationsetup=true;
                         akses.catatan_adime_gizi=rs2.getBoolean("catatan_adime_gizi");
                         akses.pengajuan_biaya=rs2.getBoolean("pengajuan_biaya");
                         akses.penilaian_awal_keperawatan_ralan_geriatri=rs2.getBoolean("penilaian_awal_keperawatan_ralan_geriatri");
@@ -3157,6 +3163,9 @@ public final class akses {
                         akses.penilaian_awal_medis_ralan_bedah_mulut=false;
                         akses.penilaian_pasien_keracunan=false;
                         akses.pemantauan_meows_obstetri=false;
+                        akses.workstation=false;
+                        akses.workstationconfiglist=false;
+                        akses.workstationsetup=false;
                         akses.catatan_adime_gizi=false;
                         akses.pengajuan_biaya=false;
                         akses.penilaian_awal_keperawatan_ralan_geriatri=false;
@@ -4204,6 +4213,9 @@ public final class akses {
     public static boolean getpenilaian_awal_medis_ralan_bedah_mulut(){return akses.penilaian_awal_medis_ralan_bedah_mulut;}
     public static boolean getpenilaian_pasien_keracunan(){return akses.penilaian_pasien_keracunan;}
     public static boolean getpemantauan_meows_obstetri(){return akses.pemantauan_meows_obstetri;}
+    public static boolean getworkstation(){return akses.workstation;}
+    public static boolean getworkstationconfiglist(){return akses.workstationconfiglist;}
+    public static boolean getworkstationsetup(){return akses.workstationsetup;}
     public static boolean getcatatan_adime_gizi(){return akses.catatan_adime_gizi;}
     public static boolean getpengajuan_biaya(){return akses.pengajuan_biaya;}
     public static boolean getpenilaian_awal_keperawatan_ralan_geriatri(){return akses.penilaian_awal_keperawatan_ralan_geriatri;}
