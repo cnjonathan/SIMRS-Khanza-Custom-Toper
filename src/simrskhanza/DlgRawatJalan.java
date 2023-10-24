@@ -13,6 +13,7 @@
 package simrskhanza;
 
 import bridging.BPJSSuratKontrol;
+import bridging.ICareRiwayatPerawatan;
 import surat.SuratKontrol;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
@@ -1436,6 +1437,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         TEvaluasi = new widget.TextArea();
         LingkarPerut = new widget.TextBox();
         Btn5Soap = new widget.Button();
+        BtnIcareNoKartu = new widget.Button();
+        BtnIcareNIK = new widget.Button();
         internalFrame6 = new widget.InternalFrame();
         Scroll4 = new widget.ScrollPane();
         tbPemeriksaanObstetri = new widget.Table();
@@ -1808,7 +1811,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-10-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1822,7 +1825,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-10-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2636,6 +2639,44 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         });
         panelGlass12.add(Btn5Soap);
         Btn5Soap.setBounds(405, 40, 28, 23);
+
+        BtnIcareNoKartu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs.png"))); // NOI18N
+        BtnIcareNoKartu.setMnemonic('T');
+        BtnIcareNoKartu.setText("History ICare by No Kartu");
+        BtnIcareNoKartu.setToolTipText("Alt+T");
+        BtnIcareNoKartu.setName("BtnIcareNoKartu"); // NOI18N
+        BtnIcareNoKartu.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnIcareNoKartu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnIcareNoKartuActionPerformed(evt);
+            }
+        });
+        BtnIcareNoKartu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnIcareNoKartuKeyPressed(evt);
+            }
+        });
+        panelGlass12.add(BtnIcareNoKartu);
+        BtnIcareNoKartu.setBounds(920, 100, 230, 50);
+
+        BtnIcareNIK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs.png"))); // NOI18N
+        BtnIcareNIK.setMnemonic('T');
+        BtnIcareNIK.setText("History ICare by NIK");
+        BtnIcareNIK.setToolTipText("Alt+T");
+        BtnIcareNIK.setName("BtnIcareNIK"); // NOI18N
+        BtnIcareNIK.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnIcareNIK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnIcareNIKActionPerformed(evt);
+            }
+        });
+        BtnIcareNIK.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnIcareNIKKeyPressed(evt);
+            }
+        });
+        panelGlass12.add(BtnIcareNIK);
+        BtnIcareNIK.setBounds(920, 40, 200, 50);
 
         PanelInput.add(panelGlass12, java.awt.BorderLayout.CENTER);
 
@@ -3531,7 +3572,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-10-2023" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2023" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -8769,6 +8810,50 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnLembarKeluarMasukActionPerformed
 
+    private void BtnIcareNoKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIcareNoKartuActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        String variabel=Sequel.cariIsi("select maping_dokter_dpjpvclaim.kd_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter=?",KdDok.getText());
+        if(!variabel.equals("")){
+            akses.setform("DlgReg");
+            ICareRiwayatPerawatan dlgki=new ICareRiwayatPerawatan(null,false);
+            dlgki.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            dlgki.setLocationRelativeTo(internalFrame1);
+            dlgki.setPasien(Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis=?",TNoRM.getText()),variabel);
+            dlgki.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null,"Maaf, Dokter tidak terdaftar di mapping dokter BPJS...!!!");
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnIcareNoKartuActionPerformed
+
+    private void BtnIcareNoKartuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnIcareNoKartuKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnPrintActionPerformed(null);
+        }else{
+            Valid.pindah(evt, BtnCari, BtnAll);
+        }
+    }//GEN-LAST:event_BtnIcareNoKartuKeyPressed
+
+    private void BtnIcareNIKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIcareNIKActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        String variabel=Sequel.cariIsi("select maping_dokter_dpjpvclaim.kd_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter=?",KdDok.getText());
+        if(!variabel.equals("")){
+            akses.setform("DlgReg");
+            ICareRiwayatPerawatan dlgki=new ICareRiwayatPerawatan(null,false);
+            dlgki.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            dlgki.setLocationRelativeTo(internalFrame1);
+            dlgki.setPasien(Sequel.cariIsi("select pasien.no_ktp from pasien where pasien.no_rkm_medis=?",TNoRM.getText()),variabel);   
+            dlgki.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null,"Maaf, Dokter tidak terdaftar di mapping dokter BPJS...!!!");  
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnIcareNIKActionPerformed
+
+    private void BtnIcareNIKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnIcareNIKKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnIcareNIKKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -8827,6 +8912,8 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnEdukasiPasienKeluarga;
     private widget.Button BtnHapus;
     private widget.Button BtnHasilPemeriksaanUSG;
+    private widget.Button BtnIcareNIK;
+    private widget.Button BtnIcareNoKartu;
     private widget.Button BtnInformasiObat;
     private widget.Button BtnInputObat;
     private widget.Button BtnJadwalOperasi;
