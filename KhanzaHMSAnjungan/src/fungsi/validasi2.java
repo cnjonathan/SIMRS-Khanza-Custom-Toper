@@ -676,6 +676,7 @@ public final class validasi2 {
                 System.out.println("try JRResultSetDataSource rsdt = new JRResultSetDataSource(rs)");
                 String namafile="./"+reportDirName+"/"+reportName;
                 rs=ps.executeQuery();
+                System.out.println("Query: "+qry);
                 JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
                 
                 JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters,rsdt);

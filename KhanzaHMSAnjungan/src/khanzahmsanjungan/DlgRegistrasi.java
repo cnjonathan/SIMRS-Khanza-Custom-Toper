@@ -52,6 +52,8 @@ public class DlgRegistrasi extends javax.swing.JDialog {
     private String status="Baru",BASENOREG="",URUTNOREG="",aktifjadwal="", cek_booking_registrasi="";
     private Properties prop = new Properties();
     String cek_noreg, cek_no_rawat = "";
+    private String nama_instansi, alamat_instansi, kabupaten, propinsi,kontak,email,poli,
+            antrian,nama,norm,dokter,no_rawat,bayar,penjab;
 
     /** Creates new form DlgAdmin
      * @param parent
@@ -59,6 +61,21 @@ public class DlgRegistrasi extends javax.swing.JDialog {
     public DlgRegistrasi(java.awt.Frame parent, boolean id) {
         super(parent, id);
         initComponents();
+        
+        try {
+            ps=koneksi.prepareStatement("select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo from setting");
+            rs=ps.executeQuery();
+            while(rs.next()){                
+                nama_instansi=rs.getString("nama_instansi");
+                alamat_instansi=rs.getString("alamat_instansi");
+                kabupaten=rs.getString("kabupaten");
+                propinsi=rs.getString("propinsi");
+                kontak=rs.getString("kontak");
+                email=rs.getString("email");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
        
         try{
            ps=koneksi.prepareStatement(
@@ -758,24 +775,24 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
                 Map<String, Object> param = new HashMap<>();
-    //            param.put("namars",nama_instansi);
-    //            param.put("alamatrs",alamat_instansi);
-    //            param.put("kotars",kabupaten);
-    //            param.put("propinsirs",propinsi);
-    //            param.put("kontakrs",kontak);
-    //            param.put("emailrs",email);
-    //            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("namars",nama_instansi);
+                param.put("alamatrs",alamat_instansi);
+                param.put("kotars",kabupaten);
+                param.put("propinsirs",propinsi);
+                param.put("kontakrs",kontak);
+                param.put("emailrs",email);
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid2.MyReportqry("rptBarcodeRM18.jasper","report","::[ Label Rekam Medis ]::","SELECT reg_periksa.*, pasien.*, poliklinik.nm_poli, penjab.png_jawab, dokter.nm_dokter FROM reg_periksa LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli LEFT JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis LEFT JOIN penjab ON reg_periksa.kd_pj = penjab.kd_pj LEFT JOIN dokter ON reg_periksa.kd_dokter = dokter.kd_dokter WHERE reg_periksa.no_rkm_medis = '"+LblNoRm.getText()+"'  AND reg_periksa.tgl_registrasi = CURDATE();",param, 6);
 
                 Map<String, Object> parampaa = new HashMap<>();
-    //            param.put("namars",nama_instansi);
-    //            param.put("alamatrs",alamat_instansi);
-    //            param.put("kotars",kabupaten);
-    //            param.put("propinsirs",propinsi);
-    //            param.put("kontakrs",kontak);
-    //            param.put("emailrs",email);
-    //            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                Valid2.MyReportqry("rptAnjungan.jasper","report","::[ Label Anjungan ]::","SELECT reg_periksa.no_reg, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.jk, poliklinik.nm_poli, reg_periksa.tgl_registrasi, dokter.nm_dokter FROM reg_periksa LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli LEFT JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis LEFT JOIN dokter ON reg_periksa.kd_dokter = dokter.kd_dokter WHERE reg_periksa.no_rkm_medis = '"+LblNoRm.getText()+"' AND reg_periksa.tgl_registrasi = CURDATE()",parampaa, 1);
+                param.put("namars",nama_instansi);
+                param.put("alamatrs",alamat_instansi);
+                param.put("kotars",kabupaten);
+                param.put("propinsirs",propinsi);
+                param.put("kontakrs",kontak);
+                param.put("emailrs",email);
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                Valid2.MyReportqry("rptAnjungan.jasper","report","::[ Label Anjungan ]::","SELECT pasien.nm_pasien, poliklinik.nm_poli, dokter.nm_dokter, reg_periksa.no_reg FROM reg_periksa LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli LEFT JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis LEFT JOIN dokter ON reg_periksa.kd_dokter = dokter.kd_dokter WHERE reg_periksa.no_rkm_medis = '"+LblNoRm.getText()+"' AND reg_periksa.tgl_registrasi = CURDATE()",parampaa, 1);
                 System.out.println(LblNoRm.getText());
 
                 this.setCursor(Cursor.getDefaultCursor());
@@ -823,7 +840,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
             Valid2.MyReportqry("rptBarcodeRM18.jasper","report","::[ Label Rekam Medis ]::","SELECT reg_periksa.*, pasien.*, poliklinik.nm_poli, penjab.png_jawab FROM reg_periksa LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli LEFT JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis LEFT JOIN penjab ON reg_periksa.kd_pj = penjab.kd_pj WHERE reg_periksa.no_rkm_medis = '"+LblNoRm.getText()+"'  AND reg_periksa.tgl_registrasi = CURDATE();",param, 6);
 
             Map<String, Object> parampaa = new HashMap<>();
-            Valid2.MyReportqry("rptAnjungan.jasper","report","::[ Label Anjungan ]::","SELECT reg_periksa.no_reg, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.jk, poliklinik.nm_poli, reg_periksa.tgl_registrasi FROM reg_periksa LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli LEFT JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis WHERE reg_periksa.no_rkm_medis = '"+LblNoRm.getText()+"' AND reg_periksa.tgl_registrasi = CURDATE()",parampaa, 1);
+            Valid2.MyReportqry("rptAnjungan.jasper","report","::[ Label Anjungan ]::","SELECT reg_periksa.no_reg, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.jk, poliklinik.nm_poli, reg_periksa.tgl_registrasi, dokter.nm_dokter FROM reg_periksa LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli LEFT JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis LEFT JOIN dokter ON reg_periksa.kd_dokter = dokter.kd_dokter WHERE reg_periksa.no_rkm_medis = '"+LblNoRm.getText()+"' AND reg_periksa.tgl_registrasi = CURDATE()",parampaa, 1);
             System.out.println(LblNoRm.getText());
 
             this.setCursor(Cursor.getDefaultCursor());

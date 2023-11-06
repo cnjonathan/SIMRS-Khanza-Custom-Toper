@@ -13601,14 +13601,45 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         Valid.tabelKosong(tabModekasir);
         try{   
             semua=caripenjab.equals("")&&CrPoli.getText().trim().equals("")&&CrPtg.getText().trim().equals("")&&cmbStatus.getSelectedItem().toString().equals("Semua")&&cmbStatusBayar.getSelectedItem().toString().equals("Semua")&&TCari.getText().trim().equals("");
-            pskasir=koneksi.prepareStatement("select DISTINCT reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,poliklinik.nm_poli,"+
-                "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts,penjab.png_jawab,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur, "+
-                "reg_periksa.status_bayar,reg_periksa.status_poli,reg_periksa.kd_pj,reg_periksa.kd_poli,pasien.no_tlp,if (diagnosa_pasien.kd_penyakit<>'','Sudah','Belum') as kd_penyakit  "+
-                "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                "LEFT JOIN (select * from diagnosa_pasien where prioritas='1') diagnosa_pasien ON diagnosa_pasien.no_rawat=reg_periksa.no_rawat where  "+
-                "reg_periksa.tgl_registrasi between ? and ? and reg_periksa.status_lanjut='Ralan' "+tampildiagnosa+
+            pskasir=koneksi.prepareStatement("SELECT "+
+                "	DISTINCT reg_periksa.no_reg,"+
+                "	reg_periksa.no_rawat,"+
+                "	reg_periksa.tgl_registrasi,"+
+                "	reg_periksa.jam_reg,"+
+                "	reg_periksa.kd_dokter,"+
+                "	dokter.nm_dokter,"+
+                "	IF((SELECT k.status_kehadiran FROM kehadiran_pasien_bpjs k WHERE k.no_rawat = reg_periksa.no_rawat AND k.no_rm = reg_periksa.no_rkm_medis)<>'', 'Online Hadir', 'Online (-)') AS kehadiran,"+
+                "	(SELECT b.no_sep FROM bridging_sep b WHERE b.no_rawat = reg_periksa.no_rawat AND b.nomr = reg_periksa.no_rkm_medis) AS no_sep,"+
+                "	reg_periksa.no_rkm_medis,"+
+                "	pasien.nm_pasien,"+
+                "	poliklinik.nm_poli,"+
+                "	reg_periksa.p_jawab,"+
+                "	reg_periksa.almt_pj,"+
+                "	reg_periksa.hubunganpj,"+
+                "	reg_periksa.biaya_reg,"+
+                "	reg_periksa.stts,"+
+                "	penjab.png_jawab,"+
+                "	concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur, "+
+                "	reg_periksa.status_bayar,"+
+                "	reg_periksa.status_poli,"+
+                "	reg_periksa.kd_pj,"+
+                "	reg_periksa.kd_poli,"+
+                "	pasien.no_tlp,"+
+                "	if (diagnosa_pasien.kd_penyakit<>'','Sudah','Belum') as kd_penyakit  "+
+                "FROM "+
+                "	reg_periksa "+
+                "INNER JOIN "+
+                "	dokter ON reg_periksa.kd_dokter=dokter.kd_dokter "+
+                "INNER JOIN "+
+                "	pasien ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                "INNER JOIN "+
+                "	poliklinik ON reg_periksa.kd_poli=poliklinik.kd_poli "+
+                "INNER JOIN "+
+                "	penjab ON reg_periksa.kd_pj=penjab.kd_pj "+
+                "LEFT JOIN "+
+                "	(SELECT * FROM diagnosa_pasien WHERE prioritas='1') diagnosa_pasien ON diagnosa_pasien.no_rawat=reg_periksa.no_rawat "+
+                "WHERE "+
+                "	reg_periksa.tgl_registrasi BETWEEN ? AND ? and reg_periksa.status_lanjut='Ralan'"+tampildiagnosa+
                 (semua?"":"and reg_periksa.kd_pj like ? and poliklinik.nm_poli like ? and dokter.nm_dokter like ? and reg_periksa.stts like ? and reg_periksa.status_bayar like ? and "+
                 "(reg_periksa.no_reg like ? or reg_periksa.no_rawat like ? or reg_periksa.tgl_registrasi like ? or reg_periksa.kd_dokter like ? or dokter.nm_dokter like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or poliklinik.nm_poli like ? or "+
                 "reg_periksa.p_jawab like ? or penjab.png_jawab like ? or reg_periksa.almt_pj like ? or reg_periksa.status_bayar like ? or reg_periksa.hubunganpj like ?)")+
@@ -13639,47 +13670,49 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 
                 rskasir=pskasir.executeQuery();
                 while(rskasir.next()){
-                    String query_kehadiran = "SELECT k.status_kehadiran FROM kehadiran_pasien_bpjs k WHERE k.no_rawat = '"+rskasir.getString(2)+"' AND k.no_rm = '"+rskasir.getString(7)+"'";
-                    System.out.println("query_kehadiran: "+query_kehadiran);
-                    String kehadiran = Sequel.cariIsi(query_kehadiran);
-                    String ket_hadir = "";
-                    switch (kehadiran) {
-                        case "hadir":
-                            ket_hadir = "Hadir";
-                            break;
-                        case "belum_hadir":
-                            ket_hadir = "Belum Hadir";
-                            break;
-                        default:
-                            ket_hadir = "-";
-                    }
-//                    String sep = Sequel.cariIsi("SELECT b.no_sep FROM kehadiran_pasien_bpjs k LEFT JOIN bridging_sep b ON k.no_rawat = b.no_rawat WHERE k.no_rawat = '"+rskasir.getString(2)+"' AND k.no_rm = '"+rskasir.getString(7)+"'");
-                    String query_sep = "SELECT b.no_sep FROM bridging_sep b WHERE b.no_rawat = '"+rskasir.getString(2)+"'  AND b.nomr = '"+rskasir.getString(7)+"'";
-                    String sep = Sequel.cariIsi(query_sep);
-                    String ket_sep = "";
-                    if(sep == null){
-                        ket_sep = "-";
-                    }else{
-                        ket_sep = sep;
-                    }
+//                    String query_kehadiran = "SELECT k.status_kehadiran FROM kehadiran_pasien_bpjs k WHERE k.no_rawat = '"+rskasir.getString(2)+"' AND k.no_rm = '"+rskasir.getString(7)+"'";
+//                    System.out.println("query_kehadiran: "+query_kehadiran);
+//                    String kehadiran = Sequel.cariIsi(query_kehadiran);
+//                    String ket_hadir = "";
+//                    switch (kehadiran) {
+//                        case "hadir":
+//                            ket_hadir = "Hadir";
+//                            break;
+//                        case "belum_hadir":
+//                            ket_hadir = "Belum Hadir";
+//                            break;
+//                        default:
+//                            ket_hadir = "-";
+//                    }
+////                    String sep = Sequel.cariIsi("SELECT b.no_sep FROM kehadiran_pasien_bpjs k LEFT JOIN bridging_sep b ON k.no_rawat = b.no_rawat WHERE k.no_rawat = '"+rskasir.getString(2)+"' AND k.no_rm = '"+rskasir.getString(7)+"'");
+//                    String query_sep = "SELECT b.no_sep FROM bridging_sep b WHERE b.no_rawat = '"+rskasir.getString(2)+"'  AND b.nomr = '"+rskasir.getString(7)+"'";
+//                    String sep = Sequel.cariIsi(query_sep);
+//                    String ket_sep = "";
+//                    if(sep == null){
+//                        ket_sep = "-";
+//                    }else{
+//                        ket_sep = sep;
+//                    }
                     tabModekasir.addRow(new String[] {
-                        rskasir.getString(5),
-                        rskasir.getString(6),
-                        rskasir.getString(7),
-                        rskasir.getString(8)+" ("+rskasir.getString("umur")+")",
-                        rskasir.getString(9),
-                        ket_hadir,
-                        ket_sep,
-                        rskasir.getString(10),
-                        rskasir.getString(11),
-                        rskasir.getString(12),
-                        Valid.SetAngka(rskasir.getDouble(13)),
+                        rskasir.getString("kd_dokter"),
+                        rskasir.getString("nm_dokter"),
+                        rskasir.getString("no_rkm_medis"),
+                        rskasir.getString("nm_pasien")+" ("+rskasir.getString("umur")+")",
+                        rskasir.getString("nm_poli"),
+                        rskasir.getString("kehadiran"),
+                        rskasir.getString("no_sep"),
+//                        ket_hadir,
+//                        ket_sep,
+                        rskasir.getString("p_jawab"),
+                        rskasir.getString("almt_pj"),
+                        rskasir.getString("hubunganpj"),
+                        Valid.SetAngka(rskasir.getDouble("biaya_reg")),
                         rskasir.getString("png_jawab"),
-                        rskasir.getString(14),
+                        rskasir.getString("status_bayar"),
                         rskasir.getString("no_rawat"),
                         rskasir.getString("tgl_registrasi"),
                         rskasir.getString("jam_reg"),
-                        rskasir.getString(1),
+                        rskasir.getString("no_reg"),
                         rskasir.getString("status_bayar"),
                         rskasir.getString("status_poli"),
                         rskasir.getString("kd_pj"),

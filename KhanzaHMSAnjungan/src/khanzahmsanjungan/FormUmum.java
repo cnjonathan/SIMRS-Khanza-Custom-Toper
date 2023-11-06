@@ -181,11 +181,8 @@ public class FormUmum extends javax.swing.JFrame {
         jPanel2.setBackground(java.awt.Color.white);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(java.awt.Color.white);
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton1.setForeground(java.awt.Color.black);
         jButton1.setText("3");
-        jButton1.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -193,11 +190,8 @@ public class FormUmum extends javax.swing.JFrame {
         });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 110, 110));
 
-        jButton2.setBackground(java.awt.Color.white);
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton2.setForeground(java.awt.Color.black);
         jButton2.setText("1");
-        jButton2.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -205,11 +199,8 @@ public class FormUmum extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 110, 110));
 
-        jButton3.setBackground(java.awt.Color.white);
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton3.setForeground(java.awt.Color.black);
         jButton3.setText("2");
-        jButton3.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -217,11 +208,8 @@ public class FormUmum extends javax.swing.JFrame {
         });
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 110, 110));
 
-        jButton4.setBackground(java.awt.Color.white);
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton4.setForeground(java.awt.Color.black);
         jButton4.setText("6");
-        jButton4.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -229,11 +217,8 @@ public class FormUmum extends javax.swing.JFrame {
         });
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 110, 110));
 
-        jButton5.setBackground(java.awt.Color.white);
         jButton5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton5.setForeground(java.awt.Color.black);
         jButton5.setText("4");
-        jButton5.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -241,11 +226,8 @@ public class FormUmum extends javax.swing.JFrame {
         });
         jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 110, 110));
 
-        jButton6.setBackground(java.awt.Color.white);
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton6.setForeground(java.awt.Color.black);
         jButton6.setText("5");
-        jButton6.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -253,11 +235,8 @@ public class FormUmum extends javax.swing.JFrame {
         });
         jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 110, 110));
 
-        jButton7.setBackground(java.awt.Color.white);
         jButton7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton7.setForeground(java.awt.Color.black);
         jButton7.setText("<-");
-        jButton7.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -265,11 +244,8 @@ public class FormUmum extends javax.swing.JFrame {
         });
         jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 110, 110));
 
-        jButton8.setBackground(java.awt.Color.white);
         jButton8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton8.setForeground(java.awt.Color.black);
         jButton8.setText("7");
-        jButton8.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -277,11 +253,8 @@ public class FormUmum extends javax.swing.JFrame {
         });
         jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 110, 110));
 
-        jButton9.setBackground(java.awt.Color.white);
         jButton9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton9.setForeground(java.awt.Color.black);
         jButton9.setText("0");
-        jButton9.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -289,11 +262,8 @@ public class FormUmum extends javax.swing.JFrame {
         });
         jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, 110, 110));
 
-        jButton10.setBackground(java.awt.Color.white);
         jButton10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton10.setForeground(java.awt.Color.black);
         jButton10.setText("8");
-        jButton10.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -301,11 +271,8 @@ public class FormUmum extends javax.swing.JFrame {
         });
         jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 110, 110));
 
-        jButton11.setBackground(java.awt.Color.white);
         jButton11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton11.setForeground(java.awt.Color.black);
         jButton11.setText("9");
-        jButton11.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
