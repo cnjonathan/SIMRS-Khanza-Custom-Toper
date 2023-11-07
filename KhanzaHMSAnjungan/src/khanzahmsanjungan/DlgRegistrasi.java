@@ -796,6 +796,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                 System.out.println(LblNoRm.getText());
 
                 this.setCursor(Cursor.getDefaultCursor());
+                dispose();
             }else{
                 LblJam.setText(Sequel.cariIsi("select current_time()"));
                 isNumber();
@@ -844,6 +845,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
             System.out.println(LblNoRm.getText());
 
             this.setCursor(Cursor.getDefaultCursor());
+            dispose();
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
