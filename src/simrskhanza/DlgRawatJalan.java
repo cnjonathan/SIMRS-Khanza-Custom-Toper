@@ -398,6 +398,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             "No.Rawat",
             "No.R.M.",
             "Nama Pasien",
+            "Dokter/Paramedis",
             "Tgl.Rawat",
             "Jam",
             "Suhu(C)",
@@ -418,7 +419,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             "Instruksi",
             "Evaluasi",
             "NIP",
-            "Dokter/Paramedis",
             "Profesi/Jabatan"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -457,37 +457,37 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }else if(i==3){
                 column.setPreferredWidth(150);
             }else if(i==4){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(150);
             }else if(i==5){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(65);
             }else if(i==6){
-                column.setPreferredWidth(45);
-            }else if(i==7){
-                column.setPreferredWidth(60);
-            }else if(i==8){
-                column.setPreferredWidth(73);
-            }else if(i==9){
-                column.setPreferredWidth(90);
-            }else if(i==10){
-                column.setPreferredWidth(63);
-            }else if(i==11){
-                column.setPreferredWidth(57);
-            }else if(i==12){
                 column.setPreferredWidth(50);
-            }else if(i==13){
-                column.setPreferredWidth(64);
-            }else if(i==14){
+            }else if(i==7){
+                column.setPreferredWidth(45);
+            }else if(i==8){
+                column.setPreferredWidth(60);
+            }else if(i==9){
+                column.setPreferredWidth(73);
+            }else if(i==10){
                 column.setPreferredWidth(90);
+            }else if(i==11){
+                column.setPreferredWidth(63);
+            }else if(i==12){
+                column.setPreferredWidth(57);
+            }else if(i==13){
+                column.setPreferredWidth(50);
+            }else if(i==14){
+                column.setPreferredWidth(64);
             }else if(i==15){
-                column.setPreferredWidth(180);
+                column.setPreferredWidth(90);
             }else if(i==16){
                 column.setPreferredWidth(180);
             }else if(i==17){
-                column.setPreferredWidth(130);
-            }else if(i==18){
-                column.setPreferredWidth(50);
-            }else if(i==19){
                 column.setPreferredWidth(180);
+            }else if(i==18){
+                column.setPreferredWidth(130);
+            }else if(i==19){
+                column.setPreferredWidth(50);
             }else if(i==20){
                 column.setPreferredWidth(180);
             }else if(i==21){
@@ -495,9 +495,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }else if(i==22){
                 column.setPreferredWidth(180);
             }else if(i==23){
-                column.setPreferredWidth(80);
+                column.setPreferredWidth(180);
             }else if(i==24){
-                column.setPreferredWidth(150);
+                column.setPreferredWidth(80);
             }else if(i==25){
                 column.setPreferredWidth(100);
             }
@@ -9866,6 +9866,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
+                        rs.getString(24),
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
@@ -9886,7 +9887,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         rs.getString(21),
                         rs.getString(22),
                         rs.getString(23),
-                        rs.getString(24),
                         rs.getString(25)
                     });
                 }
@@ -9957,27 +9957,27 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             TNoRw.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1).toString());
             TNoRM.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),2).toString());
             TPasien.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),3).toString());             
-            TSuhu.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),6).toString()); 
-            TTensi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),7).toString()); 
-            TNadi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),8).toString()); 
-            TRespirasi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),9).toString()); 
-            TTinggi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),10).toString()); 
-            TBerat.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),11).toString());  
-            SpO2.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),12).toString()); 
-            TGCS.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),13).toString());   
-            cmbKesadaran.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),14).toString()); 
-            TKeluhan.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),15).toString()); 
-            TPemeriksaan.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),16).toString()); 
-            TAlergi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),17).toString()); 
-            LingkarPerut.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),18).toString()); 
-            TindakLanjut.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),19).toString()); 
-            TPenilaian.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),20).toString()); 
-            TInstruksi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),21).toString()); 
-            TEvaluasi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),22).toString()); 
-            cmbJam.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString().substring(0,2));
-            cmbMnt.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString().substring(3,5));
-            cmbDtk.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString().substring(6,8));
-            Valid.SetTgl(DTPTgl,tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4).toString());
+            TSuhu.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),7).toString()); 
+            TTensi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),8).toString()); 
+            TNadi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),9).toString()); 
+            TRespirasi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),10).toString()); 
+            TTinggi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),11).toString()); 
+            TBerat.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),12).toString());  
+            SpO2.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),13).toString()); 
+            TGCS.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),14).toString());   
+            cmbKesadaran.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),15).toString()); 
+            TKeluhan.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),16).toString()); 
+            TPemeriksaan.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),17).toString()); 
+            TAlergi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),18).toString()); 
+            LingkarPerut.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),19).toString()); 
+            TindakLanjut.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),20).toString()); 
+            TPenilaian.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),21).toString()); 
+            TInstruksi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),22).toString()); 
+            TEvaluasi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),23).toString()); 
+            cmbJam.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),6).toString().substring(0,2));
+            cmbMnt.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),6).toString().substring(3,5));
+            cmbDtk.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),6).toString().substring(6,8));
+            Valid.SetTgl(DTPTgl,tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString());
         }
     }
     

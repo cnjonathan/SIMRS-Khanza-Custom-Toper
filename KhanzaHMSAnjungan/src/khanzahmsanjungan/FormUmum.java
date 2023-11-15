@@ -596,7 +596,7 @@ public class FormUmum extends javax.swing.JFrame {
                 regis.setSize(this.getWidth(),this.getHeight());
                 regis.setLocationRelativeTo(this);
 //                public void setPasien(String norm,String kodepoli,String kddokter)
-                regis.setPasien(noRm, cek_booking_poli, cek_booking_kddokter, "false", "umum");
+                regis.setPasien(noRm, cek_booking_poli, cek_booking_kddokter, "false", "umum", "Anjungan");
                 regis.setVisible(true);
             }
 //            else if(sisahari<=15){
@@ -615,7 +615,7 @@ public class FormUmum extends javax.swing.JFrame {
             System.out.println("form umum noRm: "+noRm);
             System.out.println("form umum cek_booking_poli: "+cek_reg_periksa_poli);
             System.out.println("form umum cek_booking_kddokter: "+cek_reg_periksa_kddokter);
-            regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "true", "umum");
+            regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "true", "umum", "Anjungan");
             regis.setVisible(true);
         }
         

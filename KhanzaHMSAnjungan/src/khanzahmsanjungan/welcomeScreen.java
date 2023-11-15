@@ -55,7 +55,9 @@ public class welcomeScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.Color.white);
         setPreferredSize(new java.awt.Dimension(1015, 1000));
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
+        jPanel3.setPreferredSize(new java.awt.Dimension(1920, 1080));
         jPanel3.setLayout(new java.awt.BorderLayout());
 
         jPanel2.setBackground(java.awt.Color.white);
@@ -91,6 +93,8 @@ public class welcomeScreen extends javax.swing.JFrame {
         });
         jPanel6.add(jButton2);
 
+        jPanel2.add(jPanel6, new java.awt.GridBagConstraints());
+
         jButton1.setBackground(new java.awt.Color(142, 68, 173));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jButton1.setForeground(new java.awt.Color(236, 240, 241));
@@ -102,9 +106,7 @@ public class welcomeScreen extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton1);
-
-        jPanel2.add(jPanel6, new java.awt.GridBagConstraints());
+        jPanel2.add(jButton1, new java.awt.GridBagConstraints());
 
         jPanel3.add(jPanel2, java.awt.BorderLayout.CENTER);
 

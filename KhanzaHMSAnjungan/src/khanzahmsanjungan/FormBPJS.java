@@ -34,8 +34,9 @@ public class FormBPJS extends javax.swing.JFrame {
     private final validasi Valid=new validasi();
     private final Connection koneksi=koneksiDB.condb();
     private String validasiregistrasi=Sequel.cariIsi("select set_validasi_registrasi.wajib_closing_kasir from set_validasi_registrasi");
-    private String cek_booking_registrasi, cek_reg_periksa, cek_booking_poli, cek_booking_kddokter, cek_reg_periksa_poli, cek_reg_periksa_kddokter, cek_rujukan_bridging_sep, cek_status_checkin = "";
+    private String cek_booking_registrasi, cek_booking_mobile_jkn, cek_reg_periksa, cek_booking_poli, cek_booking_kddokter, cek_reg_periksa_poli, cek_reg_periksa_kddokter, cek_rujukan_bridging_sep, cek_status_checkin, cek_status_checkin_mobile_jkn = "";
     Integer sisahari, cek_rujukan_expired = 0;
+    boolean booking, checkin = false;
         
     /** Creates new form frmUtama */
     public FormBPJS() {
@@ -618,127 +619,198 @@ public class FormBPJS extends javax.swing.JFrame {
     
     private void cek_pendaftaran_bpjs(String noRm){
         // cek apakah status di booking sudah check in di booking_registrasi dan apakah sudah ada di reg_periksa
-        cek_reg_periksa= Sequel.cariIsi("SELECT reg_periksa.no_rawat FROM reg_periksa WHERE reg_periksa.tgl_registrasi=LEFT(NOW(),10) AND kd_pj = 'BPJ' AND reg_periksa.no_rkm_medis=?",noRm);
-//        cek_reg_periksa= Sequel.cariIsi("SELECT reg_periksa.no_rawat FROM reg_periksa WHERE reg_periksa.tgl_registrasi='2023-10-06' AND kd_pj = 'BPJ' AND reg_periksa.no_rkm_medis=?",noRm);
-        // cek di booking apakah ada
-        cek_booking_registrasi= Sequel.cariIsi("SELECT booking_registrasi.tanggal_periksa FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa=LEFT(NOW(),10) AND kd_pj = 'BPJ' AND booking_registrasi.no_rkm_medis=?",noRm);
-        System.out.println();
-//        cek_booking_registrasi= Sequel.cariIsi("SELECT booking_registrasi.tanggal_periksa FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa='2023-10-06' AND kd_pj = 'BPJ' AND booking_registrasi.no_rkm_medis=?",noRm);
-        if(!cek_booking_registrasi.equals("")){
-            // cek apakah statusnya Belum checkin?
-          cek_status_checkin = Sequel.cariIsi("SELECT booking_registrasi.status FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa=LEFT(NOW(),10) and booking_registrasi.no_rkm_medis=?",noRm);
-//            cek_status_checkin = Sequel.cariIsi("SELECT booking_registrasi.status FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa='2023-10-06' and booking_registrasi.no_rkm_medis=?",noRm);
+        // di booking apakah ada
+        cek_booking_registrasi= Sequel.cariIsi("SELECT\n"+
+                                                "booking_registrasi.tanggal_periksa \n"+
+                                                "FROM \n"+
+                                                "booking_registrasi \n"+
+                                                "WHERE \n"+
+                                                "booking_registrasi.tanggal_periksa=CURDATE() AND \n"+
+                                                "kd_pj = 'BPJ' AND \n"+
+                                                "booking_registrasi.no_rkm_medis=?",noRm);
+        cek_booking_mobile_jkn= Sequel.cariIsi("SELECT\n"+
+                                                "referensi_mobilejkn_bpjs.tanggalperiksa \n"+
+                                                "FROM \n"+
+                                                "referensi_mobilejkn_bpjs \n"+
+                                                "WHERE \n"+
+                                                "referensi_mobilejkn_bpjs.tanggalperiksa=CURDATE() AND \n"+
+                                                "referensi_mobilejkn_bpjs.norm=?",noRm);
+        System.out.println("cek_booking_registrasi: "+cek_booking_registrasi);
+        System.out.println("cek_booking_mobile_jkn: "+cek_booking_mobile_jkn);
+        
+        if(!cek_booking_registrasi.equals("") || !cek_booking_mobile_jkn.equals("")){
+            booking = true;
+        }
+        
+        if(booking){
+            // apakah statusnya Belum checkin?
+            
+            //#################
+            //||   URGENT    ||
+            //#################
+            // cek di table booking registrasi untuk checkin lewat si doel dan referensi_mobilejkn_bpjs untuk checkin lewat mobile JKN
+            cek_status_checkin = Sequel.cariIsi("SELECT \n"+
+                                                "booking_registrasi.status \n"+
+                                                "FROM \n"+
+                                                "booking_registrasi \n"+
+                                                "WHERE \n"+
+                                                "booking_registrasi.tanggal_periksa=CURDATE() AND \n"+
+                                                "booking_registrasi.no_rkm_medis=?",noRm);
+            cek_status_checkin_mobile_jkn = Sequel.cariIsi("SELECT \n"+
+                                                "referensi_mobilejkn_bpjs.status \n"+
+                                                "FROM \n"+
+                                                "referensi_mobilejkn_bpjs \n"+
+                                                "WHERE \n"+
+                                                "referensi_mobilejkn_bpjs.tanggalperiksa=CURDATE() AND \n"+
+                                                "referensi_mobilejkn_bpjs.norm=?",noRm);
             System.out.println("cek_status_checkin: "+cek_status_checkin);
-            if(cek_status_checkin.equals("Belum")){
-                // cek rujukan di bridging_sep, jika blm ada pasien diarahkan ke petugas regis
+            System.out.println("cek_status_checkin_mobile_jkn: "+cek_status_checkin_mobile_jkn);
+            
+            if(!cek_status_checkin.equals("Belum") || !cek_status_checkin_mobile_jkn.equals("Belum")){
+                checkin = true;
+                System.out.println("checkin: "+true);
+            }
+            
+            if(!checkin){
+                if(cek_status_checkin.equals("Belum")){
+                    JOptionPane.showMessageDialog(null,"Anda belum checkin di aplikasi si Doel, \n"+
+                                                                    "Silahkan buka aplikasi si Doel dan klik Checkin untuk melanjutkan proses masuk.");
+                }else if(cek_status_checkin_mobile_jkn.equals("Belum")){
+                    JOptionPane.showMessageDialog(null,"Anda belum checkin di aplikasi Mobile JKN, \n"+
+                                                                    "Silahkan buka aplikasi Mobile JKN dan klik Checkin untuk melanjutkan proses masuk.");
+                }
+            }else{
+                //#################
+                //||   URGENT    ||
+                //#################
+                System.out.println("Line 686");
+                DlgRegistrasi regis=new DlgRegistrasi(null,true);
+                regis.setSize(this.getWidth(),this.getHeight());
+                regis.setLocationRelativeTo(this);
+                //###########################################################
+                //||                                                       ||
+                //||tujuan poli dari db booking_registrasi dicocokan dengan||
+                //||rujukan pertama di db bridging_sep supaya poli rujukan ||
+                //||  yang dari BPJS = Poli tujuan sesuai booking pasien   ||
+                //||                                                       ||
+                //###########################################################
                 
-                //SELECT 
-                //  br.no_rkm_medis,
-                //  br.tanggal_periksa, 
-                //  m.kd_poli_bpjs
-                //FROM booking_registrasi br
-                //LEFT JOIN maping_poli_bpjs m ON br.kd_poli = m.kd_poli_rs
-                //WHERE 
-                //  br.tanggal_periksa=LEFT(NOW(),10) AND 
-                //  br.no_rkm_medis = "00242283"
-                
-//                cek_rujukan_bridging_sep
-                String kd_poli_bpjs = Sequel.cariIsi("SELECT m.kd_poli_bpjs FROM booking_registrasi br LEFT JOIN maping_poli_bpjs m ON br.kd_poli = m.kd_poli_rs WHERE br.tanggal_periksa=LEFT(NOW(),10) AND br.no_rkm_medis = ?",noRm);
-//                String kd_poli_bpjs = Sequel.cariIsi("SELECT m.kd_poli_bpjs FROM booking_registrasi br LEFT JOIN maping_poli_bpjs m ON br.kd_poli = m.kd_poli_rs WHERE br.tanggal_periksa='2023-10-06' AND br.no_rkm_medis = ?",noRm);
-                String query_cek_rujukan_bridging_sep = "SELECT bridging_sep.no_rujukan FROM bridging_sep WHERE bridging_sep.nomr='"+noRm+"' AND  bridging_sep.kdpolitujuan='"+kd_poli_bpjs+"' ORDER BY bridging_sep.no_rawat DESC";
-                cek_rujukan_bridging_sep = Sequel.cariIsi(query_cek_rujukan_bridging_sep);
-                System.out.println("query_cek_rujukan_bridging_sep: "+query_cek_rujukan_bridging_sep);
-                if(!cek_rujukan_bridging_sep.equals("")){
-                    // jika ada data rujukan cek masa rujukannya apakah sudah expired, jika sudah pasien diarahkan ke petugas
-                    String query_rujukan = "SELECT (90 - DATEDIFF(CURRENT_DATE,bridging_sep.tglrujukan)) AS sisahari, bridging_sep.no_rawat, bridging_sep.tglrujukan FROM bridging_sep WHERE bridging_sep.kdpolitujuan = '"+kd_poli_bpjs+"' AND bridging_sep.nomr = '"+noRm+"' ORDER BY bridging_sep.no_rawat DESC";
+                // pemisah if antara si doel dan mobile jkn
+                if(!cek_booking_registrasi.equals("")){
+                    // tujuan poli dari booking si doel harus sama dengan rujukan dari puskesmas
+                    String kd_poli_bpjs = Sequel.cariIsi("SELECT \n"+
+                                                         "m.kd_poli_rs \n"+
+                                                         "FROM \n"+
+                                                         "booking_registrasi br \n"+
+                                                         "LEFT JOIN maping_poli_bpjs m ON br.kd_poli = m.kd_poli_rs \n"+
+                                                         "WHERE \n"+
+                                                         "br.tanggal_periksa=CURDATE() AND \n"+
+                                                         "br.no_rkm_medis = ?",noRm);
+
+                    String query_cek_rujukan_pertama_bridging_sep = "SELECT \n"+
+                                                                    "b.nomr, \n"+
+                                                                    "b.nama_pasien, \n"+
+                                                                    "MIN(b.no_rawat) AS no_rawat, \n"+
+                                                                    "b.no_rujukan, \n"+
+                                                                    "b.kdpolitujuan, \n"+
+                                                                    "m.kd_poli_rs, \n"+
+                                                                    "b.nmpolitujuan, \n"+
+                                                                    "(90 - DATEDIFF(CURRENT_DATE,b.tglrujukan)) AS sisahari \n"+
+                                                                    "FROM \n"+
+                                                                    "bridging_sep b \n"+
+                                                                    "LEFT JOIN \n"+
+                                                                    "maping_poli_bpjs m ON b.kdpolitujuan = m.kd_poli_bpjs \n"+
+                                                                    "WHERE \n"+
+                                                                    "b.nomr='"+noRm+"' AND  \n"+
+                                                                    "b.jnspelayanan = '2' AND \n"+
+                                                                    "(90 - DATEDIFF(CURRENT_DATE,b.tglrujukan)) > 1";
+
                     try {
-                        PreparedStatement ps_rujukan = koneksi.prepareStatement(query_rujukan);
-                        ResultSet rs_rujukan = ps_rujukan.executeQuery();
-                            rs_rujukan.next();
-                            sisahari = rs_rujukan.getInt("sisahari");
+                        PreparedStatement ps_rujukan_bridging_sep = koneksi.prepareStatement(query_cek_rujukan_pertama_bridging_sep);
+                        ResultSet rs_rujukan_bridging_sep = ps_rujukan_bridging_sep.executeQuery();
+                        rs_rujukan_bridging_sep.next();
+                        System.out.println("Line 731");
+                        System.out.println("kode poli rs: "+rs_rujukan_bridging_sep.getString("kd_poli_rs"));
+                        // dicocokan dari si doel dan bridging sep pertama apakah sama?
+                        // jika ya, maka lanjut ke filter selanjutnya
+                        if(rs_rujukan_bridging_sep.getString("kd_poli_rs").equals(kd_poli_bpjs+"")){
+                            System.out.println("line 735");
+                            sisahari = rs_rujukan_bridging_sep.getInt("sisahari");
                             System.out.println("sisahari: "+sisahari);
-                            if(sisahari < 0){
-                                JOptionPane.showMessageDialog(null,"Rujukan anda sudah expired, silahkan konfirmasi ke petugas registrasi.");
-                            }else if(sisahari >= 0 && sisahari<=12){
-                                JOptionPane.showMessageDialog(null,"Rujukan anda akan berakhir kurang dari 12 hari lagi, silahkan konfirmasi ke petugas registrasi.");
-                            }else if(sisahari > 12){
-                                DlgRegistrasi regis=new DlgRegistrasi(null,true);
-                                regis.setSize(this.getWidth(),this.getHeight());
-                                regis.setLocationRelativeTo(this);
-                                // query cari kd dokter dan poli di bridging sep join reg periksa
-                                String no_rawat = rs_rujukan.getString("no_rawat");
-                                cek_reg_periksa_poli = Sequel.cariIsi("SELECT reg_periksa.kd_poli FROM bridging_sep LEFT JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat WHERE bridging_sep.no_rawat = ?", no_rawat);
-                                cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT reg_periksa.kd_dokter FROM bridging_sep LEFT JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat WHERE bridging_sep.no_rawat = ?", no_rawat);
+                            if(sisahari <= 0){
+                                JOptionPane.showMessageDialog(null,"Rujukan anda sudah expired, \n"+
+                                                                                "silahkan konfirmasi ke petugas registrasi.");
+                            }else if(sisahari > 1){
+                                String no_rawat = rs_rujukan_bridging_sep.getString("no_rawat");
+                                cek_reg_periksa_poli = Sequel.cariIsi("SELECT \n"+
+                                                                        "reg_periksa.kd_poli \n"+
+                                                                        "FROM \n"+
+                                                                        "bridging_sep \n"+
+                                                                        "LEFT JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat \n"+
+                                                                        "WHERE \n"+
+                                                                        "bridging_sep.no_rawat = ?", no_rawat);
+                                cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT \n"+
+                                                                          "reg_periksa.kd_dokter \n"+
+                                                                          "FROM \n"+
+                                                                          "bridging_sep \n"+
+                                                                          "LEFT JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat \n"+
+                                                                          "WHERE \n"+
+                                                                          "bridging_sep.no_rawat = ?", no_rawat);
                                 System.out.println("form bpjs noRm: "+noRm);
                                 System.out.println("form bpjs cek_booking_poli: "+cek_reg_periksa_poli);
                                 System.out.println("form bpjs cek_booking_kddokter: "+cek_reg_periksa_kddokter);
-                                regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs");
+                                cek_reg_periksa= Sequel.cariIsi("SELECT \n"+
+                                                                "reg_periksa.no_rawat \n"+
+                                                                "FROM \n"+
+                                                                "reg_periksa \n"+
+                                                                "WHERE \n"+
+                                                                "reg_periksa.tgl_registrasi=CURDATE() AND \n"+
+                                                                "kd_pj = 'BPJ' \n"+
+                                                                "AND reg_periksa.no_rkm_medis=?",noRm);
+                                System.out.println("line 767");
+                                if(!cek_reg_periksa.equals("")){
+                                    // langsung cetak
+                                    regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "true", "bpjs", "Si Doel");
+                                }else{
+                                    regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs", "Si Doel");
+                                }
                                 regis.setVisible(true);
                             }
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Tujuan Poliklinik anda tidak sama dengan Poli Rujukan, \n"+
+                                                                                "silahkan konfirmasi ke petugas registrasi.");
+                            System.out.println("Poli rujukan dari bridging sep: "+rs_rujukan_bridging_sep.getString("kd_poli_rs"));
+                            System.out.println("Poli tujuan pasien: "+kd_poli_bpjs);
+                        }
                     } catch (SQLException ex) {
                         Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
-                        JOptionPane.showMessageDialog(null,"Belum ada data rujukan yang tersimpan, silahkan konfirmasi ke petugas registrasi.");
                     }
-                }else{
-                    JOptionPane.showMessageDialog(null,"Belum ada data rujukan yang tersimpan, silahkan konfirmasi ke petugas registrasi.");
-                }
-            }else if(cek_status_checkin.equals("Terdaftar")){
-                // cek apakah sudah ada di reg_periksa, jika di reg periksa tidak ada, maka konfirmasi ke petugas registrasi
-                System.out.println("cek_reg_periksa: "+cek_reg_periksa);
-//                String kd_poli_bpjs = Sequel.cariIsi("SELECT m.kd_poli_bpjs FROM booking_registrasi br LEFT JOIN maping_poli_bpjs m ON br.kd_poli = m.kd_poli_rs WHERE br.tanggal_periksa='2023-10-06' AND br.no_rkm_medis = ?",noRm);
-                String kd_poli_bpjs = Sequel.cariIsi("SELECT m.kd_poli_bpjs FROM booking_registrasi br LEFT JOIN maping_poli_bpjs m ON br.kd_poli = m.kd_poli_rs WHERE br.tanggal_periksa=LEFT(NOW(),10) AND br.no_rkm_medis = ?",noRm);
-                String query_cek_rujukan_bridging_sep = "SELECT bridging_sep.no_rujukan FROM bridging_sep WHERE bridging_sep.nomr='"+noRm+"' AND  bridging_sep.kdpolitujuan='"+kd_poli_bpjs+"' ORDER BY bridging_sep.no_rawat DESC";
-                String query_rujukan = "SELECT (90 - DATEDIFF(CURRENT_DATE,bridging_sep.tglrujukan)) AS sisahari, bridging_sep.no_rawat, bridging_sep.tglrujukan FROM bridging_sep WHERE bridging_sep.kdpolitujuan = '"+kd_poli_bpjs+"' AND bridging_sep.nomr = '"+noRm+"' ORDER BY bridging_sep.no_rawat DESC";
-                try {
-                    PreparedStatement ps_rujukan = koneksi.prepareStatement(query_rujukan);
-                    ResultSet rs_rujukan = ps_rujukan.executeQuery();
-                        rs_rujukan.next();
-                        sisahari = rs_rujukan.getInt("sisahari");
-                        System.out.println("sisahari: "+sisahari);
-                        if(sisahari < 0){
-                            JOptionPane.showMessageDialog(null,"Rujukan anda sudah expired, silahkan konfirmasi ke petugas registrasi.");
-                        }else if(sisahari >= 0 && sisahari<=12){
-                            JOptionPane.showMessageDialog(null,"Rujukan anda akan berakhir kurang dari 12 hari lagi, silahkan konfirmasi ke petugas registrasi.");
-                        }else if(sisahari > 12){
-                            if(!cek_reg_periksa.equals("")){
-                                // langsung cetak
-                                DlgRegistrasi regis=new DlgRegistrasi(null,true);
-                                regis.setSize(this.getWidth(),this.getHeight());
-                                regis.setLocationRelativeTo(this);
-                                cek_reg_periksa_poli = Sequel.cariIsi("SELECT reg_periksa.kd_poli FROM reg_periksa WHERE reg_periksa.tgl_registrasi=LEFT(NOW(),10) AND kd_pj = 'BPJ' AND reg_periksa.no_rkm_medis=?",noRm);
-//                                cek_reg_periksa_poli = Sequel.cariIsi("SELECT reg_periksa.kd_poli FROM reg_periksa WHERE reg_periksa.tgl_registrasi='2023-10-06' AND kd_pj = 'BPJ' AND reg_periksa.no_rkm_medis=?",noRm);
-                                cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT reg_periksa.kd_dokter FROM reg_periksa WHERE reg_periksa.tgl_registrasi=LEFT(NOW(),10) AND kd_pj = 'BPJ' AND reg_periksa.no_rkm_medis=?",noRm);
-//                                cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT reg_periksa.kd_dokter FROM reg_periksa WHERE reg_periksa.tgl_registrasi='2023-10-06' AND kd_pj = 'BPJ' AND reg_periksa.no_rkm_medis=?",noRm);
-                                System.out.println("form bpjs noRm: "+noRm);
-                                System.out.println("form bpjs cek_booking_poli: "+cek_reg_periksa_poli);
-                                System.out.println("form bpjs cek_booking_kddokter: "+cek_reg_periksa_kddokter);
-                                regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "true", "bpjs");
-                                regis.setVisible(true);
-                            }else{
-                                DlgRegistrasi regis=new DlgRegistrasi(null,true);
-                                regis.setSize(this.getWidth(),this.getHeight());
-                                regis.setLocationRelativeTo(this);
-                                cek_reg_periksa_poli = Sequel.cariIsi("SELECT reg_periksa.kd_poli FROM reg_periksa WHERE reg_periksa.tgl_registrasi=LEFT(NOW(),10) AND kd_pj = 'BPJ' AND reg_periksa.no_rkm_medis=?",noRm);
-//                                cek_reg_periksa_poli = Sequel.cariIsi("SELECT reg_periksa.kd_poli FROM reg_periksa WHERE reg_periksa.tgl_registrasi='2023-10-06' AND kd_pj = 'BPJ' AND reg_periksa.no_rkm_medis=?",noRm);
-                                cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT reg_periksa.kd_dokter FROM reg_periksa WHERE reg_periksa.tgl_registrasi=LEFT(NOW(),10) AND kd_pj = 'BPJ' AND reg_periksa.no_rkm_medis=?",noRm);
-//                                cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT reg_periksa.kd_dokter FROM reg_periksa WHERE reg_periksa.tgl_registrasi='2023-10-06' AND kd_pj = 'BPJ' AND reg_periksa.no_rkm_medis=?",noRm);
-                                System.out.println("form bpjs noRm: "+noRm);
-                                System.out.println("form bpjs cek_booking_poli: "+cek_reg_periksa_poli);
-                                System.out.println("form bpjs cek_booking_kddokter: "+cek_reg_periksa_kddokter);
-                                regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs");
-                                regis.setVisible(true);
-                            }
-                        }
-                } catch (SQLException ex) {
-                    Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
+                }else if(!cek_booking_mobile_jkn.equals("")){
+                    cek_reg_periksa_poli = Sequel.cariIsi("SELECT \n"+
+                                                        "reg_periksa.kd_poli \n"+
+                                                        "FROM \n"+
+                                                        "reg_periksa \n"+
+                                                        "WHERE \n"+
+                                                        "reg_periksa.tgl_registrasi=CURDATE() AND \n"+
+                                                        "kd_pj = 'BPJ' AND \n"+
+                                                        "reg_periksa.no_rkm_medis=?",noRm);
+                    cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT \n"+
+                                                          "reg_periksa.kd_dokter \n"+
+                                                          "FROM \n"+
+                                                          "reg_periksa \n"+
+                                                          "WHERE \n"+
+                                                          "reg_periksa.tgl_registrasi=CURDATE() AND \n"+
+                                                          "kd_pj = 'BPJ' AND \n"+
+                                                          "reg_periksa.no_rkm_medis=?",noRm);
+                    regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs", "Mobile JKN");
+                    regis.setVisible(true);
                 }
             }
         }else{
-            JOptionPane.showMessageDialog(null,"Anda belum booking melalui aplikasi, silahkan check in melalui aplikasi Si Dol. ");
+            if(cek_booking_registrasi.equals("") && cek_booking_mobile_jkn.equals("")){
+                JOptionPane.showMessageDialog(null,"Anda belum booking melalui aplikasi si Doel atau Mobile JKN, \n"+
+                                                                "silahkan daftar melalui petugas ");
+            }
         }
-        
-
-//        cek_booking_poli = Sequel.cariIsi("SELECT booking_registrasi.kd_poli FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa=LEFT(NOW(),10) and booking_registrasi.no_rkm_medis=?",noRm);
-//        cek_booking_kddokter = Sequel.cariIsi("SELECT booking_registrasi.kd_dokter FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa=LEFT(NOW(),10) and booking_registrasi.no_rkm_medis=?",noRm);
     }
 }
