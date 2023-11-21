@@ -699,7 +699,7 @@ public class FormBPJS extends javax.swing.JFrame {
                 if(!cek_booking_registrasi.equals("")){
                     // tujuan poli dari booking si doel harus sama dengan rujukan dari puskesmas
                     String kd_poli_bpjs = Sequel.cariIsi("SELECT \n"+
-                                                         "m.kd_poli_rs \n"+
+                                                         "m.kd_poli_bpjs \n"+
                                                          "FROM \n"+
                                                          "booking_registrasi br \n"+
                                                          "LEFT JOIN maping_poli_bpjs m ON br.kd_poli = m.kd_poli_rs \n"+
@@ -710,10 +710,12 @@ public class FormBPJS extends javax.swing.JFrame {
                     String query_cek_rujukan_pertama_bridging_sep = "SELECT \n"+
                                                                     "b.nomr, \n"+
                                                                     "b.nama_pasien, \n"+
-                                                                    "MIN(b.no_rawat) AS no_rawat, \n"+
+                                                                    "MIN(REPLACE(b.no_rawat,'/','')) AS no_rawat_min, \n"+
+                                                                    "b.no_rawat AS no_rawat, \n"+
                                                                     "b.no_rujukan, \n"+
                                                                     "b.kdpolitujuan, \n"+
                                                                     "m.kd_poli_rs, \n"+
+                                                                    "m.kd_poli_bpjs, \n"+
                                                                     "b.nmpolitujuan, \n"+
                                                                     "(90 - DATEDIFF(CURRENT_DATE,b.tglrujukan)) AS sisahari \n"+
                                                                     "FROM \n"+
@@ -723,6 +725,7 @@ public class FormBPJS extends javax.swing.JFrame {
                                                                     "WHERE \n"+
                                                                     "b.nomr='"+noRm+"' AND  \n"+
                                                                     "b.jnspelayanan = '2' AND \n"+
+                                                                    "b.no_rujukan <> '' AND \n"+
                                                                     "(90 - DATEDIFF(CURRENT_DATE,b.tglrujukan)) > 1";
 
                     try {
@@ -730,10 +733,11 @@ public class FormBPJS extends javax.swing.JFrame {
                         ResultSet rs_rujukan_bridging_sep = ps_rujukan_bridging_sep.executeQuery();
                         rs_rujukan_bridging_sep.next();
                         System.out.println("Line 731");
+                        System.out.println("kd_poli_bpjs "+kd_poli_bpjs);
                         System.out.println("kode poli rs: "+rs_rujukan_bridging_sep.getString("kd_poli_rs"));
                         // dicocokan dari si doel dan bridging sep pertama apakah sama?
                         // jika ya, maka lanjut ke filter selanjutnya
-                        if(rs_rujukan_bridging_sep.getString("kd_poli_rs").equals(kd_poli_bpjs+"")){
+                        if(rs_rujukan_bridging_sep.getString("kd_poli_bpjs").equals(kd_poli_bpjs+"")){
                             System.out.println("line 735");
                             sisahari = rs_rujukan_bridging_sep.getInt("sisahari");
                             System.out.println("sisahari: "+sisahari);
@@ -745,20 +749,24 @@ public class FormBPJS extends javax.swing.JFrame {
                                 cek_reg_periksa_poli = Sequel.cariIsi("SELECT \n"+
                                                                         "reg_periksa.kd_poli \n"+
                                                                         "FROM \n"+
-                                                                        "bridging_sep \n"+
-                                                                        "LEFT JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat \n"+
+                                                                        "reg_periksa \n"+
+//                                                                        "LEFT JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat \n"+
                                                                         "WHERE \n"+
-                                                                        "bridging_sep.no_rawat = ?", no_rawat);
+                                                                        "reg_periksa.no_rawat = ?", no_rawat);
                                 cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT \n"+
                                                                           "reg_periksa.kd_dokter \n"+
                                                                           "FROM \n"+
-                                                                          "bridging_sep \n"+
-                                                                          "LEFT JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat \n"+
+                                                                          "reg_periksa \n"+
+//                                                                          "LEFT JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat \n"+
                                                                           "WHERE \n"+
-                                                                          "bridging_sep.no_rawat = ?", no_rawat);
-                                System.out.println("form bpjs noRm: "+noRm);
-                                System.out.println("form bpjs cek_booking_poli: "+cek_reg_periksa_poli);
-                                System.out.println("form bpjs cek_booking_kddokter: "+cek_reg_periksa_kddokter);
+                                                                          "reg_periksa.no_rawat = ?", no_rawat);
+//                                System.out.println("cek_reg_periksa_poli: "+cek_reg_periksa_poli);
+//                                System.out.println("form bpjs noRm: "+noRm);
+//                                System.out.println("form bpjs cek_booking_poli: "+cek_reg_periksa_poli);
+//                                System.out.println("form bpjs cek_booking_kddokter: "+cek_reg_periksa_kddokter);
+                                System.out.println("no_rawat: "+no_rawat);
+                                System.out.println("cek_reg_periksa_kddokter: "+cek_reg_periksa_kddokter);
+                                System.out.println("cek_reg_periksa_poli: "+cek_reg_periksa_poli);
                                 cek_reg_periksa= Sequel.cariIsi("SELECT \n"+
                                                                 "reg_periksa.no_rawat \n"+
                                                                 "FROM \n"+
@@ -794,6 +802,7 @@ public class FormBPJS extends javax.swing.JFrame {
                                                         "reg_periksa.tgl_registrasi=CURDATE() AND \n"+
                                                         "kd_pj = 'BPJ' AND \n"+
                                                         "reg_periksa.no_rkm_medis=?",noRm);
+                    System.out.println("cek_reg_periksa_poli: "+cek_reg_periksa_poli);
                     cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT \n"+
                                                           "reg_periksa.kd_dokter \n"+
                                                           "FROM \n"+
@@ -802,6 +811,7 @@ public class FormBPJS extends javax.swing.JFrame {
                                                           "reg_periksa.tgl_registrasi=CURDATE() AND \n"+
                                                           "kd_pj = 'BPJ' AND \n"+
                                                           "reg_periksa.no_rkm_medis=?",noRm);
+                    System.out.println("cek_reg_periksa_kddokter: "+cek_reg_periksa_kddokter);
                     regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs", "Mobile JKN");
                     regis.setVisible(true);
                 }

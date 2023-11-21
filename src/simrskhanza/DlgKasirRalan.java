@@ -13646,7 +13646,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             }
             switch(cmbKehadiranPasien.getSelectedItem().toString()){
                 case "Online (-) Si Doel":
-                    tambahan_query_kehadiran_pasien_online = " AND (SELECT booking_registrasi.status FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa BETWEEN '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' AND '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' AND booking_registrasi.no_rkm_medis=reg_periksa.no_rkm_medis AND booking_registrasi.no_reg = reg_periksa.no_reg) = 'Belum' ";
+//                    tambahan_query_kehadiran_pasien_online = " AND (SELECT booking_registrasi.status FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa BETWEEN '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' AND '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' AND booking_registrasi.no_rkm_medis=reg_periksa.no_rkm_medis) = 'Terdaftar' ";
+                    tambahan_query_kehadiran_pasien_online = " AND (SELECT booking_registrasi.status FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa BETWEEN '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' AND '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' AND booking_registrasi.no_rkm_medis = reg_periksa.no_rkm_medis) <> '' AND NOT EXISTS (SELECT kehadiran_pasien_bpjs.no_rawat FROM kehadiran_pasien_bpjs WHERE kehadiran_pasien_bpjs.no_rawat = reg_periksa.no_rawat) ";
                     System.out.println("tambahan_query_no_sep belum: "+tambahan_query_no_sep);
                     break;
                 case "Online (-) Mobile JKN":
@@ -13654,7 +13655,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     System.out.println("tambahan_query_no_sep belum: "+tambahan_query_no_sep);
                     break;
                 case "Online Hadir":
-                    tambahan_query_kehadiran_pasien_online = " AND (SELECT kehadiran_pasien_bpjs.status_kehadiran FROM kehadiran_pasien_bpjs WHERE kehadiran_pasien_bpjs.created_at BETWEEN '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' AND "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' AND kehadiran_pasien_bpjs.no_rm=reg_periksa.no_rkm_medis AND reg_periksa.no_rawat = kehadiran_pasien_bpjs.no_rawat GROUP BY kehadiran_pasien_bpjs.no_rm) = 'hadir' ";
+                    tambahan_query_kehadiran_pasien_online = " AND (SELECT kehadiran_pasien_bpjs.status_kehadiran FROM kehadiran_pasien_bpjs WHERE kehadiran_pasien_bpjs.created_at BETWEEN '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' AND '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' AND kehadiran_pasien_bpjs.no_rm=reg_periksa.no_rkm_medis AND reg_periksa.no_rawat = kehadiran_pasien_bpjs.no_rawat GROUP BY kehadiran_pasien_bpjs.no_rm) = 'hadir' ";
                     System.out.println("tambahan_query_no_sep belum: "+tambahan_query_no_sep);
                     break;
                 default:
@@ -13669,9 +13670,9 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 "    reg_periksa.kd_dokter,\n"+
                 "    dokter.nm_dokter,\n"+
                 "    CASE \n"+
-                "        WHEN (SELECT booking_registrasi.status FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa BETWEEN ? AND ? AND booking_registrasi.no_rkm_medis=reg_periksa.no_rkm_medis AND booking_registrasi.no_reg = reg_periksa.no_reg) = 'Belum' THEN 'Online (-) Si Doel' \n"+
-                "        WHEN (SELECT referensi_mobilejkn_bpjs.status FROM referensi_mobilejkn_bpjs WHERE referensi_mobilejkn_bpjs.tanggalperiksa BETWEEN ? AND ? AND referensi_mobilejkn_bpjs.norm=reg_periksa.no_rkm_medis AND referensi_mobilejkn_bpjs.no_rawat = reg_periksa.no_rawat) = 'Belum' THEN 'Online (-) Mobile JKN' \n"+
                 "        WHEN (SELECT kehadiran_pasien_bpjs.status_kehadiran FROM kehadiran_pasien_bpjs WHERE kehadiran_pasien_bpjs.created_at BETWEEN ? AND ? AND kehadiran_pasien_bpjs.no_rm=reg_periksa.no_rkm_medis AND reg_periksa.no_rawat = kehadiran_pasien_bpjs.no_rawat GROUP BY kehadiran_pasien_bpjs.no_rm) = 'hadir' THEN 'Online Hadir' \n"+
+                "        WHEN (SELECT referensi_mobilejkn_bpjs.status FROM referensi_mobilejkn_bpjs WHERE referensi_mobilejkn_bpjs.tanggalperiksa BETWEEN ? AND ? AND referensi_mobilejkn_bpjs.norm=reg_periksa.no_rkm_medis AND referensi_mobilejkn_bpjs.no_rawat = reg_periksa.no_rawat) = 'Belum' THEN 'Online (-) Mobile JKN' \n"+
+                "        WHEN (SELECT booking_registrasi.status FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa BETWEEN ? AND ? AND booking_registrasi.no_rkm_medis = reg_periksa.no_rkm_medis) <> '' THEN 'Online (-) Si Doel' \n"+
                 "        ELSE '(-)' \n"+
                 "    END AS kehadiran, \n"+
                 "    (SELECT MAX(b.no_sep) FROM bridging_sep b WHERE b.no_rawat = reg_periksa.no_rawat AND b.nomr = reg_periksa.no_rkm_medis) AS no_sep, \n"+

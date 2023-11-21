@@ -9,6 +9,7 @@ import fungsi.validasi;
 import javax.swing.ImageIcon;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JFrame;
 
 /**
  *
@@ -24,7 +25,7 @@ public class welcomeScreen extends javax.swing.JFrame {
      */
     public welcomeScreen() {
         initComponents();
-        setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());      
+        setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
         this.setSize(screen.width,screen.height);
     }
     
@@ -55,7 +56,6 @@ public class welcomeScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.Color.white);
         setPreferredSize(new java.awt.Dimension(1015, 1000));
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         jPanel3.setPreferredSize(new java.awt.Dimension(1920, 1080));
         jPanel3.setLayout(new java.awt.BorderLayout());
