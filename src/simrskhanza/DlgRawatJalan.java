@@ -5271,41 +5271,149 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                         }else{
                             if(akses.getkode().equals("Admin Utama")){
                                 if(Sequel.menyimpantf("pemeriksaan_ralan","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",21,new String[]{
-                                    TNoRw.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                                    TSuhu.getText(),TTensi.getText(),TNadi.getText(),TRespirasi.getText(),TTinggi.getText(),TBerat.getText(),
-                                    SpO2.getText(),TGCS.getText(),cmbKesadaran.getSelectedItem().toString(),TKeluhan.getText(),TPemeriksaan.getText(),TAlergi.getText(),
-                                    LingkarPerut.getText(),TindakLanjut.getText(),TPenilaian.getText(),TInstruksi.getText(),TEvaluasi.getText(),KdPeg.getText()})==true){
+                                    TNoRw.getText(),
+                                    Valid.SetTgl(DTPTgl.getSelectedItem()+""),
+                                    cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
+                                    TSuhu.getText(),
+                                    TTensi.getText(),
+                                    TNadi.getText(),
+                                    TRespirasi.getText(),
+                                    TTinggi.getText(),
+                                    TBerat.getText(),
+                                    SpO2.getText(),
+                                    TGCS.getText(),
+                                    cmbKesadaran.getSelectedItem().toString(),
+                                    TKeluhan.getText(),
+                                    TPemeriksaan.getText(),
+                                    TAlergi.getText(),
+                                    LingkarPerut.getText(),
+                                    TindakLanjut.getText(),
+                                    TPenilaian.getText(),
+                                    TInstruksi.getText(),
+                                    TEvaluasi.getText(),
+                                    KdPeg.getText()})==true){
                                         tabModePemeriksaan.addRow(new Object[]{
-                                            false,TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                                            TSuhu.getText(),TTensi.getText(),TNadi.getText(),TRespirasi.getText(),TTinggi.getText(),TBerat.getText(),SpO2.getText(),TGCS.getText(),cmbKesadaran.getSelectedItem().toString(),
-                                            TKeluhan.getText(),TPemeriksaan.getText(),TAlergi.getText(),LingkarPerut.getText(),TindakLanjut.getText(),TPenilaian.getText(),TInstruksi.getText(),TEvaluasi.getText(),
-                                            KdPeg.getText(),TPegawai.getText(),Jabatan.getText()
+                                            false, //P
+                                            TNoRw.getText(), //"No.Rawat",
+                                            TNoRM.getText(), //"No.R.M.",
+                                            TPasien.getText(), //"Nama Pasien",
+                                            TPegawai.getText(), //"Dokter/Paramedis",
+                                            Valid.SetTgl(DTPTgl.getSelectedItem()+""), //"Tgl.Rawat",
+                                            cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(), //"Jam",
+                                            TSuhu.getText(), //"Suhu(C)",
+                                            TTensi.getText(), //"Tensi",
+                                            TNadi.getText(), //"Nadi(/menit)",
+                                            TRespirasi.getText(), //"Respirasi(/menit)",
+                                            TTinggi.getText(), //"Tinggi(Cm)",
+                                            TBerat.getText(), //"Berat(Kg)",
+                                            SpO2.getText(), //"SpO2(%)",
+                                            TGCS.getText(), //"GCS(E,V,M)",
+                                            cmbKesadaran.getSelectedItem().toString(), //"Kesadaran",
+                                            TKeluhan.getText(), //"Subjek",
+                                            TPemeriksaan.getText(), //"Objek",
+                                            TAlergi.getText(), //"Alergi",
+                                            LingkarPerut.getText(), //"L.P.(Cm)", lingkar_perut
+                                            TindakLanjut.getText(), //"Plan",
+                                            TPenilaian.getText(), //"Asesmen",
+                                            TInstruksi.getText(), //"Instruksi",
+                                            TEvaluasi.getText(), //"Evaluasi",
+                                            KdPeg.getText(), //"NIP",
+                                            Jabatan.getText() //"Profesi/Jabatan"
                                         });
-                                        TSuhu.setText("");TTensi.setText("");TNadi.setText("");TRespirasi.setText("");
-                                        TTinggi.setText("");TBerat.setText("");TGCS.setText("");TKeluhan.setText("");
-                                        TPemeriksaan.setText("");TAlergi.setText("");LingkarPerut.setText("");
-                                        TindakLanjut.setText("");TPenilaian.setText("");TInstruksi.setText("");SpO2.setText("");
-                                        TEvaluasi.setText("");cmbKesadaran.setSelectedIndex(0);
+                                        TSuhu.setText("");
+                                        TTensi.setText("");
+                                        TNadi.setText("");
+                                        TRespirasi.setText("");
+                                        TTinggi.setText("");
+                                        TBerat.setText("");
+                                        TGCS.setText("");
+                                        TKeluhan.setText("");
+                                        TPemeriksaan.setText("");
+                                        TAlergi.setText("");
+                                        LingkarPerut.setText("");
+                                        TindakLanjut.setText("");
+                                        TPenilaian.setText("");
+                                        TInstruksi.setText("");
+                                        SpO2.setText("");
+                                        TEvaluasi.setText("");
+                                        cmbKesadaran.setSelectedIndex(0);
                                         LCount.setText(""+tabModePemeriksaan.getRowCount());
                                 }
                             }else{
                                 if(akses.getkode().equals(KdPeg.getText())){
                                     if(Sequel.menyimpantf("pemeriksaan_ralan","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",21,new String[]{
-                                        TNoRw.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                                        TSuhu.getText(),TTensi.getText(),TNadi.getText(),TRespirasi.getText(),TTinggi.getText(),TBerat.getText(),
-                                        SpO2.getText(),TGCS.getText(),cmbKesadaran.getSelectedItem().toString(),TKeluhan.getText(),TPemeriksaan.getText(),TAlergi.getText(),
-                                        LingkarPerut.getText(),TindakLanjut.getText(),TPenilaian.getText(),TInstruksi.getText(),TEvaluasi.getText(),KdPeg.getText()})==true){
+                                        //"P",
+                                        TNoRw.getText(),//"No.Rawat",
+                                        //"No.R.M.",
+                                        //"Nama Pasien",
+                                        //"Dokter/Paramedis",
+                                        Valid.SetTgl(DTPTgl.getSelectedItem()+""),//"Tgl.Rawat",
+                                        cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),//"Jam",
+                                        TSuhu.getText(),//"Suhu(C)",
+                                        TTensi.getText(),//"Tensi",
+                                        TNadi.getText(),//"Nadi(/menit)",
+                                        TRespirasi.getText(),//"Respirasi(/menit)",
+                                        TTinggi.getText(),//"Tinggi(Cm)",
+                                        TBerat.getText(),//"Berat(Kg)",
+                                        SpO2.getText(),//"SpO2(%)",
+                                        TGCS.getText(),//"GCS(E,V,M)",
+                                        cmbKesadaran.getSelectedItem().toString(),//"Kesadaran",
+                                        TKeluhan.getText(),//"Subjek",
+                                        TPemeriksaan.getText(),//"Objek",
+                                        TAlergi.getText(),//"Alergi",
+                                        LingkarPerut.getText(),//"L.P.(Cm)",
+                                        TindakLanjut.getText(),//"Plan",
+                                        TPenilaian.getText(),//"Asesmen",
+                                        TInstruksi.getText(),//"Instruksi",
+                                        TEvaluasi.getText(),//"Evaluasi",
+                                        KdPeg.getText()//"NIP",
+                                        //"Profesi/Jabatan"             
+                                    })==true){
                                             tabModePemeriksaan.addRow(new Object[]{
-                                                false,TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                                                TSuhu.getText(),TTensi.getText(),TNadi.getText(),TRespirasi.getText(),TTinggi.getText(),TBerat.getText(),SpO2.getText(),TGCS.getText(),cmbKesadaran.getSelectedItem().toString(),
-                                                TKeluhan.getText(),TPemeriksaan.getText(),TAlergi.getText(),LingkarPerut.getText(),TindakLanjut.getText(),TPenilaian.getText(),TInstruksi.getText(),TEvaluasi.getText(),
-                                                KdPeg.getText(),TPegawai.getText(),Jabatan.getText()
+                                                false,//"P",
+                                                TNoRw.getText(),//"No.Rawat",
+                                                TNoRM.getText(),//"No.R.M.",
+                                                TPasien.getText(),//"Nama Pasien",
+                                                TPegawai.getText(),//"Dokter/Paramedis",
+                                                Valid.SetTgl(DTPTgl.getSelectedItem()+""),//"Tgl.Rawat",
+                                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),//"Jam",
+                                                TSuhu.getText(),//"Suhu(C)",
+                                                TTensi.getText(),//"Tensi",
+                                                TNadi.getText(),//"Nadi(/menit)",
+                                                TRespirasi.getText(),//"Respirasi(/menit)",
+                                                TTinggi.getText(),//"Tinggi(Cm)",
+                                                TBerat.getText(),//"Berat(Kg)",
+                                                SpO2.getText(),//"SpO2(%)",
+                                                TGCS.getText(),//"GCS(E,V,M)",
+                                                cmbKesadaran.getSelectedItem().toString(),//"Kesadaran",
+                                                TKeluhan.getText(),//"Subjek",
+                                                TPemeriksaan.getText(),//"Objek",
+                                                TAlergi.getText(),//"Alergi",
+                                                LingkarPerut.getText(),//"L.P.(Cm)",
+                                                TindakLanjut.getText(),//"Plan",
+                                                TPenilaian.getText(),//"Asesmen",
+                                                TInstruksi.getText(),//"Instruksi",
+                                                TEvaluasi.getText(),//"Evaluasi",
+                                                KdPeg.getText(),//"NIP",
+                                                Jabatan.getText()//"Profesi/Jabatan"    
                                             });
-                                            TSuhu.setText("");TTensi.setText("");TNadi.setText("");TRespirasi.setText("");
-                                            TTinggi.setText("");TBerat.setText("");TGCS.setText("");TKeluhan.setText("");
-                                            TPemeriksaan.setText("");TAlergi.setText("");LingkarPerut.setText("");
-                                            TindakLanjut.setText("");TPenilaian.setText("");TInstruksi.setText("");SpO2.setText("");
-                                            TEvaluasi.setText("");cmbKesadaran.setSelectedIndex(0);
+                                            TSuhu.setText("");
+                                            TTensi.setText("");
+                                            TNadi.setText("");
+                                            TRespirasi.setText("");
+                                            TTinggi.setText("");
+                                            TBerat.setText("");
+                                            TGCS.setText("");
+                                            TKeluhan.setText("");
+                                            TPemeriksaan.setText("");
+                                            TAlergi.setText("");
+                                            LingkarPerut.setText("");
+                                            TindakLanjut.setText("");
+                                            TPenilaian.setText("");
+                                            TInstruksi.setText("");
+                                            SpO2.setText("");
+                                            TEvaluasi.setText("");
+                                            cmbKesadaran.setSelectedIndex(0);
                                             LCount.setText(""+tabModePemeriksaan.getRowCount());
                                     }
                                 }else{
@@ -6344,90 +6452,126 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                             (!SpO2.getText().trim().equals(""))||(!TEvaluasi.getText().trim().equals(""))){
                         if(tbPemeriksaan.getSelectedRow()>-1){
                             if(akses.getkode().equals("Admin Utama")){
-                                if(Sequel.mengedittf("pemeriksaan_ralan","no_rawat='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1)+
-                                    "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4)+
-                                    "' and jam_rawat='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5)+"'",
-                                    "no_rawat='"+TNoRw.getText()+"',suhu_tubuh='"+TSuhu.getText()+"',tensi='"+TTensi.getText()+"',"+
-                                    "keluhan='"+TKeluhan.getText()+"',pemeriksaan='"+TPemeriksaan.getText()+"',"+
-                                    "nadi='"+TNadi.getText()+"',respirasi='"+TRespirasi.getText()+"',"+
-                                    "tinggi='"+TTinggi.getText()+"',berat='"+TBerat.getText()+"',spo2='"+SpO2.getText()+"',"+
-                                    "gcs='"+TGCS.getText()+"',kesadaran='"+cmbKesadaran.getSelectedItem()+"',"+
-                                    "alergi='"+TAlergi.getText()+"',lingkar_perut='"+LingkarPerut.getText()+"',"+
+                                if(Sequel.mengedittf("pemeriksaan_ralan",
+                                    "no_rawat='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1)+
+                                    "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5)+
+                                    "' and jam_rawat='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),6)+"'",
+                                    "no_rawat='"+TNoRw.getText()+
+                                    "',suhu_tubuh='"+TSuhu.getText()+
+                                    "',tensi='"+TTensi.getText()+"',"+
+                                    "keluhan='"+TKeluhan.getText()+
+                                    "',pemeriksaan='"+TPemeriksaan.getText()+"',"+
+                                    "nadi='"+TNadi.getText()+
+                                    "',respirasi='"+TRespirasi.getText()+"',"+
+                                    "tinggi='"+TTinggi.getText()+
+                                    "',berat='"+TBerat.getText()+
+                                    "',spo2='"+SpO2.getText()+"',"+
+                                    "gcs='"+TGCS.getText()+
+                                    "',kesadaran='"+cmbKesadaran.getSelectedItem()+"',"+
+                                    "alergi='"+TAlergi.getText()+
+                                    "',lingkar_perut='"+LingkarPerut.getText()+"',"+
                                     "tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"',"+
                                     "jam_rawat='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"',"+
-                                    "rtl='"+TindakLanjut.getText()+"',penilaian='"+TPenilaian.getText()+"',"+
-                                    "instruksi='"+TInstruksi.getText()+"',evaluasi='"+TEvaluasi.getText()+"',nip='"+KdPeg.getText()+"'")==true){
-                                        tbPemeriksaan.setValueAt(TNoRw.getText(),tbPemeriksaan.getSelectedRow(), 1);
-                                        tbPemeriksaan.setValueAt(TNoRM.getText(),tbPemeriksaan.getSelectedRow(), 2);
-                                        tbPemeriksaan.setValueAt(TPasien.getText(),tbPemeriksaan.getSelectedRow(), 3);
-                                        tbPemeriksaan.setValueAt(Valid.SetTgl(DTPTgl.getSelectedItem()+""),tbPemeriksaan.getSelectedRow(), 4);
-                                        tbPemeriksaan.setValueAt(cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),tbPemeriksaan.getSelectedRow(), 5);
-                                        tbPemeriksaan.setValueAt(TSuhu.getText(),tbPemeriksaan.getSelectedRow(), 6);
-                                        tbPemeriksaan.setValueAt(TTensi.getText(),tbPemeriksaan.getSelectedRow(), 7);
-                                        tbPemeriksaan.setValueAt(TNadi.getText(),tbPemeriksaan.getSelectedRow(), 8);
-                                        tbPemeriksaan.setValueAt(TRespirasi.getText(),tbPemeriksaan.getSelectedRow(), 9);
-                                        tbPemeriksaan.setValueAt(TTinggi.getText(),tbPemeriksaan.getSelectedRow(), 10);
-                                        tbPemeriksaan.setValueAt(TBerat.getText(),tbPemeriksaan.getSelectedRow(), 11);
-                                        tbPemeriksaan.setValueAt(SpO2.getText(),tbPemeriksaan.getSelectedRow(), 12);
-                                        tbPemeriksaan.setValueAt(TGCS.getText(),tbPemeriksaan.getSelectedRow(), 13);
-                                        tbPemeriksaan.setValueAt(cmbKesadaran.getSelectedItem().toString(),tbPemeriksaan.getSelectedRow(), 14);
-                                        tbPemeriksaan.setValueAt(TKeluhan.getText(),tbPemeriksaan.getSelectedRow(), 15);
-                                        tbPemeriksaan.setValueAt(TPemeriksaan.getText(),tbPemeriksaan.getSelectedRow(), 16);
-                                        tbPemeriksaan.setValueAt(TAlergi.getText(),tbPemeriksaan.getSelectedRow(), 17);
-                                        tbPemeriksaan.setValueAt(LingkarPerut.getText(),tbPemeriksaan.getSelectedRow(), 18);
-                                        tbPemeriksaan.setValueAt(TindakLanjut.getText(),tbPemeriksaan.getSelectedRow(), 19);
-                                        tbPemeriksaan.setValueAt(TPenilaian.getText(),tbPemeriksaan.getSelectedRow(), 20);
-                                        tbPemeriksaan.setValueAt(TInstruksi.getText(),tbPemeriksaan.getSelectedRow(), 21);
-                                        tbPemeriksaan.setValueAt(TEvaluasi.getText(),tbPemeriksaan.getSelectedRow(), 22);
-                                        tbPemeriksaan.setValueAt(KdPeg.getText(),tbPemeriksaan.getSelectedRow(), 23);
-                                        tbPemeriksaan.setValueAt(TPegawai.getText(),tbPemeriksaan.getSelectedRow(), 24);
-                                        tbPemeriksaan.setValueAt(Jabatan.getText(),tbPemeriksaan.getSelectedRow(), 25);
-                                        TSuhu.setText("");TTensi.setText("");TNadi.setText("");TRespirasi.setText("");
-                                        TTinggi.setText("");TBerat.setText("");TGCS.setText("");TKeluhan.setText("");
-                                        TPemeriksaan.setText("");TAlergi.setText("");LingkarPerut.setText("");
-                                        TindakLanjut.setText("");TPenilaian.setText("");TInstruksi.setText("");
-                                        SpO2.setText("");TEvaluasi.setText("");
+                                    "rtl='"+TindakLanjut.getText()+
+                                    "',penilaian='"+TPenilaian.getText()+"',"+
+                                    "instruksi='"+TInstruksi.getText()+
+                                    "',evaluasi='"+TEvaluasi.getText()+
+                                    "',nip='"+KdPeg.getText()+"'")==true){
+                                        //"P",
+                                        tbPemeriksaan.setValueAt(TNoRw.getText(),tbPemeriksaan.getSelectedRow(), 1);//"No.Rawat",
+                                        tbPemeriksaan.setValueAt(TNoRM.getText(),tbPemeriksaan.getSelectedRow(), 2);//"No.R.M.",
+                                        tbPemeriksaan.setValueAt(TPasien.getText(),tbPemeriksaan.getSelectedRow(), 3);//"Nama Pasien",
+                                        tbPemeriksaan.setValueAt(TPegawai.getText(),tbPemeriksaan.getSelectedRow(), 4);//"Dokter/Paramedis",
+                                        tbPemeriksaan.setValueAt(Valid.SetTgl(DTPTgl.getSelectedItem()+""),tbPemeriksaan.getSelectedRow(), 5);//"Tgl.Rawat",
+                                        tbPemeriksaan.setValueAt(cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),tbPemeriksaan.getSelectedRow(), 6);//"Jam",
+                                        tbPemeriksaan.setValueAt(TSuhu.getText(),tbPemeriksaan.getSelectedRow(), 7);//"Suhu(C)",
+                                        tbPemeriksaan.setValueAt(TTensi.getText(),tbPemeriksaan.getSelectedRow(), 8);//"Tensi",
+                                        tbPemeriksaan.setValueAt(TNadi.getText(),tbPemeriksaan.getSelectedRow(), 9);//"Nadi(/menit)",
+                                        tbPemeriksaan.setValueAt(TRespirasi.getText(),tbPemeriksaan.getSelectedRow(), 10);//"Respirasi(/menit)",
+                                        tbPemeriksaan.setValueAt(TTinggi.getText(),tbPemeriksaan.getSelectedRow(), 11);//"Tinggi(Cm)",
+                                        tbPemeriksaan.setValueAt(TBerat.getText(),tbPemeriksaan.getSelectedRow(), 12);//"Berat(Kg)",
+                                        tbPemeriksaan.setValueAt(SpO2.getText(),tbPemeriksaan.getSelectedRow(), 13);//"SpO2(%)",
+                                        tbPemeriksaan.setValueAt(TGCS.getText(),tbPemeriksaan.getSelectedRow(), 14);//"GCS(E,V,M)",
+                                        tbPemeriksaan.setValueAt(cmbKesadaran.getSelectedItem().toString(),tbPemeriksaan.getSelectedRow(), 15);//"Kesadaran",
+                                        tbPemeriksaan.setValueAt(TKeluhan.getText(),tbPemeriksaan.getSelectedRow(), 16);//"Subjek",
+                                        tbPemeriksaan.setValueAt(TPemeriksaan.getText(),tbPemeriksaan.getSelectedRow(), 17);//"Objek",
+                                        tbPemeriksaan.setValueAt(TAlergi.getText(),tbPemeriksaan.getSelectedRow(), 18);//"Alergi",
+                                        tbPemeriksaan.setValueAt(LingkarPerut.getText(),tbPemeriksaan.getSelectedRow(), 19);//"L.P.(Cm)",
+                                        tbPemeriksaan.setValueAt(TindakLanjut.getText(),tbPemeriksaan.getSelectedRow(), 20);//"Plan",
+                                        tbPemeriksaan.setValueAt(TPenilaian.getText(),tbPemeriksaan.getSelectedRow(), 21);//"Asesmen",
+                                        tbPemeriksaan.setValueAt(TInstruksi.getText(),tbPemeriksaan.getSelectedRow(), 22);//"Instruksi",
+                                        tbPemeriksaan.setValueAt(TEvaluasi.getText(),tbPemeriksaan.getSelectedRow(), 23);//"Evaluasi",
+                                        tbPemeriksaan.setValueAt(KdPeg.getText(),tbPemeriksaan.getSelectedRow(), 24);//"NIP",KdPeg
+                                        tbPemeriksaan.setValueAt(Jabatan.getText(),tbPemeriksaan.getSelectedRow(), 25);//"Profesi/Jabatan"
+                                        TSuhu.setText("");
+                                        TTensi.setText("");
+                                        TNadi.setText("");
+                                        TRespirasi.setText("");
+                                        TTinggi.setText("");
+                                        TBerat.setText("");
+                                        TGCS.setText("");
+                                        TKeluhan.setText("");
+                                        TPemeriksaan.setText("");
+                                        TAlergi.setText("");
+                                        LingkarPerut.setText("");
+                                        TindakLanjut.setText("");
+                                        TPenilaian.setText("");
+                                        TInstruksi.setText("");
+                                        SpO2.setText("");
+                                        TEvaluasi.setText("");
                                 }   
                             }else{
-                                if(akses.getkode().equals(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),23).toString())){
-                                    if(Sequel.mengedittf("pemeriksaan_ralan","no_rawat='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1)+
-                                        "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4)+
-                                        "' and jam_rawat='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5)+"'",
-                                        "no_rawat='"+TNoRw.getText()+"',suhu_tubuh='"+TSuhu.getText()+"',tensi='"+TTensi.getText()+"',"+
-                                        "keluhan='"+TKeluhan.getText()+"',pemeriksaan='"+TPemeriksaan.getText()+"',"+
-                                        "nadi='"+TNadi.getText()+"',respirasi='"+TRespirasi.getText()+"',"+
-                                        "tinggi='"+TTinggi.getText()+"',berat='"+TBerat.getText()+"',spo2='"+SpO2.getText()+"',"+
-                                        "gcs='"+TGCS.getText()+"',kesadaran='"+cmbKesadaran.getSelectedItem()+"',"+
-                                        "alergi='"+TAlergi.getText()+"',lingkar_perut='"+LingkarPerut.getText()+"',"+
-                                        "tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"',"+
-                                        "jam_rawat='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"',"+
-                                        "rtl='"+TindakLanjut.getText()+"',penilaian='"+TPenilaian.getText()+"',"+
-                                        "instruksi='"+TInstruksi.getText()+"',evaluasi='"+TEvaluasi.getText()+"'")==true){
-                                            tbPemeriksaan.setValueAt(TNoRw.getText(),tbPemeriksaan.getSelectedRow(), 1);
-                                            tbPemeriksaan.setValueAt(TNoRM.getText(),tbPemeriksaan.getSelectedRow(), 2);
-                                            tbPemeriksaan.setValueAt(TPasien.getText(),tbPemeriksaan.getSelectedRow(), 3);
-                                            tbPemeriksaan.setValueAt(Valid.SetTgl(DTPTgl.getSelectedItem()+""),tbPemeriksaan.getSelectedRow(), 4);
-                                            tbPemeriksaan.setValueAt(cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),tbPemeriksaan.getSelectedRow(), 5);
-                                            tbPemeriksaan.setValueAt(TSuhu.getText(),tbPemeriksaan.getSelectedRow(), 6);
-                                            tbPemeriksaan.setValueAt(TTensi.getText(),tbPemeriksaan.getSelectedRow(), 7);
-                                            tbPemeriksaan.setValueAt(TNadi.getText(),tbPemeriksaan.getSelectedRow(), 8);
-                                            tbPemeriksaan.setValueAt(TRespirasi.getText(),tbPemeriksaan.getSelectedRow(), 9);
-                                            tbPemeriksaan.setValueAt(TTinggi.getText(),tbPemeriksaan.getSelectedRow(), 10);
-                                            tbPemeriksaan.setValueAt(TBerat.getText(),tbPemeriksaan.getSelectedRow(), 11);
-                                            tbPemeriksaan.setValueAt(SpO2.getText(),tbPemeriksaan.getSelectedRow(), 12);
-                                            tbPemeriksaan.setValueAt(TGCS.getText(),tbPemeriksaan.getSelectedRow(), 13);
-                                            tbPemeriksaan.setValueAt(cmbKesadaran.getSelectedItem().toString(),tbPemeriksaan.getSelectedRow(), 14);
-                                            tbPemeriksaan.setValueAt(TKeluhan.getText(),tbPemeriksaan.getSelectedRow(), 15);
-                                            tbPemeriksaan.setValueAt(TPemeriksaan.getText(),tbPemeriksaan.getSelectedRow(), 16);
-                                            tbPemeriksaan.setValueAt(TAlergi.getText(),tbPemeriksaan.getSelectedRow(), 17);
-                                            tbPemeriksaan.setValueAt(LingkarPerut.getText(),tbPemeriksaan.getSelectedRow(), 18);
-                                            tbPemeriksaan.setValueAt(TindakLanjut.getText(),tbPemeriksaan.getSelectedRow(), 19);
-                                            tbPemeriksaan.setValueAt(TPenilaian.getText(),tbPemeriksaan.getSelectedRow(), 20);
-                                            tbPemeriksaan.setValueAt(TInstruksi.getText(),tbPemeriksaan.getSelectedRow(), 21);
-                                            tbPemeriksaan.setValueAt(TEvaluasi.getText(),tbPemeriksaan.getSelectedRow(), 22);
-                                            tbPemeriksaan.setValueAt(KdPeg.getText(),tbPemeriksaan.getSelectedRow(), 23);
-                                            tbPemeriksaan.setValueAt(TPegawai.getText(),tbPemeriksaan.getSelectedRow(), 24);
-                                            tbPemeriksaan.setValueAt(Jabatan.getText(),tbPemeriksaan.getSelectedRow(), 25);
+                                if(akses.getkode().equals(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),24).toString())){
+                                    if(Sequel.mengedittf("pemeriksaan_ralan",
+                                            "no_rawat='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1)+
+                                            "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5)+
+                                            "' and jam_rawat='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),6)+"'",
+                                            "no_rawat='"+TNoRw.getText()+
+                                            "',suhu_tubuh='"+TSuhu.getText()+
+                                            "',tensi='"+TTensi.getText()+"',"+
+                                            "keluhan='"+TKeluhan.getText()+
+                                            "',pemeriksaan='"+TPemeriksaan.getText()+"',"+
+                                            "nadi='"+TNadi.getText()+
+                                            "',respirasi='"+TRespirasi.getText()+"',"+
+                                            "tinggi='"+TTinggi.getText()+
+                                            "',berat='"+TBerat.getText()+
+                                            "',spo2='"+SpO2.getText()+"',"+
+                                            "gcs='"+TGCS.getText()+
+                                            "',kesadaran='"+cmbKesadaran.getSelectedItem()+"',"+
+                                            "alergi='"+TAlergi.getText()+
+                                            "',lingkar_perut='"+LingkarPerut.getText()+"',"+
+                                            "tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"',"+
+                                            "jam_rawat='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"',"+
+                                            "rtl='"+TindakLanjut.getText()+
+                                            "',penilaian='"+TPenilaian.getText()+"',"+
+                                            "instruksi='"+TInstruksi.getText()+
+                                            "',evaluasi='"+TEvaluasi.getText()+"'")==true){
+                                            //"P",
+                                            tbPemeriksaan.setValueAt(TNoRw.getText(),tbPemeriksaan.getSelectedRow(), 1);//"No.Rawat",
+                                            tbPemeriksaan.setValueAt(TNoRM.getText(),tbPemeriksaan.getSelectedRow(), 2);//"No.R.M.",
+                                            tbPemeriksaan.setValueAt(TPasien.getText(),tbPemeriksaan.getSelectedRow(), 3);//"Nama Pasien",
+                                            tbPemeriksaan.setValueAt(TPegawai.getText(),tbPemeriksaan.getSelectedRow(), 4);//"Dokter/Paramedis",
+                                            tbPemeriksaan.setValueAt(Valid.SetTgl(DTPTgl.getSelectedItem()+""),tbPemeriksaan.getSelectedRow(), 5);//"Tgl.Rawat",
+                                            tbPemeriksaan.setValueAt(cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),tbPemeriksaan.getSelectedRow(), 6);//"Jam",
+                                            tbPemeriksaan.setValueAt(TSuhu.getText(),tbPemeriksaan.getSelectedRow(), 7);//"Suhu(C)",
+                                            tbPemeriksaan.setValueAt(TTensi.getText(),tbPemeriksaan.getSelectedRow(), 8);//"Tensi",
+                                            tbPemeriksaan.setValueAt(TNadi.getText(),tbPemeriksaan.getSelectedRow(), 9);//"Nadi(/menit)",
+                                            tbPemeriksaan.setValueAt(TRespirasi.getText(),tbPemeriksaan.getSelectedRow(), 10);//"Respirasi(/menit)",
+                                            tbPemeriksaan.setValueAt(TTinggi.getText(),tbPemeriksaan.getSelectedRow(), 11);//"Tinggi(Cm)",
+                                            tbPemeriksaan.setValueAt(TBerat.getText(),tbPemeriksaan.getSelectedRow(), 12);//"Berat(Kg)",
+                                            tbPemeriksaan.setValueAt(SpO2.getText(),tbPemeriksaan.getSelectedRow(), 13);//"SpO2(%)",
+                                            tbPemeriksaan.setValueAt(TGCS.getText(),tbPemeriksaan.getSelectedRow(), 14);//"GCS(E,V,M)",
+                                            tbPemeriksaan.setValueAt(cmbKesadaran.getSelectedItem().toString(),tbPemeriksaan.getSelectedRow(), 15);//"Kesadaran",
+                                            tbPemeriksaan.setValueAt(TKeluhan.getText(),tbPemeriksaan.getSelectedRow(), 16);//"Subjek",
+                                            tbPemeriksaan.setValueAt(TPemeriksaan.getText(),tbPemeriksaan.getSelectedRow(), 17);//"Objek",
+                                            tbPemeriksaan.setValueAt(TAlergi.getText(),tbPemeriksaan.getSelectedRow(), 18);//"Alergi",
+                                            tbPemeriksaan.setValueAt(LingkarPerut.getText(),tbPemeriksaan.getSelectedRow(), 19);//"L.P.(Cm)",
+                                            tbPemeriksaan.setValueAt(TindakLanjut.getText(),tbPemeriksaan.getSelectedRow(), 20);//"Plan",
+                                            tbPemeriksaan.setValueAt(TPenilaian.getText(),tbPemeriksaan.getSelectedRow(), 21);//"Asesmen",
+                                            tbPemeriksaan.setValueAt(TInstruksi.getText(),tbPemeriksaan.getSelectedRow(), 22);//"Instruksi",
+                                            tbPemeriksaan.setValueAt(TEvaluasi.getText(),tbPemeriksaan.getSelectedRow(), 23);//"Evaluasi",
+                                            tbPemeriksaan.setValueAt(KdPeg.getText(),tbPemeriksaan.getSelectedRow(), 24);//"NIP",
+                                            tbPemeriksaan.setValueAt(Jabatan.getText(),tbPemeriksaan.getSelectedRow(), 25);//"Profesi/Jabatan"
                                             TSuhu.setText("");TTensi.setText("");TNadi.setText("");TRespirasi.setText("");
                                             TTinggi.setText("");TBerat.setText("");TGCS.setText("");TKeluhan.setText("");
                                             TPemeriksaan.setText("");TAlergi.setText("");LingkarPerut.setText("");
@@ -9832,19 +9976,48 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private void tampilPemeriksaan() {
         Valid.tabelKosong(tabModePemeriksaan);
         try{  
-            ps4=koneksi.prepareStatement("select pemeriksaan_ralan.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
-                    "pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat,pemeriksaan_ralan.suhu_tubuh,pemeriksaan_ralan.tensi, " +
-                    "pemeriksaan_ralan.nadi,pemeriksaan_ralan.respirasi,pemeriksaan_ralan.tinggi, " +
-                    "pemeriksaan_ralan.berat,pemeriksaan_ralan.spo2,pemeriksaan_ralan.gcs,pemeriksaan_ralan.kesadaran,pemeriksaan_ralan.keluhan, " +
-                    "pemeriksaan_ralan.pemeriksaan,pemeriksaan_ralan.alergi,pemeriksaan_ralan.lingkar_perut,pemeriksaan_ralan.rtl,"+
-                    "pemeriksaan_ralan.penilaian,pemeriksaan_ralan.instruksi,pemeriksaan_ralan.evaluasi,pemeriksaan_ralan.nip,pegawai.nama,pegawai.jbtn "+
-                    "from pasien inner join reg_periksa on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join pemeriksaan_ralan on pemeriksaan_ralan.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pegawai on pemeriksaan_ralan.nip=pegawai.nik where  "+
-                    "pemeriksaan_ralan.tgl_perawatan between ? and ? and reg_periksa.no_rkm_medis like ? "+
+            ps4=koneksi.prepareStatement("select \n"+
+                                         "    pemeriksaan_ralan.no_rawat,\n"+
+                                         "    reg_periksa.no_rkm_medis,\n"+
+                                         "    pasien.nm_pasien,\n"+
+                                         "    pemeriksaan_ralan.tgl_perawatan,\n"+
+                                         "    pemeriksaan_ralan.jam_rawat,\n"+
+                                         "    pemeriksaan_ralan.suhu_tubuh,\n"+
+                                         "    pemeriksaan_ralan.tensi,\n"+
+                                         "    pemeriksaan_ralan.nadi,\n"+ //selisih
+                                         "    pemeriksaan_ralan.respirasi,\n"+ //selisih
+                                         "    pemeriksaan_ralan.tinggi,\n"+ //selisih
+                                         "    pemeriksaan_ralan.berat,\n"+
+                                         "    pemeriksaan_ralan.spo2,\n"+
+                                         "    pemeriksaan_ralan.gcs,\n"+
+                                         "    pemeriksaan_ralan.kesadaran,\n"+
+                                         "    pemeriksaan_ralan.keluhan,\n"+
+                                         "    pemeriksaan_ralan.pemeriksaan,\n"+
+                                         "    pemeriksaan_ralan.alergi,\n"+
+                                         "    pemeriksaan_ralan.lingkar_perut,\n"+
+                                         "    pemeriksaan_ralan.rtl,\n"+
+                                         "    pemeriksaan_ralan.penilaian,\n"+
+                                         "    pemeriksaan_ralan.instruksi,\n"+
+                                         "    pemeriksaan_ralan.evaluasi,\n"+
+                                         "    pemeriksaan_ralan.nip,\n"+
+                                         "    pegawai.nama, \n"+
+                                         "    pegawai.jbtn\n"+
+                                         "from \n"+
+                                         "    pasien \n"+
+                                         "inner join reg_periksa on reg_periksa.no_rkm_medis=pasien.no_rkm_medis\n"+
+                                         "inner join pemeriksaan_ralan on pemeriksaan_ralan.no_rawat=reg_periksa.no_rawat\n"+
+                                         "inner join pegawai on pemeriksaan_ralan.nip=pegawai.nik \n"+
+                                         "where\n"+
+                                         "    pemeriksaan_ralan.tgl_perawatan between ? and ? and \n"+
+                                         "    reg_periksa.no_rkm_medis like ? \n"+
                     (TCari.getText().trim().equals("")?"":"and (pemeriksaan_ralan.no_rawat like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
                     "pemeriksaan_ralan.alergi like ? or pemeriksaan_ralan.keluhan like ? or pemeriksaan_ralan.penilaian like ? or "+
-                    "pemeriksaan_ralan.pemeriksaan like ? or pegawai.nama like ?) ")+"order by pemeriksaan_ralan.no_rawat,pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat desc"); 
+                    "pemeriksaan_ralan.pemeriksaan like ? or pegawai.nama like ?) ")+
+                                         "order by \n"+
+                                         "    pemeriksaan_ralan.no_rawat,\n"+
+                                         "    pemeriksaan_ralan.tgl_perawatan,\n"+
+                                         "    pemeriksaan_ralan.jam_rawat \n"+
+                                         "    desc;"); 
             try{
                 ps4.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps4.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
@@ -9862,33 +10035,33 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 rs=ps4.executeQuery();
                 while(rs.next()){
                     tabModePemeriksaan.addRow(new Object[]{
-                        false,
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(24),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getString(14),
-                        rs.getString(15),
-                        rs.getString(16),
-                        rs.getString(17),
-                        rs.getString(18),
-                        rs.getString(19),
-                        rs.getString(20),
-                        rs.getString(21),
-                        rs.getString(22),
-                        rs.getString(23),
-                        rs.getString(25)
-                    });
+                        false, //P
+                        rs.getString("no_rawat"), //No.Rawat
+                        rs.getString("no_rkm_medis"), //No.R.M.
+                        rs.getString("nm_pasien"), //Nama Pasien
+                        rs.getString("nama"), //Dokter/Paramedis
+                        rs.getString("tgl_perawatan"), //Tgl.Rawat
+                        rs.getString("jam_rawat"), //Jam
+                        rs.getString("suhu_tubuh"), //Suhu(C)
+                        rs.getString("tensi"), //Tensi
+                        rs.getString("nadi"), //Nadi(/menit)
+                        rs.getString("respirasi"), //Respirasi(/menit)
+                        rs.getString("tinggi"), //Tinggi(Cm)
+                        rs.getString("berat"), //Berat(Kg)
+                        rs.getString("spo2"), //SpO2(%)
+                        rs.getString("gcs"), //GCS(E,V,M)
+                        rs.getString("kesadaran"), //Kesadaran
+                        rs.getString("keluhan"), //Subjek
+                        rs.getString("pemeriksaan"), //Objek
+                        rs.getString("alergi"), //Alergi
+                        rs.getString("lingkar_perut"), //L.P.(Cm)
+                        rs.getString("rtl"), //Plan
+                        rs.getString("penilaian"), //Asesmen
+                        rs.getString("instruksi"), //Instruksi
+                        rs.getString("evaluasi"), //Evaluasi
+                        rs.getString("nip"), //NIP
+                        rs.getString("jbtn") //Profesi/Jabatan
+                    }); 
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
