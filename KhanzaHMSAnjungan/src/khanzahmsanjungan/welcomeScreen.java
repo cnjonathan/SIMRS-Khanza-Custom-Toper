@@ -26,7 +26,7 @@ public class welcomeScreen extends javax.swing.JFrame {
     public welcomeScreen() {
         initComponents();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        this.setSize(screen.width,screen.height);
+        this.setSize(600,screen.height);
     }
     
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();  
@@ -44,8 +44,10 @@ public class welcomeScreen extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
         jPanel4 = new component.Panel();
         jLabel1 = new component.Label();
         jLabel2 = new component.Label();
@@ -55,7 +57,8 @@ public class welcomeScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.Color.white);
-        setPreferredSize(new java.awt.Dimension(1015, 1000));
+        setLocation(new java.awt.Point(0, 0));
+        setPreferredSize(new java.awt.Dimension(500, 1000));
 
         jPanel3.setPreferredSize(new java.awt.Dimension(1920, 1080));
         jPanel3.setLayout(new java.awt.BorderLayout());
@@ -79,34 +82,83 @@ public class welcomeScreen extends javax.swing.JFrame {
         jPanel2.add(jPanel1, new java.awt.GridBagConstraints());
 
         jPanel6.setBackground(java.awt.Color.white);
-
-        jButton2.setBackground(new java.awt.Color(142, 68, 173));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(236, 240, 241));
-        jButton2.setText("BPJS");
-        jButton2.setMaximumSize(new java.awt.Dimension(500, 500));
-        jButton2.setPreferredSize(new java.awt.Dimension(500, 500));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel6.add(jButton2);
-
-        jPanel2.add(jPanel6, new java.awt.GridBagConstraints());
+        jPanel6.setLayout(new java.awt.BorderLayout());
 
         jButton1.setBackground(new java.awt.Color(142, 68, 173));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jButton1.setForeground(new java.awt.Color(236, 240, 241));
         jButton1.setText("UMUM");
         jButton1.setMaximumSize(new java.awt.Dimension(500, 500));
+        jButton1.setMinimumSize(new java.awt.Dimension(400, 80));
         jButton1.setPreferredSize(new java.awt.Dimension(500, 500));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new java.awt.GridBagConstraints());
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPanel6.add(jPanel7, java.awt.BorderLayout.CENTER);
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton2.setBackground(new java.awt.Color(142, 68, 173));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(236, 240, 241));
+        jButton2.setText("BPJS");
+        jButton2.setMaximumSize(new java.awt.Dimension(500, 500));
+        jButton2.setMinimumSize(new java.awt.Dimension(400, 80));
+        jButton2.setPreferredSize(new java.awt.Dimension(500, 500));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel8Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel8Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPanel6.add(jPanel8, java.awt.BorderLayout.PAGE_START);
+
+        jPanel2.add(jPanel6, new java.awt.GridBagConstraints());
 
         jPanel3.add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -220,5 +272,7 @@ public class welcomeScreen extends javax.swing.JFrame {
     private component.Panel jPanel4;
     private component.Panel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     // End of variables declaration//GEN-END:variables
 }

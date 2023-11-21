@@ -42,7 +42,7 @@ public class FormBPJS extends javax.swing.JFrame {
     public FormBPJS() {
         initComponents();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());      
-        this.setSize(screen.width,screen.height);
+        this.setSize(600,screen.height);
     }    
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();  
     /** This method is called from within the constructor to
@@ -102,7 +102,7 @@ public class FormBPJS extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(254, 184, 254));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/folder.png"))); // NOI18N
-        jLabel1.setText("Anjungan Registrasi BPJS, Silahkan Scan Kartu Pasien Anda !!!");
+        jLabel1.setText("Anjungan Registrasi BPJS");
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel1.setIconTextGap(10);
@@ -136,20 +136,23 @@ public class FormBPJS extends javax.swing.JFrame {
         panel1.setBackgroundImage(new javax.swing.ImageIcon(getClass().getResource("/picture/wallpaper.jpg"))); // NOI18N
         panel1.setBackgroundImageType(usu.widget.constan.BackgroundConstan.BACKGROUND_IMAGE_LEFT_BOTTOM);
         panel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(50, 1, 1, 1));
+        panel1.setMinimumSize(new java.awt.Dimension(500, 150));
         panel1.setOpaque(true);
         panel1.setOpaqueImage(false);
-        panel1.setPreferredSize(new java.awt.Dimension(200, 200));
+        panel1.setPreferredSize(new java.awt.Dimension(500, 150));
         panel1.setRound(false);
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout();
         flowLayout1.setAlignOnBaseline(true);
         panel1.setLayout(flowLayout1);
 
         jLabel6.setForeground(new java.awt.Color(130, 80, 130));
-        jLabel6.setText("No.RM/KTP Pasien :");
+        jLabel6.setText("No.RM/KTP :");
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel6.setIconTextGap(10);
-        jLabel6.setPreferredSize(new java.awt.Dimension(400, 45));
+        jLabel6.setMaximumSize(new java.awt.Dimension(180, 31));
+        jLabel6.setMinimumSize(new java.awt.Dimension(150, 31));
+        jLabel6.setPreferredSize(new java.awt.Dimension(150, 45));
         panel1.add(jLabel6);
 
         TCari.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
@@ -185,14 +188,12 @@ public class FormBPJS extends javax.swing.JFrame {
         });
         panel1.add(BtnCari);
 
-        jPanel4.add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1230, 110));
+        jPanel4.add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 570, 120));
 
         jPanel2.setBackground(java.awt.Color.white);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(java.awt.Color.white);
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton1.setForeground(java.awt.Color.black);
         jButton1.setText("3");
         jButton1.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -202,9 +203,7 @@ public class FormBPJS extends javax.swing.JFrame {
         });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 110, 110));
 
-        jButton2.setBackground(java.awt.Color.white);
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton2.setForeground(java.awt.Color.black);
         jButton2.setText("1");
         jButton2.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -214,9 +213,7 @@ public class FormBPJS extends javax.swing.JFrame {
         });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 110, 110));
 
-        jButton3.setBackground(java.awt.Color.white);
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton3.setForeground(java.awt.Color.black);
         jButton3.setText("2");
         jButton3.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -226,9 +223,7 @@ public class FormBPJS extends javax.swing.JFrame {
         });
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 110, 110));
 
-        jButton4.setBackground(java.awt.Color.white);
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton4.setForeground(java.awt.Color.black);
         jButton4.setText("6");
         jButton4.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -238,9 +233,7 @@ public class FormBPJS extends javax.swing.JFrame {
         });
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 110, 110));
 
-        jButton5.setBackground(java.awt.Color.white);
         jButton5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton5.setForeground(java.awt.Color.black);
         jButton5.setText("4");
         jButton5.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -250,9 +243,7 @@ public class FormBPJS extends javax.swing.JFrame {
         });
         jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 110, 110));
 
-        jButton6.setBackground(java.awt.Color.white);
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton6.setForeground(java.awt.Color.black);
         jButton6.setText("5");
         jButton6.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -262,9 +253,7 @@ public class FormBPJS extends javax.swing.JFrame {
         });
         jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 110, 110));
 
-        jButton7.setBackground(java.awt.Color.white);
         jButton7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton7.setForeground(java.awt.Color.black);
         jButton7.setText("<-");
         jButton7.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -274,9 +263,7 @@ public class FormBPJS extends javax.swing.JFrame {
         });
         jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 110, 110));
 
-        jButton8.setBackground(java.awt.Color.white);
         jButton8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton8.setForeground(java.awt.Color.black);
         jButton8.setText("7");
         jButton8.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -286,9 +273,7 @@ public class FormBPJS extends javax.swing.JFrame {
         });
         jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 110, 110));
 
-        jButton9.setBackground(java.awt.Color.white);
         jButton9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton9.setForeground(java.awt.Color.black);
         jButton9.setText("0");
         jButton9.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -298,9 +283,7 @@ public class FormBPJS extends javax.swing.JFrame {
         });
         jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, 110, 110));
 
-        jButton10.setBackground(java.awt.Color.white);
         jButton10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton10.setForeground(java.awt.Color.black);
         jButton10.setText("8");
         jButton10.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -310,9 +293,7 @@ public class FormBPJS extends javax.swing.JFrame {
         });
         jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 110, 110));
 
-        jButton11.setBackground(java.awt.Color.white);
         jButton11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton11.setForeground(java.awt.Color.black);
         jButton11.setText("9");
         jButton11.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -322,7 +303,7 @@ public class FormBPJS extends javax.swing.JFrame {
         });
         jPanel2.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 110, 110));
 
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, 650, 510));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 420, 510));
 
         btnKembali.setBackground(new java.awt.Color(130, 50, 130));
         btnKembali.setForeground(java.awt.Color.white);
