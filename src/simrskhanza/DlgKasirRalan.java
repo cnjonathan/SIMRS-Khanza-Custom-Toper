@@ -13647,15 +13647,15 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             switch(cmbKehadiranPasien.getSelectedItem().toString()){
                 case "Online (-) Si Doel":
 //                    tambahan_query_kehadiran_pasien_online = " AND (SELECT booking_registrasi.status FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa BETWEEN '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' AND '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' AND booking_registrasi.no_rkm_medis=reg_periksa.no_rkm_medis) = 'Terdaftar' ";
-                    tambahan_query_kehadiran_pasien_online = " AND (SELECT booking_registrasi.status FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa BETWEEN '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' AND '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' AND booking_registrasi.no_rkm_medis = reg_periksa.no_rkm_medis) <> '' AND NOT EXISTS (SELECT kehadiran_pasien_bpjs.no_rawat FROM kehadiran_pasien_bpjs WHERE kehadiran_pasien_bpjs.no_rawat = reg_periksa.no_rawat) ";
+                    tambahan_query_kehadiran_pasien_online = " AND (SELECT booking_registrasi.status FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa BETWEEN reg_periksa.tgl_registrasi AND reg_periksa.tgl_registrasi AND booking_registrasi.no_rkm_medis = reg_periksa.no_rkm_medis) <> '' AND NOT EXISTS (SELECT kehadiran_pasien_bpjs.no_rawat FROM kehadiran_pasien_bpjs WHERE kehadiran_pasien_bpjs.no_rawat = reg_periksa.no_rawat AND kehadiran_pasien_bpjs.no_rm = reg_periksa.no_rkm_medis) ";
                     System.out.println("tambahan_query_no_sep belum: "+tambahan_query_no_sep);
                     break;
                 case "Online (-) Mobile JKN":
-                    tambahan_query_kehadiran_pasien_online = " AND (SELECT referensi_mobilejkn_bpjs.status FROM referensi_mobilejkn_bpjs WHERE referensi_mobilejkn_bpjs.tanggalperiksa BETWEEN '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' AND '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' AND referensi_mobilejkn_bpjs.norm=reg_periksa.no_rkm_medis AND referensi_mobilejkn_bpjs.no_rawat = reg_periksa.no_rawat) = 'Belum' ";
+                    tambahan_query_kehadiran_pasien_online = " AND (SELECT referensi_mobilejkn_bpjs.status FROM referensi_mobilejkn_bpjs WHERE referensi_mobilejkn_bpjs.tanggalperiksa BETWEEN reg_periksa.tgl_registrasi AND reg_periksa.tgl_registrasi AND referensi_mobilejkn_bpjs.norm=reg_periksa.no_rkm_medis AND referensi_mobilejkn_bpjs.no_rawat = reg_periksa.no_rawat GROUP BY referensi_mobilejkn_bpjs.no_rawat) = 'Belum' ";
                     System.out.println("tambahan_query_no_sep belum: "+tambahan_query_no_sep);
                     break;
                 case "Online Hadir":
-                    tambahan_query_kehadiran_pasien_online = " AND (SELECT kehadiran_pasien_bpjs.status_kehadiran FROM kehadiran_pasien_bpjs WHERE kehadiran_pasien_bpjs.created_at BETWEEN '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' AND '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' AND kehadiran_pasien_bpjs.no_rm=reg_periksa.no_rkm_medis AND reg_periksa.no_rawat = kehadiran_pasien_bpjs.no_rawat GROUP BY kehadiran_pasien_bpjs.no_rm) = 'hadir' ";
+                    tambahan_query_kehadiran_pasien_online = " AND (SELECT kehadiran_pasien_bpjs.status_kehadiran FROM kehadiran_pasien_bpjs WHERE kehadiran_pasien_bpjs.no_rm = reg_periksa.no_rkm_medis AND kehadiran_pasien_bpjs.no_rawat = reg_periksa.no_rawat GROUP BY kehadiran_pasien_bpjs.no_rawat) = 'hadir' ";
                     System.out.println("tambahan_query_no_sep belum: "+tambahan_query_no_sep);
                     break;
                 default:
@@ -13670,10 +13670,10 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 "    reg_periksa.kd_dokter,\n"+
                 "    dokter.nm_dokter,\n"+
                 "    CASE \n"+
-                "        WHEN (SELECT kehadiran_pasien_bpjs.status_kehadiran FROM kehadiran_pasien_bpjs WHERE kehadiran_pasien_bpjs.created_at BETWEEN ? AND ? AND kehadiran_pasien_bpjs.no_rm=reg_periksa.no_rkm_medis AND reg_periksa.no_rawat = kehadiran_pasien_bpjs.no_rawat GROUP BY kehadiran_pasien_bpjs.no_rm) = 'hadir' THEN 'Online Hadir' \n"+
-                "        WHEN (SELECT referensi_mobilejkn_bpjs.status FROM referensi_mobilejkn_bpjs WHERE referensi_mobilejkn_bpjs.tanggalperiksa BETWEEN ? AND ? AND referensi_mobilejkn_bpjs.norm=reg_periksa.no_rkm_medis AND referensi_mobilejkn_bpjs.no_rawat = reg_periksa.no_rawat) = 'Belum' THEN 'Online (-) Mobile JKN' \n"+
-                "        WHEN (SELECT booking_registrasi.status FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa BETWEEN ? AND ? AND booking_registrasi.no_rkm_medis = reg_periksa.no_rkm_medis) <> '' THEN 'Online (-) Si Doel' \n"+
-                "        ELSE '(-)' \n"+
+                "       WHEN (SELECT kehadiran_pasien_bpjs.status_kehadiran FROM kehadiran_pasien_bpjs WHERE reg_periksa.no_rkm_medis = kehadiran_pasien_bpjs.no_rm AND reg_periksa.no_rawat = kehadiran_pasien_bpjs.no_rawat GROUP BY kehadiran_pasien_bpjs.no_rawat) = 'hadir' THEN 'Online Hadir' \n"+
+                "       WHEN (SELECT referensi_mobilejkn_bpjs.status FROM referensi_mobilejkn_bpjs WHERE referensi_mobilejkn_bpjs.tanggalperiksa BETWEEN reg_periksa.tgl_registrasi AND reg_periksa.tgl_registrasi AND referensi_mobilejkn_bpjs.norm=reg_periksa.no_rkm_medis AND referensi_mobilejkn_bpjs.no_rawat = reg_periksa.no_rawat GROUP BY referensi_mobilejkn_bpjs.no_rawat) = 'Belum' THEN 'Online (-) Mobile JKN' \n"+
+                "       WHEN (SELECT booking_registrasi.status FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa BETWEEN reg_periksa.tgl_registrasi AND reg_periksa.tgl_registrasi AND booking_registrasi.no_rkm_medis = reg_periksa.no_rkm_medis GROUP BY booking_registrasi.no_rkm_medis) <> '' THEN 'Online (-) Si Doel' \n"+
+                "       ELSE '(-)'  \n"+
                 "    END AS kehadiran, \n"+
                 "    (SELECT MAX(b.no_sep) FROM bridging_sep b WHERE b.no_rawat = reg_periksa.no_rawat AND b.nomr = reg_periksa.no_rkm_medis) AS no_sep, \n"+
                 "    reg_periksa.no_rkm_medis,\n"+
@@ -13714,18 +13714,18 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             try{
                 pskasir.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 pskasir.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskasir.setString(3,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskasir.setString(4,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskasir.setString(5,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
-                pskasir.setString(6,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
-                pskasir.setString(7,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskasir.setString(8,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                 if(!semua){
-                    pskasir.setString(9,"%"+caripenjab+"%");
-                    pskasir.setString(10,"%"+CrPoli.getText()+"%");
-                    pskasir.setString(11,"%"+CrPtg.getText()+"%");
-                    pskasir.setString(12,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                    pskasir.setString(13,"%"+cmbStatusBayar.getSelectedItem().toString().replaceAll("Semua","")+"%");
+                    pskasir.setString(3,"%"+caripenjab+"%");
+                    pskasir.setString(4,"%"+CrPoli.getText()+"%");
+                    pskasir.setString(5,"%"+CrPtg.getText()+"%");
+                    pskasir.setString(6,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
+                    pskasir.setString(7,"%"+cmbStatusBayar.getSelectedItem().toString().replaceAll("Semua","")+"%");
+                    pskasir.setString(8,"%"+TCari.getText().trim()+"%");
+                    pskasir.setString(9,"%"+TCari.getText().trim()+"%");
+                    pskasir.setString(10,"%"+TCari.getText().trim()+"%");
+                    pskasir.setString(11,"%"+TCari.getText().trim()+"%");
+                    pskasir.setString(12,"%"+TCari.getText().trim()+"%");
+                    pskasir.setString(13,"%"+TCari.getText().trim()+"%");
                     pskasir.setString(14,"%"+TCari.getText().trim()+"%");
                     pskasir.setString(15,"%"+TCari.getText().trim()+"%");
                     pskasir.setString(16,"%"+TCari.getText().trim()+"%");
@@ -13733,12 +13733,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     pskasir.setString(18,"%"+TCari.getText().trim()+"%");
                     pskasir.setString(19,"%"+TCari.getText().trim()+"%");
                     pskasir.setString(20,"%"+TCari.getText().trim()+"%");
-                    pskasir.setString(21,"%"+TCari.getText().trim()+"%");
-                    pskasir.setString(22,"%"+TCari.getText().trim()+"%");
-                    pskasir.setString(23,"%"+TCari.getText().trim()+"%");
-                    pskasir.setString(24,"%"+TCari.getText().trim()+"%");
-                    pskasir.setString(25,"%"+TCari.getText().trim()+"%");
-                    pskasir.setString(26,"%"+TCari.getText().trim()+"%");
                 }
                 System.out.println("query tampil kasir: "+pskasir);
                 rskasir=pskasir.executeQuery();
