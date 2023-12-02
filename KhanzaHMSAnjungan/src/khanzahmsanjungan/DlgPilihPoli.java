@@ -90,8 +90,8 @@ public class DlgPilihPoli extends javax.swing.JDialog {
         TCari = new component.TextBox();
         btnCari = new component.Button();
         btnSemua = new component.Button();
-        jLabel4 = new component.Label();
         btnKeluar = new component.Button();
+        jLabel4 = new component.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
@@ -192,7 +192,7 @@ public class DlgPilihPoli extends javax.swing.JDialog {
         jLabel3.setPreferredSize(new java.awt.Dimension(110, 30));
         jPanel4.add(jLabel3);
 
-        TCari.setPreferredSize(new java.awt.Dimension(320, 30));
+        TCari.setPreferredSize(new java.awt.Dimension(260, 30));
         TCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TCariActionPerformed(evt);
@@ -243,9 +243,6 @@ public class DlgPilihPoli extends javax.swing.JDialog {
         });
         jPanel4.add(btnSemua);
 
-        jLabel4.setPreferredSize(new java.awt.Dimension(50, 23));
-        jPanel4.add(jLabel4);
-
         btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         btnKeluar.setMnemonic('K');
         btnKeluar.setToolTipText("Alt+K");
@@ -264,6 +261,9 @@ public class DlgPilihPoli extends javax.swing.JDialog {
         });
         jPanel4.add(btnKeluar);
 
+        jLabel4.setPreferredSize(new java.awt.Dimension(50, 23));
+        jPanel4.add(jLabel4);
+
         jPanel1.add(jPanel4, java.awt.BorderLayout.PAGE_END);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -281,6 +281,7 @@ public class DlgPilihPoli extends javax.swing.JDialog {
                     pilih.setPasien(LblNoRm.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
                     pilih.tampil();
                     pilih.setVisible(true);
+                    dispose();
                 } catch (java.lang.NullPointerException e) {
                 }
             }
@@ -296,6 +297,7 @@ public class DlgPilihPoli extends javax.swing.JDialog {
                     pilih.setPasien(LblNoRm.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
                     pilih.tampil();
                     pilih.setVisible(true);
+                    dispose();
             } catch (java.lang.NullPointerException e) {
             }
         }

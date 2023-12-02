@@ -100,8 +100,8 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         TCari = new component.TextBox();
         btnCari = new component.Button();
         btnSemua = new component.Button();
-        jLabel4 = new component.Label();
         btnKeluar = new component.Button();
+        jLabel4 = new component.Label();
 
         LblKdPoli.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LblKdPoli.setText("Norm");
@@ -228,7 +228,8 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         jLabel3.setPreferredSize(new java.awt.Dimension(110, 30));
         jPanel4.add(jLabel3);
 
-        TCari.setPreferredSize(new java.awt.Dimension(320, 30));
+        TCari.setMinimumSize(new java.awt.Dimension(3, 20));
+        TCari.setPreferredSize(new java.awt.Dimension(260, 30));
         TCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TCariActionPerformed(evt);
@@ -279,9 +280,6 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         });
         jPanel4.add(btnSemua);
 
-        jLabel4.setPreferredSize(new java.awt.Dimension(50, 23));
-        jPanel4.add(jLabel4);
-
         btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         btnKeluar.setMnemonic('K');
         btnKeluar.setToolTipText("Alt+K");
@@ -299,6 +297,9 @@ public class DlgPilihDokter extends javax.swing.JDialog {
             }
         });
         jPanel4.add(btnKeluar);
+
+        jLabel4.setPreferredSize(new java.awt.Dimension(50, 23));
+        jPanel4.add(jLabel4);
 
         jPanel1.add(jPanel4, java.awt.BorderLayout.PAGE_END);
 
@@ -321,6 +322,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                             pilih.setLocationRelativeTo(this);
                             pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", "null", "Anjungan");
                             pilih.setVisible(true);
+                            dispose();
                         }                    
                     }else{
                         DlgRegistrasi pilih=new DlgRegistrasi(null,true);
@@ -328,6 +330,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                         pilih.setLocationRelativeTo(this);
                         pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", "null", "Anjungan");
                         pilih.setVisible(true);
+                        dispose();
                     } 
                 } catch (java.lang.NullPointerException e) {
                 }
@@ -349,6 +352,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                         pilih.setLocationRelativeTo(this);
                         pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", "umum", "Anjungan");
                         pilih.setVisible(true);
+                        dispose();
                     }                    
                 }else{
                     DlgRegistrasi pilih=new DlgRegistrasi(null,true);
@@ -356,6 +360,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                     pilih.setLocationRelativeTo(this);
                     pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", "umum", "Anjungan");
                     pilih.setVisible(true);
+                    dispose();
                 } 
             } catch (java.lang.NullPointerException e) {
             }

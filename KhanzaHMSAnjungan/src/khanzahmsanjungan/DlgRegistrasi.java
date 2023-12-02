@@ -795,10 +795,10 @@ public class DlgRegistrasi extends javax.swing.JDialog {
             try {
                 query_simpan_kehadiran_pasien_bpjs = koneksi.prepareStatement("insert into kehadiran_pasien_bpjs (no_rawat, no_rm, status_kehadiran) values('"+LblNoRawat.getText()+"', '"+LblNoRm.getText()+"', 'hadir')");
                 query_simpan_kehadiran_pasien_bpjs.executeUpdate();
-                System.out.println("query_simpan_kehadiran_pasien_bpjs tersimpan: "+query_simpan_kehadiran_pasien_bpjs);
+                // System.out.println("query_simpan_kehadiran_pasien_bpjs tersimpan: "+query_simpan_kehadiran_pasien_bpjs);
             } catch (SQLException ex) {
                 Logger.getLogger(DlgRegistrasi.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("query_simpan_kehadiran_pasien_bpjs error: "+ex);
+                // System.out.println("query_simpan_kehadiran_pasien_bpjs error: "+ex);
             }
             
             if(LblAppBooking.getText() == "Si Doel"){
@@ -828,7 +828,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                     // update database booking
                     cek_booking_registrasi= Sequel.cariIsi("SELECT booking_registrasi.tanggal_periksa FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa=CURDATE() and booking_registrasi.no_rkm_medis=?",LblNoRm.getText());
                     if(cek_booking_registrasi.equals("")){
-                        System.out.println("tidak ada booking");
+                        // System.out.println("tidak ada booking");
                     }else{
                         Sequel.queryu("UPDATE booking_registrasi SET status = 'Terdaftar' WHERE booking_registrasi.tanggal_periksa=CURDATE() AND no_rkm_medis = ?;", LblNoRm.getText());
                     }
@@ -858,7 +858,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                 // update database referensi_mobilejkn_bpjs
                 cek_booking_registrasi= Sequel.cariIsi("SELECT referensi_mobilejkn_bpjs.tanggalperiksa FROM referensi_mobilejkn_bpjs WHERE referensi_mobilejkn_bpjs.tanggalperiksa=CURDATE() and referensi_mobilejkn_bpjs.norm =?",LblNoRm.getText());
                 if(cek_booking_registrasi.equals("")){
-                    System.out.println("tidak ada booking");
+                    // System.out.println("tidak ada booking");
                 }else{
                     Sequel.queryu("UPDATE referensi_mobilejkn_bpjs SET status = 'Checkin' WHERE referensi_mobilejkn_bpjs.tanggalperiksa=CURDATE() AND norm = ?;", LblNoRm.getText());
                 }
@@ -885,7 +885,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                     "Belum Bayar",
                     status
                 })==true){
-                   System.out.println("Anjungan tersimpan");
+                   // System.out.println("Anjungan tersimpan");
                 }else{
                     LblJam.setText(Sequel.cariIsi("select current_time()"));
                     isNumber();
@@ -934,7 +934,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
             param.put("emailrs",email);
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid2.MyReportqry("rptAnjungan.jasper","report","::[ Label Anjungan ]::","SELECT pasien.no_ktp, pasien.jk, pasien.nm_pasien, poliklinik.nm_poli, dokter.nm_dokter, reg_periksa.no_reg, reg_periksa.no_rkm_medis, reg_periksa.tgl_registrasi FROM reg_periksa LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli LEFT JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis LEFT JOIN dokter ON reg_periksa.kd_dokter = dokter.kd_dokter WHERE reg_periksa.no_rkm_medis = '"+LblNoRm.getText()+"' AND reg_periksa.tgl_registrasi = CURDATE()",parampaa, 1);
-            System.out.println(LblNoRm.getText());
+            // System.out.println(LblNoRm.getText());
 
             this.setCursor(Cursor.getDefaultCursor());
             dispose();
@@ -949,13 +949,13 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                 try {
                     query_simpan_kehadiran_pasien_bpjs = koneksi.prepareStatement("insert into kehadiran_pasien_bpjs (no_rawat, no_rm, status_kehadiran) values('"+LblNoRawat.getText()+"', '"+LblNoRm.getText()+"', 'hadir')");
                     query_simpan_kehadiran_pasien_bpjs.executeUpdate();
-                    System.out.println("query_simpan_kehadiran_pasien_bpjs tersimpan: "+query_simpan_kehadiran_pasien_bpjs);
+                    // System.out.println("query_simpan_kehadiran_pasien_bpjs tersimpan: "+query_simpan_kehadiran_pasien_bpjs);
                 } catch (SQLException ex) {
                     Logger.getLogger(DlgRegistrasi.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println("query_simpan_kehadiran_pasien_bpjs error: "+ex);
+                    // System.out.println("query_simpan_kehadiran_pasien_bpjs error: "+ex);
                 }   
             }else{
-                System.out.println("status kehadiran: "+cek_kehadiran);
+                // System.out.println("status kehadiran: "+cek_kehadiran);
             }
             Map<String, Object> param = new HashMap<>();
             Valid2.MyReportqry("rptBarcodeRM18.jasper",
@@ -972,7 +972,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                                 "SELECT reg_periksa.no_reg, reg_periksa.no_rkm_medis, pasien.no_ktp, pasien.nm_pasien, pasien.jk, poliklinik.nm_poli, reg_periksa.tgl_registrasi, dokter.nm_dokter FROM reg_periksa LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli LEFT JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis LEFT JOIN dokter ON reg_periksa.kd_dokter = dokter.kd_dokter WHERE reg_periksa.no_rkm_medis = '"+LblNoRm.getText()+"' AND reg_periksa.tgl_registrasi = CURDATE()",
                                 parampaa, 
                                 1);
-            System.out.println(LblNoRm.getText());
+            // System.out.println(LblNoRm.getText());
 
             this.setCursor(Cursor.getDefaultCursor());
             dispose();
@@ -981,12 +981,16 @@ public class DlgRegistrasi extends javax.swing.JDialog {
         switch (LblPenjab.getText()) {
             case "umum":
                 form_umum.dispose();
+//                welcomeScreen menuUtama = new welcomeScreen();
+//                menuUtama.setVisible(true);
+//                System.out.println("form_umum.dispose()");
                 break;
             case "bpjs":
                 form_bpjs.dispose();
+//                System.out.println("form_bpjs.dispose()");
                 break;
             default:
-                System.out.println("DISPOSE");
+                System.out.println("DISPOSE GAGAL");
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
@@ -1136,9 +1140,9 @@ public class DlgRegistrasi extends javax.swing.JDialog {
         try {
             ps.setString(1,Tanggal.getSelectedItem()+"");
             ps.setString(2,norm);
-            System.out.println("line 1089");
-            System.out.println("valid set tanggal: "+Tanggal.getSelectedItem()+"");
-            System.out.println("norm: "+norm);
+//            System.out.println("line 1089");
+//            System.out.println("valid set tanggal: "+Tanggal.getSelectedItem()+"");
+//            System.out.println("norm: "+norm);
             rs=ps.executeQuery();
             if(rs.next()){
                 LblNama.setText(rs.getString("nm_pasien"));
@@ -1179,15 +1183,15 @@ public class DlgRegistrasi extends javax.swing.JDialog {
         }
         LblKdPoli.setText(kdpoli);
         LblNamaPoli.setText(Sequel.cariIsi("select poliklinik.nm_poli from poliklinik where poliklinik.kd_poli=?", kdpoli));
-        System.out.println("LblKdPoli:"+LblKdPoli.getText());
-        System.out.println("LblNamaPoli:"+LblNamaPoli.getText());
+//        System.out.println("LblKdPoli:"+LblKdPoli.getText());
+//        System.out.println("LblNamaPoli:"+LblNamaPoli.getText());
         if(Status.getText().equals("Baru")){
             Biaya.setText(""+Sequel.cariIsiAngka("select poliklinik.registrasi from poliklinik where poliklinik.kd_poli=?",kdpoli));
         }else{
             Biaya.setText(""+Sequel.cariIsiAngka("select poliklinik.registrasilama from poliklinik where poliklinik.kd_poli=?",kdpoli));
         }
         LblKdDokter.setText(kddokter);
-        System.out.println("kddokter: "+kddokter);
+//        System.out.println("kddokter: "+kddokter);
         LblDokter.setText(Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kddokter));
         Tanggal.setDate(new Date());
         LblTanggal.setText(Tanggal.getSelectedItem().toString());

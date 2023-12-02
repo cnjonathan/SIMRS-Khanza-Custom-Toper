@@ -42,7 +42,11 @@ public class FormBPJS extends javax.swing.JFrame {
     public FormBPJS() {
         initComponents();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());      
-        this.setSize(600,screen.height);
+//        Toolkit tk = Toolkit.getDefaultToolkit();  
+//        int ySize = ((int) tk.getScreenSize().getWidth());
+//        int anjunganHeight = (int) (Math.round(ySize * 0.80));
+        int anjunganHeight = (int) (Math.round(screen.height * 0.80));
+        this.setSize(600,anjunganHeight);
     }    
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();  
     /** This method is called from within the constructor to
@@ -616,8 +620,8 @@ public class FormBPJS extends javax.swing.JFrame {
                                                 "WHERE \n"+
                                                 "referensi_mobilejkn_bpjs.tanggalperiksa=CURDATE() AND \n"+
                                                 "referensi_mobilejkn_bpjs.norm=?",noRm);
-        System.out.println("cek_booking_registrasi: "+cek_booking_registrasi);
-        System.out.println("cek_booking_mobile_jkn: "+cek_booking_mobile_jkn);
+//        System.out.println("cek_booking_registrasi: "+cek_booking_registrasi);
+//        System.out.println("cek_booking_mobile_jkn: "+cek_booking_mobile_jkn);
         
         if(!cek_booking_registrasi.equals("") || !cek_booking_mobile_jkn.equals("")){
             booking = true;
@@ -644,12 +648,12 @@ public class FormBPJS extends javax.swing.JFrame {
                                                 "WHERE \n"+
                                                 "referensi_mobilejkn_bpjs.tanggalperiksa=CURDATE() AND \n"+
                                                 "referensi_mobilejkn_bpjs.norm=?",noRm);
-            System.out.println("cek_status_checkin: "+cek_status_checkin);
-            System.out.println("cek_status_checkin_mobile_jkn: "+cek_status_checkin_mobile_jkn);
+//            System.out.println("cek_status_checkin: "+cek_status_checkin);
+//            System.out.println("cek_status_checkin_mobile_jkn: "+cek_status_checkin_mobile_jkn);
             
             if(!cek_status_checkin.equals("Belum") || !cek_status_checkin_mobile_jkn.equals("Belum")){
                 checkin = true;
-                System.out.println("checkin: "+true);
+//                System.out.println("checkin: "+true);
             }
             
             if(!checkin){
@@ -664,7 +668,7 @@ public class FormBPJS extends javax.swing.JFrame {
                 //#################
                 //||   URGENT    ||
                 //#################
-                System.out.println("Line 686");
+//                System.out.println("Line 686");
                 DlgRegistrasi regis=new DlgRegistrasi(null,true);
                 regis.setSize(this.getWidth(),this.getHeight());
                 regis.setLocationRelativeTo(this);
@@ -713,15 +717,15 @@ public class FormBPJS extends javax.swing.JFrame {
                         PreparedStatement ps_rujukan_bridging_sep = koneksi.prepareStatement(query_cek_rujukan_pertama_bridging_sep);
                         ResultSet rs_rujukan_bridging_sep = ps_rujukan_bridging_sep.executeQuery();
                         rs_rujukan_bridging_sep.next();
-                        System.out.println("Line 731");
-                        System.out.println("kd_poli_bpjs "+kd_poli_bpjs);
-                        System.out.println("kode poli rs: "+rs_rujukan_bridging_sep.getString("kd_poli_rs"));
+//                        System.out.println("Line 731");
+//                        System.out.println("kd_poli_bpjs "+kd_poli_bpjs);
+//                        System.out.println("kode poli rs: "+rs_rujukan_bridging_sep.getString("kd_poli_rs"));
                         // dicocokan dari si doel dan bridging sep pertama apakah sama?
                         // jika ya, maka lanjut ke filter selanjutnya
                         if(rs_rujukan_bridging_sep.getString("kd_poli_bpjs").equals(kd_poli_bpjs+"")){
-                            System.out.println("line 735");
+//                            System.out.println("line 735");
                             sisahari = rs_rujukan_bridging_sep.getInt("sisahari");
-                            System.out.println("sisahari: "+sisahari);
+//                            System.out.println("sisahari: "+sisahari);
                             if(sisahari <= 0){
                                 JOptionPane.showMessageDialog(null,"Rujukan anda sudah expired, \n"+
                                                                                 "silahkan konfirmasi ke petugas registrasi.");
@@ -745,9 +749,9 @@ public class FormBPJS extends javax.swing.JFrame {
 //                                System.out.println("form bpjs noRm: "+noRm);
 //                                System.out.println("form bpjs cek_booking_poli: "+cek_reg_periksa_poli);
 //                                System.out.println("form bpjs cek_booking_kddokter: "+cek_reg_periksa_kddokter);
-                                System.out.println("no_rawat: "+no_rawat);
-                                System.out.println("cek_reg_periksa_kddokter: "+cek_reg_periksa_kddokter);
-                                System.out.println("cek_reg_periksa_poli: "+cek_reg_periksa_poli);
+//                                System.out.println("no_rawat: "+no_rawat);
+//                                System.out.println("cek_reg_periksa_kddokter: "+cek_reg_periksa_kddokter);
+//                                System.out.println("cek_reg_periksa_poli: "+cek_reg_periksa_poli);
                                 cek_reg_periksa= Sequel.cariIsi("SELECT \n"+
                                                                 "reg_periksa.no_rawat \n"+
                                                                 "FROM \n"+
@@ -768,8 +772,8 @@ public class FormBPJS extends javax.swing.JFrame {
                         }else{
                             JOptionPane.showMessageDialog(null,"Tujuan Poliklinik anda tidak sama dengan Poli Rujukan, \n"+
                                                                                 "silahkan konfirmasi ke petugas registrasi.");
-                            System.out.println("Poli rujukan dari bridging sep: "+rs_rujukan_bridging_sep.getString("kd_poli_rs"));
-                            System.out.println("Poli tujuan pasien: "+kd_poli_bpjs);
+//                            System.out.println("Poli rujukan dari bridging sep: "+rs_rujukan_bridging_sep.getString("kd_poli_rs"));
+//                            System.out.println("Poli tujuan pasien: "+kd_poli_bpjs);
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
@@ -783,7 +787,7 @@ public class FormBPJS extends javax.swing.JFrame {
                                                         "reg_periksa.tgl_registrasi=CURDATE() AND \n"+
                                                         "kd_pj = 'BPJ' AND \n"+
                                                         "reg_periksa.no_rkm_medis=?",noRm);
-                    System.out.println("cek_reg_periksa_poli: "+cek_reg_periksa_poli);
+//                    System.out.println("cek_reg_periksa_poli: "+cek_reg_periksa_poli);
                     cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT \n"+
                                                           "reg_periksa.kd_dokter \n"+
                                                           "FROM \n"+
@@ -792,7 +796,7 @@ public class FormBPJS extends javax.swing.JFrame {
                                                           "reg_periksa.tgl_registrasi=CURDATE() AND \n"+
                                                           "kd_pj = 'BPJ' AND \n"+
                                                           "reg_periksa.no_rkm_medis=?",noRm);
-                    System.out.println("cek_reg_periksa_kddokter: "+cek_reg_periksa_kddokter);
+//                    System.out.println("cek_reg_periksa_kddokter: "+cek_reg_periksa_kddokter);
                     regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs", "Mobile JKN");
                     regis.setVisible(true);
                 }

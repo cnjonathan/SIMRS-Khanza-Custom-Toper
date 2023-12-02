@@ -431,7 +431,7 @@ public class DlgCetak extends javax.swing.JDialog {
                 "inner join kelurahan inner join kecamatan inner join kabupaten "+
                 "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                 "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+norm+"' ",param);
-            System.out.println(norm);
+            // System.out.println(norm);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnAbout6MRActionPerformed

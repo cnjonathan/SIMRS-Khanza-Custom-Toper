@@ -26,7 +26,9 @@ public class welcomeScreen extends javax.swing.JFrame {
     public welcomeScreen() {
         initComponents();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        this.setSize(600,screen.height);
+//        this.setSize(600,screen.height);
+        int anjunganHeight = (int) (Math.round(screen.height * 0.90));
+        this.setSize(600,anjunganHeight);
     }
     
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();  
