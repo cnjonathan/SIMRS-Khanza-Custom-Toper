@@ -344,22 +344,30 @@ public class FormBPJS extends javax.swing.JFrame {
                          if(Sequel.cariInteger("select count(no_rkm_medis) from reg_periksa where no_rkm_medis=? and status_bayar='Belum Bayar' and stts<>'Batal'",TCari.getText())>0){
                              JOptionPane.showMessageDialog(rootPane,"Maaf, pasien pada kunjungan sebelumnya memiliki tagihan yang belum di closing.\nSilahkan konfirmasi dengan pihak kasir.. !!");
                          }else{
-    //                         DlgPilihPoli pilih=new DlgPilihPoli(this,true);
-    //                         pilih.setSize(this.getWidth()-20,this.getHeight()-70);
-    //                         pilih.setLocationRelativeTo(this);
-    //                         pilih.setPasien(TCari.getText());
-    //                         pilih.tampil();
-    //                         pilih.setVisible(true);
-                               cek_pendaftaran_bpjs(TCari.getText().trim());
+                             try {
+                                 //DlgPilihPoli pilih=new DlgPilihPoli(this,true);
+                                 //pilih.setSize(this.getWidth()-20,this.getHeight()-70);
+                                 //pilih.setLocationRelativeTo(this);
+                                 //pilih.setPasien(TCari.getText());
+                                 //pilih.tampil();
+                                 //pilih.setVisible(true);
+                                 cek_pendaftaran_bpjs(TCari.getText().trim());
+                             } catch (SQLException ex) {
+                                 Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
+                             }
                          }
                      }else{
-    //                     DlgPilihPoli pilih=new DlgPilihPoli(this,true);
-    //                     pilih.setSize(this.getWidth()-20,this.getHeight()-70);
-    //                     pilih.setLocationRelativeTo(this);
-    //                     pilih.setPasien(TCari.getText());
-    //                     pilih.tampil();
-    //                     pilih.setVisible(true);
-                           cek_pendaftaran_bpjs(TCari.getText().trim());
+                         try {
+                             //DlgPilihPoli pilih=new DlgPilihPoli(this,true);
+                             //pilih.setSize(this.getWidth()-20,this.getHeight()-70);
+                             //pilih.setLocationRelativeTo(this);
+                             //pilih.setPasien(TCari.getText());
+                             //pilih.tampil();
+                             //pilih.setVisible(true);
+                             cek_pendaftaran_bpjs(TCari.getText().trim());
+                         } catch (SQLException ex) {
+                             Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
+                         }
                      }  
                 }else if(Sequel.cariInteger("select count(no_ktp) from pasien where no_ktp=?",TCari.getText().trim())>0){
                      if(validasiregistrasi.equals("Yes")){
@@ -490,22 +498,30 @@ public class FormBPJS extends javax.swing.JFrame {
                      if(Sequel.cariInteger("select count(no_rkm_medis) from reg_periksa where no_rkm_medis=? and status_bayar='Belum Bayar' and stts<>'Batal'",TCari.getText())>0){
                          JOptionPane.showMessageDialog(rootPane,"Maaf, pasien pada kunjungan sebelumnya memiliki tagihan yang belum di closing.\nSilahkan konfirmasi dengan pihak kasir.. !!");
                      }else{
-//                         DlgPilihPoli pilih=new DlgPilihPoli(this,true);
-//                         pilih.setSize(this.getWidth()-20,this.getHeight()-70);
-//                         pilih.setLocationRelativeTo(this);
-//                         pilih.setPasien(TCari.getText());
-//                         pilih.tampil();
-//                         pilih.setVisible(true);
-                           cek_pendaftaran_bpjs(TCari.getText().trim());
+                         try {
+                            //DlgPilihPoli pilih=new DlgPilihPoli(this,true);
+                            //pilih.setSize(this.getWidth()-20,this.getHeight()-70);
+                            //pilih.setLocationRelativeTo(this);
+                            //pilih.setPasien(TCari.getText());
+                            //pilih.tampil();
+                            //pilih.setVisible(true);
+                            cek_pendaftaran_bpjs(TCari.getText().trim());
+                         } catch (SQLException ex) {
+                             Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
+                         }
                      }
                  }else{
-//                     DlgPilihPoli pilih=new DlgPilihPoli(this,true);
-//                     pilih.setSize(this.getWidth()-20,this.getHeight()-70);
-//                     pilih.setLocationRelativeTo(this);
-//                     pilih.setPasien(TCari.getText());
-//                     pilih.tampil();
-//                     pilih.setVisible(true);
-                       cek_pendaftaran_bpjs(TCari.getText().trim());
+                     try {
+                        //DlgPilihPoli pilih=new DlgPilihPoli(this,true);
+                        //pilih.setSize(this.getWidth()-20,this.getHeight()-70);
+                        //pilih.setLocationRelativeTo(this);
+                        //pilih.setPasien(TCari.getText());
+                        //pilih.tampil();
+                        //pilih.setVisible(true);
+                        cek_pendaftaran_bpjs(TCari.getText().trim());
+                     } catch (SQLException ex) {
+                         Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
+                     }
                  }  
             }else if(Sequel.cariInteger("select count(no_ktp) from pasien where no_ktp=?",TCari.getText().trim())>0){
                  if(validasiregistrasi.equals("Yes")){
@@ -602,7 +618,7 @@ public class FormBPJS extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     
-    private void cek_pendaftaran_bpjs(String noRm){
+    private void cek_pendaftaran_bpjs(String noRm) throws SQLException{
         // cek apakah status di booking sudah check in di booking_registrasi dan apakah sudah ada di reg_periksa
         // di booking apakah ada
         cek_booking_registrasi= Sequel.cariIsi("SELECT\n"+
@@ -804,7 +820,13 @@ public class FormBPJS extends javax.swing.JFrame {
         }else{
             if(cek_booking_registrasi.equals("") && cek_booking_mobile_jkn.equals("")){
                 JOptionPane.showMessageDialog(null,"Anda belum booking melalui aplikasi si Doel atau Mobile JKN, \n"+
-                                                                "silahkan daftar melalui petugas ");
+                                                                "silahkan pilih poli dan dokter berikut ini:");
+                DlgPilihPoli pilih=new DlgPilihPoli(this,true);
+                pilih.setSize(this.getWidth()-20,this.getHeight()-70);
+                pilih.setLocationRelativeTo(this);
+                pilih.setPasien(noRm, "bpjs");
+                pilih.tampil();
+                pilih.setVisible(true);
             }
         }
     }

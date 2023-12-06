@@ -15,6 +15,9 @@ import fungsi.validasi;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -600,15 +603,15 @@ public class FormUmum extends javax.swing.JFrame {
                 DlgPilihPoli pilih=new DlgPilihPoli(this,true);
                 pilih.setSize(this.getWidth()-20,this.getHeight()-70);
                 pilih.setLocationRelativeTo(this);
-                pilih.setPasien(noRm);
+                pilih.setPasien(noRm, "umum");
                 pilih.tampil();
                 pilih.setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(null,"Anda sudah booking. ");
+                JOptionPane.showMessageDialog(null,"Anda sudah terdaftar. ");
                 DlgRegistrasi regis=new DlgRegistrasi(null,true);
                 regis.setSize(this.getWidth(),this.getHeight());
                 regis.setLocationRelativeTo(this);
-//                public void setPasien(String norm,String kodepoli,String kddokter)
+                //public void setPasien(String norm,String kodepoli,String kddokter)
                 regis.setPasien(noRm, cek_booking_poli, cek_booking_kddokter, "false", "umum", "Anjungan");
                 regis.setVisible(true);
             }
@@ -622,7 +625,7 @@ public class FormUmum extends javax.swing.JFrame {
             DlgRegistrasi regis=new DlgRegistrasi(null,true);
             regis.setSize(this.getWidth(),this.getHeight());
             regis.setLocationRelativeTo(this);
-//                public void setPasien(String norm,String kodepoli,String kddokter)
+            //public void setPasien(String norm,String kodepoli,String kddokter)
             cek_reg_periksa_poli = Sequel.cariIsi("SELECT reg_periksa.kd_poli FROM reg_periksa WHERE reg_periksa.tgl_registrasi=LEFT(NOW(),10) and reg_periksa.no_rkm_medis=?",noRm);
             cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT reg_periksa.kd_dokter FROM reg_periksa WHERE reg_periksa.tgl_registrasi=LEFT(NOW(),10) and reg_periksa.no_rkm_medis=?",noRm);
             System.out.println("form umum noRm: "+noRm);

@@ -75,6 +75,7 @@ public class DlgPilihPoli extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        LblPenjab = new component.Label();
         jPanel1 = new component.Panel();
         jPanel2 = new component.Panel();
         jLabel2 = new component.Label();
@@ -92,6 +93,11 @@ public class DlgPilihPoli extends javax.swing.JDialog {
         btnSemua = new component.Button();
         btnKeluar = new component.Button();
         jLabel4 = new component.Label();
+
+        LblPenjab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LblPenjab.setText("Norm");
+        LblPenjab.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        LblPenjab.setPreferredSize(new java.awt.Dimension(20, 14));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
@@ -278,7 +284,7 @@ public class DlgPilihPoli extends javax.swing.JDialog {
                     DlgPilihDokter pilih=new DlgPilihDokter(null,true);
                     pilih.setSize(this.getWidth(),this.getHeight());
                     pilih.setLocationRelativeTo(this);
-                    pilih.setPasien(LblNoRm.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
+                    pilih.setPasien(LblNoRm.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), LblPenjab.getText());
                     pilih.tampil();
                     pilih.setVisible(true);
                     dispose();
@@ -291,13 +297,13 @@ public class DlgPilihPoli extends javax.swing.JDialog {
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
         if(tabmode.getRowCount()!=0){
             try {
-                 DlgPilihDokter pilih=new DlgPilihDokter(null,true);
-                    pilih.setSize(this.getWidth(),this.getHeight());
-                    pilih.setLocationRelativeTo(this);
-                    pilih.setPasien(LblNoRm.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
-                    pilih.tampil();
-                    pilih.setVisible(true);
-                    dispose();
+                DlgPilihDokter pilih=new DlgPilihDokter(null,true);
+                pilih.setSize(this.getWidth(),this.getHeight());
+                pilih.setLocationRelativeTo(this);
+                pilih.setPasien(LblNoRm.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), LblPenjab.getText());
+                pilih.tampil();
+                pilih.setVisible(true);
+                dispose();
             } catch (java.lang.NullPointerException e) {
             }
         }
@@ -367,6 +373,7 @@ public class DlgPilihPoli extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private component.Label LblNama;
     private component.Label LblNoRm;
+    private component.Label LblPenjab;
     private component.TextBox TCari;
     private component.Button btnCari;
     private component.Button btnKeluar;
@@ -430,8 +437,9 @@ public class DlgPilihPoli extends javax.swing.JDialog {
         }
     }
     
-    public void setPasien(String norm){
+    public void setPasien(String norm, String penjab){
         LblNoRm.setText(norm);
+        LblPenjab.setText(penjab);
         LblNama.setText(Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=?", norm));
     }
 }

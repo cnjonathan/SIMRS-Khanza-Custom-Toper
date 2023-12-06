@@ -681,7 +681,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
         jPanel3.add(jPanel2, java.awt.BorderLayout.CENTER);
 
         jPanel4.setPreferredSize(new java.awt.Dimension(390, 56));
-        jPanel4.setLayout(new java.awt.FlowLayout(0, 3, 9));
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 9));
 
         btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
         btnSimpan.setMnemonic('S');
@@ -1140,9 +1140,6 @@ public class DlgRegistrasi extends javax.swing.JDialog {
         try {
             ps.setString(1,Tanggal.getSelectedItem()+"");
             ps.setString(2,norm);
-//            System.out.println("line 1089");
-//            System.out.println("valid set tanggal: "+Tanggal.getSelectedItem()+"");
-//            System.out.println("norm: "+norm);
             rs=ps.executeQuery();
             if(rs.next()){
                 LblNama.setText(rs.getString("nm_pasien"));
@@ -1183,20 +1180,18 @@ public class DlgRegistrasi extends javax.swing.JDialog {
         }
         LblKdPoli.setText(kdpoli);
         LblNamaPoli.setText(Sequel.cariIsi("select poliklinik.nm_poli from poliklinik where poliklinik.kd_poli=?", kdpoli));
-//        System.out.println("LblKdPoli:"+LblKdPoli.getText());
-//        System.out.println("LblNamaPoli:"+LblNamaPoli.getText());
         if(Status.getText().equals("Baru")){
             Biaya.setText(""+Sequel.cariIsiAngka("select poliklinik.registrasi from poliklinik where poliklinik.kd_poli=?",kdpoli));
         }else{
             Biaya.setText(""+Sequel.cariIsiAngka("select poliklinik.registrasilama from poliklinik where poliklinik.kd_poli=?",kdpoli));
         }
         LblKdDokter.setText(kddokter);
-//        System.out.println("kddokter: "+kddokter);
         LblDokter.setText(Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kddokter));
         Tanggal.setDate(new Date());
         LblTanggal.setText(Tanggal.getSelectedItem().toString());
         LblJam.setText(Sequel.cariIsi("select current_time()"));
         if(ischeckin.equals("true")){
+            System.out.println("ischeckin is true");
             switch (penjab) {
                 case "umum":
                     KdBayar.setText("01");
