@@ -2218,18 +2218,33 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             try {
                 i=0;
                 ps=koneksi.prepareStatement(
-                    "select databarang.nama_brng,aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan "+
-                    "from resep_obat inner join reg_periksa inner join "+
-                    "aturan_pakai inner join databarang inner join detail_pemberian_obat "+
-                    "inner join kodesatuan on resep_obat.no_rawat=reg_periksa.no_rawat  "+
-                    "and databarang.kode_brng=aturan_pakai.kode_brng and "+
-                    "detail_pemberian_obat.kode_brng=databarang.kode_brng " +
-                    "and resep_obat.no_rawat=aturan_pakai.no_rawat and "+
-                    "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
-                    "resep_obat.jam=aturan_pakai.jam and resep_obat.no_rawat=detail_pemberian_obat.no_rawat "+
-                    "and resep_obat.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and " +
-                    "resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode_sat "+
-                    "where resep_obat.no_resep=? and aturan_pakai.aturan<>''");
+                        "SELECT "+
+                        "    databarang.nama_brng, "+
+                        "    aturan_pakai.aturan, "+
+                        "    detail_pemberian_obat.jml, "+
+                        "    kodesatuan.satuan "+
+                        "FROM "+
+                        "	resep_obat "+
+                        "INNER JOIN reg_periksa "+
+                        "INNER JOIN bridging_sep "+
+                        "INNER JOIN aturan_pakai "+
+                        "INNER JOIN databarang "+
+                        "INNER JOIN detail_pemberian_obat "+
+                        "INNER JOIN kodesatuan "+
+                        "	ON resep_obat.no_rawat=reg_periksa.no_rawat  "+
+                        "       AND databarang.kode_brng=aturan_pakai.kode_brng "+
+                        "       AND detail_pemberian_obat.kode_brng=databarang.kode_brng  "+
+                        "       AND resep_obat.no_rawat=aturan_pakai.no_rawat "+
+                        "       AND resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan "+
+                        "       AND resep_obat.jam=aturan_pakai.jam "+
+                        "       AND resep_obat.no_rawat=detail_pemberian_obat.no_rawat "+
+                        "       AND resep_obat.tgl_perawatan=detail_pemberian_obat.tgl_perawatan "+
+                        "       AND resep_obat.jam=detail_pemberian_obat.jam "+
+                        "       AND kodesatuan.kode_sat=databarang.kode_sat "+
+                        "WHERE "+
+                        "	resep_obat.no_resep=? AND "+
+                        "       aturan_pakai.aturan<>''"
+                );
                 try {
                     ps.setString(1,NoResep.getText());
                     rs=ps.executeQuery();
