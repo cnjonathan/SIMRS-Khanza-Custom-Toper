@@ -8877,16 +8877,24 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        }else{ 
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            DlgTemplateResep2 template=new DlgTemplateResep2(null,false);
-            template.isCek();
-            template.setRM(TNoRw.getText(),TNoRM.getText(),KdDok.getText(),kd_pj,"ralan");
-            template.tampil2();
-            template.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-            template.setLocationRelativeTo(internalFrame1);
-            template.setVisible(true);
-            this.setCursor(Cursor.getDefaultCursor());
+        }else{
+            String query_asesmen = "select count(*),(pemeriksaan_ralan.penilaian) from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat='"+TNoRw.getText()+"' and pemeriksaan_ralan.nip='"+KdDok.getText()+"'";
+            System.out.println("query_asesmen: "+query_asesmen);
+            if(Sequel.cariInteger(query_asesmen)== 0){
+                JOptionPane.showMessageDialog(null,"Maaf, Dokter belum mengisi Asesment " + KdDok.getText());
+                System.out.println("Notifikasi : "+KdDok.getText());
+                TCari.requestFocus();
+            }else{
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                DlgTemplateResep2 template=new DlgTemplateResep2(null,false);
+                template.isCek();
+                template.setRM(TNoRw.getText(),TNoRM.getText(),KdDok.getText(),kd_pj,"ralan");
+                template.tampil2();
+                template.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+                template.setLocationRelativeTo(internalFrame1);
+                template.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }
         } 
     }//GEN-LAST:event_BtnTemplateResepActionPerformed
 

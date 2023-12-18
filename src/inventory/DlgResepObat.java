@@ -1266,10 +1266,18 @@ public final class DlgResepObat extends javax.swing.JDialog {
         }else if(NoResep.getText().trim().equals("")){
             Valid.textKosong(NoResep,"No.Resep");
         }else{
-            if(Sequel.menyimpantf("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
-                    NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
+            if(Sequel.menyimpantf("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
+                    NoResep.getText(),
+                    Valid.SetTgl(DTPBeri.getSelectedItem()+""),
                     cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                    TNoRw.getText(),KdDokter.getText(),"0000-00-00","00:00:00",status,"0000-00-00","00:00:00"
+                    TNoRw.getText(),
+                    KdDokter.getText(),
+                    "0000-00-00",
+                    "00:00:00",
+                    status,
+                    "0000-00-00",
+                    "00:00:00",
+                    ""
                 })==true){
                 tampil();
                 if(lembarobat.equals("yes")){
@@ -1510,22 +1518,60 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "aturan_pakai on resep_obat.no_rawat=aturan_pakai.no_rawat and "+
                     "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
                     "resep_obat.jam=aturan_pakai.jam where resep_obat.no_resep=? and aturan_pakai.aturan<>''",NoResep.getText())>0){
-                Valid2.MyReportqry("rptItemResep.jasper","report","::[ Aturan Pakai Obat ]::",
-                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir, "+
-                    "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,databarang.nama_brng,"+
-                    "aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur "+
-                    "from resep_obat inner join reg_periksa inner join pasien inner join "+
-                    "aturan_pakai inner join databarang inner join detail_pemberian_obat "+
-                    "inner join kodesatuan on resep_obat.no_rawat=reg_periksa.no_rawat  "+
-                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and "+
-                    "databarang.kode_brng=aturan_pakai.kode_brng and "+
-                    "detail_pemberian_obat.kode_brng=databarang.kode_brng " +
-                    "and resep_obat.no_rawat=aturan_pakai.no_rawat and "+
-                    "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
-                    "resep_obat.jam=aturan_pakai.jam and resep_obat.no_rawat=detail_pemberian_obat.no_rawat "+
-                    "and resep_obat.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and " +
-                    "resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode_sat "+
-                    "where resep_obat.no_resep='"+NoResep.getText()+"' and aturan_pakai.aturan<>''",param);
+//                Valid.MyReportqry("rptItemResep.jasper","report","::[ Aturan Pakai Obat ]::",
+//                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir, "+
+//                    "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,databarang.nama_brng,"+
+//                    "aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur "+
+//                    "from resep_obat inner join reg_periksa inner join pasien inner join "+
+//                    "aturan_pakai inner join databarang inner join detail_pemberian_obat "+
+//                    "inner join kodesatuan on resep_obat.no_rawat=reg_periksa.no_rawat  "+
+//                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and "+
+//                    "databarang.kode_brng=aturan_pakai.kode_brng and "+
+//                    "detail_pemberian_obat.kode_brng=databarang.kode_brng " +
+//                    "and resep_obat.no_rawat=aturan_pakai.no_rawat and "+
+//                    "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
+//                    "resep_obat.jam=aturan_pakai.jam and resep_obat.no_rawat=detail_pemberian_obat.no_rawat "+
+//                    "and resep_obat.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and " +
+//                    "resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode_sat "+
+//                    "where resep_obat.no_resep='"+NoResep.getText()+"' and aturan_pakai.aturan<>''",param);
+                String query_non_racikan = "select "+
+                                            "  resep_obat.no_resep, "+
+                                            "  resep_obat.tgl_perawatan, "+
+                                            "  resep_obat.jam, "+
+                                            "  pasien.tgl_lahir, "+
+                                            "  resep_obat.no_rawat, "+
+                                            "  pasien.no_rkm_medis, "+
+                                            "  pasien.nm_pasien, "+
+                                            "  databarang.nama_brng, "+
+                                            "  aturan_pakai.aturan, "+
+                                            "  detail_pemberian_obat.jml, "+
+                                            "  kodesatuan.satuan, "+
+                                            "  pasien.jk, "+
+                                            "  reg_periksa.umurdaftar, "+
+                                            "  reg_periksa.sttsumur "+
+                                            "from "+
+                                            "  resep_obat "+
+                                            "  inner join reg_periksa "+
+                                            "  inner join pasien "+
+                                            "  inner join aturan_pakai "+
+                                            "  inner join databarang "+
+                                            "  inner join detail_pemberian_obat "+
+                                            "  inner join kodesatuan on resep_obat.no_rawat = reg_periksa.no_rawat "+
+                                            "  and reg_periksa.no_rkm_medis = pasien.no_rkm_medis "+
+                                            "  and databarang.kode_brng = aturan_pakai.kode_brng "+
+                                            "  and detail_pemberian_obat.kode_brng = databarang.kode_brng "+
+                                            "  and resep_obat.no_rawat = aturan_pakai.no_rawat "+
+                                            "  and resep_obat.tgl_perawatan = aturan_pakai.tgl_perawatan "+
+                                            "  and resep_obat.jam = aturan_pakai.jam "+
+                                            "  and resep_obat.no_rawat = detail_pemberian_obat.no_rawat "+
+                                            "  and resep_obat.tgl_perawatan = detail_pemberian_obat.tgl_perawatan "+
+                                            "  and resep_obat.jam = detail_pemberian_obat.jam "+
+                                            "  and kodesatuan.kode_sat = databarang.kode_sat "+
+                                            "where "+
+                                            "  resep_obat.no_resep = '"+NoResep.getText()+"' "+
+                                            "  and aturan_pakai.aturan <> ''"+
+                                            "";
+                Valid2.MyReportqry("rptItemResep.jasper","report","::[ Aturan Pakai Obat ]::",query_non_racikan,param, 1);
             }
             
             if(Sequel.cariInteger(
@@ -1533,18 +1579,49 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "obat_racikan on resep_obat.no_rawat=obat_racikan.no_rawat and "+
                     "resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and " +
                     "resep_obat.jam=obat_racikan.jam where resep_obat.no_resep=? and obat_racikan.aturan_pakai<>''",NoResep.getText())>0){
-                Valid2.MyReportqry("rptItemResep2.jasper","report","::[ Aturan Pakai Obat ]::",
-                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir," +
-                    "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,obat_racikan.nama_racik," +
-                    "obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur " +
-                    "from resep_obat inner join reg_periksa inner join pasien inner join " +
-                    "obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat " +
-                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
-                    "and obat_racikan.kd_racik=metode_racik.kd_racik " +
-                    "and resep_obat.no_rawat=obat_racikan.no_rawat and " +
-                    "resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and " +
-                    "resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat "+
-                    "where resep_obat.no_resep='"+NoResep.getText()+"'",param);
+//                Valid.MyReportqry("rptItemResep2.jasper","report","::[ Aturan Pakai Obat ]::",
+//                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir," +
+//                    "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,obat_racikan.nama_racik," +
+//                    "obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur " +
+//                    "from resep_obat inner join reg_periksa inner join pasien inner join " +
+//                    "obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat " +
+//                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+//                    "and obat_racikan.kd_racik=metode_racik.kd_racik " +
+//                    "and resep_obat.no_rawat=obat_racikan.no_rawat and " +
+//                    "resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and " +
+//                    "resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat "+
+//                    "where resep_obat.no_resep='"+NoResep.getText()+"'",param);
+                String query_racikan = "select "+
+                                        "  resep_obat.no_resep, "+
+                                        "  resep_obat.tgl_perawatan, "+
+                                        "  resep_obat.jam, "+
+                                        "  pasien.tgl_lahir, "+
+                                        "  resep_obat.no_rawat, "+
+                                        "  pasien.no_rkm_medis, "+
+                                        "  pasien.nm_pasien, "+
+                                        "  obat_racikan.nama_racik, "+
+                                        "  obat_racikan.aturan_pakai, "+
+                                        "  obat_racikan.jml_dr, "+
+                                        "  metode_racik.nm_racik, "+
+                                        "  pasien.jk, "+
+                                        "  reg_periksa.umurdaftar, "+
+                                        "  reg_periksa.sttsumur "+
+                                        "from "+
+                                        "  resep_obat "+
+                                        "  inner join reg_periksa "+
+                                        "  inner join pasien "+
+                                        "  inner join obat_racikan "+
+                                        "  inner join metode_racik on resep_obat.no_rawat = reg_periksa.no_rawat "+
+                                        "  and reg_periksa.no_rkm_medis = pasien.no_rkm_medis "+
+                                        "  and obat_racikan.kd_racik = metode_racik.kd_racik "+
+                                        "  and resep_obat.no_rawat = obat_racikan.no_rawat "+
+                                        "  and resep_obat.tgl_perawatan = obat_racikan.tgl_perawatan "+
+                                        "  and resep_obat.jam = obat_racikan.jam "+
+                                        "  and resep_obat.no_rawat = obat_racikan.no_rawat "+
+                                        "where "+
+                                        "  resep_obat.no_resep = '"+NoResep.getText()+"' "+
+                                        "";
+                Valid2.MyReportqry("rptItemResep2.jasper","report","::[ Aturan Pakai Obat ]::",query_racikan,param, 1);
             }                
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -1576,7 +1653,27 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             param.put("jam",cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
             
-            Valid.MyReport("rptLembarObat.jasper",param,"::[ Lembar Pemberian Obat ]::");
+            String queryJasper = "select "+
+                                "  databarang.kode_brng, "+
+                                "  databarang.nama_brng, "+
+                                "  detail_pemberian_obat.jml, "+
+                                "  detail_pemberian_obat.biaya_obat, "+
+                                "  detail_pemberian_obat.embalase, "+
+                                "  databarang.kode_sat, "+
+                                "  detail_pemberian_obat.tuslah, "+
+                                "  detail_pemberian_obat.total "+
+                                "from "+
+                                "  detail_pemberian_obat "+
+                                "  inner join databarang on detail_pemberian_obat.kode_brng = databarang.kode_brng "+
+                                "where "+
+                                "  detail_pemberian_obat.tgl_perawatan = '"+ Valid.SetTgl(DTPBeri.getSelectedItem()+"") +"' "+
+                                "  and detail_pemberian_obat.jam = '"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' "+
+                                "  and detail_pemberian_obat.no_rawat = '"+TNoRw.getText()+"'"+
+                                "";
+            
+//            Valid.MyReport("rptLembarObat.jasper",param,"::[ Lembar Pemberian Obat ]::");
+            Valid2.MyReportqry("rptLembarObat.jasper","report","::[ Lembar Pemberian Obat ]::",queryJasper,param, 1);
+            
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_ppLembarObatActionPerformed
@@ -1723,22 +1820,63 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "aturan_pakai on resep_obat.no_rawat=aturan_pakai.no_rawat and "+
                     "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
                     "resep_obat.jam=aturan_pakai.jam where resep_obat.no_resep=? and aturan_pakai.aturan<>''",NoResep.getText())>0){
-                Valid.MyReportqry("rptItemResep3.jasper","report","::[ Aturan Pakai Obat ]::",
-                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir, "+
-                    "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,databarang.nama_brng,"+
-                    "aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan,jenis.nama as jenis,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur "+
-                    "from resep_obat inner join reg_periksa inner join pasien inner join "+
-                    "aturan_pakai inner join databarang inner join detail_pemberian_obat "+
-                    "inner join kodesatuan inner join jenis on resep_obat.no_rawat=reg_periksa.no_rawat  "+
-                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and "+
-                    "databarang.kode_brng=aturan_pakai.kode_brng and databarang.kdjns=jenis.kdjns and "+
-                    "detail_pemberian_obat.kode_brng=databarang.kode_brng " +
-                    "and resep_obat.no_rawat=aturan_pakai.no_rawat and "+
-                    "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
-                    "resep_obat.jam=aturan_pakai.jam and resep_obat.no_rawat=detail_pemberian_obat.no_rawat "+
-                    "and resep_obat.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and " +
-                    "resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode_sat "+
-                    "where resep_obat.no_resep='"+NoResep.getText()+"' and aturan_pakai.aturan<>''",param);
+//                Valid.MyReportqry("rptItemResep3.jasper","report","::[ Aturan Pakai Obat ]::",
+//                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir, "+
+//                    "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,databarang.nama_brng,"+
+//                    "aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan,jenis.nama as jenis,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur "+
+//                    "from resep_obat inner join reg_periksa inner join pasien inner join "+
+//                    "aturan_pakai inner join databarang inner join detail_pemberian_obat "+
+//                    "inner join kodesatuan inner join jenis on resep_obat.no_rawat=reg_periksa.no_rawat  "+
+//                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and "+
+//                    "databarang.kode_brng=aturan_pakai.kode_brng and databarang.kdjns=jenis.kdjns and "+
+//                    "detail_pemberian_obat.kode_brng=databarang.kode_brng " +
+//                    "and resep_obat.no_rawat=aturan_pakai.no_rawat and "+
+//                    "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
+//                    "resep_obat.jam=aturan_pakai.jam and resep_obat.no_rawat=detail_pemberian_obat.no_rawat "+
+//                    "and resep_obat.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and " +
+//                    "resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode_sat "+
+//                    "where resep_obat.no_resep='"+NoResep.getText()+"' and aturan_pakai.aturan<>''",param);
+                String obat_non_racikan = "select "+
+                                            "  resep_obat.no_resep, "+
+                                            "  resep_obat.tgl_perawatan, "+
+                                            "  resep_obat.jam, "+
+                                            "  pasien.tgl_lahir, "+
+                                            "  resep_obat.no_rawat, "+
+                                            "  pasien.no_rkm_medis, "+
+                                            "  pasien.nm_pasien, "+
+                                            "  databarang.nama_brng, "+
+                                            "  aturan_pakai.aturan, "+
+                                            "  detail_pemberian_obat.jml, "+
+                                            "  kodesatuan.satuan, "+
+                                            "  jenis.nama as jenis, "+
+                                            "  pasien.jk, "+
+                                            "  reg_periksa.umurdaftar, "+
+                                            "  reg_periksa.sttsumur "+
+                                            "from "+
+                                            "  resep_obat "+
+                                            "  inner join reg_periksa "+
+                                            "  inner join pasien "+
+                                            "  inner join aturan_pakai "+
+                                            "  inner join databarang "+
+                                            "  inner join detail_pemberian_obat "+
+                                            "  inner join kodesatuan "+
+                                            "  inner join jenis on resep_obat.no_rawat = reg_periksa.no_rawat "+
+                                            "  and reg_periksa.no_rkm_medis = pasien.no_rkm_medis "+
+                                            "  and databarang.kode_brng = aturan_pakai.kode_brng "+
+                                            "  and databarang.kdjns = jenis.kdjns "+
+                                            "  and detail_pemberian_obat.kode_brng = databarang.kode_brng "+
+                                            "  and resep_obat.no_rawat = aturan_pakai.no_rawat "+
+                                            "  and resep_obat.tgl_perawatan = aturan_pakai.tgl_perawatan "+
+                                            "  and resep_obat.jam = aturan_pakai.jam "+
+                                            "  and resep_obat.no_rawat = detail_pemberian_obat.no_rawat "+
+                                            "  and resep_obat.tgl_perawatan = detail_pemberian_obat.tgl_perawatan "+
+                                            "  and resep_obat.jam = detail_pemberian_obat.jam "+
+                                            "  and kodesatuan.kode_sat = databarang.kode_sat "+
+                                            "where "+
+                                            "  resep_obat.no_resep = '"+NoResep.getText()+"' "+
+                                            "  and aturan_pakai.aturan <> ''"+
+                                            "";
+                Valid2.MyReportqry("rptItemResep3.jasper","report","::[ Aturan Pakai Obat ]::",obat_non_racikan,param, 1);
             }
             
             if(Sequel.cariInteger(
@@ -1746,18 +1884,49 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "obat_racikan on resep_obat.no_rawat=obat_racikan.no_rawat and "+
                     "resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and " +
                     "resep_obat.jam=obat_racikan.jam where resep_obat.no_resep=? and obat_racikan.aturan_pakai<>''",NoResep.getText())>0){
-                Valid.MyReportqry("rptItemResep2.jasper","report","::[ Aturan Pakai Obat ]::",
-                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir," +
-                    "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,obat_racikan.nama_racik," +
-                    "obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur " +
-                    "from resep_obat inner join reg_periksa inner join pasien inner join " +
-                    "obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat " +
-                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
-                    "and obat_racikan.kd_racik=metode_racik.kd_racik " +
-                    "and resep_obat.no_rawat=obat_racikan.no_rawat and " +
-                    "resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and " +
-                    "resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat "+
-                    "where resep_obat.no_resep='"+NoResep.getText()+"'",param);
+//                Valid.MyReportqry("rptItemResep2.jasper","report","::[ Aturan Pakai Obat ]::",
+//                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir," +
+//                    "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,obat_racikan.nama_racik," +
+//                    "obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur " +
+//                    "from resep_obat inner join reg_periksa inner join pasien inner join " +
+//                    "obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat " +
+//                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+//                    "and obat_racikan.kd_racik=metode_racik.kd_racik " +
+//                    "and resep_obat.no_rawat=obat_racikan.no_rawat and " +
+//                    "resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and " +
+//                    "resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat "+
+//                    "where resep_obat.no_resep='"+NoResep.getText()+"'",param);
+                String query_racikan = "select "+
+                                            "  resep_obat.no_resep, "+
+                                            "  resep_obat.tgl_perawatan, "+
+                                            "  resep_obat.jam, "+
+                                            "  pasien.tgl_lahir, "+
+                                            "  resep_obat.no_rawat, "+
+                                            "  pasien.no_rkm_medis, "+
+                                            "  pasien.nm_pasien, "+
+                                            "  obat_racikan.nama_racik, "+
+                                            "  obat_racikan.aturan_pakai, "+
+                                            "  obat_racikan.jml_dr, "+
+                                            "  metode_racik.nm_racik, "+
+                                            "  pasien.jk, "+
+                                            "  reg_periksa.umurdaftar, "+
+                                            "  reg_periksa.sttsumur "+
+                                            "from "+
+                                            "  resep_obat "+
+                                            "  inner join reg_periksa "+
+                                            "  inner join pasien "+
+                                            "  inner join obat_racikan "+
+                                            "  inner join metode_racik on resep_obat.no_rawat = reg_periksa.no_rawat "+
+                                            "  and reg_periksa.no_rkm_medis = pasien.no_rkm_medis "+
+                                            "  and obat_racikan.kd_racik = metode_racik.kd_racik "+
+                                            "  and resep_obat.no_rawat = obat_racikan.no_rawat "+
+                                            "  and resep_obat.tgl_perawatan = obat_racikan.tgl_perawatan "+
+                                            "  and resep_obat.jam = obat_racikan.jam "+
+                                            "  and resep_obat.no_rawat = obat_racikan.no_rawat "+
+                                            "where "+
+                                            "  resep_obat.no_resep = '"+NoResep.getText()+"' "+
+                                            "";
+                Valid2.MyReportqry("rptItemResep2.jasper","report","::[ Aturan Pakai Obat ]::",query_racikan,param, 1);
             }                
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -1784,22 +1953,60 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "aturan_pakai on resep_obat.no_rawat=aturan_pakai.no_rawat and "+
                     "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
                     "resep_obat.jam=aturan_pakai.jam where resep_obat.no_resep=? and aturan_pakai.aturan<>''",NoResep.getText())>0){
-                Valid.MyReportqry("rptItemResep5.jasper","report","::[ Aturan Pakai Obat ]::",
-                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir, "+
-                    "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,databarang.nama_brng,"+
-                    "aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur "+
-                    "from resep_obat inner join reg_periksa inner join pasien inner join "+
-                    "aturan_pakai inner join databarang inner join detail_pemberian_obat "+
-                    "inner join kodesatuan on resep_obat.no_rawat=reg_periksa.no_rawat  "+
-                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and "+
-                    "databarang.kode_brng=aturan_pakai.kode_brng and "+
-                    "detail_pemberian_obat.kode_brng=databarang.kode_brng " +
-                    "and resep_obat.no_rawat=aturan_pakai.no_rawat and "+
-                    "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
-                    "resep_obat.jam=aturan_pakai.jam and resep_obat.no_rawat=detail_pemberian_obat.no_rawat "+
-                    "and resep_obat.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and " +
-                    "resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode_sat "+
-                    "where resep_obat.no_resep='"+NoResep.getText()+"' and aturan_pakai.aturan<>''",param);
+//                Valid.MyReportqry("rptItemResep5.jasper","report","::[ Aturan Pakai Obat ]::",
+//                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir, "+
+//                    "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,databarang.nama_brng,"+
+//                    "aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur "+
+//                    "from resep_obat inner join reg_periksa inner join pasien inner join "+
+//                    "aturan_pakai inner join databarang inner join detail_pemberian_obat "+
+//                    "inner join kodesatuan on resep_obat.no_rawat=reg_periksa.no_rawat  "+
+//                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and "+
+//                    "databarang.kode_brng=aturan_pakai.kode_brng and "+
+//                    "detail_pemberian_obat.kode_brng=databarang.kode_brng " +
+//                    "and resep_obat.no_rawat=aturan_pakai.no_rawat and "+
+//                    "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
+//                    "resep_obat.jam=aturan_pakai.jam and resep_obat.no_rawat=detail_pemberian_obat.no_rawat "+
+//                    "and resep_obat.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and " +
+//                    "resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode_sat "+
+//                    "where resep_obat.no_resep='"+NoResep.getText()+"' and aturan_pakai.aturan<>''",param);
+                String query_non_racikan = "select "+
+                                            "  resep_obat.no_resep, "+
+                                            "  resep_obat.tgl_perawatan, "+
+                                            "  resep_obat.jam, "+
+                                            "  pasien.tgl_lahir, "+
+                                            "  resep_obat.no_rawat, "+
+                                            "  pasien.no_rkm_medis, "+
+                                            "  pasien.nm_pasien, "+
+                                            "  databarang.nama_brng, "+
+                                            "  aturan_pakai.aturan, "+
+                                            "  detail_pemberian_obat.jml, "+
+                                            "  kodesatuan.satuan, "+
+                                            "  pasien.jk, "+
+                                            "  reg_periksa.umurdaftar, "+
+                                            "  reg_periksa.sttsumur "+
+                                            "from "+
+                                            "  resep_obat "+
+                                            "  inner join reg_periksa "+
+                                            "  inner join pasien "+
+                                            "  inner join aturan_pakai "+
+                                            "  inner join databarang "+
+                                            "  inner join detail_pemberian_obat "+
+                                            "  inner join kodesatuan on resep_obat.no_rawat = reg_periksa.no_rawat "+
+                                            "  and reg_periksa.no_rkm_medis = pasien.no_rkm_medis "+
+                                            "  and databarang.kode_brng = aturan_pakai.kode_brng "+
+                                            "  and detail_pemberian_obat.kode_brng = databarang.kode_brng "+
+                                            "  and resep_obat.no_rawat = aturan_pakai.no_rawat "+
+                                            "  and resep_obat.tgl_perawatan = aturan_pakai.tgl_perawatan "+
+                                            "  and resep_obat.jam = aturan_pakai.jam "+
+                                            "  and resep_obat.no_rawat = detail_pemberian_obat.no_rawat "+
+                                            "  and resep_obat.tgl_perawatan = detail_pemberian_obat.tgl_perawatan "+
+                                            "  and resep_obat.jam = detail_pemberian_obat.jam "+
+                                            "  and kodesatuan.kode_sat = databarang.kode_sat "+
+                                            "where "+
+                                            "  resep_obat.no_resep = '"+NoResep.getText()+"' "+
+                                            "  and aturan_pakai.aturan <> ''"+
+                                            "";
+                Valid2.MyReportqry("rptItemResep5.jasper","report","::[ Aturan Pakai Obat ]::",query_non_racikan,param, 1);
             }
             
             if(Sequel.cariInteger(
@@ -1807,18 +2014,49 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "obat_racikan on resep_obat.no_rawat=obat_racikan.no_rawat and "+
                     "resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and " +
                     "resep_obat.jam=obat_racikan.jam where resep_obat.no_resep=? and obat_racikan.aturan_pakai<>''",NoResep.getText())>0){
-                Valid.MyReportqry("rptItemResep6.jasper","report","::[ Aturan Pakai Obat ]::",
-                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir," +
-                    "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,obat_racikan.nama_racik," +
-                    "obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur " +
-                    "from resep_obat inner join reg_periksa inner join pasien inner join " +
-                    "obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat " +
-                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
-                    "and obat_racikan.kd_racik=metode_racik.kd_racik " +
-                    "and resep_obat.no_rawat=obat_racikan.no_rawat and " +
-                    "resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and " +
-                    "resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat "+
-                    "where resep_obat.no_resep='"+NoResep.getText()+"'",param);
+//                Valid.MyReportqry("rptItemResep6.jasper","report","::[ Aturan Pakai Obat ]::",
+//                    "select resep_obat.no_resep,resep_obat.tgl_perawatan,resep_obat.jam,pasien.tgl_lahir," +
+//                    "resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,obat_racikan.nama_racik," +
+//                    "obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur " +
+//                    "from resep_obat inner join reg_periksa inner join pasien inner join " +
+//                    "obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat " +
+//                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+//                    "and obat_racikan.kd_racik=metode_racik.kd_racik " +
+//                    "and resep_obat.no_rawat=obat_racikan.no_rawat and " +
+//                    "resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and " +
+//                    "resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat "+
+//                    "where resep_obat.no_resep='"+NoResep.getText()+"'",param);
+                String query_racikan = "select "+
+                                        "  resep_obat.no_resep, "+
+                                        "  resep_obat.tgl_perawatan, "+
+                                        "  resep_obat.jam, "+
+                                        "  pasien.tgl_lahir, "+
+                                        "  resep_obat.no_rawat, "+
+                                        "  pasien.no_rkm_medis, "+
+                                        "  pasien.nm_pasien, "+
+                                        "  obat_racikan.nama_racik, "+
+                                        "  obat_racikan.aturan_pakai, "+
+                                        "  obat_racikan.jml_dr, "+
+                                        "  metode_racik.nm_racik, "+
+                                        "  pasien.jk, "+
+                                        "  reg_periksa.umurdaftar, "+
+                                        "  reg_periksa.sttsumur "+
+                                        "from "+
+                                        "  resep_obat "+
+                                        "  inner join reg_periksa "+
+                                        "  inner join pasien "+
+                                        "  inner join obat_racikan "+
+                                        "  inner join metode_racik on resep_obat.no_rawat = reg_periksa.no_rawat "+
+                                        "  and reg_periksa.no_rkm_medis = pasien.no_rkm_medis "+
+                                        "  and obat_racikan.kd_racik = metode_racik.kd_racik "+
+                                        "  and resep_obat.no_rawat = obat_racikan.no_rawat "+
+                                        "  and resep_obat.tgl_perawatan = obat_racikan.tgl_perawatan "+
+                                        "  and resep_obat.jam = obat_racikan.jam "+
+                                        "  and resep_obat.no_rawat = obat_racikan.no_rawat "+
+                                        "where "+
+                                        "  resep_obat.no_resep = '"+NoResep.getText()+"' "+
+                                        "";
+                Valid2.MyReportqry("rptItemResep6.jasper","report","::[ Aturan Pakai Obat ]::",query_racikan,param, 1);
             }                
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -1845,24 +2083,36 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             try {
                 i=0;
                 ps=koneksi.prepareStatement(
-                    "select databarang.nama_brng,aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan "+
-                    "from resep_obat inner join reg_periksa inner join "+
-                    "aturan_pakai inner join databarang inner join detail_pemberian_obat "+
-                    "inner join kodesatuan on resep_obat.no_rawat=reg_periksa.no_rawat  "+
-                    "and databarang.kode_brng=aturan_pakai.kode_brng and "+
-                    "detail_pemberian_obat.kode_brng=databarang.kode_brng " +
-                    "and resep_obat.no_rawat=aturan_pakai.no_rawat and "+
-                    "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
-                    "resep_obat.jam=aturan_pakai.jam and resep_obat.no_rawat=detail_pemberian_obat.no_rawat "+
-                    "and resep_obat.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and " +
-                    "resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode_sat "+
-                    "where resep_obat.no_resep=? and aturan_pakai.aturan<>''");
+                    "SELECT "+
+                        "  databarang.nama_brng, "+
+                        "  aturan_pakai.aturan, "+
+                        "  detail_pemberian_obat.jml, "+
+                        "  kodesatuan.satuan, "+
+                        "  reg_periksa.no_rkm_medis, "+
+                        "  bridging_sep.no_kartu "+
+                        "FROM "+
+                        "  resep_obat "+
+                        "  INNER JOIN reg_periksa ON resep_obat.no_rawat = reg_periksa.no_rawat "+
+                        "  INNER JOIN aturan_pakai ON resep_obat.no_rawat = aturan_pakai.no_rawat "+
+                        "  AND resep_obat.tgl_perawatan = aturan_pakai.tgl_perawatan "+
+                        "  AND resep_obat.jam = aturan_pakai.jam "+
+                        "  INNER JOIN databarang ON databarang.kode_brng = aturan_pakai.kode_brng "+
+                        "  INNER JOIN detail_pemberian_obat ON resep_obat.no_rawat = detail_pemberian_obat.no_rawat "+
+                        "  AND resep_obat.tgl_perawatan = detail_pemberian_obat.tgl_perawatan "+
+                        "  AND resep_obat.jam = detail_pemberian_obat.jam "+
+                        "  AND databarang.kode_brng = detail_pemberian_obat.kode_brng "+
+                        "  INNER JOIN kodesatuan ON kodesatuan.kode_sat = databarang.kode_sat "+
+                        "  LEFT JOIN bridging_sep ON reg_periksa.no_rawat = bridging_sep.no_rawat "+
+                        "WHERE "+
+                        "  resep_obat.no_resep = ?"+
+                        "  AND aturan_pakai.aturan <> ''"+
+                        "");
                 try {
                     ps.setString(1,NoResep.getText());
                     rs=ps.executeQuery();
                     while(rs.next()){
                         Sequel.menyimpan("temporary_resep","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                            ""+i,rs.getString("nama_brng"),rs.getString("aturan"),rs.getString("jml"),rs.getString("satuan"),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
+                            ""+i,rs.getString("nama_brng"),rs.getString("aturan"),rs.getString("jml"),rs.getString("satuan"),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",rs.getString("no_kartu")+"",rs.getString("no_rkm_medis"),akses.getalamatip()
                         });
                         i++;
                     }
@@ -1878,30 +2128,54 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 }
                 
                 psracikan=koneksi.prepareStatement(
-                    "select obat_racikan.no_racik,obat_racikan.nama_racik,obat_racikan.tgl_perawatan,obat_racikan.jam," +
-                    "obat_racikan.no_rawat,obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik " +
-                    "from resep_obat inner join reg_periksa inner join " +
-                    "obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat " +
-                    "and obat_racikan.kd_racik=metode_racik.kd_racik " +
-                    "and resep_obat.no_rawat=obat_racikan.no_rawat and " +
-                    "resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and " +
-                    "resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat "+
-                    "where resep_obat.no_resep=?");
+                    "select "+
+                    "  obat_racikan.no_racik, "+
+                    "  obat_racikan.nama_racik, "+
+                    "  obat_racikan.tgl_perawatan, "+
+                    "  obat_racikan.jam, "+
+                    "  obat_racikan.no_rawat, "+
+                    "  obat_racikan.aturan_pakai, "+
+                    "  obat_racikan.jml_dr, "+
+                    "  metode_racik.nm_racik, "+
+                    "  reg_periksa.no_rkm_medis, "+
+                    "  bridging_sep.no_kartu "+
+                    "from "+
+                    "  resep_obat "+
+                    "  inner join reg_periksa on resep_obat.no_rawat = reg_periksa.no_rawat "+
+                    "  inner join obat_racikan on resep_obat.no_rawat = obat_racikan.no_rawat "+
+                    "  and resep_obat.tgl_perawatan = obat_racikan.tgl_perawatan "+
+                    "  and resep_obat.jam = obat_racikan.jam "+
+                    "  and resep_obat.no_rawat = obat_racikan.no_rawat "+
+                    "  inner join metode_racik on obat_racikan.kd_racik = metode_racik.kd_racik "+
+                    "  left join bridging_sep ON reg_periksa.no_rawat = bridging_sep.no_rawat "+
+                    "where "+
+                    "  resep_obat.no_resep = ?"+
+                    "");
                 try {
                     psracikan.setString(1,NoResep.getText());
                     rsracikan=psracikan.executeQuery();
                     while(rsracikan.next()){
                         rincianobat="";
                         ps2=koneksi.prepareStatement(
-                            "select databarang.nama_brng,detail_pemberian_obat.jml from "+
-                            "detail_pemberian_obat inner join databarang inner join detail_obat_racikan "+
-                            "on detail_pemberian_obat.kode_brng=databarang.kode_brng and "+
-                            "detail_pemberian_obat.kode_brng=detail_obat_racikan.kode_brng and "+
-                            "detail_pemberian_obat.tgl_perawatan=detail_obat_racikan.tgl_perawatan and "+
-                            "detail_pemberian_obat.jam=detail_obat_racikan.jam and "+
-                            "detail_pemberian_obat.no_rawat=detail_obat_racikan.no_rawat "+
-                            "where detail_pemberian_obat.tgl_perawatan=? and detail_pemberian_obat.jam=? and "+
-                            "detail_pemberian_obat.no_rawat=? and detail_obat_racikan.no_racik=? order by databarang.kode_brng");
+                            "select "+
+                            "  databarang.nama_brng, "+
+                            "  detail_pemberian_obat.jml "+
+                            "from "+
+                            "  detail_pemberian_obat "+
+                            "  inner join databarang "+
+                            "  inner join detail_obat_racikan on detail_pemberian_obat.kode_brng = databarang.kode_brng "+
+                            "  and detail_pemberian_obat.kode_brng = detail_obat_racikan.kode_brng "+
+                            "  and detail_pemberian_obat.tgl_perawatan = detail_obat_racikan.tgl_perawatan "+
+                            "  and detail_pemberian_obat.jam = detail_obat_racikan.jam "+
+                            "  and detail_pemberian_obat.no_rawat = detail_obat_racikan.no_rawat "+
+                            "where "+
+                            "  detail_pemberian_obat.tgl_perawatan = ? "+
+                            "  and detail_pemberian_obat.jam = ? "+
+                            "  and detail_pemberian_obat.no_rawat = ? "+
+                            "  and detail_obat_racikan.no_racik = ? "+
+                            "order by "+
+                            "  databarang.kode_brng"+
+                            "");
                         try {
                             ps2.setString(1,rsracikan.getString("tgl_perawatan"));
                             ps2.setString(2,rsracikan.getString("jam"));
@@ -1925,7 +2199,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         rincianobat = rincianobat.substring(0,rincianobat.length() - 1);
                         
                         Sequel.menyimpan("temporary_resep","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                            ""+i,rsracikan.getString("nama_racik")+" ("+rincianobat+")",rsracikan.getString("aturan_pakai"),rsracikan.getString("jml_dr"),rsracikan.getString("nm_racik"),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
+                            ""+i,rsracikan.getString("nama_racik")+" ("+rincianobat+")",rsracikan.getString("aturan_pakai"),rsracikan.getString("jml_dr"),rsracikan.getString("nm_racik"),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",rsracikan.getString("no_kartu")+"",rsracikan.getString("no_rkm_medis"),akses.getalamatip()
                         });
                         i++;
                     }
@@ -1962,8 +2236,11 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmDokter.getText()+"\nID "+(finger.equals("")?KdDokter.getText():finger)+"\n"+DTPBeri.getSelectedItem());  
             param.put("jam",cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("no_sep",Sequel.cariIsi("select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat=?",TNoRw.getText()));
+            param.put("no_kartu",Sequel.cariIsi("select bridging_sep.no_kartu from bridging_sep where bridging_sep.no_rawat=?",TNoRw.getText()));
             
-            Valid.MyReportqry("rptLembarObat2.jasper","report","::[ Lembar Pemberian Obat Tes ]::","select * from temporary_resep where temporary_resep.temp37='"+akses.getalamatip()+"' order by temporary_resep.no",param);
+//            Valid.MyReportqry("rptLembarObat2.jasper","report","::[ Lembar Pemberian Obat Tes ]::","select * from temporary_resep where temporary_resep.temp37='"+akses.getalamatip()+"' order by temporary_resep.temp1",param);
+            Valid2.MyReportqry("rptLembarObat2.jasper","report","::[ Lembar Pemberian Obat Tes ]::","select * from temporary_resep where temporary_resep.temp37='"+akses.getalamatip()+"' order by temporary_resep.temp1",param, 1);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_ppLembarObat1ActionPerformed
@@ -2020,18 +2297,31 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             try {
                 i=0;
                 ps=koneksi.prepareStatement(
-                    "select databarang.nama_brng,aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan "+
-                    "from resep_obat inner join reg_periksa inner join "+
-                    "aturan_pakai inner join databarang inner join detail_pemberian_obat "+
-                    "inner join kodesatuan on resep_obat.no_rawat=reg_periksa.no_rawat  "+
-                    "and databarang.kode_brng=aturan_pakai.kode_brng and "+
-                    "detail_pemberian_obat.kode_brng=databarang.kode_brng " +
-                    "and resep_obat.no_rawat=aturan_pakai.no_rawat and "+
-                    "resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and " +
-                    "resep_obat.jam=aturan_pakai.jam and resep_obat.no_rawat=detail_pemberian_obat.no_rawat "+
-                    "and resep_obat.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and " +
-                    "resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode_sat "+
-                    "where resep_obat.no_resep=? and aturan_pakai.aturan<>''");//
+                    "select "+
+                    "  databarang.nama_brng, "+
+                    "  aturan_pakai.aturan, "+
+                    "  detail_pemberian_obat.jml, "+
+                    "  kodesatuan.satuan "+
+                    "from "+
+                    "  resep_obat "+
+                    "  inner join reg_periksa "+
+                    "  inner join aturan_pakai "+
+                    "  inner join databarang "+
+                    "  inner join detail_pemberian_obat "+
+                    "  inner join kodesatuan on resep_obat.no_rawat = reg_periksa.no_rawat "+
+                    "  and databarang.kode_brng = aturan_pakai.kode_brng "+
+                    "  and detail_pemberian_obat.kode_brng = databarang.kode_brng "+
+                    "  and resep_obat.no_rawat = aturan_pakai.no_rawat "+
+                    "  and resep_obat.tgl_perawatan = aturan_pakai.tgl_perawatan "+
+                    "  and resep_obat.jam = aturan_pakai.jam "+
+                    "  and resep_obat.no_rawat = detail_pemberian_obat.no_rawat "+
+                    "  and resep_obat.tgl_perawatan = detail_pemberian_obat.tgl_perawatan "+
+                    "  and resep_obat.jam = detail_pemberian_obat.jam "+
+                    "  and kodesatuan.kode_sat = databarang.kode_sat "+
+                    "where "+
+                    "  resep_obat.no_resep = ? "+
+                    "  and aturan_pakai.aturan <> ''"+
+                    "");
                 try {
                     ps.setString(1,NoResep.getText());
                     rs=ps.executeQuery();
@@ -2053,15 +2343,28 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 }
                 
                 psracikan=koneksi.prepareStatement(
-                    "select obat_racikan.no_racik,obat_racikan.nama_racik,obat_racikan.tgl_perawatan,obat_racikan.jam," +
-                    "obat_racikan.no_rawat,obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik " +
-                    "from resep_obat inner join reg_periksa inner join " +
-                    "obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat " +
-                    "and obat_racikan.kd_racik=metode_racik.kd_racik " +
-                    "and resep_obat.no_rawat=obat_racikan.no_rawat and " +
-                    "resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and " +
-                    "resep_obat.jam=obat_racikan.jam and resep_obat.no_rawat=obat_racikan.no_rawat "+
-                    "where resep_obat.no_resep=?"); 
+                    "select "+
+                    "  obat_racikan.no_racik, "+
+                    "  obat_racikan.nama_racik, "+
+                    "  obat_racikan.tgl_perawatan, "+
+                    "  obat_racikan.jam, "+
+                    "  obat_racikan.no_rawat, "+
+                    "  obat_racikan.aturan_pakai, "+
+                    "  obat_racikan.jml_dr, "+
+                    "  metode_racik.nm_racik "+
+                    "from "+
+                    "  resep_obat "+
+                    "  inner join reg_periksa "+
+                    "  inner join obat_racikan "+
+                    "  inner join metode_racik on resep_obat.no_rawat = reg_periksa.no_rawat "+
+                    "  and obat_racikan.kd_racik = metode_racik.kd_racik "+
+                    "  and resep_obat.no_rawat = obat_racikan.no_rawat "+
+                    "  and resep_obat.tgl_perawatan = obat_racikan.tgl_perawatan "+
+                    "  and resep_obat.jam = obat_racikan.jam "+
+                    "  and resep_obat.no_rawat = obat_racikan.no_rawat "+
+                    "where "+
+                    "  resep_obat.no_resep = ?"+
+                    ""); 
              
                 try {
                     psracikan.setString(1,NoResep.getText());
@@ -2072,15 +2375,25 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                 }); 
                         rincianobat="";
                         ps2=koneksi.prepareStatement(
-                            "select databarang.nama_brng,detail_pemberian_obat.jml from "+
-                            "detail_pemberian_obat inner join databarang inner join detail_obat_racikan "+
-                            "on detail_pemberian_obat.kode_brng=databarang.kode_brng and "+
-                            "detail_pemberian_obat.kode_brng=detail_obat_racikan.kode_brng and "+
-                            "detail_pemberian_obat.tgl_perawatan=detail_obat_racikan.tgl_perawatan and "+
-                            "detail_pemberian_obat.jam=detail_obat_racikan.jam and "+
-                            "detail_pemberian_obat.no_rawat=detail_obat_racikan.no_rawat "+
-                            "where detail_pemberian_obat.tgl_perawatan=? and detail_pemberian_obat.jam=? and "+
-                            "detail_pemberian_obat.no_rawat=? and detail_obat_racikan.no_racik=? order by databarang.kode_brng");
+                            "select "+
+                            "  databarang.nama_brng, "+
+                            "  detail_pemberian_obat.jml "+
+                            "from "+
+                            "  detail_pemberian_obat "+
+                            "  inner join databarang "+
+                            "  inner join detail_obat_racikan on detail_pemberian_obat.kode_brng = databarang.kode_brng "+
+                            "  and detail_pemberian_obat.kode_brng = detail_obat_racikan.kode_brng "+
+                            "  and detail_pemberian_obat.tgl_perawatan = detail_obat_racikan.tgl_perawatan "+
+                            "  and detail_pemberian_obat.jam = detail_obat_racikan.jam "+
+                            "  and detail_pemberian_obat.no_rawat = detail_obat_racikan.no_rawat "+
+                            "where "+
+                            "  detail_pemberian_obat.tgl_perawatan = ? "+
+                            "  and detail_pemberian_obat.jam = ? "+
+                            "  and detail_pemberian_obat.no_rawat = ? "+
+                            "  and detail_obat_racikan.no_racik = ? "+
+                            "order by "+
+                            "  databarang.kode_brng"+
+                            "");
 
                         try {
                             ps2.setString(1,rsracikan.getString("tgl_perawatan"));
@@ -2149,7 +2462,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             param.put("jam",cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
             
-            Valid.MyReportqry("rptLabelDaftarObat.jasper","report","::[ Label Daftar Obat ]::","select * from temporary_resep where temporary_resep.temp37='"+akses.getalamatip()+"' order by temporary_resep.no,temporary_resep.temp2 desc ",param);
+//            Valid.MyReportqry("rptLabelDaftarObat.jasper","report","::[ Label Daftar Obat ]::","select * from temporary_resep where temporary_resep.temp37='"+akses.getalamatip()+"' order by temporary_resep.no,temporary_resep.temp2 desc ",param);
+            Valid2.MyReportqry("rptLabelDaftarObat.jasper","report","::[ Label Daftar Obat ]::","select * from temporary_resep where temporary_resep.temp37='"+akses.getalamatip()+"' order by temporary_resep.no,temporary_resep.temp2 desc ",param, 1);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_ppLabelDataObatActionPerformed
@@ -2224,7 +2538,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         "  detail_pemberian_obat.jml, "+
                         "  kodesatuan.satuan, "+
                         "  reg_periksa.no_rkm_medis, "+
-                        "  bridging_sep.no_sep "+
+                        "  bridging_sep.no_kartu "+
                         "FROM "+
                         "  resep_obat "+
                         "  INNER JOIN reg_periksa ON resep_obat.no_rawat = reg_periksa.no_rawat "+
@@ -2249,7 +2563,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     rs=ps.executeQuery();
                     while(rs.next()){
                         Sequel.menyimpan("temporary_resep","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                            ""+i,rs.getString("nama_brng"),rs.getString("aturan"),rs.getString("jml"),rs.getString("satuan"),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",rs.getString("no_sep")+"",rs.getString("no_rkm_medis"),akses.getalamatip()
+                            ""+i,rs.getString("nama_brng"),rs.getString("aturan"),rs.getString("jml"),rs.getString("satuan"),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",rs.getString("no_kartu")+"",rs.getString("no_rkm_medis"),akses.getalamatip()
                         });
                         i++;
                     }
@@ -2275,7 +2589,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     "  obat_racikan.jml_dr, "+
                     "  metode_racik.nm_racik, "+
                     "  reg_periksa.no_rkm_medis, "+
-                    "  bridging_sep.no_sep "+
+                    "  bridging_sep.no_kartu "+
                     "from "+
                     "  resep_obat "+
                     "  inner join reg_periksa on resep_obat.no_rawat = reg_periksa.no_rawat "+
@@ -2337,7 +2651,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         rincianobat = rincianobat.substring(0,rincianobat.length() - 1);
                         
                         Sequel.menyimpan("temporary_resep","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                            ""+i,rsracikan.getString("nama_racik")+" ("+rincianobat+")",rsracikan.getString("aturan_pakai"),rsracikan.getString("jml_dr"),rsracikan.getString("nm_racik"),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",rsracikan.getString("no_sep")+"",rsracikan.getString("no_rkm_medis"),akses.getalamatip()
+                            ""+i,rsracikan.getString("nama_racik")+" ("+rincianobat+")",rsracikan.getString("aturan_pakai"),rsracikan.getString("jml_dr"),rsracikan.getString("nm_racik"),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",rsracikan.getString("no_kartu")+"",rsracikan.getString("no_rkm_medis"),akses.getalamatip()
                         });
                         i++;
                     }
@@ -2369,6 +2683,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             param.put("pasien",TPasien.getText());
             param.put("norm",TNoRm.getText());
             param.put("peresep",NmDokter.getText());
+            param.put("no_sep",Sequel.cariIsi("select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat=?",TNoRw.getText()));
+            param.put("no_kartu",Sequel.cariIsi("select bridging_sep.no_kartu from bridging_sep where bridging_sep.no_rawat=?",TNoRw.getText()));
             if(akses.getkode().equals("rsud")){
                 param.put("diserahkanoleh","Petugas Farmasi");
             }else{
@@ -2384,7 +2700,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 //            param.put("photo","http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penyerahanresep/"+Sequel.cariIsi("select bukti_penyerahan_resep_obat.photo from bukti_penyerahan_resep_obat where bukti_penyerahan_resep_obat.no_resep=?",NoResep.getText()));
 //            System.out.println("photo: "+"http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penyerahanresep/"+Sequel.cariIsi("select bukti_penyerahan_resep_obat.photo from bukti_penyerahan_resep_obat where bukti_penyerahan_resep_obat.no_resep=?",NoResep.getText()));
             
-            Valid.MyReportqry("rptLembarObat3.jasper","report","::[ Lembar Pemberian Obat ]::","select * from temporary_resep where temporary_resep.temp37='"+akses.getalamatip()+"' order by temporary_resep.no",param);
+//            Valid.MyReportqry("rptLembarObat3.jasper","report","::[ Lembar Pemberian Obat ]::","select * from temporary_resep where temporary_resep.temp37='"+akses.getalamatip()+"' order by temporary_resep.temp1",param);
+            Valid2.MyReportqry("rptLembarObat3.jasper","report","::[ Lembar Pemberian Obat ]::","select * from temporary_resep where temporary_resep.temp37='"+akses.getalamatip()+"' order by temporary_resep.temp1",param, 1);
             this.setCursor(Cursor.getDefaultCursor());
             System.out.println("Jasper finished");
         }

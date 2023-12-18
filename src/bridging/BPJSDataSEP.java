@@ -33,11 +33,14 @@ import java.security.cert.X509Certificate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.X509TrustManager;
 import javax.swing.JOptionPane;
@@ -65,7 +68,7 @@ import rekammedis.RMRiwayatPerawatan;
  * @author perpustakaan
  */
 public final class BPJSDataSEP extends javax.swing.JDialog {
-    private DefaultTableModel tabMode,tabModeInternal;
+    private DefaultTableModel tabMode,tabModeInternal, tabModeAsesmen;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -1074,6 +1077,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         NmDPJPLayanan = new widget.TextBox();
         btnDPJPLayanan = new widget.Button();
         btnRiwayatRujukan = new widget.Button();
+        ScrollAsesmen = new javax.swing.JScrollPane();
+        tbAsesmen = new javax.swing.JTable();
         internalFrame4 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbDataSEP = new widget.Table();
@@ -1501,7 +1506,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 70, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2023 14:51:09" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023 09:19:54" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -1547,7 +1552,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         internalFrame5.add(jLabel48);
         jLabel48.setBounds(291, 62, 120, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2023" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -1615,7 +1620,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel30.setBounds(0, 25, 102, 23);
 
         TanggalRujukKeluar.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujukKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2023" }));
+        TanggalRujukKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
         TanggalRujukKeluar.setDisplayFormat("dd-MM-yyyy");
         TanggalRujukKeluar.setName("TanggalRujukKeluar"); // NOI18N
         TanggalRujukKeluar.setOpaque(false);
@@ -1798,7 +1803,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel50.setBounds(638, 55, 80, 23);
 
         TanggalKunjungRujukan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKunjungRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2023" }));
+        TanggalKunjungRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
         TanggalKunjungRujukan.setDisplayFormat("dd-MM-yyyy");
         TanggalKunjungRujukan.setName("TanggalKunjungRujukan"); // NOI18N
         TanggalKunjungRujukan.setOpaque(false);
@@ -2068,7 +2073,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel20.setBounds(187, 102, 65, 23);
 
         TanggalSEP.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2023" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy");
         TanggalSEP.setName("TanggalSEP"); // NOI18N
         TanggalSEP.setOpaque(false);
@@ -2088,7 +2093,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel22.setBounds(0, 102, 90, 23);
 
         TanggalRujuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2023" }));
+        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
         TanggalRujuk.setDisplayFormat("dd-MM-yyyy");
         TanggalRujuk.setName("TanggalRujuk"); // NOI18N
         TanggalRujuk.setOpaque(false);
@@ -2449,7 +2454,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel38.setBounds(594, 132, 40, 23);
 
         TanggalKKL.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2023" }));
+        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
         TanggalKKL.setDisplayFormat("dd-MM-yyyy");
         TanggalKKL.setEnabled(false);
         TanggalKKL.setName("TanggalKKL"); // NOI18N
@@ -2869,6 +2874,41 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         internalFrame2.add(Scroll1, java.awt.BorderLayout.CENTER);
 
+        ScrollAsesmen.setBackground(new java.awt.Color(255, 255, 255));
+        ScrollAsesmen.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Riwayat Pasien", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 1, 36))); // NOI18N
+        ScrollAsesmen.setForeground(new java.awt.Color(255, 255, 255));
+        ScrollAsesmen.setName("ScrollAsesmen"); // NOI18N
+        ScrollAsesmen.setPreferredSize(new java.awt.Dimension(747, 469));
+
+        tbAsesmen.setBackground(new java.awt.Color(255, 255, 255));
+        tbAsesmen.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nama Pasien", "Tanggal Periksa", "Asesmen", "Dokter"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbAsesmen.setName("tbAsesmen"); // NOI18N
+        ScrollAsesmen.setViewportView(tbAsesmen);
+
+        internalFrame2.add(ScrollAsesmen, java.awt.BorderLayout.LINE_END);
+
         TabRawat.addTab("Input SEP", internalFrame2);
 
         internalFrame4.setBorder(null);
@@ -2909,7 +2949,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2923,7 +2963,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3014,7 +3054,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass10.add(jLabel51);
 
         DTPCariInternal.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCariInternal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2023" }));
+        DTPCariInternal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
         DTPCariInternal.setDisplayFormat("dd-MM-yyyy");
         DTPCariInternal.setName("DTPCariInternal"); // NOI18N
         DTPCariInternal.setOpaque(false);
@@ -3028,7 +3068,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass10.add(jLabel52);
 
         DTPCariInternal2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCariInternal2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-04-2023" }));
+        DTPCariInternal2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
         DTPCariInternal2.setDisplayFormat("dd-MM-yyyy");
         DTPCariInternal2.setName("DTPCariInternal2"); // NOI18N
         DTPCariInternal2.setOpaque(false);
@@ -3081,7 +3121,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         TabRawat.addTab("Data SEP Internal", internalFrame8);
 
-        internalFrame1.add(TabRawat, java.awt.BorderLayout.CENTER);
+        internalFrame1.add(TabRawat, java.awt.BorderLayout.PAGE_START);
 
         panelGlass8.setName("panelGlass8"); // NOI18N
         panelGlass8.setPreferredSize(new java.awt.Dimension(44, 54));
@@ -5613,6 +5653,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;
+    private javax.swing.JScrollPane ScrollAsesmen;
     private widget.TextBox Status;
     private widget.ComboBox StatusPulang;
     private widget.ComboBox Suplesi;
@@ -5738,6 +5779,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private javax.swing.JMenuItem ppSuplesiJasaRaharja;
     private javax.swing.JMenuItem ppSuratKontrol;
     private javax.swing.JMenuItem ppSuratPRI;
+    private javax.swing.JTable tbAsesmen;
     private widget.Table tbDataSEP;
     private widget.Table tbDataSEPInternal;
     // End of variables declaration//GEN-END:variables
@@ -6053,7 +6095,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         NmDPJP.setText(Sequel.cariIsi("select maping_dokter_dpjpvclaim.nm_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter=?",kddokter));
         JenisPelayanan.setSelectedItem(status);
         JenisPelayananItemStateChanged(null);
-        isRawat();            
+        isRawat();
+        tampilTbAsesmen();
     }
     
     public void setNoRm(String norwt, Date tgl1,String status,String kdpoli,String namapoli) {
@@ -6213,6 +6256,57 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             Valid.SetTgl(TanggalRujuk,tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),5).toString());            
             Valid.SetTgl(TanggalKKL,tbDataSEPInternal.getValueAt(tbDataSEPInternal.getSelectedRow(),33).toString());            
             Status.setText("AKTIF");
+        }
+    }
+
+    private void tampilTbAsesmen() {
+        String query_asesmen = "SELECT"+
+                                "    pasien.nm_pasien,"+
+                                "    reg_periksa.tgl_registrasi,"+
+                                "    pemeriksaan_ralan.penilaian,"+
+                                "    dokter.nm_dokter "+
+                                "FROM "+
+                                "    `pemeriksaan_ralan` "+
+                                "LEFT JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_ralan.no_rawat "+
+                                "LEFT JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis "+
+                                "LEFT JOIN dokter ON dokter.kd_dokter = reg_periksa.kd_dokter "+
+                                "WHERE "+
+                                "    pemeriksaan_ralan.no_rawat = ? "+
+                                "ORDER BY "+
+                                "    pemeriksaan_ralan.no_rawat "+
+                                "DESC "+
+                                "LIMIT 0, 5; ";
+        PreparedStatement ps_asesmen;
+        ResultSet rs_asesment;
+        try {
+            ps_asesmen = koneksi.prepareStatement(query_asesmen);
+            ps_asesmen.setString(1, TNoRw.getText());
+            System.out.println("ps_asesmen: "+ps_asesmen);
+            rs_asesment = ps_asesmen.executeQuery();
+            DefaultTableModel model_asesmen = (DefaultTableModel) tbAsesmen.getModel();
+            tbAsesmen.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            for (i = 0; i < 4; i++) {
+                TableColumn column = tbAsesmen.getColumnModel().getColumn(i);
+                if(i==0){
+                    column.setPreferredWidth(150); //1
+                }else if(i==1){
+                    column.setPreferredWidth(100); //2
+                }else if(i==2){
+                    column.setPreferredWidth(370); //3
+                }else if(i==3){
+                    column.setPreferredWidth(150); //4
+                }
+            }
+            while(rs_asesment.next()){
+                    model_asesmen.addRow(new String[] {
+                        rs_asesment.getString("nm_pasien"),
+                        rs_asesment.getString("tgl_registrasi"),
+                        rs_asesment.getString("penilaian"),
+                        rs_asesment.getString("nm_dokter")
+                    });
+                } 
+        } catch (SQLException ex) {
+            Logger.getLogger(BPJSDataSEP.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
