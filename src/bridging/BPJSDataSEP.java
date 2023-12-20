@@ -22,6 +22,9 @@ import fungsi.validasi;
 import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -1079,6 +1082,10 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         btnRiwayatRujukan = new widget.Button();
         ScrollAsesmen = new javax.swing.JScrollPane();
         tbAsesmen = new javax.swing.JTable();
+        jLabel55 = new widget.Label();
+        TNIK = new widget.TextBox();
+        BtnPrint1 = new widget.Button();
+        jLabel56 = new widget.Label();
         internalFrame4 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbDataSEP = new widget.Table();
@@ -1506,7 +1513,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 70, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023 09:02:45" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023 10:32:21" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -2001,7 +2008,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Bridging SEP BPJS ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
-        internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
+        internalFrame1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TabRawat.setBackground(new java.awt.Color(255, 255, 254));
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
@@ -2875,7 +2882,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         internalFrame2.add(Scroll1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 766, -1));
 
         ScrollAsesmen.setBackground(new java.awt.Color(255, 255, 255));
-        ScrollAsesmen.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "❤ ️Riwayat Pasien ❤️", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 1, 12))); // NOI18N
+        ScrollAsesmen.setBorder(null);
         ScrollAsesmen.setForeground(new java.awt.Color(255, 255, 255));
         ScrollAsesmen.setName("ScrollAsesmen"); // NOI18N
         ScrollAsesmen.setPreferredSize(new java.awt.Dimension(747, 469));
@@ -2907,7 +2914,44 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         tbAsesmen.setName("tbAsesmen"); // NOI18N
         ScrollAsesmen.setViewportView(tbAsesmen);
 
-        internalFrame2.add(ScrollAsesmen, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 760, -1));
+        internalFrame2.add(ScrollAsesmen, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 49, 440, 420));
+
+        jLabel55.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel55.setText("Riwayat Pasien");
+        jLabel55.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel55.setName("jLabel55"); // NOI18N
+        jLabel55.setPreferredSize(new java.awt.Dimension(85, 23));
+        internalFrame2.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, 110, 30));
+
+        TNIK.setEditable(false);
+        TNIK.setHighlighter(null);
+        TNIK.setName("TNIK"); // NOI18N
+        TNIK.setPreferredSize(new java.awt.Dimension(250, 23));
+        internalFrame2.add(TNIK, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 10, 180, 30));
+
+        BtnPrint1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editcopy.png"))); // NOI18N
+        BtnPrint1.setMnemonic('T');
+        BtnPrint1.setText("Copy NIK");
+        BtnPrint1.setToolTipText("Alt+T");
+        BtnPrint1.setName("BtnPrint1"); // NOI18N
+        BtnPrint1.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnPrint1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPrint1ActionPerformed(evt);
+            }
+        });
+        BtnPrint1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnPrint1KeyPressed(evt);
+            }
+        });
+        internalFrame2.add(BtnPrint1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 10, 90, 30));
+
+        jLabel56.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel56.setText("No NIK");
+        jLabel56.setName("jLabel56"); // NOI18N
+        jLabel56.setPreferredSize(new java.awt.Dimension(85, 23));
+        internalFrame2.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, 40, 30));
 
         TabRawat.addTab("Input SEP", internalFrame2);
 
@@ -3121,7 +3165,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         TabRawat.addTab("Data SEP Internal", internalFrame8);
 
-        internalFrame1.add(TabRawat, java.awt.BorderLayout.PAGE_START);
+        internalFrame1.add(TabRawat, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 16, 1210, 500));
 
         panelGlass8.setName("panelGlass8"); // NOI18N
         panelGlass8.setPreferredSize(new java.awt.Dimension(44, 54));
@@ -3253,7 +3297,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         });
         panelGlass8.add(BtnKeluar);
 
-        internalFrame1.add(panelGlass8, java.awt.BorderLayout.PAGE_END);
+        internalFrame1.add(panelGlass8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 750, -1));
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
 
@@ -5545,6 +5589,17 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_NIKKeyPressed
 
+    private void BtnPrint1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint1ActionPerformed
+        String sepText = TNIK.getText();
+        StringSelection stringSelectionObj = new StringSelection(sepText);
+        Clipboard clipboardObj = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboardObj.setContents(stringSelectionObj, null);
+    }//GEN-LAST:event_BtnPrint1ActionPerformed
+
+    private void BtnPrint1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnPrint1KeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -5576,6 +5631,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
+    private widget.Button BtnPrint1;
     private widget.Button BtnSimpan;
     private widget.Button BtnSimpan4;
     private widget.Button BtnSimpan5;
@@ -5659,6 +5715,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private widget.ComboBox Suplesi;
     private widget.TextBox TCari;
     private widget.TextBox TCariInternal;
+    private widget.TextBox TNIK;
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
@@ -5745,6 +5802,8 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private widget.Label jLabel52;
     private widget.Label jLabel53;
     private widget.Label jLabel54;
+    private widget.Label jLabel55;
+    private widget.Label jLabel56;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
@@ -6097,6 +6156,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         JenisPelayananItemStateChanged(null);
         isRawat();
         tampilTbAsesmen();
+        TNIK.setText(Sequel.cariIsi("select pasien.no_ktp from reg_periksa left join pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis where reg_periksa.no_rawat=?",norwt));
     }
     
     public void setNoRm(String norwt, Date tgl1,String status,String kdpoli,String namapoli) {

@@ -212,6 +212,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         tabModekasir=new DefaultTableModel(null,new String[]{
             "Kode Dokter",
             "Dokter Dituju",
+            "No.Reg",
             "No.RM",
             "Pasien",
             "Poliklinik",
@@ -226,7 +227,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             "No.Rawat",
             "Tanggal",
             "Jam",
-            "No.Reg",
             "Status Bayar",
             "Stts Poli",
             "Kd PJ",
@@ -249,33 +249,33 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }else if(i==2){
                 column.setPreferredWidth(65); //3
             }else if(i==3){
-                column.setPreferredWidth(170); //4
-            }else if(i==4){
-                column.setPreferredWidth(170); //5
-            }else if(i==5){
-                column.setPreferredWidth(140); //6
-            }else if(i==6){
-                column.setPreferredWidth(140); //7
-            }else if(i==7){
-                column.setPreferredWidth(130); //8
-            }else if(i==8){
-                column.setPreferredWidth(160); //9
-            }else if(i==9){
-                column.setPreferredWidth(80); //10
-            }else if(i==10){
-                column.setPreferredWidth(60); //11
-            }else if(i==11){
-                column.setPreferredWidth(100); //12
-            }else if(i==12){
-                column.setPreferredWidth(75); //13
-            }else if(i==13){
-                column.setPreferredWidth(105); //14
-            }else if(i==14){
-                column.setPreferredWidth(65); //15
-            }else if(i==15){
-                column.setPreferredWidth(55); //16
-            }else if(i==16){
                 column.setPreferredWidth(47); //17
+            }else if(i==4){
+                column.setPreferredWidth(170); //4
+            }else if(i==5){
+                column.setPreferredWidth(170); //5
+            }else if(i==6){
+                column.setPreferredWidth(140); //6
+            }else if(i==7){
+                column.setPreferredWidth(140); //7
+            }else if(i==8){
+                column.setPreferredWidth(130); //8
+            }else if(i==9){
+                column.setPreferredWidth(160); //9
+            }else if(i==10){
+                column.setPreferredWidth(80); //10
+            }else if(i==11){
+                column.setPreferredWidth(60); //11
+            }else if(i==12){
+                column.setPreferredWidth(100); //12
+            }else if(i==13){
+                column.setPreferredWidth(75); //13
+            }else if(i==14){
+                column.setPreferredWidth(105); //14
+            }else if(i==15){
+                column.setPreferredWidth(65); //15
+            }else if(i==16){
+                column.setPreferredWidth(55); //16
             }else if(i==17){
                 column.setPreferredWidth(70); //18
             }else if(i==18){
@@ -5925,7 +5925,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2023" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -5972,7 +5972,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel32.setBounds(176, 10, 20, 23);
 
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2023" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -6285,7 +6285,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6298,7 +6298,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass8.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6451,6 +6451,11 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         TNoReg.setHighlighter(null);
         TNoReg.setName("TNoReg"); // NOI18N
         TNoReg.setPreferredSize(new java.awt.Dimension(50, 23));
+        TNoReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TNoRegActionPerformed(evt);
+            }
+        });
         TNoReg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TNoRegKeyPressed(evt);
@@ -7436,14 +7441,15 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     if(akses.getberi_obat()==true){
                         MnPemberianObatActionPerformed(null);
                     }                    
-                }else if(i==2){
-                    //if(var.getbilling_ralan()==true){
-                        MnBillingActionPerformed(null);
-                    //}                    
                 }else if(i==3){
-                    if(MnKamarInap.isEnabled()==true){
-                        MnKamarInapActionPerformed(null);
+                    if(akses.getbilling_ralan()==true){
+                        MnBillingActionPerformed(null);
                     }                    
+                }else if(i==4){
+//                    if(MnKamarInap.isEnabled()==true){
+//                        MnKamarInapActionPerformed(null);
+//                    }                    
+                    System.out.println("weeelkkk❤️");
                 }
             }
         }
@@ -13219,6 +13225,10 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbSortingActionPerformed
 
+    private void TNoRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TNoRegActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TNoRegActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -13773,6 +13783,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     tabModekasir.addRow(new String[] {
                         rskasir.getString("kd_dokter"),
                         rskasir.getString("nm_dokter"),
+                        rskasir.getString("no_reg"),
                         rskasir.getString("no_rkm_medis"),
                         rskasir.getString("nm_pasien")+" ("+rskasir.getString("umur")+")",
                         rskasir.getString("nm_poli"),
@@ -13787,7 +13798,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                         rskasir.getString("no_rawat"),
                         rskasir.getString("tgl_registrasi"),
                         rskasir.getString("jam_reg"),
-                        rskasir.getString("no_reg"),
                         rskasir.getString("status_bayar"),
                         rskasir.getString("status_poli"),
                         rskasir.getString("kd_pj"),
@@ -13913,14 +13923,14 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
 
     private void getDatakasir() {
         if(tbKasirRalan.getSelectedRow()!= -1){
-            TNoRw.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),13).toString());
-            Tanggal.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),14).toString());
-            Jam.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),15).toString());
-            TNoRwCari.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),13).toString());
-            TNoReg.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString());
-            TNoRMCari.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString());
-            TPasienCari.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),3).toString());
-            TNoSep.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),6).toString());
+            TNoRw.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),14).toString());
+            Tanggal.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),15).toString());
+            Jam.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),16).toString());
+            TNoRwCari.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),14).toString());
+            TNoReg.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString());
+            TNoRMCari.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),3).toString());
+            TPasienCari.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),4).toString());
+            TNoSep.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),7).toString());
         }
     }
 
