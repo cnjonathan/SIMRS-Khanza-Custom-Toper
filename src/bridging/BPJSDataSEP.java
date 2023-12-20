@@ -1506,7 +1506,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 70, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023 09:19:54" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023 09:02:45" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -1552,7 +1552,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         internalFrame5.add(jLabel48);
         jLabel48.setBounds(291, 62, 120, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -1620,7 +1620,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel30.setBounds(0, 25, 102, 23);
 
         TanggalRujukKeluar.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujukKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
+        TanggalRujukKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         TanggalRujukKeluar.setDisplayFormat("dd-MM-yyyy");
         TanggalRujukKeluar.setName("TanggalRujukKeluar"); // NOI18N
         TanggalRujukKeluar.setOpaque(false);
@@ -1803,7 +1803,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel50.setBounds(638, 55, 80, 23);
 
         TanggalKunjungRujukan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKunjungRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
+        TanggalKunjungRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         TanggalKunjungRujukan.setDisplayFormat("dd-MM-yyyy");
         TanggalKunjungRujukan.setName("TanggalKunjungRujukan"); // NOI18N
         TanggalKunjungRujukan.setOpaque(false);
@@ -2015,7 +2015,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         internalFrame2.setBorder(null);
         internalFrame2.setName("internalFrame2"); // NOI18N
-        internalFrame2.setLayout(new java.awt.BorderLayout(1, 1));
+        internalFrame2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Scroll1.setName("Scroll1"); // NOI18N
@@ -2073,7 +2073,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel20.setBounds(187, 102, 65, 23);
 
         TanggalSEP.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy");
         TanggalSEP.setName("TanggalSEP"); // NOI18N
         TanggalSEP.setOpaque(false);
@@ -2093,7 +2093,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel22.setBounds(0, 102, 90, 23);
 
         TanggalRujuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
+        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         TanggalRujuk.setDisplayFormat("dd-MM-yyyy");
         TanggalRujuk.setName("TanggalRujuk"); // NOI18N
         TanggalRujuk.setOpaque(false);
@@ -2454,7 +2454,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         jLabel38.setBounds(594, 132, 40, 23);
 
         TanggalKKL.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
+        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         TanggalKKL.setDisplayFormat("dd-MM-yyyy");
         TanggalKKL.setEnabled(false);
         TanggalKKL.setName("TanggalKKL"); // NOI18N
@@ -2872,10 +2872,10 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
         Scroll1.setViewportView(FormInput);
 
-        internalFrame2.add(Scroll1, java.awt.BorderLayout.CENTER);
+        internalFrame2.add(Scroll1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 766, -1));
 
         ScrollAsesmen.setBackground(new java.awt.Color(255, 255, 255));
-        ScrollAsesmen.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Riwayat Pasien", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 1, 36))); // NOI18N
+        ScrollAsesmen.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "❤ ️Riwayat Pasien ❤️", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 1, 12))); // NOI18N
         ScrollAsesmen.setForeground(new java.awt.Color(255, 255, 255));
         ScrollAsesmen.setName("ScrollAsesmen"); // NOI18N
         ScrollAsesmen.setPreferredSize(new java.awt.Dimension(747, 469));
@@ -2907,7 +2907,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         tbAsesmen.setName("tbAsesmen"); // NOI18N
         ScrollAsesmen.setViewportView(tbAsesmen);
 
-        internalFrame2.add(ScrollAsesmen, java.awt.BorderLayout.LINE_END);
+        internalFrame2.add(ScrollAsesmen, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 760, -1));
 
         TabRawat.addTab("Input SEP", internalFrame2);
 
@@ -2949,7 +2949,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2963,7 +2963,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3054,7 +3054,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass10.add(jLabel51);
 
         DTPCariInternal.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCariInternal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
+        DTPCariInternal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         DTPCariInternal.setDisplayFormat("dd-MM-yyyy");
         DTPCariInternal.setName("DTPCariInternal"); // NOI18N
         DTPCariInternal.setOpaque(false);
@@ -3068,7 +3068,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         panelGlass10.add(jLabel52);
 
         DTPCariInternal2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCariInternal2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-12-2023" }));
+        DTPCariInternal2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
         DTPCariInternal2.setDisplayFormat("dd-MM-yyyy");
         DTPCariInternal2.setName("DTPCariInternal2"); // NOI18N
         DTPCariInternal2.setOpaque(false);
@@ -6266,12 +6266,12 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                                 "    pemeriksaan_ralan.penilaian,"+
                                 "    dokter.nm_dokter "+
                                 "FROM "+
-                                "    `pemeriksaan_ralan` "+
-                                "LEFT JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_ralan.no_rawat "+
+                                "    `reg_periksa` "+
+                                "LEFT JOIN pemeriksaan_ralan ON reg_periksa.no_rawat = pemeriksaan_ralan.no_rawat "+
                                 "LEFT JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis "+
                                 "LEFT JOIN dokter ON dokter.kd_dokter = reg_periksa.kd_dokter "+
                                 "WHERE "+
-                                "    pemeriksaan_ralan.no_rawat = ? "+
+                                "    reg_periksa.no_rkm_medis = ? "+
                                 "ORDER BY "+
                                 "    pemeriksaan_ralan.no_rawat "+
                                 "DESC "+
@@ -6280,7 +6280,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         ResultSet rs_asesment;
         try {
             ps_asesmen = koneksi.prepareStatement(query_asesmen);
-            ps_asesmen.setString(1, TNoRw.getText());
+            ps_asesmen.setString(1, TNoRM.getText());
             System.out.println("ps_asesmen: "+ps_asesmen);
             rs_asesment = ps_asesmen.executeQuery();
             DefaultTableModel model_asesmen = (DefaultTableModel) tbAsesmen.getModel();

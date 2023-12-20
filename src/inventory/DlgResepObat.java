@@ -1570,6 +1570,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                             "where "+
                                             "  resep_obat.no_resep = '"+NoResep.getText()+"' "+
                                             "  and aturan_pakai.aturan <> ''"+
+                                            "  ORDER BY databarang.nama_brng"+
                                             "";
                 Valid2.MyReportqry("rptItemResep.jasper","report","::[ Aturan Pakai Obat ]::",query_non_racikan,param, 1);
             }
@@ -1875,6 +1876,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                             "where "+
                                             "  resep_obat.no_resep = '"+NoResep.getText()+"' "+
                                             "  and aturan_pakai.aturan <> ''"+
+                                            "  ORDER BY databarang.nama_brng"+
                                             "";
                 Valid2.MyReportqry("rptItemResep3.jasper","report","::[ Aturan Pakai Obat ]::",obat_non_racikan,param, 1);
             }
@@ -2005,6 +2007,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                             "where "+
                                             "  resep_obat.no_resep = '"+NoResep.getText()+"' "+
                                             "  and aturan_pakai.aturan <> ''"+
+                                            "  ORDER BY databarang.nama_brng"+
                                             "";
                 Valid2.MyReportqry("rptItemResep5.jasper","report","::[ Aturan Pakai Obat ]::",query_non_racikan,param, 1);
             }
