@@ -1021,8 +1021,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         cmbStatusSep = new widget.ComboBox();
         jLabel23 = new widget.Label();
         cmbKehadiranPasien = new widget.ComboBox();
-        jLabel25 = new widget.Label();
-        cmbSorting = new widget.ComboBox();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll1 = new widget.ScrollPane();
         tbKasirRalan = new widget.Table();
@@ -5925,7 +5923,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-12-2023" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -5972,7 +5970,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel32.setBounds(176, 10, 20, 23);
 
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-12-2023" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -6285,7 +6283,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-12-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6298,7 +6296,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass8.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-12-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6344,21 +6342,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         cmbKehadiranPasien.setName("cmbKehadiranPasien"); // NOI18N
         cmbKehadiranPasien.setPreferredSize(new java.awt.Dimension(130, 23));
         panelGlass8.add(cmbKehadiranPasien);
-
-        jLabel25.setText("Sorting");
-        jLabel25.setName("jLabel25"); // NOI18N
-        jLabel25.setPreferredSize(new java.awt.Dimension(80, 23));
-        panelGlass8.add(jLabel25);
-
-        cmbSorting.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Terbaru", "Terlama" }));
-        cmbSorting.setName("cmbSorting"); // NOI18N
-        cmbSorting.setPreferredSize(new java.awt.Dimension(130, 23));
-        cmbSorting.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbSortingActionPerformed(evt);
-            }
-        });
-        panelGlass8.add(cmbSorting);
 
         jPanel2.add(panelGlass8, java.awt.BorderLayout.PAGE_START);
 
@@ -13221,10 +13204,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }//GEN-LAST:event_MnRiwayatPerawatanICareNoKartuActionPerformed
 
-    private void cmbSortingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSortingActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbSortingActionPerformed
-
     private void TNoRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TNoRegActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TNoRegActionPerformed
@@ -13565,7 +13544,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private widget.Button btnCariPoli;
     private javax.swing.ButtonGroup buttonGroup1;
     private widget.ComboBox cmbKehadiranPasien;
-    private widget.ComboBox cmbSorting;
     private widget.ComboBox cmbStatus;
     private widget.ComboBox cmbStatusBayar;
     private widget.ComboBox cmbStatusSep;
@@ -13591,7 +13569,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private widget.Label jLabel22;
     private widget.Label jLabel23;
     private widget.Label jLabel24;
-    private widget.Label jLabel25;
     private widget.Label jLabel3;
     private widget.Label jLabel31;
     private widget.Label jLabel32;
@@ -13695,16 +13672,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     tambahan_query_kehadiran_pasien_online = "";
                     System.out.println("tambahan_query_kehadiran_pasien_online semua: "+tambahan_query_kehadiran_pasien_online);
             }
-            switch (cmbSorting.getSelectedItem().toString()) {
-                case "Terbaru":
-                    order = "reg_periksa.no_rawat DESC";
-                    break;
-                case "Terlama":
-                    order = "reg_periksa.no_rawat ASC";
-                    break;
-                default:
-                    throw new AssertionError();
-            }
             String query_tampilkasir="SELECT \n"+
                 "    DISTINCT reg_periksa.no_reg,\n"+
                 "    reg_periksa.no_rawat,\n"+
@@ -13752,7 +13719,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 (semua?"":"and reg_periksa.kd_pj like ? and poliklinik.nm_poli like ? and dokter.nm_dokter like ? and reg_periksa.stts like ? and reg_periksa.status_bayar like ? and "+
                 "(reg_periksa.no_reg like ? or reg_periksa.no_rawat like ? or reg_periksa.tgl_registrasi like ? or reg_periksa.kd_dokter like ? or dokter.nm_dokter like ? or reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ? or poliklinik.nm_poli like ? or "+
                 "reg_periksa.p_jawab like ? or penjab.png_jawab like ? or reg_periksa.almt_pj like ? or reg_periksa.status_bayar like ? or reg_periksa.hubunganpj like ?)")+
-                "order by "+order;
+                " order by "+order;
             pskasir=koneksi.prepareStatement(query_tampilkasir); //group by reg_periksa.no_rawat
             try{
                 pskasir.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
@@ -13777,7 +13744,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     pskasir.setString(19,"%"+TCari.getText().trim()+"%");
                     pskasir.setString(20,"%"+TCari.getText().trim()+"%");
                 }
-                System.out.println("query tampil kasir: "+pskasir);
+//                System.out.println("query tampil kasir: "+pskasir);
                 rskasir=pskasir.executeQuery();
                 while(rskasir.next()){
                     tabModekasir.addRow(new String[] {

@@ -190,7 +190,7 @@ public final class DlgReg extends javax.swing.JDialog {
     private int pilihan=0,i=0,kuota=0,jmlparsial=0,sisahari=0;
     private boolean ceksukses=false;
     private String nosisrute="",aktifkanparsial="no",BASENOREG="",finger="",
-            URUTNOREG="",status="Baru",order="reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc",alamatperujuk="-",aktifjadwal="",IPPRINTERTRACER="",umur="0",sttsumur="Th",
+            URUTNOREG="",status="Baru",order=" reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc",alamatperujuk="-",aktifjadwal="",IPPRINTERTRACER="",umur="0",sttsumur="Th",
             validasiregistrasi=Sequel.cariIsi("select set_validasi_registrasi.wajib_closing_kasir from set_validasi_registrasi"),
             validasicatatan=Sequel.cariIsi("select set_validasi_catatan.tampilkan_catatan from set_validasi_catatan"),norawatdipilih="",normdipilih="",variabel="",cekpasien="";
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
@@ -251,6 +251,9 @@ public final class DlgReg extends javax.swing.JDialog {
 
         this.setLocation(8,1);
         setSize(885,674);
+        
+        System.out.println("Class name: "+this.getClass().getName());
+        System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
 
         tabMode=new DefaultTableModel(null,new Object[]{
             "P",
@@ -9846,62 +9849,62 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }//GEN-LAST:event_MnMeninggalActionPerformed
 
     private void MnUrutNoRawatDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutNoRawatDescActionPerformed
-        order="reg_periksa.no_rawat desc";
+        order=" reg_periksa.no_rawat desc";
         tampil();
     }//GEN-LAST:event_MnUrutNoRawatDescActionPerformed
 
     private void MnUrutNoRawatAscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutNoRawatAscActionPerformed
-        order="reg_periksa.no_rawat asc";
+        order=" reg_periksa.no_rawat asc";
         tampil();
     }//GEN-LAST:event_MnUrutNoRawatAscActionPerformed
 
     private void MnUrutTanggalDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutTanggalDescActionPerformed
-        order="reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc";
+        order=" reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc";
         tampil();
     }//GEN-LAST:event_MnUrutTanggalDescActionPerformed
 
     private void MnUrutTanggalAscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutTanggalAscActionPerformed
-        order="reg_periksa.tgl_registrasi,reg_periksa.jam_reg asc";
+        order=" reg_periksa.tgl_registrasi,reg_periksa.jam_reg asc";
         tampil();
     }//GEN-LAST:event_MnUrutTanggalAscActionPerformed
 
     private void MnUrutDokterDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutDokterDescActionPerformed
-        order="dokter.nm_dokter desc";
+        order=" dokter.nm_dokter desc";
         tampil();
     }//GEN-LAST:event_MnUrutDokterDescActionPerformed
 
     private void MnUrutDokterAscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutDokterAscActionPerformed
-        order="dokter.nm_dokter asc";
+        order=" dokter.nm_dokter asc";
         tampil();
     }//GEN-LAST:event_MnUrutDokterAscActionPerformed
 
     private void MnUrutPoliklinikDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutPoliklinikDescActionPerformed
-        order="poliklinik.nm_poli desc";
+        order=" poliklinik.nm_poli desc";
         tampil();
     }//GEN-LAST:event_MnUrutPoliklinikDescActionPerformed
 
     private void MnUrutPoliklinikAscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutPoliklinikAscActionPerformed
-        order="poliklinik.nm_poli asc";
+        order=" poliklinik.nm_poli asc";
         tampil();
     }//GEN-LAST:event_MnUrutPoliklinikAscActionPerformed
 
     private void MnUrutPenjabDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutPenjabDescActionPerformed
-        order="penjab.png_jawab desc";
+        order=" penjab.png_jawab desc";
         tampil();
     }//GEN-LAST:event_MnUrutPenjabDescActionPerformed
 
     private void MnUrutPenjabAscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutPenjabAscActionPerformed
-        order="penjab.png_jawab asc";
+        order=" penjab.png_jawab asc";
         tampil();
     }//GEN-LAST:event_MnUrutPenjabAscActionPerformed
 
     private void MnUrutStatusDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutStatusDescActionPerformed
-        order="reg_periksa.stts desc";
+        order=" reg_periksa.stts desc";
         tampil();
     }//GEN-LAST:event_MnUrutStatusDescActionPerformed
 
     private void MnUrutStatusAscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutStatusAscActionPerformed
-        order="reg_periksa.stts asc";
+        order=" reg_periksa.stts asc";
         tampil();
     }//GEN-LAST:event_MnUrutStatusAscActionPerformed
 
@@ -10379,62 +10382,62 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }//GEN-LAST:event_ppRiwayat1BtnPrintActionPerformed
 
     private void MnUrutNoRawatDesc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutNoRawatDesc1ActionPerformed
-        order="reg_periksa.no_rawat desc";
+        order=" reg_periksa.no_rawat desc";
         tampil2();
     }//GEN-LAST:event_MnUrutNoRawatDesc1ActionPerformed
 
     private void MnUrutNoRawatAsc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutNoRawatAsc1ActionPerformed
-        order="reg_periksa.no_rawat asc";
+        order=" reg_periksa.no_rawat asc";
         tampil2();
     }//GEN-LAST:event_MnUrutNoRawatAsc1ActionPerformed
 
     private void MnUrutTanggalDesc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutTanggalDesc1ActionPerformed
-        order="reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc";
+        order=" reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc";
         tampil2();
     }//GEN-LAST:event_MnUrutTanggalDesc1ActionPerformed
 
     private void MnUrutTanggalAsc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutTanggalAsc1ActionPerformed
-        order="reg_periksa.tgl_registrasi,reg_periksa.jam_reg asc";
+        order=" reg_periksa.tgl_registrasi,reg_periksa.jam_reg asc";
         tampil2();
     }//GEN-LAST:event_MnUrutTanggalAsc1ActionPerformed
 
     private void MnUrutDokterDesc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutDokterDesc1ActionPerformed
-        order="dokter.nm_dokter desc";
+        order=" okter.nm_dokter desc";
         tampil2();
     }//GEN-LAST:event_MnUrutDokterDesc1ActionPerformed
 
     private void MnUrutDokterAsc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutDokterAsc1ActionPerformed
-        order="dokter.nm_dokter asc";
+        order=" dokter.nm_dokter asc";
         tampil2();
     }//GEN-LAST:event_MnUrutDokterAsc1ActionPerformed
 
     private void MnUrutPoliklinikDesc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutPoliklinikDesc1ActionPerformed
-        order="poliklinik.nm_poli desc";
+        order=" poliklinik.nm_poli desc";
         tampil2();
     }//GEN-LAST:event_MnUrutPoliklinikDesc1ActionPerformed
 
     private void MnUrutPoliklinikAsc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutPoliklinikAsc1ActionPerformed
-        order="poliklinik.nm_poli asc";
+        order=" poliklinik.nm_poli asc";
         tampil2();
     }//GEN-LAST:event_MnUrutPoliklinikAsc1ActionPerformed
 
     private void MnUrutPenjabDesc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutPenjabDesc1ActionPerformed
-        order="penjab.png_jawab desc";
+        order=" penjab.png_jawab desc";
         tampil2();
     }//GEN-LAST:event_MnUrutPenjabDesc1ActionPerformed
 
     private void MnUrutPenjabAsc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutPenjabAsc1ActionPerformed
-        order="penjab.png_jawab asc";
+        order=" penjab.png_jawab asc";
         tampil2();
     }//GEN-LAST:event_MnUrutPenjabAsc1ActionPerformed
 
     private void MnUrutStatusDesc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutStatusDesc1ActionPerformed
-        order="reg_periksa.stts desc";
+        order=" reg_periksa.stts desc";
         tampil2();
     }//GEN-LAST:event_MnUrutStatusDesc1ActionPerformed
 
     private void MnUrutStatusAsc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutStatusAsc1ActionPerformed
-        order="reg_periksa.stts asc";
+        order=" reg_periksa.stts asc";
         tampil2();
     }//GEN-LAST:event_MnUrutStatusAsc1ActionPerformed
 
@@ -10461,12 +10464,12 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }//GEN-LAST:event_MnCetakSuratSehat1ActionPerformed
 
     private void MnUrutRegDesc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutRegDesc1ActionPerformed
-        order="reg_periksa.no_reg desc";
+        order=" reg_periksa.no_reg desc";
         tampil();
     }//GEN-LAST:event_MnUrutRegDesc1ActionPerformed
 
     private void MnUrutRegAsc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutRegAsc1ActionPerformed
-        order="reg_periksa.no_reg asc";
+        order=" reg_periksa.no_reg asc";
         tampil();
     }//GEN-LAST:event_MnUrutRegAsc1ActionPerformed
 
@@ -11212,12 +11215,12 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }//GEN-LAST:event_MnLembarKeluarMasuk2ActionPerformed
 
     private void MnUrutRMDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutRMDescActionPerformed
-        order="pasien.no_rkm_medis desc";
+        order=" pasien.no_rkm_medis desc";
         tampil();
     }//GEN-LAST:event_MnUrutRMDescActionPerformed
 
     private void MnUrutRMAscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUrutRMAscActionPerformed
-        order="pasien.no_rkm_medis asc";
+        order=" pasien.no_rkm_medis asc";
         tampil();
     }//GEN-LAST:event_MnUrutRMAscActionPerformed
 
@@ -13932,22 +13935,98 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         Valid.tabelKosong(tabMode);   
         try {
             if(CrPoli.getText().trim().equals("")&&CrDokter.getText().equals("")&&TCari.equals("")){
-                ps=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                    "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,poliklinik.nm_poli,"+
-                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab,pasien.no_tlp,reg_periksa.stts,reg_periksa.status_poli, "+
-                    "reg_periksa.kd_poli,reg_periksa.kd_pj,reg_periksa.status_bayar from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where  "+
-                    " poliklinik.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi between ? and ? order by "+order); 
+                ps=koneksi.prepareStatement("select "+
+                                            "  reg_periksa.no_reg, "+
+                                            "  reg_periksa.no_rawat, "+
+                                            "  reg_periksa.tgl_registrasi, "+
+                                            "  reg_periksa.jam_reg, "+
+                                            "  reg_periksa.kd_dokter, "+
+                                            "  dokter.nm_dokter, "+
+                                            "  reg_periksa.no_rkm_medis, "+
+                                            "  pasien.nm_pasien, "+
+                                            "  pasien.jk, "+
+                                            "  concat("+
+                                            "    reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur"+
+                                            "  ) as umur, "+
+                                            "  poliklinik.nm_poli, "+
+                                            "  reg_periksa.p_jawab, "+
+                                            "  reg_periksa.almt_pj, "+
+                                            "  reg_periksa.hubunganpj, "+
+                                            "  reg_periksa.biaya_reg, "+
+                                            "  reg_periksa.stts_daftar, "+
+                                            "  penjab.png_jawab, "+
+                                            "  pasien.no_tlp, "+
+                                            "  reg_periksa.stts, "+
+                                            "  reg_periksa.status_poli, "+
+                                            "  reg_periksa.kd_poli, "+
+                                            "  reg_periksa.kd_pj, "+
+                                            "  reg_periksa.status_bayar "+
+                                            "from "+
+                                            "  reg_periksa "+
+                                            "  inner join dokter on reg_periksa.kd_dokter = dokter.kd_dokter "+
+                                            "  inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis "+
+                                            "  inner join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli "+
+                                            "  inner join penjab on reg_periksa.kd_pj = penjab.kd_pj "+
+                                            "where "+
+                                            "  poliklinik.kd_poli <> 'IGDK' "+
+                                            "  and reg_periksa.tgl_registrasi between ? "+
+                                            "  and ? "+
+                                            "order by"+order); 
             }else{
-                ps=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                    "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,poliklinik.nm_poli,"+
-                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab,pasien.no_tlp,reg_periksa.stts,reg_periksa.status_poli, "+
-                    "reg_periksa.kd_poli,reg_periksa.kd_pj,reg_periksa.status_bayar from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where  "+
-                    " poliklinik.kd_poli<>'IGDK' and poliklinik.nm_poli like ? and  dokter.nm_dokter like ? and reg_periksa.tgl_registrasi between ? and ? and  "+
-                    "(reg_periksa.no_reg like ? or reg_periksa.no_rawat like ? or reg_periksa.tgl_registrasi like ? or reg_periksa.kd_dokter like ? or "+
-                    " dokter.nm_dokter like ? or reg_periksa.no_rkm_medis like ? or reg_periksa.stts_daftar like ? or pasien.nm_pasien like ? or "+
-                    " poliklinik.nm_poli like ? or reg_periksa.p_jawab like ? or reg_periksa.almt_pj like ? or reg_periksa.hubunganpj like ? or penjab.png_jawab like ?) order by "+order); 
+                ps=koneksi.prepareStatement("select "+
+                                            "  reg_periksa.no_reg, "+
+                                            "  reg_periksa.no_rawat, "+
+                                            "  reg_periksa.tgl_registrasi, "+
+                                            "  reg_periksa.jam_reg, "+
+                                            "  reg_periksa.kd_dokter, "+
+                                            "  dokter.nm_dokter, "+
+                                            "  reg_periksa.no_rkm_medis, "+
+                                            "  pasien.nm_pasien, "+
+                                            "  pasien.jk, "+
+                                            "  concat("+
+                                            "    reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur"+
+                                            "  ) as umur, "+
+                                            "  poliklinik.nm_poli, "+
+                                            "  reg_periksa.p_jawab, "+
+                                            "  reg_periksa.almt_pj, "+
+                                            "  reg_periksa.hubunganpj, "+
+                                            "  reg_periksa.biaya_reg, "+
+                                            "  reg_periksa.stts_daftar, "+
+                                            "  penjab.png_jawab, "+
+                                            "  pasien.no_tlp, "+
+                                            "  reg_periksa.stts, "+
+                                            "  reg_periksa.status_poli, "+
+                                            "  reg_periksa.kd_poli, "+
+                                            "  reg_periksa.kd_pj, "+
+                                            "  reg_periksa.status_bayar "+
+                                            "from "+
+                                            "  reg_periksa "+
+                                            "  inner join dokter on reg_periksa.kd_dokter = dokter.kd_dokter "+
+                                            "  inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis "+
+                                            "  inner join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli "+
+                                            "  inner join penjab on reg_periksa.kd_pj = penjab.kd_pj "+
+                                            "where "+
+                                            "  poliklinik.kd_poli <> 'IGDK' "+
+                                            "  and poliklinik.nm_poli like ? "+
+                                            "  and dokter.nm_dokter like ? "+
+                                            "  and reg_periksa.tgl_registrasi between ? "+
+                                            "  and ? "+
+                                            "  and ("+
+                                            "    reg_periksa.no_reg like ? "+
+                                            "    or reg_periksa.no_rawat like ? "+
+                                            "    or reg_periksa.tgl_registrasi like ? "+
+                                            "    or reg_periksa.kd_dokter like ? "+
+                                            "    or dokter.nm_dokter like ? "+
+                                            "    or reg_periksa.no_rkm_medis like ? "+
+                                            "    or reg_periksa.stts_daftar like ? "+
+                                            "    or pasien.nm_pasien like ? "+
+                                            "    or poliklinik.nm_poli like ? "+
+                                            "    or reg_periksa.p_jawab like ? "+
+                                            "    or reg_periksa.almt_pj like ? "+
+                                            "    or reg_periksa.hubunganpj like ? "+
+                                            "    or penjab.png_jawab like ?"+
+                                            "  ) "+
+                                            "order by"+order); 
             }
                 
             try{  
@@ -13999,25 +14078,25 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     }
                     tabMode.addRow(new Object[] {
                         false,
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11),
+                        rs.getString("no_reg"),
+                        rs.getString("no_rawat"),
+                        rs.getString("tgl_registrasi"),
+                        rs.getString("jam_reg"),
+                        rs.getString("kd_dokter"),
+                        rs.getString("nm_dokter"),
+                        rs.getString("no_rkm_medis"),
+                        rs.getString("nm_pasien"),
+                        rs.getString("jk"),
+                        rs.getString("umur"),
+                        rs.getString("nm_poli"),
                         ket_hadir,
                         ket_sep,
-                        rs.getString(17),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getString(14),
-                        Valid.SetAngka(rs.getDouble(15)),
-                        rs.getString(16),
+                        rs.getString("png_jawab"),
+                        rs.getString("p_jawab"),
+                        rs.getString("almt_pj"),
+                        rs.getString("hubunganpj"),
+                        Valid.SetAngka(rs.getDouble("biaya_reg")),
+                        rs.getString("stts_daftar"),
                         rs.getString("no_tlp"),
                         rs.getString("stts"),
                         rs.getString("status_poli"),
@@ -14047,16 +14126,56 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private void tampil2() {
         Valid.tabelKosong(tabMode2);   
         try {
-            ps=koneksi.prepareStatement("select reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                    "rujukan_internal_poli.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,poliklinik.nm_poli,"+
-                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.stts_daftar,penjab.png_jawab,pasien.no_tlp,reg_periksa.stts,rujukan_internal_poli.kd_poli,reg_periksa.kd_pj "+
-                    "from reg_periksa inner join rujukan_internal_poli on rujukan_internal_poli.no_rawat=reg_periksa.no_rawat inner join dokter on rujukan_internal_poli.kd_dokter=dokter.kd_dokter "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join poliklinik on rujukan_internal_poli.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                    "where  "+
-                    " poliklinik.nm_poli like ? and  dokter.nm_dokter like ? and reg_periksa.tgl_registrasi between ? and ? and "+
-                    "(reg_periksa.no_reg like ? or reg_periksa.no_rawat like ? or reg_periksa.tgl_registrasi like ? or rujukan_internal_poli.kd_dokter like ? or "+
-                    " dokter.nm_dokter like ? or reg_periksa.no_rkm_medis like ? or reg_periksa.stts_daftar like ? or pasien.nm_pasien like ? or "+
-                    " poliklinik.nm_poli like ? or reg_periksa.p_jawab like ? or reg_periksa.almt_pj like ? or reg_periksa.hubunganpj like ? or penjab.png_jawab like ?) order by "+order); 
+            ps=koneksi.prepareStatement("select "+
+                                        "  reg_periksa.no_rawat, "+
+                                        "  reg_periksa.tgl_registrasi, "+
+                                        "  reg_periksa.jam_reg, "+
+                                        "  rujukan_internal_poli.kd_dokter, "+
+                                        "  dokter.nm_dokter, "+
+                                        "  reg_periksa.no_rkm_medis, "+
+                                        "  pasien.nm_pasien, "+
+                                        "  pasien.jk, "+
+                                        "  concat("+
+                                        "    reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur"+
+                                        "  ) as umur, "+
+                                        "  poliklinik.nm_poli, "+
+                                        "  reg_periksa.p_jawab, "+
+                                        "  reg_periksa.almt_pj, "+
+                                        "  reg_periksa.hubunganpj, "+
+                                        "  reg_periksa.stts_daftar, "+
+                                        "  penjab.png_jawab, "+
+                                        "  pasien.no_tlp, "+
+                                        "  reg_periksa.stts, "+
+                                        "  rujukan_internal_poli.kd_poli, "+
+                                        "  reg_periksa.kd_pj "+
+                                        "from "+
+                                        "  reg_periksa "+
+                                        "  inner join rujukan_internal_poli on rujukan_internal_poli.no_rawat = reg_periksa.no_rawat "+
+                                        "  inner join dokter on rujukan_internal_poli.kd_dokter = dokter.kd_dokter "+
+                                        "  inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis "+
+                                        "  inner join poliklinik on rujukan_internal_poli.kd_poli = poliklinik.kd_poli "+
+                                        "  inner join penjab on reg_periksa.kd_pj = penjab.kd_pj "+
+                                        "where "+
+                                        "  poliklinik.nm_poli like ? "+
+                                        "  and dokter.nm_dokter like ? "+
+                                        "  and reg_periksa.tgl_registrasi between ? "+
+                                        "  and ? "+
+                                        "  and ("+
+                                        "    reg_periksa.no_reg like ? "+
+                                        "    or reg_periksa.no_rawat like ? "+
+                                        "    or reg_periksa.tgl_registrasi like ? "+
+                                        "    or rujukan_internal_poli.kd_dokter like ? "+
+                                        "    or dokter.nm_dokter like ? "+
+                                        "    or reg_periksa.no_rkm_medis like ? "+
+                                        "    or reg_periksa.stts_daftar like ? "+
+                                        "    or pasien.nm_pasien like ? "+
+                                        "    or poliklinik.nm_poli like ? "+
+                                        "    or reg_periksa.p_jawab like ? "+
+                                        "    or reg_periksa.almt_pj like ? "+
+                                        "    or reg_periksa.hubunganpj like ? "+
+                                        "    or penjab.png_jawab like ?"+
+                                        "  ) "+
+                                        "order by"+order); 
             try{  
                 ps.setString(1,"%"+CrPoli.getText()+"%");
                 ps.setString(2,"%"+CrDokter.getText()+"%");
@@ -14172,14 +14291,14 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             TNoRM.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString());            
             isCekPasien();
             TPoli.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),11).toString());          
-            nmpnj.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),12).toString());
-            TPngJwb.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),13).toString());
-            TAlmt.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),14).toString());
-            THbngn.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),15).toString());
-            TBiaya.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),16).toString());
-            TStatus.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),17).toString());  
-            kdpoli.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),21).toString()); 
-            kdpnj.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),22).toString()); 
+            nmpnj.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),14).toString());
+            TPngJwb.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),15).toString());
+            TAlmt.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),16).toString());
+            THbngn.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),17).toString());
+            TBiaya.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),18).toString());
+            TStatus.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),21).toString());  
+            kdpoli.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),23).toString()); 
+            kdpnj.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),24).toString()); 
             Sequel.cariIsi("select rujuk_masuk.perujuk from rujuk_masuk where rujuk_masuk.no_rawat=?", AsalRujukan,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
             TNoRw.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
             TNoReg.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),1).toString());    

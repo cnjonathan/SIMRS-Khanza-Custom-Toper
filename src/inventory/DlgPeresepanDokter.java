@@ -59,7 +59,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private double x=0,y=0,kenaikan=0,ttl=0,ppnobat=0,jumlahracik=0,persenracik=0,kapasitasracik=0;
     private int i=0,z=0,row2=0,r=0;
     private boolean ubah=false,copy=false,sukses=true;
-    private boolean[] pilih; 
+//    private boolean[] pilih;
+    private String[] pilih;
     private double[] jumlah,harga,beli,stok,kapasitas,p1,p2;
     private String[] no,kodebarang,namabarang,kodesatuan,kandungan,letakbarang,namajenis,aturan,industri,komposisi,noRMPasienArray;
     public DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
@@ -79,7 +80,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
         tabModeResep=new DefaultTableModel(null,new Object[]{
-                "K","Jumlah","Kode Barang","Nama Barang","Satuan","Komposisi",
+                "","Jumlah","Kode Barang","Nama Barang","Satuan","Komposisi",
                 "Harga(Rp)","Jenis Obat","Aturan Pakai","I.F.","H.Beli","Stok"
             }){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -90,7 +91,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                 java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class, 
                 java.lang.Object.class,java.lang.Object.class,java.lang.Double.class,java.lang.Double.class
              };
@@ -109,7 +110,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         for (i = 0; i < 12; i++) {
             TableColumn column = tbResep.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(20);
+                column.setPreferredWidth(0);
             }else if(i==1){
                 column.setPreferredWidth(45);
             }else if(i==2){
@@ -219,7 +220,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         for (i = 0; i < 16; i++) {
             TableColumn column = tbDetailResepObatRacikan.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(25);
+                column.setPreferredWidth(0);
             }else if(i==1){
                 column.setPreferredWidth(75);
             }else if(i==2){
@@ -1622,7 +1623,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }    
         
         pilih=null;
-        pilih=new boolean[z]; 
+        pilih=new String[z]; 
         jumlah=null;
         jumlah=new double[z];
         harga=null;
@@ -1648,7 +1649,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         z=0;        
         for(i=0;i<tbResep.getRowCount();i++){
             if(!tbResep.getValueAt(i,1).toString().equals("")){
-                pilih[z]=Boolean.parseBoolean(tbResep.getValueAt(i,0).toString());                
+//                pilih[z]=Boolean.parseBoolean(tbResep.getValueAt(i,0).toString());
+                  pilih[z]="";               
                 try {
                     jumlah[z]=Double.parseDouble(tbResep.getValueAt(i,1).toString());
                 } catch (Exception e) {
@@ -1731,7 +1733,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     psresepasuransi.setString(6,"%"+TCari.getText().trim()+"%");
                     rsobat=psresepasuransi.executeQuery();
                     while(rsobat.next()){
-                        tabModeResep.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
+                        tabModeResep.addRow(new Object[] {"","",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                            rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("harga"),100),
                            rsobat.getString("nama"),"",rsobat.getString("nama_industri"),
                            rsobat.getDouble("h_beli"),rsobat.getDouble("stok")
@@ -1790,7 +1792,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     rsobat=psresep.executeQuery();
                     if(Jeniskelas.getSelectedItem().equals("Karyawan")){
                         while(rsobat.next()){
-                            tabModeResep.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
+                            tabModeResep.addRow(new Object[] {"","",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("karyawan"),100),
                                rsobat.getString("nama"),"",rsobat.getString("nama_industri"),
                                rsobat.getDouble("h_beli"),rsobat.getDouble("stok")
@@ -1798,7 +1800,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         }
                     }else if(Jeniskelas.getSelectedItem().equals("Rawat Jalan")){
                         while(rsobat.next()){
-                            tabModeResep.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
+                            tabModeResep.addRow(new Object[] {"","",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("ralan"),100),
                                rsobat.getString("nama"),"",rsobat.getString("nama_industri"),
                                rsobat.getDouble("h_beli"),rsobat.getDouble("stok")
@@ -1806,7 +1808,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         }
                     }else if(Jeniskelas.getSelectedItem().equals("Beli Luar")){
                         while(rsobat.next()){
-                            tabModeResep.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
+                            tabModeResep.addRow(new Object[] {"","",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("beliluar"),100),
                                rsobat.getString("nama"),"",rsobat.getString("nama_industri"),
                                rsobat.getDouble("h_beli"),rsobat.getDouble("stok")
@@ -1814,7 +1816,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         }
                     }else if(Jeniskelas.getSelectedItem().equals("Utama/BPJS")){
                         while(rsobat.next()){
-                            tabModeResep.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
+                            tabModeResep.addRow(new Object[] {"","",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("utama"),100),
                                rsobat.getString("nama"),"",rsobat.getString("nama_industri"),
                                rsobat.getDouble("h_beli"),rsobat.getDouble("stok")
@@ -1822,7 +1824,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         }
                     }else if(Jeniskelas.getSelectedItem().equals("Kelas 1")){
                         while(rsobat.next()){
-                            tabModeResep.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
+                            tabModeResep.addRow(new Object[] {"","",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("kelas1"),100),
                                rsobat.getString("nama"),"",rsobat.getString("nama_industri"),
                                rsobat.getDouble("h_beli"),rsobat.getDouble("stok")
@@ -1830,7 +1832,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         }
                     }else if(Jeniskelas.getSelectedItem().equals("Kelas 2")){
                         while(rsobat.next()){
-                            tabModeResep.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
+                            tabModeResep.addRow(new Object[] {"","",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("kelas2"),100),
                                rsobat.getString("nama"),"",rsobat.getString("nama_industri"),
                                rsobat.getDouble("h_beli"),rsobat.getDouble("stok")
@@ -1838,7 +1840,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         }
                     }else if(Jeniskelas.getSelectedItem().equals("Kelas 3")){
                         while(rsobat.next()){
-                            tabModeResep.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
+                            tabModeResep.addRow(new Object[] {"","",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("kelas3"),100),
                                rsobat.getString("nama"),"",rsobat.getString("nama_industri"),
                                rsobat.getDouble("h_beli"),rsobat.getDouble("stok")
@@ -1846,7 +1848,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         }
                     }else if(Jeniskelas.getSelectedItem().equals("VIP")){
                         while(rsobat.next()){
-                            tabModeResep.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
+                            tabModeResep.addRow(new Object[] {"","",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("vip"),100),
                                rsobat.getString("nama"),"",rsobat.getString("nama_industri"),
                                rsobat.getDouble("h_beli"),rsobat.getDouble("stok")
@@ -1854,7 +1856,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         }
                     }else if(Jeniskelas.getSelectedItem().equals("VVIP")){
                         while(rsobat.next()){
-                            tabModeResep.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
+                            tabModeResep.addRow(new Object[] {"","",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("vvip"),100),
                                rsobat.getString("nama"),"",rsobat.getString("nama_industri"),
                                rsobat.getDouble("h_beli"),rsobat.getDouble("stok")
@@ -2026,7 +2028,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }    
         
         pilih=null;
-        pilih=new boolean[z]; 
+//        pilih=new boolean[z]; 
+        pilih=new String[z]; 
         jumlah=null;
         jumlah=new double[z];
         harga=null;
