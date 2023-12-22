@@ -236,13 +236,39 @@ public class frmUtama extends javax.swing.JFrame {
         //kirim encounter
         try{
             ps=koneksi.prepareStatement(
-                   "select reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.no_rawat,pasien.nm_pasien,pasien.no_ktp,"+
-                   "pegawai.nama,pegawai.no_ktp as ktpdokter,poliklinik.nm_poli,satu_sehat_mapping_lokasi_ralan.id_lokasi_satusehat,"+
-                   "reg_periksa.status_lanjut,DATE_FORMAT(tagihan_sadewa.tgl_bayar,'%Y-%m-%dT%H:%i:%s+07:00') as pulang,ifnull(satu_sehat_encounter.id_encounter,'') as id_encounter "+
-                   "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join pegawai on pegawai.nik=reg_periksa.kd_dokter "+
-                   "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join satu_sehat_mapping_lokasi_ralan on satu_sehat_mapping_lokasi_ralan.kd_poli=poliklinik.kd_poli "+
-                   "inner join tagihan_sadewa on tagihan_sadewa.no_nota=reg_periksa.no_rawat left join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
-                   "where reg_periksa.tgl_registrasi between ? and ? order by reg_periksa.tgl_registrasi,reg_periksa.jam_reg");
+                   "select "+
+                    "  reg_periksa.tgl_registrasi, "+
+                    "  reg_periksa.jam_reg, "+
+                    "  reg_periksa.no_rawat, "+
+                    "  pasien.nm_pasien, "+
+                    "  pasien.no_ktp, "+
+                    "  pegawai.nama, "+
+                    "  pegawai.no_ktp as ktpdokter, "+
+                    "  poliklinik.nm_poli, "+
+                    "  satu_sehat_mapping_lokasi_ralan.id_lokasi_satusehat, "+
+                    "  reg_periksa.status_lanjut, "+
+                    "  DATE_FORMAT("+
+                    "    tagihan_sadewa.tgl_bayar, '%Y-%m-%dT%H:%i:%s+07:00'"+
+                    "  ) as pulang, "+
+                    "  ifnull("+
+                    "    satu_sehat_encounter.id_encounter, "+
+                    "    ''"+
+                    "  ) as id_encounter "+
+                    "from "+
+                    "  reg_periksa "+
+                    "  inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis "+
+                    "  inner join pegawai on pegawai.nik = reg_periksa.kd_dokter "+
+                    "  inner join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli "+
+                    "  inner join satu_sehat_mapping_lokasi_ralan on satu_sehat_mapping_lokasi_ralan.kd_poli = poliklinik.kd_poli "+
+                    "  inner join tagihan_sadewa on tagihan_sadewa.no_nota = reg_periksa.no_rawat "+
+                    "  left join satu_sehat_encounter on satu_sehat_encounter.no_rawat = reg_periksa.no_rawat "+
+                    "where "+
+                    "  reg_periksa.tgl_registrasi between ? "+
+                    "  and ? "+
+                    "order by "+
+                    "  reg_periksa.tgl_registrasi, "+
+                    "  reg_periksa.jam_reg"+
+                    "");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());

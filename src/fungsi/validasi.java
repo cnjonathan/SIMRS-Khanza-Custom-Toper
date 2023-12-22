@@ -149,6 +149,7 @@ public final class validasi {
     }
     
     public void autoNomer3(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
+        System.out.println("sql autonomer 3"+sql);
         try {
             ps=connect.prepareStatement(sql);
             try{   
@@ -166,7 +167,7 @@ public final class validasi {
                 teks.setText(strAwal+s1+s);
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
+//                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(rs != null){
                     rs.close();

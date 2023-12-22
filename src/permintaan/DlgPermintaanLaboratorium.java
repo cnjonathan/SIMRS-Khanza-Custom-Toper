@@ -2800,7 +2800,13 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     
     private void autoNomor3() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_labmb.noorder,4),signed)),0) from permintaan_labmb where permintaan_labmb.tgl_permintaan='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","MB"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaanMB);           
+        String tanggal_lab = Valid.SetTgl((String) Tanggal.getSelectedItem());
+        if (tanggal_lab.isBlank()) {
+            System.out.println("tanggal lab: kosong");
+        }else{
+            Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_labmb.noorder,4),signed)),0) from permintaan_labmb where permintaan_labmb.tgl_permintaan='"+tanggal_lab+"' ","MB"+tanggal_lab.replaceAll("-",""),4,TNoPermintaanMB);           
+            System.out.println("tanggal lab: "+tanggal_lab);
+        }
     }
     
     private void tampiltarif2() {          
