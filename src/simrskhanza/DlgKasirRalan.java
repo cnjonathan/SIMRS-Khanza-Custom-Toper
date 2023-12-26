@@ -10286,11 +10286,28 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString());
                 param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString()+"\nID "+(finger.equals("")?tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString():finger)+"\n"+Valid.SetTgl3(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),12).toString()));  
                 Valid.MyReportqry("rptSuratSehat.jasper","report","::[ Surat Keterangan Sehat ]::",
-                    "select reg_periksa.no_rawat,dokter.nm_dokter,pasien.tgl_lahir,pasien.jk,DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y')as tgl_registrasi,"+
-                    " pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.pekerjaan,pasien.alamat "+
-                    " from reg_periksa inner join pasien inner join dokter "+
-                    " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter  "+
-                    "where pasien.no_rkm_medis='"+TNoRMCari.getText()+"' ",param);
+                    "select "+
+                    "  reg_periksa.no_rawat, "+
+                    "  dokter.nm_dokter, "+
+                    "  pasien.tgl_lahir, "+
+                    "  pasien.jk, "+
+                    "  DATE_FORMAT("+
+                    "    reg_periksa.tgl_registrasi, '%d-%m-%Y'"+
+                    "  ) as tgl_registrasi, "+
+                    "  pasien.nm_pasien, "+
+                    "  pasien.jk, "+
+                    "  concat("+
+                    "    reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur"+
+                    "  ) as umur, "+
+                    "  pasien.pekerjaan, "+
+                    "  pasien.alamat "+
+                    "from "+
+                    "  reg_periksa "+
+                    "  inner join pasien "+
+                    "  inner join dokter on reg_periksa.no_rkm_medis = pasien.no_rkm_medis "+
+                    "  and reg_periksa.kd_dokter = dokter.kd_dokter "+
+                    "where "+
+                    "  pasien.no_rkm_medis = '"+TNoRMCari.getText()+"' ",param);
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
