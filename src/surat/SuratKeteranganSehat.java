@@ -1428,6 +1428,11 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
     
     public void setNoRm(String norwt, Date tgl1, Date tgl2) {
         TNoRw.setText(norwt);
+        Bb.setText(Sequel.cariIsi("select berat from pemeriksaan_ralan where no_rawat=?",norwt));
+        Tb.setText(Sequel.cariIsi("select tinggi from pemeriksaan_ralan where no_rawat=?",norwt));
+        Tensi.setText(Sequel.cariIsi("select tensi from pemeriksaan_ralan where no_rawat=?",norwt));
+        Nadi.setText(Sequel.cariIsi("select nadi from pemeriksaan_ralan where no_rawat=?",norwt));
+        Suhu.setText(Sequel.cariIsi("select suhu_tubuh from pemeriksaan_ralan where no_rawat=?",norwt));
         TCari.setText(norwt);
         DTPCari1.setDate(tgl1);
         DTPCari2.setDate(tgl2);
