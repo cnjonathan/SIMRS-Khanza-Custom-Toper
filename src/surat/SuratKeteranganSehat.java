@@ -1094,7 +1094,8 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
                                 "  surat_keterangan_sehat.nadi, "+
                                 "  surat_keterangan_sehat.bmi, "+
                                 "  surat_keterangan_sehat.butawarna, "+
-                                "  surat_keterangan_sehat.keperluan, "+
+                                "  reg_periksa.no_rkm_medis,surat_keterangan_sehat.keperluan, "+
+                                "  DATE_FORMAT(pasien.tgl_lahir, '%d-%m-%Y') as tgl_lahir, "+
                                 "  surat_keterangan_sehat.kesimpulan, "+
                                 "  dokter.nm_dokter, "+
                                 "  pasien.jk, "+
