@@ -7430,7 +7430,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     }                    
                 }else if(i==4){
 //                    if(MnKamarInap.isEnabled()==true){
-//                        MnKamarInapActionPerformed(null);
+                        MnCetakSuratSehat2ActionPerformed(null);
 //                    }                    
                     System.out.println("weeelkkk❤️");
                 }

@@ -1098,16 +1098,16 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
                                 "  DATE_FORMAT(pasien.tgl_lahir, '%d-%m-%Y') as tgl_lahir, "+
                                 "  surat_keterangan_sehat.kesimpulan, "+
                                 "  dokter.nm_dokter, "+
-                                "  pasien.jk, "+
+                                "  UCASE(pasien.jk) AS jk, "+
                                 "  reg_periksa.kd_dokter, "+
                                 "  pasien.nm_pasien, "+
                                 "  concat("+
                                 "    reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur"+
                                 "  ) as umur, "+
-                                "  concat("+
+                                "  UCASE(concat("+
                                 "    pasien.alamat, ', ', kelurahan.nm_kel, "+
                                 "    ', ', kecamatan.nm_kec, ', ', kabupaten.nm_kab"+
-                                "  ) as alamat "+
+                                "  )) as alamat "+
                                 "from "+
                                 "  surat_keterangan_sehat "+
                                 "  inner join reg_periksa "+
