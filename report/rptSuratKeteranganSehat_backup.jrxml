@@ -386,7 +386,7 @@
 				<textElement>
 					<font fontName="Tahoma" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{keperluan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["......."+$F{keperluan} + "......."]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="351" y="493" width="192" height="19" uuid="816320f6-7c29-4933-b34e-e68305a2256d"/>
@@ -520,11 +520,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="12" isUnderline="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{nm_dokter}.equals("dr. SATRIYO FAJAR WICAKSONO") ? "NIP.  19870328 201101 1 004" :
-
-( $F{nm_dokter}.equals("dr. KASYFI HARTATI") ? "NIP. 19681010 19903 2 007" : 
-	
-($F{nm_dokter}.equals("dr. MAIA THALIA GIANI") ? "NIP. 19950808 202203 2 014" : "")))]]></textFieldExpression>
+				<textFieldExpression><![CDATA["NIP.  19870328 201101 1 004"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="437" y="533" width="117" height="22" uuid="711bb00f-95b9-4e3c-8771-832b2aeb6262"/>
@@ -532,7 +528,7 @@
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[RM. 28.1/Rev.2/X/2024]]></text>
+				<text><![CDATA[RM. 28.1/Rev.2/X/2023]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="2" y="70" width="556" height="21" uuid="e88c4563-e38a-40a7-9d3f-d8c7a399dba1"/>
