@@ -5843,15 +5843,15 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                         if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
                             if(akses.getkode().equals("Admin Utama")){
                                 Sequel.queryu("delete from pemeriksaan_ralan where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
-                                        "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
-                                        "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
+                                        "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,5).toString()+
+                                        "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,6).toString()+"' ");
                                 tabModePemeriksaan.removeRow(i);
                                 i--;
                             }else{
                                 if(akses.getkode().equals(tbPemeriksaan.getValueAt(i,24).toString())){
                                     Sequel.queryu("delete from pemeriksaan_ralan where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
-                                            "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
-                                            "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
+                                            "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,5).toString()+
+                                            "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,6).toString()+"' ");
                                     tabModePemeriksaan.removeRow(i);
                                     i--;
                                 }else{

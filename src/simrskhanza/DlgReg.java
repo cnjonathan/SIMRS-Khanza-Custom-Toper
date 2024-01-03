@@ -6965,6 +6965,7 @@ public final class DlgReg extends javax.swing.JDialog {
                                 TBiaya.getText(),
                                 THbngn.getText(),
                                 TStatus.getText(),
+                                //tabMode.getValueAt(TStatus.getText(),tbPetugas.getSelectedRow(),19);
                                 kdpnj.getText(),
                                 umur,
                                 sttsumur,
@@ -14313,7 +14314,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             TAlmt.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),16).toString());
             THbngn.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),17).toString());
             TBiaya.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),18).toString());
-            TStatus.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),21).toString());  
+            TStatus.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),19).toString());  
             kdpoli.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),23).toString()); 
             kdpnj.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),24).toString()); 
             Sequel.cariIsi("select rujuk_masuk.perujuk from rujuk_masuk where rujuk_masuk.no_rawat=?", AsalRujukan,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
