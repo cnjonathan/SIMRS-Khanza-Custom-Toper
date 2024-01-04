@@ -7602,7 +7602,7 @@ private void MnSudahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }else {
                 Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Sudah'");
                 if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Sudah",tbKasirRalan.getSelectedRow(),10);
+                    tabModekasir.setValueAt("Sudah",tbKasirRalan.getSelectedRow(),13);
                 }
             }
             
@@ -7618,7 +7618,7 @@ private void MnBelumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
            }else {
                 Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Belum'");
                 if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Belum",tbKasirRalan.getSelectedRow(),10);
+                    tabModekasir.setValueAt("Belum",tbKasirRalan.getSelectedRow(),13);
                 }
            }
             
@@ -8063,7 +8063,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             }else {
                 Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Batal',biaya_reg='0'");
                 if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Batal",tbKasirRalan.getSelectedRow(),10);
+                    tabModekasir.setValueAt("Batal",tbKasirRalan.getSelectedRow(),13);
                 }
             }
         }
@@ -8645,7 +8645,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Masuk Ranap',now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',now()","status='Masuk Ranap',ranap=now()","no_rawat='"+TNoRw.getText()+"'");
             Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Dirawat'");
             if(tbKasirRalan.getSelectedRow()>-1){
-                tabModekasir.setValueAt("Dirawat",tbKasirRalan.getSelectedRow(),10);
+                tabModekasir.setValueAt("Dirawat",tbKasirRalan.getSelectedRow(),13);
             }
         }
     }//GEN-LAST:event_ppBerkasRanapBtnPrintActionPerformed
@@ -8702,7 +8702,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Dirujuk'");
                 MnRujukActionPerformed(evt);
                 if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Dirujuk",tbKasirRalan.getSelectedRow(),10);
+                    tabModekasir.setValueAt("Dirujuk",tbKasirRalan.getSelectedRow(),13);
                 }
             }
         }
@@ -8720,7 +8720,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     MnKamarInapActionPerformed(null);
                 }
                 if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Dirawat",tbKasirRalan.getSelectedRow(),10);
+                    tabModekasir.setValueAt("Dirawat",tbKasirRalan.getSelectedRow(),13);
                 }
             }            
         }
@@ -8738,11 +8738,11 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 dlgPasienMati.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 dlgPasienMati.setLocationRelativeTo(internalFrame1);
                 dlgPasienMati.emptTeks();
-                dlgPasienMati.setNoRm(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),3).toString()); 
+                dlgPasienMati.setNoRm(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),3).toString(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),4).toString()); 
                 dlgPasienMati.isCek();
                 dlgPasienMati.setVisible(true);                
                 if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Meninggal",tbKasirRalan.getSelectedRow(),10);
+                    tabModekasir.setValueAt("Meninggal",tbKasirRalan.getSelectedRow(),13);
                 }
             }
             
@@ -9588,7 +9588,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }else{
             Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"status_poli='Baru'");
             if(tbKasirRalan.getSelectedRow()>-1){
-                tabModekasir.setValueAt("Baru",tbKasirRalan.getSelectedRow(),16);
+                tabModekasir.setValueAt("Baru",tbKasirRalan.getSelectedRow(),18);
             }
         }
     }//GEN-LAST:event_MnStatusBaruActionPerformed
@@ -9599,7 +9599,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }else{
             Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"status_poli='Lama'");
             if(tbKasirRalan.getSelectedRow()>-1){
-                tabModekasir.setValueAt("Lama",tbKasirRalan.getSelectedRow(),16);
+                tabModekasir.setValueAt("Lama",tbKasirRalan.getSelectedRow(),18);
             }
         }
     }//GEN-LAST:event_MnStatusLamaActionPerformed
@@ -10143,7 +10143,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             }else {
                 Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Pulang Paksa'");
                 if(tbKasirRalan.getSelectedRow()>-1){
-                    tabModekasir.setValueAt("Pulang Paksa",tbKasirRalan.getSelectedRow(),10);
+                    tabModekasir.setValueAt("Pulang Paksa",tbKasirRalan.getSelectedRow(),13);
                 }
             }
 
@@ -10242,7 +10242,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             Sequel.menyimpan("mutasi_berkas","'"+TNoRw.getText()+"','Sudah Diterima',now(),now(),'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00'","status='Sudah Diterima',diterima=now()","no_rawat='"+TNoRw.getText()+"'");
             Valid.editTable(tabModekasir,"reg_periksa","no_rawat",TNoRw,"stts='Berkas Diterima'");
             if(tbKasirRalan.getSelectedRow()>-1){
-                tabModekasir.setValueAt("Berkas Diterima",tbKasirRalan.getSelectedRow(),10);
+                tabModekasir.setValueAt("Berkas Diterima",tbKasirRalan.getSelectedRow(),13);
             }
         }
     }//GEN-LAST:event_ppBerkasDIterimaBtnPrintActionPerformed
