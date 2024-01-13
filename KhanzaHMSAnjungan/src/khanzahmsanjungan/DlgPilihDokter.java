@@ -20,11 +20,15 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.jfree.util.Log;
 
 /**
  *
@@ -40,6 +44,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
     private Calendar cal = Calendar.getInstance();
     private int day = cal.get(Calendar.DAY_OF_WEEK);
     private String hari="",aktifjadwal="";
+    Integer sisahari, cek_rujukan_expired = 0;
 
     /** Creates new form DlgAdmin
      * @param parent
@@ -82,6 +87,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
     private void initComponents() {
 
         LblKdPoli = new component.Label();
+        LblPenjab = new component.Label();
         jPanel1 = new component.Panel();
         jPanel2 = new component.Panel();
         jLabel2 = new component.Label();
@@ -100,13 +106,18 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         TCari = new component.TextBox();
         btnCari = new component.Button();
         btnSemua = new component.Button();
-        jLabel4 = new component.Label();
         btnKeluar = new component.Button();
+        jLabel4 = new component.Label();
 
         LblKdPoli.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LblKdPoli.setText("Norm");
         LblKdPoli.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         LblKdPoli.setPreferredSize(new java.awt.Dimension(20, 14));
+
+        LblPenjab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LblPenjab.setText("Norm");
+        LblPenjab.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        LblPenjab.setPreferredSize(new java.awt.Dimension(20, 14));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
@@ -228,7 +239,8 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         jLabel3.setPreferredSize(new java.awt.Dimension(110, 30));
         jPanel4.add(jLabel3);
 
-        TCari.setPreferredSize(new java.awt.Dimension(320, 30));
+        TCari.setMinimumSize(new java.awt.Dimension(3, 20));
+        TCari.setPreferredSize(new java.awt.Dimension(260, 30));
         TCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TCariActionPerformed(evt);
@@ -279,9 +291,6 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         });
         jPanel4.add(btnSemua);
 
-        jLabel4.setPreferredSize(new java.awt.Dimension(50, 23));
-        jPanel4.add(jLabel4);
-
         btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         btnKeluar.setMnemonic('K');
         btnKeluar.setToolTipText("Alt+K");
@@ -300,6 +309,9 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         });
         jPanel4.add(btnKeluar);
 
+        jLabel4.setPreferredSize(new java.awt.Dimension(50, 23));
+        jPanel4.add(jLabel4);
+
         jPanel1.add(jPanel4, java.awt.BorderLayout.PAGE_END);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -311,7 +323,8 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         if(tabmode.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
-                    if(aktifjadwal.equals("aktif")){
+//                    if(aktifjadwal.equals("aktif")){
+                    if(aktifjadwal == "aktif"){
                         if(Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_dokter='"+tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString()+"' and reg_periksa.tgl_registrasi=CURRENT_DATE() ")>=Integer.parseInt(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),2).toString())){
                             JOptionPane.showMessageDialog(null,"Eiiits, Kuota registrasi penuh..!!!");
                             TCari.requestFocus();
@@ -319,15 +332,25 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                             DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                             pilih.setSize(this.getWidth(),this.getHeight());
                             pilih.setLocationRelativeTo(this);
-                            pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
+//                            try {
+                                pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan");
+//                            } catch (SQLException ex) {
+//                                Logger.getLogger(DlgPilihDokter.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
                             pilih.setVisible(true);
+                            dispose();
                         }                    
                     }else{
                         DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                         pilih.setSize(this.getWidth(),this.getHeight());
                         pilih.setLocationRelativeTo(this);
-                        pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
+//                        try {
+                            pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan");
+//                        } catch (SQLException ex) {
+//                            Logger.getLogger(DlgPilihDokter.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
                         pilih.setVisible(true);
+                        dispose();
                     } 
                 } catch (java.lang.NullPointerException e) {
                 }
@@ -337,27 +360,124 @@ public class DlgPilihDokter extends javax.swing.JDialog {
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
         if(tabmode.getRowCount()!=0){
-            try {
-                if(aktifjadwal.equals("aktif")){
+            System.out.println("line 362 aktifjadwal: "+aktifjadwal);
+            System.out.println("LblNoRm: "+LblNoRm.getText()+", LblKdPoli: "+LblKdPoli.getText()+", kddokter: "+tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
+                if(aktifjadwal == "aktif"){
+                    System.out.println("line 367 aktifjadwal:"+aktifjadwal);
                     if(Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_dokter='"+tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString()+"' and reg_periksa.tgl_registrasi=CURRENT_DATE() ")>=Integer.parseInt(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),2).toString())){
                         JOptionPane.showMessageDialog(null,"Eiiits, Kuota registrasi penuh..!!!");
                         TCari.requestFocus();
+                        System.out.println("line 371");
                     }else{
                         DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                         pilih.setSize(this.getWidth(),this.getHeight());
                         pilih.setLocationRelativeTo(this);
-                        pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
+                        pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan");
                         pilih.setVisible(true);
                     }                    
                 }else{
                     DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                     pilih.setSize(this.getWidth(),this.getHeight());
                     pilih.setLocationRelativeTo(this);
-                    pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
-                    pilih.setVisible(true);
-                } 
-            } catch (java.lang.NullPointerException e) {
-            }
+                    System.out.println("LblNoRm.getText() "+LblNoRm.getText());
+                    System.out.println("LblKdPoli.getText() "+LblKdPoli.getText());
+                    System.out.println("tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString() "+tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
+                    System.out.println("LblPenjab.getText() "+LblPenjab.getText());
+                    pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan");
+                    
+                    DlgRegistrasi regis=new DlgRegistrasi(null,true);
+                    regis.setSize(this.getWidth(),this.getHeight());
+                    regis.setLocationRelativeTo(this);
+                    
+                    switch (LblPenjab.getText()) {
+                        case "bpjs":
+                            try {
+                                //#################
+                                //||   URGENT    ||
+                                //#################
+                                String query_cek_rujukan_pertama_bridging_sep = "SELECT \n"+
+                                        "b.nomr, \n"+
+                                        "b.nama_pasien, \n"+
+                                        "MIN(REPLACE(b.no_rawat,'/','')) AS no_rawat_min, \n"+
+                                        "b.no_rawat AS no_rawat, \n"+
+                                        "b.no_rujukan, \n"+
+                                        "b.kdpolitujuan, \n"+
+                                        "m.kd_poli_rs, \n"+
+                                        "m.kd_poli_bpjs, \n"+
+                                        "b.nmpolitujuan, \n"+
+                                        "(90 - DATEDIFF(CURRENT_DATE,b.tglrujukan)) AS sisahari \n"+
+                                        "FROM \n"+
+                                        "bridging_sep b \n"+
+                                        "LEFT JOIN \n"+
+                                        "maping_poli_bpjs m ON b.kdpolitujuan = m.kd_poli_bpjs \n"+
+                                        "WHERE \n"+
+                                        "b.nomr='"+LblNoRm.getText()+"' AND  \n"+
+                                        "b.jnspelayanan = '2' AND \n"+
+                                        "b.no_rujukan <> '' AND \n"+
+                                        "(90 - DATEDIFF(CURRENT_DATE,b.tglrujukan)) > 1";
+                                
+                                String query_count = "SELECT \n"+
+                                                        "COUNT(*) AS jml_data,\n"+
+                                                        "(90 - DATEDIFF(CURRENT_DATE,b.tglrujukan)) AS sisahari \n"+
+                                                        "FROM \n"+
+                                                        "bridging_sep b \n"+
+                                                        "WHERE \n"+
+                                                        "b.nomr='"+LblNoRm.getText()+"' AND  \n"+
+                                                        "b.jnspelayanan = '2' AND \n"+
+                                                        "b.no_rujukan <> '' AND \n"+
+                                                        "(90 - DATEDIFF(CURRENT_DATE,b.tglrujukan)) > 1;";
+
+                                String query_maping_kd_poli = "SELECT maping_poli_bpjs.kd_poli_bpjs FROM maping_poli_bpjs WHERE maping_poli_bpjs.kd_poli_rs = '"+LblKdPoli.getText()+"'";
+                                String maping_kd_poli = Sequel.cariIsi(query_maping_kd_poli);
+                                System.out.println("String query_maping_kd_poli: "+query_maping_kd_poli);
+                                System.out.println("query_cek_rujukan_pertama_bridging_sep: "+query_cek_rujukan_pertama_bridging_sep);
+
+                                //###########################################################
+                                //||                                                       ||
+                                //||tujuan poli dari db booking_registrasi dicocokan dengan||
+                                //||rujukan pertama di db bridging_sep supaya poli rujukan ||
+                                //||  yang dari BPJS = Poli tujuan sesuai booking pasien   ||
+                                //||                                                       ||
+                                //###########################################################
+                                PreparedStatement ps_rujukan_bridging_sep = koneksi.prepareStatement(query_cek_rujukan_pertama_bridging_sep);
+                                ResultSet rs_rujukan_bridging_sep = ps_rujukan_bridging_sep.executeQuery();
+                                PreparedStatement ps_query_count = koneksi.prepareStatement(query_count);
+                                ResultSet rs_query_count = ps_query_count.executeQuery();
+                                rs_query_count.next();
+                                System.out.println("rs_rujukan_bridging_sep: "+rs_query_count.getString("jml_data"));
+                                int jml_data = Integer.parseInt(rs_query_count.getString("jml_data"));
+                                rs_rujukan_bridging_sep.next();
+                                if(jml_data > 0){
+                                    System.out.println("line 1260");
+                                    if(rs_rujukan_bridging_sep.getString("kd_poli_bpjs").equals(maping_kd_poli)){
+                                        sisahari = rs_rujukan_bridging_sep.getInt("sisahari");
+                                        if(sisahari <= 0){
+                                            JOptionPane.showMessageDialog(null,"Rujukan anda sudah expired, \n"+
+                                                    "silahkan konfirmasi ke petugas registrasi.");
+                                        }else if(sisahari > 1){
+                                            pilih.setVisible(true);
+                                        }
+                                    }else{
+                                        JOptionPane.showMessageDialog(null,"Tujuan Poliklinik anda tidak sama dengan Poli Rujukan, \n"+
+                                                "silahkan konfirmasi ke petugas registrasi.");
+                                    }
+                                }else{
+                                    System.out.println("line 1277");
+                                    JOptionPane.showMessageDialog(null,"Anda tidak punya rujukan, \n"+
+                                            "silahkan konfirmasi ke petugas registrasi.");
+                                }
+                            } catch (SQLException ex) {
+                                System.out.println("asw");
+                                Logger.getLogger(DlgRegistrasi.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            break;
+                        case "umum":
+                            pilih.setVisible(true);
+                            break;
+                        default:
+                            throw new AssertionError();
+                    }
+                }
         }
     }//GEN-LAST:event_tbAdminMouseClicked
 
@@ -427,6 +547,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
     private component.Label LblNama;
     private component.Label LblNamaPoli;
     private component.Label LblNoRm;
+    private component.Label LblPenjab;
     private component.TextBox TCari;
     private component.Button btnCari;
     private component.Button btnKeluar;
@@ -494,10 +615,11 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         }
     }
     
-    public void setPasien(String norm,String kodepoli){
+    public void setPasien(String norm,String kodepoli, String penjab){
         LblNoRm.setText(norm);
         LblNama.setText(Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=?", norm));
         LblKdPoli.setText(kodepoli);
         LblNamaPoli.setText(Sequel.cariIsi("select poliklinik.nm_poli from poliklinik where poliklinik.kd_poli=?", kodepoli));
+        LblPenjab.setText(penjab);
     }
 }

@@ -15,7 +15,8 @@ public class KhanzaHMSAnjungan {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new frmUtama().setVisible(true);
+          new welcomeScreen().setVisible(true);
+//        new frmUtama().setVisible(true);
     }
     
 }

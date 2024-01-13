@@ -5197,7 +5197,7 @@ public final class InhealthCekEligibilitas extends javax.swing.JDialog {
             if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
                     new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSEP.getSelectedItem()+""),TanggalSEP.getSelectedItem().toString().substring(11,19),
                     kddokter.getText(),TNo.getText(),"IGDK",Saudara.getText(),AlamatPj.getText()+", "+KelurahanPj.getText()+", "+KecamatanPj.getText()+", "+KabupatenPj.getText(),
-                    klg,Sequel.cariIsi("select poliklinik.registrasilama from poliklinik where poliklinik.kd_poli='IGDK'"),"Belum","Lama","Ralan",Kdpnj.getText(),umur,sttsumur,"Belum Bayar",status
+                    klg,Sequel.cariIsi("select registrasilama from poliklinik where kd_poli='IGDK'"),"Belum","Lama","Ralan",Kdpnj.getText(),umur,sttsumur,"Belum Bayar",status
                 })==true){
                     UpdateUmur();
                     Sequel.menyimpan2("rujuk_masuk","'"+TNoRw.getText()+"','"+NmPpkRujukan.getText()+"','"+Kabupaten.getText()+"','"+NoRujukan.getText()+"','0','"+NmPPK.getText()+"','"+KdPenyakit.getText()+"','-','-','"+NoBalasan.getText()+"'","No.Rujuk");                                     
@@ -5258,11 +5258,11 @@ public final class InhealthCekEligibilitas extends javax.swing.JDialog {
         }    
 
                         
-        Sequel.queryu4("insert ignore into kelurahan values(?,?)",2,new String[]{"0",Kelurahan.getText()});
-        Sequel.queryu4("insert ignore into kecamatan values(?,?)",2,new String[]{"0",Kecamatan.getText()});
-        Sequel.queryu4("insert ignore into kabupaten values(?,?)",2,new String[]{"0",Kabupaten.getText()});
+        Sequel.queryu4("insert ignore into kelurahan values(?,?)",2,new String[]{"0",Kelurahan.getText().replaceAll("KELURAHAN","-")});
+        Sequel.queryu4("insert ignore into kecamatan values(?,?)",2,new String[]{"0",Kecamatan.getText().replaceAll("KECAMATAN","-")});
+        Sequel.queryu4("insert ignore into kabupaten values(?,?)",2,new String[]{"0",Kabupaten.getText().replaceAll("KABUPATEN","-")});
         Sequel.queryu4("insert into penjab values(?,?)",2,new String[]{Kdpnj.getText(),nmpnj.getText()});
-        Sequel.queryu4("insert ignore into propinsi values(?,?)",2,new String[]{"0",Propinsi.getText()});
+        Sequel.queryu4("insert ignore into propinsi values(?,?)",2,new String[]{"0",Propinsi.getText().replaceAll("PROPINSI","-")});
         
         if(statuspasien.equals("baru")){
             autoNomor();
@@ -5272,10 +5272,10 @@ public final class InhealthCekEligibilitas extends javax.swing.JDialog {
                     Alamat.getText().replaceAll("ALAMAT",""),CMbGd.getSelectedItem().toString(),Pekerjaan.getText(),CmbStts.getSelectedItem().toString(),cmbAgama.getSelectedItem().toString(),
                     DTPDaftar.getSelectedItem().toString().substring(6,10)+"-"+DTPDaftar.getSelectedItem().toString().substring(3,5)+"-"+DTPDaftar.getSelectedItem().toString().substring(0,2),
                     TTlp.getText(),TUmur.getText(),CMbPnd.getSelectedItem().toString(),klg,Saudara.getText(),Kdpnj.getText(),TNoPeserta.getText(),
-                    kel.tampil3(Kelurahan.getText()),kec.tampil3(Kecamatan.getText()),
-                    kab.tampil3(Kabupaten.getText()),PekerjaanPj.getText(),AlamatPj.getText(),KelurahanPj.getText(),KecamatanPj.getText(),
+                    kel.tampil3(Kelurahan.getText().replaceAll("KELURAHAN","-")),kec.tampil3(Kecamatan.getText().replaceAll("KECAMATAN","-")),
+                    kab.tampil3(Kabupaten.getText().replaceAll("KABUPATEN","-")),PekerjaanPj.getText(),AlamatPj.getText(),KelurahanPj.getText(),KecamatanPj.getText(),
                     KabupatenPj.getText(),kdperusahaan.getText(),kdsuku.getText(),kdbahasa.getText(),kdcacat.getText(),EMail.getText(),NIP.getText(),
-                    propin.tampil3(Propinsi.getText()),PropinsiPj.getText()
+                    propin.tampil3(Propinsi.getText().replaceAll("PROPINSI","-")),PropinsiPj.getText()
                 })==true){
                     if(chkTNI.isSelected()==true){
                         Sequel.menyimpan2("pasien_tni","?,?,?,?,?","Data",5,new String[]{
@@ -5309,11 +5309,11 @@ public final class InhealthCekEligibilitas extends javax.swing.JDialog {
                     Alamat.getText(),CMbGd.getSelectedItem().toString(),Pekerjaan.getText(),CmbStts.getSelectedItem().toString(),cmbAgama.getSelectedItem().toString(),
                     DTPDaftar.getSelectedItem().toString().substring(6,10)+"-"+DTPDaftar.getSelectedItem().toString().substring(3,5)+"-"+DTPDaftar.getSelectedItem().toString().substring(0,2),
                     TTlp.getText(),TUmur.getText(),CMbPnd.getSelectedItem().toString(),klg,Saudara.getText(),Kdpnj.getText(),TNoPeserta.getText(),
-                    kel.tampil3(Kelurahan.getText()),
-                    kec.tampil3(Kecamatan.getText()),
-                    kab.tampil3(Kabupaten.getText()),NmIbu.getText(),PekerjaanPj.getText(),AlamatPj.getText(),
+                    kel.tampil3(Kelurahan.getText().replaceAll("KELURAHAN","-")),
+                    kec.tampil3(Kecamatan.getText().replaceAll("KECAMATAN","-")),
+                    kab.tampil3(Kabupaten.getText().replaceAll("KABUPATEN","-")),NmIbu.getText(),PekerjaanPj.getText(),AlamatPj.getText(),
                     KelurahanPj.getText(),KecamatanPj.getText(),KabupatenPj.getText(),kdperusahaan.getText(),kdsuku.getText(),
-                    kdbahasa.getText(),kdcacat.getText(),EMail.getText(),NIP.getText(),propin.tampil3(Propinsi.getText()),
+                    kdbahasa.getText(),kdcacat.getText(),EMail.getText(),NIP.getText(),propin.tampil3(Propinsi.getText().replaceAll("PROPINSI","-")),
                     PropinsiPj.getText(),TNo.getText()
             });   
 

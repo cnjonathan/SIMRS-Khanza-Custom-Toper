@@ -80,7 +80,6 @@
                   <Color PropertyName="color" blue="eb" green="f5" red="f0" type="rgb"/>
                 </LineBorder>
               </Border>
-              <Font PropertyName="font" name="Tahoma" size="11" style="0"/>
               <Color PropertyName="color" blue="32" green="32" red="32" type="rgb"/>
             </TitledBorder>
           </Border>
@@ -257,9 +256,6 @@
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="32" green="32" red="32" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0"/>
             </Property>
             <Property name="name" type="java.lang.String" value="TabRawat" noResource="true"/>
           </Properties>
@@ -468,7 +464,7 @@
                         </Component>
                         <Component class="widget.Label" name="jLabel9">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value=":"/>
+                            <Property name="text" type="java.lang.String" value="Riwayat Penggunaan Obat :"/>
                             <Property name="name" type="java.lang.String" value="jLabel9" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -527,6 +523,9 @@
                         <Component class="widget.TextBox" name="Alergi">
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="11" style="1"/>
+                            </Property>
                             <Property name="name" type="java.lang.String" value="Alergi" noResource="true"/>
                           </Properties>
                           <Events>
@@ -583,6 +582,9 @@
                                 </Property>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="1"/>
+                                </Property>
                                 <Property name="name" type="java.lang.String" value="KeluhanUtama" noResource="true"/>
                               </Properties>
                               <Events>
@@ -628,6 +630,9 @@
                                 </Property>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="1"/>
+                                </Property>
                                 <Property name="name" type="java.lang.String" value="RPD" noResource="true"/>
                               </Properties>
                               <Events>
@@ -673,6 +678,9 @@
                                 </Property>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="1"/>
+                                </Property>
                                 <Property name="name" type="java.lang.String" value="RPO" noResource="true"/>
                               </Properties>
                               <Events>
@@ -745,7 +753,7 @@
                         </Component>
                         <Component class="widget.Label" name="jLabel33">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value=":"/>
+                            <Property name="text" type="java.lang.String" value="Keluhan Utama :"/>
                             <Property name="name" type="java.lang.String" value="jLabel33" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -919,7 +927,7 @@
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="03-08-2023 19:58:19"/>
+                                <StringItem index="0" value="26-07-2023 07:58:23"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -1951,6 +1959,9 @@
                         <Component class="widget.TextBox" name="BB">
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="11" style="1"/>
+                            </Property>
                             <Property name="name" type="java.lang.String" value="BB" noResource="true"/>
                           </Properties>
                           <Events>
@@ -1989,6 +2000,9 @@
                         <Component class="widget.TextBox" name="Nadi">
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="11" style="1"/>
+                            </Property>
                             <Property name="name" type="java.lang.String" value="Nadi" noResource="true"/>
                           </Properties>
                           <Events>
@@ -2025,6 +2039,9 @@
                         <Component class="widget.TextBox" name="Suhu">
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="11" style="1"/>
+                            </Property>
                             <Property name="name" type="java.lang.String" value="Suhu" noResource="true"/>
                           </Properties>
                           <Events>
@@ -2038,7 +2055,7 @@
                         </Component>
                         <Component class="widget.Label" name="jLabel22">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value=":"/>
+                            <Property name="text" type="java.lang.String" value="TD :"/>
                             <Property name="name" type="java.lang.String" value="jLabel22" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -2050,6 +2067,9 @@
                         <Component class="widget.TextBox" name="TD">
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="11" style="1"/>
+                            </Property>
                             <Property name="name" type="java.lang.String" value="TD" noResource="true"/>
                           </Properties>
                           <Events>
@@ -2100,6 +2120,9 @@
                         <Component class="widget.TextBox" name="RR">
                           <Properties>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="11" style="1"/>
+                            </Property>
                             <Property name="name" type="java.lang.String" value="RR" noResource="true"/>
                           </Properties>
                           <Events>
@@ -2149,7 +2172,7 @@
                         </Component>
                         <Component class="widget.Label" name="jLabel29">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value=":"/>
+                            <Property name="text" type="java.lang.String" value="Nyeri :"/>
                             <Property name="name" type="java.lang.String" value="jLabel29" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -2731,54 +2754,6 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="widget.Label" name="jLabel36">
-                          <Properties>
-                            <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="Keluhan Utama"/>
-                            <Property name="name" type="java.lang.String" value="jLabel36" noResource="true"/>
-                          </Properties>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="44" y="90" width="90" height="23"/>
-                            </Constraint>
-                          </Constraints>
-                        </Component>
-                        <Component class="widget.Label" name="jLabel14">
-                          <Properties>
-                            <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="Riwayat Penggunaan Obat"/>
-                            <Property name="name" type="java.lang.String" value="jLabel14" noResource="true"/>
-                          </Properties>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="44" y="170" width="150" height="23"/>
-                            </Constraint>
-                          </Constraints>
-                        </Component>
-                        <Component class="widget.Label" name="jLabel24">
-                          <Properties>
-                            <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="TD"/>
-                            <Property name="name" type="java.lang.String" value="jLabel24" noResource="true"/>
-                          </Properties>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="44" y="240" width="30" height="23"/>
-                            </Constraint>
-                          </Constraints>
-                        </Component>
-                        <Component class="widget.Label" name="jLabel39">
-                          <Properties>
-                            <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="Nyeri"/>
-                            <Property name="name" type="java.lang.String" value="jLabel39" noResource="true"/>
-                          </Properties>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="44" y="270" width="50" height="23"/>
-                            </Constraint>
-                          </Constraints>
-                        </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -2870,7 +2845,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="1">
-                            <StringItem index="0" value="03-08-2023"/>
+                            <StringItem index="0" value="26-07-2023"/>
                           </StringArray>
                         </Property>
                         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -2898,7 +2873,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="1">
-                            <StringItem index="0" value="03-08-2023"/>
+                            <StringItem index="0" value="26-07-2023"/>
                           </StringArray>
                         </Property>
                         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>

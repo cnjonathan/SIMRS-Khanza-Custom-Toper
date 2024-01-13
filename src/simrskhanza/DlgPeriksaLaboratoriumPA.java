@@ -88,7 +88,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         setSize(885,674);
 
         tabMode=new DefaultTableModel(null,new Object[]{
-                "Pemeriksaan","Diagnosa Klinis","Makroskopik","Mikroskopik","Kesimpulan","Kesan","Kode Jenis"
+                "Pemeriksaan","Diagnosa Klinis","Makroskopik","Mikroskopik","Kesimpulan","Kesan","Kode Jenis","Nomor Sampel"
             }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                     boolean a = true;
@@ -99,7 +99,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
              }
              Class[] types = new Class[] {
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
+                java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -113,7 +113,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         tbPemeriksaan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbPemeriksaan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 7; i++) {
+        for (i = 0; i < 8; i++) {
             TableColumn column = tbPemeriksaan.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
@@ -130,6 +130,8 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
             }else if(i==6){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);                
+            }else if(i==7){
+                column.setPreferredWidth(150);               
             }
         }
         
@@ -1962,9 +1964,9 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             if(sukses==true){
                 for(i=0;i<tbPemeriksaan.getRowCount();i++){ 
                     if(!tbPemeriksaan.getValueAt(i,2).toString().equals("")){  
-                        if(Sequel.menyimpantf2("detail_periksa_labpa","?,?,?,?,?,?,?,?,?","Pemeriksaan Lab",9,new String[]{
+                        if(Sequel.menyimpantf2("detail_periksa_labpa","?,?,?,?,?,?,?,?,?,?","Pemeriksaan Lab",10,new String[]{
                                 TNoRw.getText(),tbPemeriksaan.getValueAt(i,6).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                                tbPemeriksaan.getValueAt(i,1).toString(),tbPemeriksaan.getValueAt(i,2).toString(),tbPemeriksaan.getValueAt(i,3).toString(),tbPemeriksaan.getValueAt(i,4).toString(),tbPemeriksaan.getValueAt(i,5).toString()
+                                tbPemeriksaan.getValueAt(i,1).toString(),tbPemeriksaan.getValueAt(i,2).toString(),tbPemeriksaan.getValueAt(i,3).toString(),tbPemeriksaan.getValueAt(i,4).toString(),tbPemeriksaan.getValueAt(i,5).toString(),tbPemeriksaan.getValueAt(i,7).toString()
                             })==false){
                             sukses=false;
                         }

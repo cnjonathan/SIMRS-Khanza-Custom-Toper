@@ -162,7 +162,7 @@ public final class validasi {
                 teks.setText(strAwal+s1+s);
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(rs != null){
                     rs.close();
@@ -195,7 +195,7 @@ public final class validasi {
                 teks.setText((strAwal+s1+s).substring(4,6)+(strAwal+s1+s).substring(2,4)+(strAwal+s1+s).substring(0,2));
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(rs != null){
                     rs.close();
@@ -228,7 +228,7 @@ public final class validasi {
                 teks.setText((strAwal+s1+s).substring(2,4)+(strAwal+s1+s).substring(0,2)+(strAwal+s1+s).substring(4,6));
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(rs != null){
                     rs.close();
@@ -261,7 +261,7 @@ public final class validasi {
                 teks.setText(s1+s+strAwal);
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(rs != null){
                     rs.close();
@@ -292,7 +292,7 @@ public final class validasi {
                 auto=strAwal+s1+s;             
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(rs != null){
                     rs.close();
@@ -328,7 +328,7 @@ public final class validasi {
                 auto=strAwal+s1+s;
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(rs != null){
                     rs.close();
