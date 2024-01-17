@@ -134,8 +134,6 @@ public class DlgPembelian extends javax.swing.JDialog {
                 column.setPreferredWidth(85);
             }else if(i==13){
                 column.setPreferredWidth(70);
-            }else if(i==25){
-                column.setPreferredWidth(30);
             }else{
                 column.setMinWidth(0);
                 column.setMaxWidth(0);                   
@@ -1200,7 +1198,6 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 tampil2();
             }else{
                 tampil();
-                tampil2();
             }
         } catch (Exception e) {
         }
@@ -1384,7 +1381,6 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-        tampil2();
         LSubtotal.setText("0");
         LPotongan.setText("0");
         LTotal2.setText("0");
@@ -1480,6 +1476,7 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     private void tampil() {
         try{
+            Valid.tabelKosong(tabMode);
             file=new File("./cache/penerimaanobat.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
@@ -1490,9 +1487,27 @@ private void btnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 " where databarang.status='1' order by databarang.nama_brng");
             try {
                 rs=ps.executeQuery();
-                while(rs.next()){
-                    iyem=iyem+"{\"SatuanBeli\":\""+rs.getString(6)+"\",\"KodeBarang\":\""+rs.getString(1)+"\",\"NamaBarang\":\""+rs.getString(2).replaceAll("\"","")+"\",\"Satuan\":\""+rs.getString(3)+"\",\"Kadaluwarsa\":\""+rs.getString(5)+"\",\"Harga\":\""+rs.getString(8)+"\",\"Isi\":\""+rs.getString(7)+"\"},";
-                }                                          
+                if(aktifkanbatch.equals("yes")){
+                    while(rs.next()){
+                        tabMode.addRow(new Object[]{
+                            "",rs.getString(6),rs.getString(1),
+                            rs.getString(2),rs.getString(3),true,
+                            rs.getString(5),rs.getDouble(8),0,0,0,0,0,"",
+                            0,0,0,0,0,0,0,0,0,0,0,rs.getDouble(7),1,0
+                        });
+                        iyem=iyem+"{\"SatuanBeli\":\""+rs.getString(6)+"\",\"KodeBarang\":\""+rs.getString(1)+"\",\"NamaBarang\":\""+rs.getString(2).replaceAll("\"","")+"\",\"Satuan\":\""+rs.getString(3)+"\",\"Kadaluwarsa\":\""+rs.getString(5)+"\",\"Harga\":\""+rs.getString(8)+"\",\"Isi\":\""+rs.getString(7)+"\"},";
+                    } 
+                }else{
+                    while(rs.next()){
+                        tabMode.addRow(new Object[]{
+                            "",rs.getString(6),rs.getString(1),
+                            rs.getString(2),rs.getString(3),false,
+                            rs.getString(5),rs.getDouble(8),0,0,0,0,0,"",
+                            0,0,0,0,0,0,0,0,0,0,0,rs.getDouble(7),1,0
+                        });
+                        iyem=iyem+"{\"SatuanBeli\":\""+rs.getString(6)+"\",\"KodeBarang\":\""+rs.getString(1)+"\",\"NamaBarang\":\""+rs.getString(2).replaceAll("\"","")+"\",\"Satuan\":\""+rs.getString(3)+"\",\"Kadaluwarsa\":\""+rs.getString(5)+"\",\"Harga\":\""+rs.getString(8)+"\",\"Isi\":\""+rs.getString(7)+"\"},";
+                    } 
+                }                                               
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             } finally{

@@ -117,7 +117,6 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
         Kesimpulan.setDocument(new batasInput((int)100).getKata(Kesimpulan));
         HasilYangDidapat.setDocument(new batasInput((int)100).getKata(HasilYangDidapat));
         Rekomendasi.setDocument(new batasInput((int)100).getKata(Rekomendasi));
-        TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -235,7 +234,6 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
         Kesimpulan = new widget.TextBox();
         jLabel20 = new widget.Label();
         Rekomendasi = new widget.TextBox();
-        jLabel22 = new widget.Label();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -424,7 +422,7 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-08-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2022" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -438,7 +436,7 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-08-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2022" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -499,7 +497,7 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
 
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(192, 264));
+        PanelInput.setPreferredSize(new java.awt.Dimension(192, 274));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         FormInput.setBackground(new java.awt.Color(250, 255, 245));
@@ -534,7 +532,7 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
         TPasien.setBounds(336, 10, 240, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-08-2023" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2022" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -650,7 +648,7 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
         FormInput.add(TglLahir);
         TglLahir.setBounds(689, 10, 100, 23);
 
-        jLabel12.setText(":");
+        jLabel12.setText("Diagnosis Fungsional :");
         jLabel12.setName("jLabel12"); // NOI18N
         FormInput.add(jLabel12);
         jLabel12.setBounds(0, 70, 125, 23);
@@ -691,16 +689,15 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
         FormInput.add(DiagnosisMedis);
         DiagnosisMedis.setBounds(129, 100, 660, 23);
 
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("INSTRUMEN UJI FUNGSI/PROSEDUR KFR :");
         jLabel14.setName("jLabel14"); // NOI18N
         FormInput.add(jLabel14);
-        jLabel14.setBounds(15, 130, 219, 23);
+        jLabel14.setBounds(0, 130, 219, 23);
 
         jLabel15.setText("Hasil Yang Didapat :");
         jLabel15.setName("jLabel15"); // NOI18N
         FormInput.add(jLabel15);
-        jLabel15.setBounds(0, 150, 135, 23);
+        jLabel15.setBounds(0, 160, 114, 23);
 
         HasilYangDidapat.setFocusTraversalPolicyProvider(true);
         HasilYangDidapat.setName("HasilYangDidapat"); // NOI18N
@@ -710,12 +707,12 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
             }
         });
         FormInput.add(HasilYangDidapat);
-        HasilYangDidapat.setBounds(139, 150, 650, 23);
+        HasilYangDidapat.setBounds(118, 160, 671, 23);
 
         jLabel17.setText("Kesimpulan :");
         jLabel17.setName("jLabel17"); // NOI18N
         FormInput.add(jLabel17);
-        jLabel17.setBounds(0, 180, 135, 23);
+        jLabel17.setBounds(0, 190, 78, 23);
 
         Kesimpulan.setFocusTraversalPolicyProvider(true);
         Kesimpulan.setName("Kesimpulan"); // NOI18N
@@ -725,12 +722,12 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
             }
         });
         FormInput.add(Kesimpulan);
-        Kesimpulan.setBounds(139, 180, 650, 23);
+        Kesimpulan.setBounds(82, 190, 707, 23);
 
         jLabel20.setText("Rekomendasi :");
         jLabel20.setName("jLabel20"); // NOI18N
         FormInput.add(jLabel20);
-        jLabel20.setBounds(0, 210, 135, 23);
+        jLabel20.setBounds(0, 220, 87, 23);
 
         Rekomendasi.setFocusTraversalPolicyProvider(true);
         Rekomendasi.setName("Rekomendasi"); // NOI18N
@@ -740,13 +737,7 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
             }
         });
         FormInput.add(Rekomendasi);
-        Rekomendasi.setBounds(139, 210, 650, 23);
-
-        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel22.setText("Diagnosis Fungsional");
-        jLabel22.setName("jLabel22"); // NOI18N
-        FormInput.add(jLabel22);
-        jLabel22.setBounds(15, 70, 125, 23);
+        Rekomendasi.setBounds(91, 220, 698, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -1173,7 +1164,6 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
     private widget.Label jLabel19;
     private widget.Label jLabel20;
     private widget.Label jLabel21;
-    private widget.Label jLabel22;
     private widget.Label jLabel4;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
@@ -1304,7 +1294,7 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH,264));
+            PanelInput.setPreferredSize(new Dimension(WIDTH,274));
             FormInput.setVisible(true);      
             ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){           

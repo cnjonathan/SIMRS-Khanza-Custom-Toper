@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.5.1  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="311" pageHeight="595" orientation="Landscape" columnWidth="277" leftMargin="17" rightMargin="17" topMargin="17" bottomMargin="17" uuid="f71eddde-54e0-4c95-bb40-f4df24903e9d">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
@@ -330,7 +330,7 @@
 				<text><![CDATA[No. Rawat]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="106" y="112" width="65" height="19" uuid="23d77141-2d57-4ccb-ba7c-01397c0cc3be"/>
+				<reportElement mode="Transparent" x="100" y="112" width="71" height="19" uuid="23d77141-2d57-4ccb-ba7c-01397c0cc3be"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font fontName="Tahoma" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -385,6 +385,27 @@
 					<pen lineWidth="2.0" lineStyle="Double"/>
 				</graphicElement>
 			</line>
+			<textField>
+				<reportElement x="217" y="90" width="57" height="9" uuid="3ab6b99a-c1ea-4862-a9fa-19e2eb6e5584"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{norm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="217" y="101" width="57" height="9" uuid="0201b0de-6db5-49eb-9a4b-57c7f114b714"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{temp36}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="217" y="79" width="57" height="9" uuid="b464722c-ff5d-4861-9369-da28475e4b2a"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{temp35}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

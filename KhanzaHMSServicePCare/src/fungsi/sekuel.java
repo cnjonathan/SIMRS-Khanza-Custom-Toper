@@ -845,7 +845,7 @@ public final class sekuel {
                 ps.executeQuery();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(ps != null){
                     ps.close();
@@ -864,7 +864,7 @@ public final class sekuel {
                 ps.executeUpdate(); 
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(ps != null){
                     ps.close();
@@ -887,7 +887,7 @@ public final class sekuel {
              }catch(Exception e){
                 bool=false;
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");                
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());                
              }finally{
                 if(ps != null){
                     ps.close();
@@ -909,7 +909,7 @@ public final class sekuel {
                 ps.executeUpdate();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(ps != null){
                     ps.close();

@@ -1234,27 +1234,25 @@ public class koneksiDB {
         }
         return var;
     }
-    
-    // tambahan
-    public static String ADDANTRIANAPIMOBILEJKN(){
-        try{
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var=prop.getProperty("ADDANTRIANAPIMOBILEJKN");
-        }catch(Exception e){
-            var=""; 
-        }
-        return var;
-    }
-    
-    public static String JADIKANBOOKINGSURATKONTROLAPIBPJS(){
-        try{
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var=prop.getProperty("JADIKANBOOKINGSURATKONTROLAPIBPJS");
-        }catch(Exception e){
-            var=""; 
-        }
-        return var;
-    }
+//    public static String ADDANTRIANAPIMOBILEJKN(){
+//        try{
+//            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+//            var=prop.getProperty("ADDANTRIANAPIMOBILEJKN");
+//        }catch(Exception e){
+//            var=""; 
+//        }
+//        return var;
+//    }
+//    
+//    public static String JADIKANBOOKINGSURATKONTROLAPIBPJS(){
+//        try{
+//            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+//            var=prop.getProperty("JADIKANBOOKINGSURATKONTROLAPIBPJS");
+//        }catch(Exception e){
+//            var=""; 
+//        }
+//        return var;
+//    }
     
     public static String URLAPIICARE(){
         try{
@@ -1296,15 +1294,46 @@ public class koneksiDB {
         return var;
     }
     
-    public static String URLAPISMARTCLAIM(){
-        try{
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var=prop.getProperty("URLAPISMARTCLAIM");
-        }catch(Exception e){
-            var=""; 
-        }
-        return var;
-    }
+//    public static String URLAPISMARTCLAIM(){
+//        try{
+//            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+//            var=prop.getProperty("URLAPISMARTCLAIM");
+//        }catch(Exception e){
+//            var=""; 
+//        }
+//        return var;
+//    }
+//    
+//    public static String SECRETKEYAPISMARTCLAIM(){
+//        try{
+//            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+//            var=EnkripsiAES.decrypt(prop.getProperty("SECRETKEYAPISMARTCLAIM"));
+//        }catch(Exception e){
+//            var=""; 
+//        }
+//        return var;
+//    }
+//    
+//    public static String CONSIDAPISMARTCLAIM(){
+//        try{
+//            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+//            var=EnkripsiAES.decrypt(prop.getProperty("CONSIDAPISMARTCLAIM"));
+//        }catch(Exception e){
+//            var=""; 
+//        }
+//        return var;
+//    }
+//    
+//    public static String USERKEYAPISMARTCLAIM(){
+//        try{
+//            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+//            var=EnkripsiAES.decrypt(prop.getProperty("USERKEYAPISMARTCLAIM"));
+//        }catch(Exception e){
+//            var=""; 
+//        }
+//        return var;
+//    }
+
     
     public static String SECRETKEYAPISMARTCLAIM(){
         try{

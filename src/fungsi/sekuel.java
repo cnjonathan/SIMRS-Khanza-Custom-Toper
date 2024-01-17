@@ -67,7 +67,9 @@ public final class sekuel {
 
     public void menyimpan(String table,String value,String sama){
         try {
-            ps=connect.prepareStatement("insert into "+table+" values("+value+")");
+            String query = "insert into "+table+" values("+value+")";
+            System.out.println(query);
+            ps=connect.prepareStatement(query);
             try{                  
                 ps.executeUpdate();
             }catch(Exception e){
@@ -974,7 +976,7 @@ public final class sekuel {
                 ps.executeQuery();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(ps != null){
                     ps.close();
@@ -993,7 +995,7 @@ public final class sekuel {
                 ps.executeUpdate(); 
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(ps != null){
                     ps.close();
@@ -1016,7 +1018,7 @@ public final class sekuel {
              }catch(Exception e){
                 bool=false;
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");                
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());                
              }finally{
                 if(ps != null){
                     ps.close();
@@ -1061,7 +1063,7 @@ public final class sekuel {
                 ps.executeUpdate();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!"); System.out.println("Class name: "+this.getClass().getName()); System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
              }finally{
                 if(ps != null){
                     ps.close();
@@ -1895,6 +1897,33 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
             
+    }
+    
+    public void cariIsiText(String sql,JTextArea txt,String data,String data2){
+        try {
+            ps=connect.prepareStatement(sql);
+            try{
+              ps.setString(1,data);
+              ps.setString(2,data2);
+              rs=ps.executeQuery();
+              if(rs.next()){
+                txt.setText(rs.getString(1));
+              }else{
+                txt.setText("");
+              }
+            }catch(SQLException e){
+              System.out.println("Notifikasi : "+e);
+            }finally{
+                if(rs != null){
+                  rs.close();
+                }
+                if(ps != null){
+                  ps.close();
+                }
+            }
+      } catch (Exception e) {
+        System.out.println("Notifikasi : "+e);
+      }
     }
     
     private void SimpanTrack(String sql){

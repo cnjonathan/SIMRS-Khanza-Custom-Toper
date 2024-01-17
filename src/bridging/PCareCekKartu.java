@@ -5069,42 +5069,42 @@ public final class PCareCekKartu extends javax.swing.JDialog {
         }    
         
         if(Kelurahan.isEditable()==true){
-            Sequel.queryu4("insert ignore into kelurahan values(?,?)",2,new String[]{"0",Kelurahan.getText()});
-            kdkel=pasien.kel.tampil3(Kelurahan.getText());
+            Sequel.queryu4("insert ignore into kelurahan values(?,?)",2,new String[]{"0",Kelurahan.getText().replaceAll("KELURAHAN","-")});
+            kdkel=pasien.kel.tampil3(Kelurahan.getText().replaceAll("KELURAHAN","-"));
         }else if(Kelurahan.isEditable()==false){
             if(kdkel.equals("")){
-                Sequel.queryu4("insert ignore into kelurahan values(?,?)",2,new String[]{"0",Kelurahan.getText()});
-                kdkel=pasien.kel.tampil3(Kelurahan.getText());
+                Sequel.queryu4("insert ignore into kelurahan values(?,?)",2,new String[]{"0",Kelurahan.getText().replaceAll("KELURAHAN","-")});
+                kdkel=pasien.kel.tampil3(Kelurahan.getText().replaceAll("KELURAHAN","-"));
             }
         }
 
         if(Kecamatan.isEditable()==true){
-            Sequel.queryu4("insert ignore into kecamatan values(?,?)",2,new String[]{"0",Kecamatan.getText()});
-            kdkec=pasien.kec.tampil3(Kecamatan.getText());
+            Sequel.queryu4("insert ignore into kecamatan values(?,?)",2,new String[]{"0",Kecamatan.getText().replaceAll("KECAMATAN","-")});
+            kdkec=pasien.kec.tampil3(Kecamatan.getText().replaceAll("KECAMATAN","-"));
         }else if(Kecamatan.isEditable()==false){
             if(kdkec.equals("")){
-                Sequel.queryu4("insert ignore into kecamatan values(?,?)",2,new String[]{"0",Kecamatan.getText()});
-                kdkec=pasien.kec.tampil3(Kecamatan.getText());
+                Sequel.queryu4("insert ignore into kecamatan values(?,?)",2,new String[]{"0",Kecamatan.getText().replaceAll("KECAMATAN","-")});
+                kdkec=pasien.kec.tampil3(Kecamatan.getText().replaceAll("KECAMATAN","-"));
             }
         }
 
         if(Kabupaten.isEditable()==true){
-            Sequel.queryu4("insert ignore into kabupaten values(?,?)",2,new String[]{"0",Kabupaten.getText()});
-            kdkab=pasien.kab.tampil3(Kabupaten.getText());
+            Sequel.queryu4("insert ignore into kabupaten values(?,?)",2,new String[]{"0",Kabupaten.getText().replaceAll("KABUPATEN","-")});
+            kdkab=pasien.kab.tampil3(Kabupaten.getText().replaceAll("KABUPATEN","-"));
         }else if(Kabupaten.isEditable()==false){
             if(kdkab.equals("")){
-                Sequel.queryu4("insert ignore into kabupaten values(?,?)",2,new String[]{"0",Kabupaten.getText()});
-                kdkab=pasien.kab.tampil3(Kabupaten.getText());
+                Sequel.queryu4("insert ignore into kabupaten values(?,?)",2,new String[]{"0",Kabupaten.getText().replaceAll("KABUPATEN","-")});
+                kdkab=pasien.kab.tampil3(Kabupaten.getText().replaceAll("KABUPATEN","-"));
             }
         }
 
         if(Propinsi.isEditable()==true){
-           Sequel.queryu4("insert ignore into propinsi values(?,?)",2,new String[]{"0",Propinsi.getText()}); 
-           kdprop=pasien.prop.tampil3(Propinsi.getText());
+           Sequel.queryu4("insert ignore into propinsi values(?,?)",2,new String[]{"0",Propinsi.getText().replaceAll("PROPINSI","-")}); 
+           kdprop=pasien.prop.tampil3(Propinsi.getText().replaceAll("PROPINSI","-"));
         }else if(Propinsi.isEditable()==false){
             if(kdprop.equals("")){
-                Sequel.queryu4("insert ignore into propinsi values(?,?)",2,new String[]{"0",Propinsi.getText()}); 
-                kdprop=pasien.prop.tampil3(Propinsi.getText());
+                Sequel.queryu4("insert ignore into propinsi values(?,?)",2,new String[]{"0",Propinsi.getText().replaceAll("PROPINSI","-")}); 
+                kdprop=pasien.prop.tampil3(Propinsi.getText().replaceAll("PROPINSI","-"));
             }
         }
         
@@ -5168,16 +5168,16 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             }
         }else if(statuspasien.equals("Lama")){
             if(kdkel.equals("")){
-                kdkel=pasien.kel.tampil3(Kelurahan.getText());
+                kdkel=pasien.kel.tampil3(Kelurahan.getText().replaceAll("KELURAHAN","-"));
             }
             if(kdkec.equals("")){
-                kdkec=pasien.kec.tampil3(Kecamatan.getText());
+                kdkec=pasien.kec.tampil3(Kecamatan.getText().replaceAll("KECAMATAN","-"));
             }            
             if(kdkab.equals("")){
-                kdkab=pasien.kab.tampil3(Kabupaten.getText());
+                kdkab=pasien.kab.tampil3(Kabupaten.getText().replaceAll("KABUPATEN","-"));
             }            
             if(kdprop.equals("")){
-                kdprop=pasien.prop.tampil3(Propinsi.getText());
+                kdprop=pasien.prop.tampil3(Propinsi.getText().replaceAll("PROPINSI","-"));
             }
         
             Sequel.mengedit("pasien","no_rkm_medis=?","no_rkm_medis=?,nm_pasien=?,jk=?,tmp_lahir=?,"+

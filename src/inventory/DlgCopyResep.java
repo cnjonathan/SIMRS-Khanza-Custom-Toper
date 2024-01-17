@@ -59,8 +59,8 @@ public class DlgCopyResep extends javax.swing.JDialog {
             }else if(i==5){
                 column.setPreferredWidth(300);
             }else if(i==6){
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
+                column.setMinWidth(100);
+                column.setMaxWidth(100);
             }else if(i==7){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -461,24 +461,24 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,resep_obat.status as status_asal "+
                     " from resep_obat inner join reg_periksa inner join pasien inner join dokter on resep_obat.no_rawat=reg_periksa.no_rawat  "+
                     " and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and resep_obat.kd_dokter=dokter.kd_dokter where "+
-                    " resep_obat.tgl_peresepan<>'0000-00-00' and resep_obat.tgl_peresepan between ? and ? and pasien.no_rkm_medis=? and resep_obat.kd_dokter=? order by resep_obat.tgl_perawatan,resep_obat.jam desc");
+                    " resep_obat.tgl_peresepan<>'0000-00-00' and reg_periksa.status_lanjut = 'ralan' and resep_obat.tgl_peresepan between ? and ? and pasien.no_rkm_medis=? order by resep_obat.no_resep desc");
             }else{
                 ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
                     " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter, "+
                     " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,resep_obat.status as status_asal "+
                     " from resep_obat inner join reg_periksa inner join pasien inner join dokter on resep_obat.no_rawat=reg_periksa.no_rawat  "+
                     " and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and resep_obat.kd_dokter=dokter.kd_dokter where "+
-                    " resep_obat.tgl_peresepan<>'0000-00-00' and pasien.no_rkm_medis=? and resep_obat.kd_dokter=? order by resep_obat.tgl_perawatan,resep_obat.jam desc");
+                    " resep_obat.tgl_peresepan<>'0000-00-00' and reg_periksa.status_lanjut = 'ralan' and pasien.no_rkm_medis=? order by resep_obat.no_resep desc");
             }
             try{
                 if(ChkTanggal.isSelected()==true){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                     ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                     ps.setString(3,norm);
-                    ps.setString(4,kddokter);
+//                    ps.setString(4,kddokter); and resep_obat.kd_dokter=? query dihapus
                 }else{
                     ps.setString(1,norm);
-                    ps.setString(2,kddokter);
+//                    ps.setString(2,kddokter); and resep_obat.kd_dokter=? query dihapus
                 }                
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -587,11 +587,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         DlgPeresepanDokter resep=new DlgPeresepanDokter(null,false);
         resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
         resep.setLocationRelativeTo(internalFrame1);
-        resep.setNoRm(norawat,tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),7).toString(),
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),6).toString(), 
+        resep.setNoRm(norawat,kddokter,
+                Sequel.cariIsi("select dokter.nm_dokter from reg_periksa inner join dokter on reg_periksa.kd_dokter = dokter.kd_dokter where reg_periksa.no_rawat=?", norawat), 
                 tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),4).toString()+" "+
                 tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),5).toString(), 
                 kode_pj,status);
+//        resep.setNoRm(norawat,tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),7).toString(),
+//                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),6).toString(), 
+//                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),4).toString()+" "+
+//                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),5).toString(), 
+//                kode_pj,status);
         resep.isCek();
         resep.tampilobat2(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString());
         resep.setVisible(true);
