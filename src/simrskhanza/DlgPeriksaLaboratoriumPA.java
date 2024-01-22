@@ -88,7 +88,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         setSize(885,674);
 
         tabMode=new DefaultTableModel(null,new Object[]{
-                "Pemeriksaan","Diagnosa Klinis","Makroskopik","Mikroskopik","Kesimpulan","Kesan","Kode Jenis","Nomor Sampel"
+                "Pemeriksaan","Diagnosa Klinis","Makroskopik","Mikroskopik","Kesimpulan","Kesan","Kode Jenis"
             }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                     boolean a = true;
@@ -99,7 +99,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
              }
              Class[] types = new Class[] {
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
+                java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -113,7 +113,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         tbPemeriksaan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbPemeriksaan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < 7; i++) {
             TableColumn column = tbPemeriksaan.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
@@ -130,8 +130,6 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
             }else if(i==6){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);                
-            }else if(i==7){
-                column.setPreferredWidth(150);               
             }
         }
         
@@ -1494,13 +1492,13 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 kelas=Sequel.cariIsi(
                     "select kamar.kelas from kamar inner join kamar_inap "+
                     "on kamar.kd_kamar=kamar_inap.kd_kamar where no_rawat=? "+
-                    "and stts_pulang='-' order by STR_TO_DATE(concat(kamar_inap.tgl_masuk,' ',jam_masuk),'%Y-%m-%d %H:%i:%s') desc limit 1",norawatibu);
+                    "and kamar_inap.stts_pulang='-' order by STR_TO_DATE(concat(kamar_inap.tgl_masuk,' ',kamar_inap.jam_masuk),'%Y-%m-%d %H:%i:%s') desc limit 1",norawatibu);
             }else{
                 kamar=Sequel.cariIsi("select ifnull(kamar_inap.kd_kamar,'') from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1",TNoRw.getText());
                 kelas=Sequel.cariIsi(
                     "select kamar.kelas from kamar inner join kamar_inap "+
                     "on kamar.kd_kamar=kamar_inap.kd_kamar where no_rawat=? "+
-                    "and stts_pulang='-' order by STR_TO_DATE(concat(kamar_inap.tgl_masuk,' ',jam_masuk),'%Y-%m-%d %H:%i:%s') desc limit 1",TNoRw.getText());
+                    "and kamar_inap.stts_pulang='-' order by STR_TO_DATE(concat(kamar_inap.tgl_masuk,' ',kamar_inap.jam_masuk),'%Y-%m-%d %H:%i:%s') desc limit 1",TNoRw.getText());
             }  
             namakamar=kamar+", "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal inner join kamar on bangsal.kd_bangsal=kamar.kd_bangsal "+
                     " where kamar.kd_kamar=? ",kamar);            
@@ -1964,9 +1962,9 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             if(sukses==true){
                 for(i=0;i<tbPemeriksaan.getRowCount();i++){ 
                     if(!tbPemeriksaan.getValueAt(i,2).toString().equals("")){  
-                        if(Sequel.menyimpantf2("detail_periksa_labpa","?,?,?,?,?,?,?,?,?,?","Pemeriksaan Lab",10,new String[]{
+                        if(Sequel.menyimpantf2("detail_periksa_labpa","?,?,?,?,?,?,?,?,?","Pemeriksaan Lab",9,new String[]{
                                 TNoRw.getText(),tbPemeriksaan.getValueAt(i,6).toString(),Valid.SetTgl(Tanggal.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                                tbPemeriksaan.getValueAt(i,1).toString(),tbPemeriksaan.getValueAt(i,2).toString(),tbPemeriksaan.getValueAt(i,3).toString(),tbPemeriksaan.getValueAt(i,4).toString(),tbPemeriksaan.getValueAt(i,5).toString(),tbPemeriksaan.getValueAt(i,7).toString()
+                                tbPemeriksaan.getValueAt(i,1).toString(),tbPemeriksaan.getValueAt(i,2).toString(),tbPemeriksaan.getValueAt(i,3).toString(),tbPemeriksaan.getValueAt(i,4).toString(),tbPemeriksaan.getValueAt(i,5).toString()
                             })==false){
                             sukses=false;
                         }

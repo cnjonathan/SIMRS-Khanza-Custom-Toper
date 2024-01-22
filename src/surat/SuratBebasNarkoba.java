@@ -234,13 +234,12 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
-        jPopupMenu1.setPreferredSize(new java.awt.Dimension(175, 50));
 
         MnCetakSuratSKBN.setBackground(new java.awt.Color(250, 250, 250));
         MnCetakSuratSKBN.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnCetakSuratSKBN.setForeground(new java.awt.Color(50, 50, 50));
         MnCetakSuratSKBN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakSuratSKBN.setText("Cetak SKBN 6 Parameter");
+        MnCetakSuratSKBN.setText("Cetak SKBN 1");
         MnCetakSuratSKBN.setName("MnCetakSuratSKBN"); // NOI18N
         MnCetakSuratSKBN.setPreferredSize(new java.awt.Dimension(140, 26));
         MnCetakSuratSKBN.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +253,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         MnCetakSuratSKBN1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnCetakSuratSKBN1.setForeground(new java.awt.Color(50, 50, 50));
         MnCetakSuratSKBN1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakSuratSKBN1.setText("Cetak SKBN 3 Parameter");
+        MnCetakSuratSKBN1.setText("Cetak SKBN 2");
         MnCetakSuratSKBN1.setName("MnCetakSuratSKBN1"); // NOI18N
         MnCetakSuratSKBN1.setPreferredSize(new java.awt.Dimension(140, 26));
         MnCetakSuratSKBN1.addActionListener(new java.awt.event.ActionListener() {
@@ -470,7 +469,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2020" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -484,7 +483,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2020" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -604,7 +603,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         jLabel18.setBounds(511, 40, 100, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2023" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2020" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -642,7 +641,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         FormInput.add(Keperluan);
         Keperluan.setBounds(490, 70, 225, 23);
 
-        hasil1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF", "TIDAK DIPERIKSA" }));
+        hasil1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF" }));
         hasil1.setName("hasil1"); // NOI18N
         hasil1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -711,7 +710,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         FormInput.add(jLabel23);
         jLabel23.setBounds(0, 100, 135, 23);
 
-        hasil2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF", "TIDAK DIPERIKSA" }));
+        hasil2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF" }));
         hasil2.setName("hasil2"); // NOI18N
         hasil2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -736,7 +735,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         FormInput.add(jLabel26);
         jLabel26.setBounds(516, 100, 95, 23);
 
-        hasil4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF", "TIDAK DIPERIKSA" }));
+        hasil4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF" }));
         hasil4.setName("hasil4"); // NOI18N
         hasil4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -746,7 +745,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         FormInput.add(hasil4);
         hasil4.setBounds(389, 130, 100, 23);
 
-        hasil3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF", "TIDAK DIPERIKSA" }));
+        hasil3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF" }));
         hasil3.setName("hasil3"); // NOI18N
         hasil3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -756,7 +755,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         FormInput.add(hasil3);
         hasil3.setBounds(389, 100, 100, 23);
 
-        hasil5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF", "TIDAK DIPERIKSA" }));
+        hasil5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF" }));
         hasil5.setName("hasil5"); // NOI18N
         hasil5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -771,7 +770,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         FormInput.add(jLabel27);
         jLabel27.setBounds(516, 130, 95, 23);
 
-        hasil6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF", "TIDAK DIPERIKSA" }));
+        hasil6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF" }));
         hasil6.setName("hasil6"); // NOI18N
         hasil6.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1498,9 +1497,6 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         BtnSimpan.setEnabled(akses.getsurat_bebas_narkoba());
         BtnHapus.setEnabled(akses.getsurat_bebas_narkoba());
         BtnEdit.setEnabled(akses.getsurat_bebas_narkoba());
-        
-        MnCetakSuratSKBN2.setVisible(false);
-        MnCetakSuratSKBN3.setVisible(false);
     }
 }
 

@@ -341,7 +341,7 @@ public final class DlgCariIndustriFarmasi extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/industrifarmasi.iyem")<8){
+            if(Valid.daysOld("./cache/industrifarmasi.iyem")<30){
                 tampil2();
             }else{
                 tampil();
@@ -427,11 +427,19 @@ public final class DlgCariIndustriFarmasi extends javax.swing.JDialog {
             Valid.tabelKosong(tabMode);
             response = root.path("industrifarmasi");
             if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("KodeIF").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaIF").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Kota").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                if(TCari.getText().trim().equals("")){
+                    for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("KodeIF").asText(),list.path("NamaIF").asText(),list.path("Alamat").asText(),list.path("Kota").asText(),list.path("NoTelp").asText()
                         });
+                    }
+                }else{
+                    for(JsonNode list:response){
+                        if(list.path("KodeIF").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaIF").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Kota").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            tabMode.addRow(new Object[]{
+                                list.path("KodeIF").asText(),list.path("NamaIF").asText(),list.path("Alamat").asText(),list.path("Kota").asText(),list.path("NoTelp").asText()
+                            });
+                        }
                     }
                 }
             }

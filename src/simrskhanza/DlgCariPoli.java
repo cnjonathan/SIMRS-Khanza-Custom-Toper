@@ -134,6 +134,9 @@ public final class DlgCariPoli extends javax.swing.JDialog {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
         });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Unit/Poliklinik ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
@@ -331,6 +334,17 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         emptTeks();
     }//GEN-LAST:event_formWindowActivated
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try {
+            if(Valid.daysOld("./cache/poli.iyem")<30){
+                tampil2();
+            }else{
+                tampil();
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_formWindowOpened
+
     /**
     * @param args the command line arguments
     */
@@ -417,11 +431,19 @@ public final class DlgCariPoli extends javax.swing.JDialog {
             Valid.tabelKosong(tabMode);
             response = root.path("poli");
             if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("KodeUnit").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaUnit").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                if(TCari.getText().trim().equals("")){
+                    for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("KodeUnit").asText(),list.path("NamaUnit").asText(),list.path("RegistrasiBaru").asText(),list.path("RegistrasiLama").asText()
                         });
+                    }
+                }else{
+                    for(JsonNode list:response){
+                        if(list.path("KodeUnit").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaUnit").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            tabMode.addRow(new Object[]{
+                                list.path("KodeUnit").asText(),list.path("NamaUnit").asText(),list.path("RegistrasiBaru").asText(),list.path("RegistrasiLama").asText()
+                            });
+                        }
                     }
                 }
             }

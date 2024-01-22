@@ -617,6 +617,7 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
 
         TabRawat.setBackground(new java.awt.Color(254, 255, 254));
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
+        TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -737,9 +738,7 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         FormInput.add(jLabel12);
         jLabel12.setBounds(760, 520, 30, 23);
 
-        BB.setBackground(new java.awt.Color(255, 204, 204));
         BB.setFocusTraversalPolicyProvider(true);
-        BB.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         BB.setName("BB"); // NOI18N
         BB.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -755,9 +754,7 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         FormInput.add(jLabel13);
         jLabel13.setBounds(842, 520, 30, 23);
 
-        TB.setBackground(new java.awt.Color(255, 204, 204));
         TB.setFocusTraversalPolicyProvider(true);
-        TB.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         TB.setName("TB"); // NOI18N
         TB.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -791,11 +788,9 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         scrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane1.setName("scrollPane1"); // NOI18N
 
-        KeluhanUtama.setBackground(new java.awt.Color(255, 204, 204));
         KeluhanUtama.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         KeluhanUtama.setColumns(20);
         KeluhanUtama.setRows(5);
-        KeluhanUtama.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         KeluhanUtama.setName("KeluhanUtama"); // NOI18N
         KeluhanUtama.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -815,11 +810,9 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         scrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane2.setName("scrollPane2"); // NOI18N
 
-        RPD.setBackground(new java.awt.Color(255, 204, 204));
         RPD.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         RPD.setColumns(20);
         RPD.setRows(5);
-        RPD.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         RPD.setName("RPD"); // NOI18N
         RPD.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -880,9 +873,7 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         FormInput.add(jLabel28);
         jLabel28.setBounds(489, 520, 70, 23);
 
-        GCS.setBackground(new java.awt.Color(255, 204, 204));
         GCS.setFocusTraversalPolicyProvider(true);
-        GCS.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         GCS.setName("GCS"); // NOI18N
         GCS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1111,7 +1102,7 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         label11.setBounds(380, 40, 52, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023 09:17:04" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2022 17:46:10" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -1391,9 +1382,7 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         FormInput.add(jLabel16);
         jLabel16.setBounds(370, 550, 50, 23);
 
-        Nadi.setBackground(new java.awt.Color(255, 204, 204));
         Nadi.setFocusTraversalPolicyProvider(true);
-        Nadi.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Nadi.setName("Nadi"); // NOI18N
         Nadi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1413,9 +1402,7 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         FormInput.add(jLabel18);
         jLabel18.setBounds(606, 550, 40, 23);
 
-        Suhu.setBackground(new java.awt.Color(255, 204, 204));
         Suhu.setFocusTraversalPolicyProvider(true);
-        Suhu.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Suhu.setName("Suhu"); // NOI18N
         Suhu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1430,9 +1417,7 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         FormInput.add(jLabel22);
         jLabel22.setBounds(0, 550, 127, 23);
 
-        TD.setBackground(new java.awt.Color(255, 204, 204));
         TD.setFocusTraversalPolicyProvider(true);
-        TD.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         TD.setName("TD"); // NOI18N
         TD.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1460,9 +1445,7 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         FormInput.add(jLabel25);
         jLabel25.setBounds(527, 550, 50, 23);
 
-        RR.setBackground(new java.awt.Color(255, 204, 204));
         RR.setFocusTraversalPolicyProvider(true);
-        RR.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         RR.setName("RR"); // NOI18N
         RR.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1635,9 +1618,7 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         FormInput.add(jLabel46);
         jLabel46.setBounds(0, 670, 127, 23);
 
-        Alergi.setBackground(new java.awt.Color(255, 204, 204));
         Alergi.setFocusTraversalPolicyProvider(true);
-        Alergi.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Alergi.setName("Alergi"); // NOI18N
         Alergi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1689,7 +1670,7 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2022" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1703,7 +1684,7 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2022" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2895,12 +2876,8 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
-                    "select reg_periksa.no_rkm_medis,pasien.nm_pasien, if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,reg_periksa.tgl_registrasi, "+
-                    "penilaian_awal_keperawatan_ralan_psikiatri.keluhan_utama,penilaian_awal_keperawatan_ralan_psikiatri.rkd_keluhan, " +
-                    "penilaian_awal_keperawatan_ralan_psikiatri.td,penilaian_awal_keperawatan_ralan_psikiatri.suhu, " +
-                    "penilaian_awal_keperawatan_ralan_psikiatri.rr,penilaian_awal_keperawatan_ralan_psikiatri.nadi,penilaian_awal_keperawatan_ralan_psikiatri.gcs " +
+                    "select reg_periksa.no_rkm_medis,pasien.nm_pasien, if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,reg_periksa.tgl_registrasi "+
                     "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "left join penilaian_awal_keperawatan_ralan_psikiatri on penilaian_awal_keperawatan_ralan_psikiatri.no_rawat=reg_periksa.no_rawat "+ 
                     "where reg_periksa.no_rawat=?");
             try {
                 ps.setString(1,TNoRw.getText());
@@ -2911,14 +2888,6 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
                     TPasien.setText(rs.getString("nm_pasien"));
                     Jk.setText(rs.getString("jk"));
                     TglLahir.setText(rs.getString("tgl_lahir"));
-                    
-                    KeluhanUtama.setText(rs.getString("keluhan_utama"));
-                    RPD.setText(rs.getString("rkd_keluhan"));
-                    GCS.setText(rs.getString("gcs"));
-                    TD.setText(rs.getString("td"));
-                    Nadi.setText(rs.getString("nadi"));
-                    RR.setText(rs.getString("rr"));
-                    Suhu.setText(rs.getString("suhu"));
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
@@ -2943,10 +2912,9 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
     }
     
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getpenilaian_awal_medis_ralan());
-        BtnHapus.setEnabled(akses.getpenilaian_awal_medis_ralan());
-        BtnEdit.setEnabled(akses.getpenilaian_awal_medis_ralan());
-        BtnEdit.setEnabled(akses.getpenilaian_awal_medis_ralan());
+        BtnSimpan.setEnabled(akses.getpenilaian_awal_medis_ralan_psikiatri());
+        BtnHapus.setEnabled(akses.getpenilaian_awal_medis_ralan_psikiatri());
+        BtnEdit.setEnabled(akses.getpenilaian_awal_medis_ralan_psikiatri());
         if(akses.getjml2()>=1){
             KdDokter.setEditable(false);
             BtnDokter.setEnabled(false);

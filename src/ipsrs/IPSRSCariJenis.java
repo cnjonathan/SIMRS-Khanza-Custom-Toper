@@ -337,7 +337,7 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/jenisipsrs.iyem")<8){
+            if(Valid.daysOld("./cache/jenisipsrs.iyem")<30){
                 tampil2();
             }else{
                 tampil();
@@ -420,11 +420,19 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
             Valid.tabelKosong(tabMode);
             response = root.path("jenisipsrs");
             if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("NamaJenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                if(TCari.getText().trim().equals("")){
+                    for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("KodeJenis").asText(),list.path("NamaJenis").asText()
                         });
+                    }
+                }else{
+                    for(JsonNode list:response){
+                        if(list.path("NamaJenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            tabMode.addRow(new Object[]{
+                                list.path("KodeJenis").asText(),list.path("NamaJenis").asText()
+                            });
+                        }
                     }
                 }
             }

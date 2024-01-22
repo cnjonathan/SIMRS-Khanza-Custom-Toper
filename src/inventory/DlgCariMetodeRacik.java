@@ -339,7 +339,7 @@ public final class DlgCariMetodeRacik extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/metoderacik.iyem")<8){
+            if(Valid.daysOld("./cache/metoderacik.iyem")<30){
                 tampil2();
             }else{
                 tampil();
@@ -425,12 +425,21 @@ public final class DlgCariMetodeRacik extends javax.swing.JDialog {
             response = root.path("metoderacik");
             i=1;
             if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("NamaRacik").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                if(TCari.getText().trim().equals("")){
+                    for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             i+"",list.path("KodeRacik").asText(),list.path("NamaRacik").asText()
                         });
                         i++;
+                    }
+                }else{
+                    for(JsonNode list:response){
+                        if(list.path("NamaRacik").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            tabMode.addRow(new Object[]{
+                                i+"",list.path("KodeRacik").asText(),list.path("NamaRacik").asText()
+                            });
+                            i++;
+                        }
                     }
                 }
             }

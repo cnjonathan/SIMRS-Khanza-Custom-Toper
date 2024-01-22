@@ -310,7 +310,7 @@ public final class DlgCariJabatan extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/jabatan.iyem")<8){
+            if(Valid.daysOld("./cache/jabatan.iyem")<30){
                 tampil2();
             }else{
                 tampil();
@@ -402,11 +402,19 @@ public final class DlgCariJabatan extends javax.swing.JDialog {
             Valid.tabelKosong(tabMode);
             response = root.path("jabatan");
             if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("KodeJabatan").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaJabatan").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                if(TCari.getText().trim().equals("")){
+                    for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("KodeJabatan").asText(),list.path("NamaJabatan").asText()
-                        });                    
+                        }); 
+                    }
+                }else{
+                    for(JsonNode list:response){
+                        if(list.path("KodeJabatan").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaJabatan").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            tabMode.addRow(new Object[]{
+                                list.path("KodeJabatan").asText(),list.path("NamaJabatan").asText()
+                            });                    
+                        }
                     }
                 }
             }

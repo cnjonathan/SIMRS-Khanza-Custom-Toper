@@ -312,7 +312,7 @@ public final class DlgCariDiet extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/diet.iyem")<8){
+            if(Valid.daysOld("./cache/diet.iyem")<30){
                 tampil2();
             }else{
                 tampil();
@@ -404,11 +404,20 @@ public final class DlgCariDiet extends javax.swing.JDialog {
             Valid.tabelKosong(tabMode);
             response = root.path("diet");
             if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("KodeDiet").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaDiet").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                if(TCari.getText().trim().equals("")){
+                    for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("KodeDiet").asText(),list.path("NamaDiet").asText()
-                        });                    }
+                        }); 
+                    }
+                }else{
+                    for(JsonNode list:response){
+                        if(list.path("KodeDiet").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaDiet").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            tabMode.addRow(new Object[]{
+                                list.path("KodeDiet").asText(),list.path("NamaDiet").asText()
+                            });                    
+                        }
+                    }
                 }
             }
             myObj.close();
