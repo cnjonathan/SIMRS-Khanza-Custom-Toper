@@ -277,7 +277,7 @@ public class DlgCetak extends javax.swing.JDialog {
                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab "+
                    "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
                    "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                   "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+LblNoRw.getText()+"' ",param);
+                   "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+LblNoRw.getText()+"' ",param, 1);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnAboutActionPerformed
@@ -314,7 +314,7 @@ public class DlgCetak extends javax.swing.JDialog {
                 param.put("emailrs",email);
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptLembarPeriksa.jasper","report","::[ Lembar Periksa ]::",
-                        "select date_format(current_date(),'%d/%m/%Y') as sekarang",param); 
+                        "select date_format(current_date(),'%d/%m/%Y') as sekarang",param, 1); 
             }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnAbout1ActionPerformed
@@ -333,7 +333,7 @@ public class DlgCetak extends javax.swing.JDialog {
                 param.put("kontakrs",kontak);
                 param.put("emailrs",email);   
                 Valid.MyReportqry("rptBarcodeRawat.jasper","report","::[ Barcode No.Rawat ]::",
-                        "select reg_periksa.no_rawat from reg_periksa where no_rawat='"+LblNoRw.getText()+"'",param); 
+                        "select reg_periksa.no_rawat from reg_periksa where no_rawat='"+LblNoRw.getText()+"'",param, 1); 
                 this.setCursor(Cursor.getDefaultCursor());
             }  
     }//GEN-LAST:event_BtnAbout2ActionPerformed
@@ -358,7 +358,7 @@ public class DlgCetak extends javax.swing.JDialog {
                 param.put("emailrs",email);
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptLembarPeriksa2.jasper","report","::[ Lembar Periksa ]::",
-                        "select date_format(current_date(),'%d/%m/%Y') as sekarang",param); 
+                        "select date_format(current_date(),'%d/%m/%Y') as sekarang",param, 1); 
             }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnAbout3ActionPerformed
@@ -405,7 +405,7 @@ public class DlgCetak extends javax.swing.JDialog {
                    "pasien.jk,pasien.tgl_lahir,pasien.umur,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,"+
                    "reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab from reg_periksa inner join dokter inner join pasien "+
                    "inner join poliklinik inner join penjab on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                   "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+LblNoRw.getText()+"' ",param);
+                   "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+LblNoRw.getText()+"' ",param, 1);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnAbout5ActionPerformed
@@ -430,7 +430,7 @@ public class DlgCetak extends javax.swing.JDialog {
                 "concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj) as alamatpj from pasien "+
                 "inner join kelurahan inner join kecamatan inner join kabupaten "+
                 "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
-                "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+norm+"' ",param);
+                "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+norm+"' ",param, 1);
             // System.out.println(norm);
             this.setCursor(Cursor.getDefaultCursor());
         }

@@ -15,6 +15,7 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import fungsi.validasi2;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -22,6 +23,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -39,12 +42,15 @@ public class DlgPilihDokter extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
+    private validasi Valid2=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
     private Calendar cal = Calendar.getInstance();
     private int day = cal.get(Calendar.DAY_OF_WEEK);
     private String hari="",aktifjadwal="";
     Integer sisahari, cek_rujukan_expired = 0;
+    private String nama_instansi, alamat_instansi, kabupaten, propinsi,kontak,email,poli,
+           antrian,nama,norm,dokter,no_rawat,bayar,penjab;
 
     /** Creates new form DlgAdmin
      * @param parent
@@ -52,6 +58,22 @@ public class DlgPilihDokter extends javax.swing.JDialog {
     public DlgPilihDokter(java.awt.Frame parent, boolean id) {
         super(parent, id);
         initComponents();
+        
+        try {
+            ps=koneksi.prepareStatement("select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo from setting");
+            rs=ps.executeQuery();
+            while(rs.next()){                
+                nama_instansi=rs.getString("nama_instansi");
+                alamat_instansi=rs.getString("alamat_instansi");
+                kabupaten=rs.getString("kabupaten");
+                propinsi=rs.getString("propinsi");
+                kontak=rs.getString("kontak");
+                email=rs.getString("email");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
         tabmode=new DefaultTableModel(new Object[]{"Kode","Nama Dokter","Kuota"},0){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -360,14 +382,10 @@ public class DlgPilihDokter extends javax.swing.JDialog {
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
         if(tabmode.getRowCount()!=0){
-            System.out.println("line 362 aktifjadwal: "+aktifjadwal);
-            System.out.println("LblNoRm: "+LblNoRm.getText()+", LblKdPoli: "+LblKdPoli.getText()+", kddokter: "+tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
                 if(aktifjadwal == "aktif"){
-                    System.out.println("line 367 aktifjadwal:"+aktifjadwal);
                     if(Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_dokter='"+tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString()+"' and reg_periksa.tgl_registrasi=CURRENT_DATE() ")>=Integer.parseInt(tbAdmin.getValueAt(tbAdmin.getSelectedRow(),2).toString())){
                         JOptionPane.showMessageDialog(null,"Eiiits, Kuota registrasi penuh..!!!");
                         TCari.requestFocus();
-                        System.out.println("line 371");
                     }else{
                         DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                         pilih.setSize(this.getWidth(),this.getHeight());
@@ -379,10 +397,6 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                     DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                     pilih.setSize(this.getWidth(),this.getHeight());
                     pilih.setLocationRelativeTo(this);
-                    System.out.println("LblNoRm.getText() "+LblNoRm.getText());
-                    System.out.println("LblKdPoli.getText() "+LblKdPoli.getText());
-                    System.out.println("tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString() "+tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
-                    System.out.println("LblPenjab.getText() "+LblPenjab.getText());
                     pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan");
                     
                     DlgRegistrasi regis=new DlgRegistrasi(null,true);
@@ -398,7 +412,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                                 String query_cek_rujukan_pertama_bridging_sep = "SELECT \n"+
                                         "b.nomr, \n"+
                                         "b.nama_pasien, \n"+
-                                        "MIN(REPLACE(b.no_rawat,'/','')) AS no_rawat_min, \n"+
+//                                        "MIN(REPLACE(b.no_rawat,'/','')) AS no_rawat_min, \n"+
                                         "b.no_rawat AS no_rawat, \n"+
                                         "b.no_rujukan, \n"+
                                         "b.kdpolitujuan, \n"+
@@ -413,8 +427,9 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                                         "WHERE \n"+
                                         "b.nomr='"+LblNoRm.getText()+"' AND  \n"+
                                         "b.jnspelayanan = '2' AND \n"+
-                                        "b.no_rujukan <> '' AND \n"+
-                                        "(90 - DATEDIFF(CURRENT_DATE,b.tglrujukan)) > 1";
+                                        "b.no_rujukan <> '' \n"+
+                                        "ORDER BY sisahari DESC \n";
+//                                        "(90 - DATEDIFF(CURRENT_DATE,b.tglrujukan)) > 1";
                                 
                                 String query_count = "SELECT \n"+
                                                         "COUNT(*) AS jml_data,\n"+
@@ -429,8 +444,6 @@ public class DlgPilihDokter extends javax.swing.JDialog {
 
                                 String query_maping_kd_poli = "SELECT maping_poli_bpjs.kd_poli_bpjs FROM maping_poli_bpjs WHERE maping_poli_bpjs.kd_poli_rs = '"+LblKdPoli.getText()+"'";
                                 String maping_kd_poli = Sequel.cariIsi(query_maping_kd_poli);
-                                System.out.println("String query_maping_kd_poli: "+query_maping_kd_poli);
-                                System.out.println("query_cek_rujukan_pertama_bridging_sep: "+query_cek_rujukan_pertama_bridging_sep);
 
                                 //###########################################################
                                 //||                                                       ||
@@ -444,30 +457,24 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                                 PreparedStatement ps_query_count = koneksi.prepareStatement(query_count);
                                 ResultSet rs_query_count = ps_query_count.executeQuery();
                                 rs_query_count.next();
-                                System.out.println("rs_rujukan_bridging_sep: "+rs_query_count.getString("jml_data"));
                                 int jml_data = Integer.parseInt(rs_query_count.getString("jml_data"));
                                 rs_rujukan_bridging_sep.next();
                                 if(jml_data > 0){
-                                    System.out.println("line 1260");
                                     if(rs_rujukan_bridging_sep.getString("kd_poli_bpjs").equals(maping_kd_poli)){
                                         sisahari = rs_rujukan_bridging_sep.getInt("sisahari");
                                         if(sisahari <= 0){
-                                            JOptionPane.showMessageDialog(null,"Rujukan anda sudah expired, \n"+
-                                                    "silahkan konfirmasi ke petugas registrasi.");
+                                            printLabelAtasSaja(LblNoRm.getText(), "Rujukan anda sudah expired, ");
                                         }else if(sisahari > 1){
                                             pilih.setVisible(true);
                                         }
                                     }else{
-                                        JOptionPane.showMessageDialog(null,"Tujuan Poliklinik anda tidak sama dengan Poli Rujukan, \n"+
-                                                "silahkan konfirmasi ke petugas registrasi.");
+                                        printLabelAtasSaja(LblNoRm.getText(), "Tujuan Poliklinik anda tidak sama dengan Poli Rujukan,");
                                     }
                                 }else{
-                                    System.out.println("line 1277");
                                     JOptionPane.showMessageDialog(null,"Anda tidak punya rujukan, \n"+
-                                            "silahkan konfirmasi ke petugas registrasi.");
+                                            "Silahkan membuat rujukan yang baru ke Faskes Pertama untuk membuat rujukan yang baru.");
                                 }
                             } catch (SQLException ex) {
-                                System.out.println("asw");
                                 Logger.getLogger(DlgRegistrasi.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             break;
@@ -621,5 +628,89 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         LblKdPoli.setText(kodepoli);
         LblNamaPoli.setText(Sequel.cariIsi("select poliklinik.nm_poli from poliklinik where poliklinik.kd_poli=?", kodepoli));
         LblPenjab.setText(penjab);
+    }
+    
+    public void printLabelAtasSaja(String noRm, String notif){
+        if (JOptionPane.showConfirmDialog(null, notif+"\n apakah Anda membawa rujukan yang baru dari Faskes Pertama?", "WARNING",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            // yes option
+            Map<String, Object> param_expired = new HashMap<>();
+            param_expired.put("namars",nama_instansi);
+            param_expired.put("alamatrs",alamat_instansi);
+            param_expired.put("kotars",kabupaten);
+            param_expired.put("propinsirs",propinsi);
+            param_expired.put("kontakrs",kontak);
+            param_expired.put("emailrs",email);
+            param_expired.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+
+            String cek_booking_registrasi= Sequel.cariIsi("SELECT\n"+
+                            "booking_registrasi.tanggal_periksa \n"+
+                            "FROM \n"+
+                            "booking_registrasi \n"+
+                            "WHERE \n"+
+                            "booking_registrasi.tanggal_periksa=CURDATE() AND \n"+
+                            "kd_pj = 'BPJ' AND \n"+
+                            "booking_registrasi.no_rkm_medis=?",noRm);
+
+            String cek_booking_mobile_jkn= Sequel.cariIsi("SELECT\n"+
+                                                    "referensi_mobilejkn_bpjs.tanggalperiksa \n"+
+                                                    "FROM \n"+
+                                                    "referensi_mobilejkn_bpjs \n"+
+                                                    "WHERE \n"+
+                                                    "referensi_mobilejkn_bpjs.tanggalperiksa=CURDATE() AND \n"+
+                                                    "referensi_mobilejkn_bpjs.norm=?",noRm);
+
+            if(!cek_booking_registrasi.equals("")){
+                Valid2.MyReportqry("rptAnjungan.jasper",
+                                 "report",
+                                       "::[ Label Anjungan ]::",
+                                            "SELECT "+
+                                            "  p.no_ktp, "+
+                                            "  p.jk, "+
+                                            "  p.nm_pasien, "+
+                                            "  poli.nm_poli, "+
+                                            "  d.nm_dokter, "+
+                                            "  b.no_reg, "+
+                                            "  b.no_rkm_medis, "+
+                                            "  b.tanggal_periksa AS tgl_registrasi "+
+                                            "FROM "+
+                                            "  booking_registrasi b "+
+                                            "  INNER JOIN pasien p ON b.no_rkm_medis = p.no_rkm_medis "+
+                                            "  INNER JOIN poliklinik poli ON b.kd_poli = poli.kd_poli "+
+                                            "  INNER JOIN dokter d ON b.kd_dokter = d.kd_dokter "+
+                                            "WHERE "+
+                                            "  b.tanggal_periksa = CURDATE() "+
+                                            "  AND b.kd_pj = 'BPJ' "+
+                                            "  AND b.no_rkm_medis = "+noRm,
+                                   param_expired, 
+                                        1);
+            }else if(!cek_booking_mobile_jkn.equals("")){
+                Valid2.MyReportqry("rptAnjungan.jasper",
+                                 "report",
+                                       "::[ Label Anjungan ]::",
+                                            "SELECT "+
+                                            "  p.no_ktp, "+
+                                            "  p.jk, "+
+                                            "  p.nm_pasien, "+
+                                            "  m.nm_poli_bpjs AS nm_poli, "+
+                                            "  d.nm_dokter, "+
+                                            "  r.nomorantrean AS no_reg, "+
+                                            "  r.norm AS no_rkm_medis, "+
+                                            "  r.tanggalperiksa AS tgl_registrasi "+
+                                            "FROM "+
+                                            "  referensi_mobilejkn_bpjs r "+
+                                            "  INNER JOIN pasien p ON r.norm = p.no_rkm_medis "+
+                                            "  INNER JOIN maping_poli_bpjs m ON r.kodepoli = m.kd_poli_bpjs "+
+                                            "  INNER JOIN dokter d ON r.kodedokter = d.kd_dokter "+
+                                            "WHERE "+
+                                            "  r.tanggalperiksa = CURDATE() "+
+                                            "  AND r.norm ="+noRm,
+                                   param_expired, 
+                                        1);
+            }
+        } else {
+            // no option
+            JOptionPane.showMessageDialog(null,"Silahkan membuat rujukan yang baru ke Faskes Pertama untuk membuat rujukan yang baru. ");
+        }
     }
 }
