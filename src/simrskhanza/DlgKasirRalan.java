@@ -933,6 +933,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnHapusReturObat = new javax.swing.JMenuItem();
         MnHapusStokObatRanap = new javax.swing.JMenuItem();
         MnHapusSemua = new javax.swing.JMenuItem();
+        PrintSuratKontrolBPJS = new javax.swing.JMenuItem();
         TNoRw = new widget.TextBox();
         WindowObatBhp = new javax.swing.JDialog();
         internalFrame2 = new widget.InternalFrame();
@@ -5251,6 +5252,22 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
         jPopupMenu1.add(MnHapusData);
 
+        PrintSuratKontrolBPJS.setBackground(new java.awt.Color(255, 255, 254));
+        PrintSuratKontrolBPJS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        PrintSuratKontrolBPJS.setForeground(new java.awt.Color(50, 50, 50));
+        PrintSuratKontrolBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        PrintSuratKontrolBPJS.setText("Print Surat Kontrol BPJS");
+        PrintSuratKontrolBPJS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        PrintSuratKontrolBPJS.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        PrintSuratKontrolBPJS.setName("PrintSuratKontrolBPJS"); // NOI18N
+        PrintSuratKontrolBPJS.setPreferredSize(new java.awt.Dimension(200, 26));
+        PrintSuratKontrolBPJS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrintSuratKontrolBPJSActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(PrintSuratKontrolBPJS);
+
         TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -8221,6 +8238,7 @@ private void MnKamarInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
 }//GEN-LAST:event_MnKamarInapActionPerformed
 
+
 private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed
         // TODO add your handling code here:
 }//GEN-LAST:event_Kd2KeyPressed
@@ -8984,6 +9002,47 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             }
         }
     }//GEN-LAST:event_MnHapusSemuaActionPerformed
+
+    private void PrintSuratKontrolBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintSuratKontrolBPJSActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        Map<String, Object> param = new HashMap<>();  
+        param.put("namars",akses.getnamars());
+        param.put("alamatrs",akses.getalamatrs());
+        param.put("kotars",akses.getkabupatenrs());
+        param.put("propinsirs",akses.getpropinsirs());
+        param.put("kontakrs",akses.getkontakrs());
+        param.put("emailrs",akses.getemailrs());   
+        param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+        finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString());
+        param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString()+"\nID "+(finger.equals("")?tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString():finger)+"\n"+Valid.SetTgl3(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),15).toString()));
+        String query_surat_kontrol =    "SELECT "+
+                                        "    sk.no_surat, "+
+                                        "    p.nm_pasien, "+
+                                        "    pr.penilaian, "+
+                                        "    pr.rtl, "+
+                                        "    sk.tgl_surat, "+
+                                        "    pr.keluhan, "+
+                                        "    pr.instruksi, "+
+                                        "    pr.evaluasi, "+
+                                        "    sk.tgl_rencana, "+
+                                        "    sk.nm_poli_bpjs, "+
+                                        "    sk.nm_dokter_bpjs "+
+                                        "FROM "+
+                                        "	pemeriksaan_ralan pr "+
+                                        "INNER JOIN "+
+                                        "	reg_periksa reg ON pr.no_rawat = reg.no_rawat "+
+                                        "INNER JOIN "+
+                                        "	pasien p ON reg.no_rkm_medis = p.no_rkm_medis "+
+                                        "INNER JOIN "+
+                                        "	bridging_sep bs ON pr.no_rawat = bs.no_rawat "+
+                                        "INNER JOIN "+
+                                        "	bridging_surat_kontrol_bpjs sk ON bs.no_sep = sk.no_sep "+
+                                        "WHERE "+
+                                        "	pr.no_rawat = '"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 14)+"'";
+        System.out.println("query_surat_kontrol: "+query_surat_kontrol);
+        Valid.MyReportqry("rptSuratKontrol.jasper","report","::[ Surat Kontrol BPJS ]::",query_surat_kontrol,param); 
+        this.setCursor(Cursor.getDefaultCursor());
+}//GEN-LAST:event_PrintSuratKontrolBPJSActionPerformed
 
     private void ppRiwayatBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatBtnPrintActionPerformed
         if(tabModekasir.getRowCount()==0){
@@ -14286,6 +14345,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem MnHapusRujukMasuk;
     private javax.swing.JMenuItem MnHapusRujukan;
     private javax.swing.JMenuItem MnHapusSemua;
+    private javax.swing.JMenuItem PrintSuratKontrolBPJS;
     private javax.swing.JMenuItem MnHapusStokObatRanap;
     private javax.swing.JMenuItem MnHapusTagihanOperasi;
     private javax.swing.JMenuItem MnHapusTambahan;
