@@ -333,7 +333,7 @@ public final class DlgCariRuangAuditKepatuhan extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/ruangauditkepatuhan.iyem")<8){
+            if(Valid.daysOld("./cache/ruangauditkepatuhan.iyem")<30){
                 tampil2();
             }else{
                 tampil();
@@ -426,11 +426,19 @@ public final class DlgCariRuangAuditKepatuhan extends javax.swing.JDialog {
             Valid.tabelKosong(tabMode);
             response = root.path("ruang_audit_kepatuhan");
             if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("NamaRuang").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                if(TCari.getText().trim().equals("")){
+                    for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("KodeRuang").asText(),list.path("NamaRuang").asText()
                         });
+                    }
+                }else{
+                    for(JsonNode list:response){
+                        if(list.path("NamaRuang").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            tabMode.addRow(new Object[]{
+                                list.path("KodeRuang").asText(),list.path("NamaRuang").asText()
+                            });
+                        }
                     }
                 }
             }

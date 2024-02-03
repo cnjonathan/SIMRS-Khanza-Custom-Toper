@@ -622,7 +622,7 @@ public final class validasi {
         }
     }
     
-    public void MyReportqry(String reportName,String reportDirName,String judul,String qry,Map parameters){
+    public void MyReportqry(String reportName, String reportDirName, String judul, String qry, Map parameters, int par1){
         Properties systemProp = System.getProperties();
 
         // Ambil current dir

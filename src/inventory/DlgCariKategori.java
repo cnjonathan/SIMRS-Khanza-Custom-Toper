@@ -335,7 +335,7 @@ public final class DlgCariKategori extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/kategoriobat.iyem")<8){
+            if(Valid.daysOld("./cache/kategoriobat.iyem")<30){
                 tampil2();
             }else{
                 tampil();
@@ -418,11 +418,19 @@ public final class DlgCariKategori extends javax.swing.JDialog {
             Valid.tabelKosong(tabMode);
             response = root.path("kategoriobat");
             if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("NamaKategori").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                if(TCari.getText().trim().equals("")){
+                    for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("KodeKategori").asText(),list.path("NamaKategori").asText()
                         });
+                    }
+                }else{
+                    for(JsonNode list:response){
+                        if(list.path("NamaKategori").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            tabMode.addRow(new Object[]{
+                                list.path("KodeKategori").asText(),list.path("NamaKategori").asText()
+                            });
+                        }
                     }
                 }
             }

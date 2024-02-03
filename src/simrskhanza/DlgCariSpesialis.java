@@ -312,7 +312,7 @@ public final class DlgCariSpesialis extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/spesialis.iyem")<8){
+            if(Valid.daysOld("./cache/spesialis.iyem")<30){
                 tampil2();
             }else{
                 tampil();
@@ -404,11 +404,20 @@ public final class DlgCariSpesialis extends javax.swing.JDialog {
             Valid.tabelKosong(tabMode);
             response = root.path("spesialis");
             if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("KodeSpesialis").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaSpesialis").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                if(TCari.getText().trim().equals("")){
+                    for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("KodeSpesialis").asText(),list.path("NamaSpesialis").asText()
-                        });                    }
+                        }); 
+                    }
+                }else{
+                    for(JsonNode list:response){
+                        if(list.path("KodeSpesialis").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaSpesialis").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            tabMode.addRow(new Object[]{
+                                list.path("KodeSpesialis").asText(),list.path("NamaSpesialis").asText()
+                            });                    
+                        }
+                    }
                 }
             }
             myObj.close();

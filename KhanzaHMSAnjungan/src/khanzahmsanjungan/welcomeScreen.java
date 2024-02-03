@@ -203,7 +203,7 @@ public class welcomeScreen extends javax.swing.JFrame {
 
         jLabel4.setForeground(new java.awt.Color(254, 184, 254));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Dikembangkan Oleh Khanza.Soft Media and modified by IT RSUD Kartini 2023");
+        jLabel4.setText("Dikembangkan Oleh Khanza.Soft Media and modified by IT RSUD Kartini 2024");
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jPanel5.add(jLabel4, java.awt.BorderLayout.CENTER);
 

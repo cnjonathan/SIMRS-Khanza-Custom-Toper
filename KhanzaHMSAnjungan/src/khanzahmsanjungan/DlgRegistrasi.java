@@ -828,7 +828,7 @@ public class DlgRegistrasi extends javax.swing.JDialog {
                     // update database booking
                     cek_booking_registrasi= Sequel.cariIsi("SELECT booking_registrasi.tanggal_periksa FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa=CURDATE() and booking_registrasi.no_rkm_medis=?",LblNoRm.getText());
                     if(cek_booking_registrasi.equals("")){
-                        // System.out.println("tidak ada booking");
+                        System.out.println("tidak ada booking");
                     }else{
                         Sequel.queryu("UPDATE booking_registrasi SET status = 'Terdaftar' WHERE booking_registrasi.tanggal_periksa=CURDATE() AND no_rkm_medis = ?;", LblNoRm.getText());
                     }
@@ -926,13 +926,13 @@ public class DlgRegistrasi extends javax.swing.JDialog {
             Valid2.MyReportqry("rptBarcodeRM18.jasper","report","::[ Label Rekam Medis ]::","SELECT reg_periksa.*, pasien.*, poliklinik.nm_poli, penjab.png_jawab, dokter.nm_dokter FROM reg_periksa LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli LEFT JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis LEFT JOIN penjab ON reg_periksa.kd_pj = penjab.kd_pj LEFT JOIN dokter ON reg_periksa.kd_dokter = dokter.kd_dokter WHERE reg_periksa.no_rkm_medis = '"+LblNoRm.getText()+"'  AND reg_periksa.tgl_registrasi = CURDATE();",param, 6);
 
             Map<String, Object> parampaa = new HashMap<>();
-            param.put("namars",nama_instansi);
-            param.put("alamatrs",alamat_instansi);
-            param.put("kotars",kabupaten);
-            param.put("propinsirs",propinsi);
-            param.put("kontakrs",kontak);
-            param.put("emailrs",email);
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            parampaa.put("namars",nama_instansi);
+            parampaa.put("alamatrs",alamat_instansi);
+            parampaa.put("kotars",kabupaten);
+            parampaa.put("propinsirs",propinsi);
+            parampaa.put("kontakrs",kontak);
+            parampaa.put("emailrs",email);
+            parampaa.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid2.MyReportqry("rptAnjungan.jasper","report","::[ Label Anjungan ]::","SELECT pasien.no_ktp, pasien.jk, pasien.nm_pasien, poliklinik.nm_poli, dokter.nm_dokter, reg_periksa.no_reg, reg_periksa.no_rkm_medis, reg_periksa.tgl_registrasi FROM reg_periksa LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli LEFT JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis LEFT JOIN dokter ON reg_periksa.kd_dokter = dokter.kd_dokter WHERE reg_periksa.no_rkm_medis = '"+LblNoRm.getText()+"' AND reg_periksa.tgl_registrasi = CURDATE()",parampaa, 1);
             // System.out.println(LblNoRm.getText());
 

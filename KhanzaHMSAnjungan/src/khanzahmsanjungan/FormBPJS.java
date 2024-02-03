@@ -13,6 +13,7 @@ package khanzahmsanjungan;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import fungsi.validasi2;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -20,6 +21,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -32,15 +35,36 @@ import javax.swing.JOptionPane;
 public class FormBPJS extends javax.swing.JFrame {
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
+    private validasi2 Valid2=new validasi2();
     private final Connection koneksi=koneksiDB.condb();
+    private PreparedStatement ps;
+    private ResultSet rs;
     private String validasiregistrasi=Sequel.cariIsi("select set_validasi_registrasi.wajib_closing_kasir from set_validasi_registrasi");
     private String cek_booking_registrasi, cek_booking_mobile_jkn, cek_reg_periksa, cek_booking_poli, cek_booking_kddokter, cek_reg_periksa_poli, cek_reg_periksa_kddokter, cek_rujukan_bridging_sep, cek_status_checkin, cek_status_checkin_mobile_jkn = "";
     Integer sisahari, cek_rujukan_expired = 0;
     boolean booking, checkin = false;
+    private String nama_instansi, alamat_instansi, kabupaten, propinsi,kontak,email,poli,
+            antrian,nama,norm,dokter,no_rawat,bayar,penjab;
         
     /** Creates new form frmUtama */
     public FormBPJS() {
         initComponents();
+        
+        try {
+            ps=koneksi.prepareStatement("select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo from setting");
+            rs=ps.executeQuery();
+            while(rs.next()){                
+                nama_instansi=rs.getString("nama_instansi");
+                alamat_instansi=rs.getString("alamat_instansi");
+                kabupaten=rs.getString("kabupaten");
+                propinsi=rs.getString("propinsi");
+                kontak=rs.getString("kontak");
+                email=rs.getString("email");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());      
 //        Toolkit tk = Toolkit.getDefaultToolkit();  
 //        int ySize = ((int) tk.getScreenSize().getWidth());
@@ -636,8 +660,6 @@ public class FormBPJS extends javax.swing.JFrame {
                                                 "WHERE \n"+
                                                 "referensi_mobilejkn_bpjs.tanggalperiksa=CURDATE() AND \n"+
                                                 "referensi_mobilejkn_bpjs.norm=?",noRm);
-//        System.out.println("cek_booking_registrasi: "+cek_booking_registrasi);
-//        System.out.println("cek_booking_mobile_jkn: "+cek_booking_mobile_jkn);
         
         if(!cek_booking_registrasi.equals("") || !cek_booking_mobile_jkn.equals("")){
             booking = true;
@@ -664,12 +686,12 @@ public class FormBPJS extends javax.swing.JFrame {
                                                 "WHERE \n"+
                                                 "referensi_mobilejkn_bpjs.tanggalperiksa=CURDATE() AND \n"+
                                                 "referensi_mobilejkn_bpjs.norm=?",noRm);
-//            System.out.println("cek_status_checkin: "+cek_status_checkin);
-//            System.out.println("cek_status_checkin_mobile_jkn: "+cek_status_checkin_mobile_jkn);
+
             
             if(!cek_status_checkin.equals("Belum") || !cek_status_checkin_mobile_jkn.equals("Belum")){
                 checkin = true;
-//                System.out.println("checkin: "+true);
+            }else{
+                checkin = false;
             }
             
             if(!checkin){
@@ -684,7 +706,6 @@ public class FormBPJS extends javax.swing.JFrame {
                 //#################
                 //||   URGENT    ||
                 //#################
-//                System.out.println("Line 686");
                 DlgRegistrasi regis=new DlgRegistrasi(null,true);
                 regis.setSize(this.getWidth(),this.getHeight());
                 regis.setLocationRelativeTo(this);
@@ -699,98 +720,137 @@ public class FormBPJS extends javax.swing.JFrame {
                 // pemisah if antara si doel dan mobile jkn
                 if(!cek_booking_registrasi.equals("")){
                     // tujuan poli dari booking si doel harus sama dengan rujukan dari puskesmas
-                    String kd_poli_bpjs = Sequel.cariIsi("SELECT \n"+
-                                                         "m.kd_poli_bpjs \n"+
-                                                         "FROM \n"+
-                                                         "booking_registrasi br \n"+
-                                                         "LEFT JOIN maping_poli_bpjs m ON br.kd_poli = m.kd_poli_rs \n"+
-                                                         "WHERE \n"+
-                                                         "br.tanggal_periksa=CURDATE() AND \n"+
+                    String kd_poli_bpjs = Sequel.cariIsi("SELECT "+
+                                                         "m.kd_poli_bpjs "+
+                                                         "FROM "+
+                                                         "booking_registrasi br "+
+                                                         "LEFT JOIN maping_poli_bpjs m ON br.kd_poli = m.kd_poli_rs "+
+                                                         "WHERE "+
+                                                         "br.tanggal_periksa=CURDATE() AND "+
                                                          "br.no_rkm_medis = ?",noRm);
-
-                    String query_cek_rujukan_pertama_bridging_sep = "SELECT \n"+
-                                                                    "b.nomr, \n"+
-                                                                    "b.nama_pasien, \n"+
-                                                                    "MIN(REPLACE(b.no_rawat,'/','')) AS no_rawat_min, \n"+
-                                                                    "b.no_rawat AS no_rawat, \n"+
-                                                                    "b.no_rujukan, \n"+
-                                                                    "b.kdpolitujuan, \n"+
-                                                                    "m.kd_poli_rs, \n"+
-                                                                    "m.kd_poli_bpjs, \n"+
-                                                                    "b.nmpolitujuan, \n"+
-                                                                    "(90 - DATEDIFF(CURRENT_DATE,b.tglrujukan)) AS sisahari \n"+
-                                                                    "FROM \n"+
-                                                                    "bridging_sep b \n"+
-                                                                    "LEFT JOIN \n"+
-                                                                    "maping_poli_bpjs m ON b.kdpolitujuan = m.kd_poli_bpjs \n"+
-                                                                    "WHERE \n"+
-                                                                    "b.nomr='"+noRm+"' AND  \n"+
-                                                                    "b.jnspelayanan = '2' AND \n"+
-                                                                    "b.no_rujukan <> '' AND \n"+
-                                                                    "(90 - DATEDIFF(CURRENT_DATE,b.tglrujukan)) > 1";
+                    
+                    String query_cek_rujukan_pertama_bridging_sep = "SELECT "+
+                                                                    "  b.nomr, "+
+                                                                    "  b.nama_pasien, "+
+//                                                                    "  MIN("+
+//                                                                    "    REPLACE(b.no_rawat, '/', '')"+
+//                                                                    "  ) AS no_rawat_min, "+
+                                                                    "  b.no_rawat AS no_rawat, "+
+                                                                    "  b.no_rujukan, "+
+                                                                    "  b.kdpolitujuan, "+
+                                                                    "  m.kd_poli_rs, "+
+                                                                    "  m.kd_poli_bpjs, "+
+                                                                    "  b.nmpolitujuan, "+
+                                                                    "  ("+
+                                                                    "    90 - DATEDIFF(CURRENT_DATE, b.tglrujukan)"+
+                                                                    "  ) AS sisahari "+
+                                                                    "FROM "+
+                                                                    "  bridging_sep b "+
+                                                                    "  LEFT JOIN maping_poli_bpjs m ON b.kdpolitujuan = m.kd_poli_bpjs "+
+                                                                    "WHERE "+
+                                                                    "  b.nomr = '"+noRm+"' "+
+                                                                    "  AND b.jnspelayanan = '2' "+
+                                                                    "  AND b.no_rujukan <> '' "+
+                                                                    "  ORDER BY sisahari DESC "
+//                                                                    "  AND ("+
+//                                                                    "    90 - DATEDIFF(CURRENT_DATE, b.tglrujukan)"+
+//                                                                    "  ) > 1"
+                            ;
+                    
+                    String query_count_rujukan_pertama_bridging_sep = "SELECT "+
+                                                                    "  COUNT(b.nomr) AS jml_data, "+
+                                                                    "  b.nomr, "+
+                                                                    "  b.nama_pasien, "+
+//                                                                    "  MIN("+
+//                                                                    "    REPLACE(b.no_rawat, '/', '')"+
+//                                                                    "  ) AS no_rawat_min, "+
+                                                                    "  b.no_rawat AS no_rawat, "+
+                                                                    "  b.no_rujukan, "+
+                                                                    "  b.kdpolitujuan, "+
+                                                                    "  m.kd_poli_rs, "+
+                                                                    "  m.kd_poli_bpjs, "+
+                                                                    "  b.nmpolitujuan, "+
+                                                                    "  ("+
+                                                                    "    90 - DATEDIFF(CURRENT_DATE, b.tglrujukan)"+
+                                                                    "  ) AS sisahari "+
+                                                                    "FROM "+
+                                                                    "  bridging_sep b "+
+                                                                    "  LEFT JOIN maping_poli_bpjs m ON b.kdpolitujuan = m.kd_poli_bpjs "+
+                                                                    "WHERE "+
+                                                                    "  b.nomr = '"+noRm+"' "+
+                                                                    "  AND b.jnspelayanan = '2' "+
+                                                                    "  AND b.no_rujukan <> '' "
+//                                                                    "  AND ("+
+//                                                                    "    90 - DATEDIFF(CURRENT_DATE, b.tglrujukan)"+
+//                                                                    "  ) > 1"
+                            ;
 
                     try {
                         PreparedStatement ps_rujukan_bridging_sep = koneksi.prepareStatement(query_cek_rujukan_pertama_bridging_sep);
                         ResultSet rs_rujukan_bridging_sep = ps_rujukan_bridging_sep.executeQuery();
-                        rs_rujukan_bridging_sep.next();
-//                        System.out.println("Line 731");
-//                        System.out.println("kd_poli_bpjs "+kd_poli_bpjs);
-//                        System.out.println("kode poli rs: "+rs_rujukan_bridging_sep.getString("kd_poli_rs"));
-                        // dicocokan dari si doel dan bridging sep pertama apakah sama?
-                        // jika ya, maka lanjut ke filter selanjutnya
-                        if(rs_rujukan_bridging_sep.getString("kd_poli_bpjs").equals(kd_poli_bpjs+"")){
-//                            System.out.println("line 735");
-                            sisahari = rs_rujukan_bridging_sep.getInt("sisahari");
-//                            System.out.println("sisahari: "+sisahari);
-                            if(sisahari <= 0){
-                                JOptionPane.showMessageDialog(null,"Rujukan anda sudah expired, \n"+
-                                                                                "silahkan konfirmasi ke petugas registrasi.");
-                            }else if(sisahari > 1){
-                                String no_rawat = rs_rujukan_bridging_sep.getString("no_rawat");
-                                cek_reg_periksa_poli = Sequel.cariIsi("SELECT \n"+
-                                                                        "reg_periksa.kd_poli \n"+
-                                                                        "FROM \n"+
-                                                                        "reg_periksa \n"+
-//                                                                        "LEFT JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat \n"+
-                                                                        "WHERE \n"+
-                                                                        "reg_periksa.no_rawat = ?", no_rawat);
-                                cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT \n"+
-                                                                          "reg_periksa.kd_dokter \n"+
-                                                                          "FROM \n"+
-                                                                          "reg_periksa \n"+
-//                                                                          "LEFT JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat \n"+
-                                                                          "WHERE \n"+
-                                                                          "reg_periksa.no_rawat = ?", no_rawat);
-//                                System.out.println("cek_reg_periksa_poli: "+cek_reg_periksa_poli);
-//                                System.out.println("form bpjs noRm: "+noRm);
-//                                System.out.println("form bpjs cek_booking_poli: "+cek_reg_periksa_poli);
-//                                System.out.println("form bpjs cek_booking_kddokter: "+cek_reg_periksa_kddokter);
-//                                System.out.println("no_rawat: "+no_rawat);
-//                                System.out.println("cek_reg_periksa_kddokter: "+cek_reg_periksa_kddokter);
-//                                System.out.println("cek_reg_periksa_poli: "+cek_reg_periksa_poli);
-                                cek_reg_periksa= Sequel.cariIsi("SELECT \n"+
-                                                                "reg_periksa.no_rawat \n"+
-                                                                "FROM \n"+
-                                                                "reg_periksa \n"+
-                                                                "WHERE \n"+
-                                                                "reg_periksa.tgl_registrasi=CURDATE() AND \n"+
-                                                                "kd_pj = 'BPJ' \n"+
-                                                                "AND reg_periksa.no_rkm_medis=?",noRm);
-                                System.out.println("line 767");
-                                if(!cek_reg_periksa.equals("")){
-                                    // langsung cetak
-                                    regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "true", "bpjs", "Si Doel");
-                                }else{
-                                    regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs", "Si Doel");
-                                }
-                                regis.setVisible(true);
-                            }
+                        
+                        PreparedStatement ps_count_rujukan_bridging_sep = koneksi.prepareStatement(query_count_rujukan_pertama_bridging_sep);
+                        ResultSet rs_count_rujukan_bridging_sep = ps_count_rujukan_bridging_sep.executeQuery();
+                        
+                        rs_count_rujukan_bridging_sep.next();
+                        int jml_data = rs_count_rujukan_bridging_sep.getInt("jml_data");
+                        if(jml_data<1){
+                            System.out.println("null");
+                            printLabelAtasSaja(noRm, "Belum ada rujukan yang tersimpan di kami,");
                         }else{
-                            JOptionPane.showMessageDialog(null,"Tujuan Poliklinik anda tidak sama dengan Poli Rujukan, \n"+
-                                                                                "silahkan konfirmasi ke petugas registrasi.");
-//                            System.out.println("Poli rujukan dari bridging sep: "+rs_rujukan_bridging_sep.getString("kd_poli_rs"));
-//                            System.out.println("Poli tujuan pasien: "+kd_poli_bpjs);
+                            System.out.println("not null");
+                            // dicocokan dari si doel dan bridging sep pertama apakah sama?
+                            // jika ya, maka lanjut ke filter selanjutnya
+                            
+                            rs_rujukan_bridging_sep.next();
+                            String kode_poli_bpjs = rs_rujukan_bridging_sep.getString("kd_poli_bpjs")+" ";
+                            if(kode_poli_bpjs.equals(kd_poli_bpjs+" ")){
+    //                        if(!rs_rujukan_bridging_sep.wasNull()){
+                              System.out.println("line 735 "+rs_rujukan_bridging_sep.getString("kd_poli_bpjs"));
+                              sisahari = rs_rujukan_bridging_sep.getInt("sisahari");
+                              System.out.println("sisahari: "+sisahari);
+                                if(sisahari <= 0){
+                                    printLabelAtasSaja(noRm, "Mohon maaf, rujukan Anda sudah expired,");
+                                }else if(sisahari > 1){
+                                    String no_rawat = rs_rujukan_bridging_sep.getString("no_rawat");
+                                    cek_reg_periksa_poli = Sequel.cariIsi("SELECT \n"+
+                                                                            "reg_periksa.kd_poli \n"+
+                                                                            "FROM \n"+
+                                                                            "reg_periksa \n"+
+    //                                                                        "LEFT JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat \n"+
+                                                                            "WHERE \n"+
+                                                                            "reg_periksa.no_rawat = ?", no_rawat);
+                                    cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT \n"+
+                                                                              "reg_periksa.kd_dokter \n"+
+                                                                              "FROM \n"+
+                                                                              "reg_periksa \n"+
+    //                                                                          "LEFT JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat \n"+
+                                                                              "WHERE \n"+
+                                                                              "reg_periksa.no_rawat = ?", no_rawat);
+
+                                    cek_reg_periksa= Sequel.cariIsi("SELECT \n"+
+                                                                    "reg_periksa.no_rawat \n"+
+                                                                    "FROM \n"+
+                                                                    "reg_periksa \n"+
+                                                                    "WHERE \n"+
+                                                                    "reg_periksa.tgl_registrasi=CURDATE() AND \n"+
+                                                                    "kd_pj = 'BPJ' \n"+
+                                                                    "AND reg_periksa.no_rkm_medis=?",noRm);
+                                    if(!cek_reg_periksa.equals("")){
+                                        // langsung cetak
+                                        regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "true", "bpjs", "Si Doel");
+                                    }else{
+                                        regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs", "Si Doel");
+                                    }
+                                    regis.setVisible(true);
+                                }
+                            }else{
+                                JOptionPane.showMessageDialog(null,"Tujuan Poliklinik anda ("+kd_poli_bpjs+") tidak sama dengan Poli Rujukan("+rs_rujukan_bridging_sep.getString("kd_poli_bpjs")+"), \n"+
+                                                                                    "silahkan konfirmasi ke petugas registrasi.");
+                                printLabelAtasSajaTanpaOpsi(noRm);
+                            }
                         }
+                        
                     } catch (SQLException ex) {
                         Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -803,7 +863,6 @@ public class FormBPJS extends javax.swing.JFrame {
                                                         "reg_periksa.tgl_registrasi=CURDATE() AND \n"+
                                                         "kd_pj = 'BPJ' AND \n"+
                                                         "reg_periksa.no_rkm_medis=?",noRm);
-//                    System.out.println("cek_reg_periksa_poli: "+cek_reg_periksa_poli);
                     cek_reg_periksa_kddokter = Sequel.cariIsi("SELECT \n"+
                                                           "reg_periksa.kd_dokter \n"+
                                                           "FROM \n"+
@@ -812,7 +871,6 @@ public class FormBPJS extends javax.swing.JFrame {
                                                           "reg_periksa.tgl_registrasi=CURDATE() AND \n"+
                                                           "kd_pj = 'BPJ' AND \n"+
                                                           "reg_periksa.no_rkm_medis=?",noRm);
-//                    System.out.println("cek_reg_periksa_kddokter: "+cek_reg_periksa_kddokter);
                     regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs", "Mobile JKN");
                     regis.setVisible(true);
                 }
@@ -829,5 +887,172 @@ public class FormBPJS extends javax.swing.JFrame {
                 pilih.setVisible(true);
             }
         }
+    }
+    
+        public void printLabelAtasSaja(String noRm, String notif){
+        if (JOptionPane.showConfirmDialog(null, notif+"\n apakah Anda membawa rujukan yang baru dari Faskes Pertama?", "WARNING",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            // yes option
+            Map<String, Object> param_expired = new HashMap<>();
+            param_expired.put("namars",nama_instansi);
+            param_expired.put("alamatrs",alamat_instansi);
+            param_expired.put("kotars",kabupaten);
+            param_expired.put("propinsirs",propinsi);
+            param_expired.put("kontakrs",kontak);
+            param_expired.put("emailrs",email);
+            param_expired.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+
+            String cek_booking_registrasi= Sequel.cariIsi("SELECT\n"+
+                            "booking_registrasi.tanggal_periksa \n"+
+                            "FROM \n"+
+                            "booking_registrasi \n"+
+                            "WHERE \n"+
+                            "booking_registrasi.tanggal_periksa=CURDATE() AND \n"+
+                            "kd_pj = 'BPJ' AND \n"+
+                            "booking_registrasi.no_rkm_medis=?",noRm);
+
+            String cek_booking_mobile_jkn= Sequel.cariIsi("SELECT\n"+
+                                                    "referensi_mobilejkn_bpjs.tanggalperiksa \n"+
+                                                    "FROM \n"+
+                                                    "referensi_mobilejkn_bpjs \n"+
+                                                    "WHERE \n"+
+                                                    "referensi_mobilejkn_bpjs.tanggalperiksa=CURDATE() AND \n"+
+                                                    "referensi_mobilejkn_bpjs.norm=?",noRm);
+
+            if(!cek_booking_registrasi.equals("")){
+                Valid2.MyReportqry("rptAnjungan.jasper",
+                                 "report",
+                                       "::[ Label Anjungan ]::",
+                                            "SELECT "+
+                                            "  p.no_ktp, "+
+                                            "  p.jk, "+
+                                            "  p.nm_pasien, "+
+                                            "  poli.nm_poli, "+
+                                            "  d.nm_dokter, "+
+                                            "  b.no_reg, "+
+                                            "  b.no_rkm_medis, "+
+                                            "  b.tanggal_periksa AS tgl_registrasi "+
+                                            "FROM "+
+                                            "  booking_registrasi b "+
+                                            "  INNER JOIN pasien p ON b.no_rkm_medis = p.no_rkm_medis "+
+                                            "  INNER JOIN poliklinik poli ON b.kd_poli = poli.kd_poli "+
+                                            "  INNER JOIN dokter d ON b.kd_dokter = d.kd_dokter "+
+                                            "WHERE "+
+                                            "  b.tanggal_periksa = CURDATE() "+
+                                            "  AND b.kd_pj = 'BPJ' "+
+                                            "  AND b.no_rkm_medis = "+noRm,
+                                   param_expired, 
+                                        1);
+            }else if(!cek_booking_mobile_jkn.equals("")){
+                Valid2.MyReportqry("rptAnjungan.jasper",
+                                 "report",
+                                       "::[ Label Anjungan ]::",
+                                            "SELECT "+
+                                            "  p.no_ktp, "+
+                                            "  p.jk, "+
+                                            "  p.nm_pasien, "+
+                                            "  m.nm_poli_bpjs AS nm_poli, "+
+                                            "  d.nm_dokter, "+
+                                            "  r.nomorantrean AS no_reg, "+
+                                            "  r.norm AS no_rkm_medis, "+
+                                            "  r.tanggalperiksa AS tgl_registrasi "+
+                                            "FROM "+
+                                            "  referensi_mobilejkn_bpjs r "+
+                                            "  INNER JOIN pasien p ON r.norm = p.no_rkm_medis "+
+                                            "  INNER JOIN maping_poli_bpjs m ON r.kodepoli = m.kd_poli_bpjs "+
+                                            "  INNER JOIN dokter d ON r.kodedokter = d.kd_dokter "+
+                                            "WHERE "+
+                                            "  r.tanggalperiksa = CURDATE() "+
+                                            "  AND r.norm ="+noRm,
+                                   param_expired, 
+                                        1);
+            }
+        } else {
+            // no option
+            JOptionPane.showMessageDialog(null,"Silahkan ke Faskes Pertama untuk membuat rujukan yang baru. ");
+        }
+    }
+        
+    public void printLabelAtasSajaTanpaOpsi(String noRm){
+        Map<String, Object> param_expired = new HashMap<>();
+        param_expired.put("namars",nama_instansi);
+        param_expired.put("alamatrs",alamat_instansi);
+        param_expired.put("kotars",kabupaten);
+        param_expired.put("propinsirs",propinsi);
+        param_expired.put("kontakrs",kontak);
+        param_expired.put("emailrs",email);
+        param_expired.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+
+        String cek_booking_registrasi= Sequel.cariIsi("SELECT\n"+
+                        "booking_registrasi.tanggal_periksa \n"+
+                        "FROM \n"+
+                        "booking_registrasi \n"+
+                        "WHERE \n"+
+                        "booking_registrasi.tanggal_periksa=CURDATE() AND \n"+
+                        "kd_pj = 'BPJ' AND \n"+
+                        "booking_registrasi.no_rkm_medis=?",noRm);
+
+        String cek_booking_mobile_jkn= Sequel.cariIsi("SELECT\n"+
+                                                "referensi_mobilejkn_bpjs.tanggalperiksa \n"+
+                                                "FROM \n"+
+                                                "referensi_mobilejkn_bpjs \n"+
+                                                "WHERE \n"+
+                                                "referensi_mobilejkn_bpjs.tanggalperiksa=CURDATE() AND \n"+
+                                                "referensi_mobilejkn_bpjs.norm=?",noRm);
+
+        if(!cek_booking_registrasi.equals("")){
+            Valid2.MyReportqry("rptAnjungan.jasper",
+                             "report",
+                                   "::[ Label Anjungan ]::",
+                                        "SELECT "+
+                                        "  p.no_ktp, "+
+                                        "  p.jk, "+
+                                        "  p.nm_pasien, "+
+                                        "  poli.nm_poli, "+
+                                        "  d.nm_dokter, "+
+                                        "  b.no_reg, "+
+                                        "  b.no_rkm_medis, "+
+                                        "  b.tanggal_periksa AS tgl_registrasi "+
+                                        "FROM "+
+                                        "  booking_registrasi b "+
+                                        "  INNER JOIN pasien p ON b.no_rkm_medis = p.no_rkm_medis "+
+                                        "  INNER JOIN poliklinik poli ON b.kd_poli = poli.kd_poli "+
+                                        "  INNER JOIN dokter d ON b.kd_dokter = d.kd_dokter "+
+                                        "WHERE "+
+                                        "  b.tanggal_periksa = CURDATE() "+
+                                        "  AND b.kd_pj = 'BPJ' "+
+                                        "  AND b.no_rkm_medis = "+noRm,
+                               param_expired, 
+                                    1);
+        }else if(!cek_booking_mobile_jkn.equals("")){
+            Valid2.MyReportqry("rptAnjungan.jasper",
+                             "report",
+                                   "::[ Label Anjungan ]::",
+                                        "SELECT "+
+                                        "  p.no_ktp, "+
+                                        "  p.jk, "+
+                                        "  p.nm_pasien, "+
+                                        "  m.nm_poli_bpjs AS nm_poli, "+
+                                        "  d.nm_dokter, "+
+                                        "  r.nomorantrean AS no_reg, "+
+                                        "  r.norm AS no_rkm_medis, "+
+                                        "  r.tanggalperiksa AS tgl_registrasi "+
+                                        "FROM "+
+                                        "  referensi_mobilejkn_bpjs r "+
+                                        "  INNER JOIN pasien p ON r.norm = p.no_rkm_medis "+
+                                        "  INNER JOIN maping_poli_bpjs m ON r.kodepoli = m.kd_poli_bpjs "+
+                                        "  INNER JOIN dokter d ON r.kodedokter = d.kd_dokter "+
+                                        "WHERE "+
+                                        "  r.tanggalperiksa = CURDATE() "+
+                                        "  AND r.norm ="+noRm,
+                               param_expired, 
+                                    1);
+        }
+        Valid2.MyReportqry("rptNotifPetugas.jasper",
+                             "report",
+                                   "::[ Label Anjungan ]::",
+                                        "SELECT CURDATE() AS tgl_registrasi",
+                               param_expired, 
+                                    1);
     }
 }

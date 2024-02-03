@@ -336,7 +336,7 @@ public final class DlgCariGolongan extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/golonganobat.iyem")<8){
+            if(Valid.daysOld("./cache/golonganobat.iyem")<30){
                 tampil2();
             }else{
                 tampil();
@@ -419,11 +419,19 @@ public final class DlgCariGolongan extends javax.swing.JDialog {
             Valid.tabelKosong(tabMode);
             response = root.path("golonganobat");
             if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("NamaGolongan").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                if(TCari.getText().trim().equals("")){
+                    for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("KodeGolongan").asText(),list.path("NamaGolongan").asText()
                         });
+                    }
+                }else{
+                    for(JsonNode list:response){
+                        if(list.path("NamaGolongan").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            tabMode.addRow(new Object[]{
+                                list.path("KodeGolongan").asText(),list.path("NamaGolongan").asText()
+                            });
+                        }
                     }
                 }
             }

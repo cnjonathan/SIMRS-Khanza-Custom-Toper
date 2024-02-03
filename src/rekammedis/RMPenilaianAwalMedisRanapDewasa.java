@@ -1,5 +1,5 @@
 /*
- * Kontribusi dari Abdul Wahid, RSUD Cipayung Jakarta Timur
+ * Kontribusi dari windiarto
  */
 
 
@@ -2170,7 +2170,10 @@ public final class RMPenilaianAwalMedisRanapDewasa extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());          
             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            param.put("lokalis",Sequel.cariGambar("select lokalis from gambar")); 
+            try {
+                param.put("lokalis",getClass().getResource("/picture/semua.png").openStream());
+            } catch (Exception e) {
+            } 
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString())); 
             
@@ -2575,7 +2578,6 @@ public final class RMPenilaianAwalMedisRanapDewasa extends javax.swing.JDialog {
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_medis_ranap());
         BtnHapus.setEnabled(akses.getpenilaian_awal_medis_ranap());
-        BtnEdit.setEnabled(akses.getpenilaian_awal_medis_ranap());
         BtnEdit.setEnabled(akses.getpenilaian_awal_medis_ranap());
         if(akses.getjml2()>=1){
             KdDokter.setEditable(false);

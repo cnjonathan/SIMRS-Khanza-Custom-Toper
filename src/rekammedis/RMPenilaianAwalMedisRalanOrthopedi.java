@@ -572,6 +572,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
 
         TabRawat.setBackground(new java.awt.Color(254, 255, 254));
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
+        TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
         TabRawat.setPreferredSize(new java.awt.Dimension(457, 480));
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -730,7 +731,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         label11.setBounds(380, 40, 52, 23);
 
         TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
-        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023 09:16:35" }));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-07-2023 10:47:42" }));
         TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglAsuhan.setName("TglAsuhan"); // NOI18N
         TglAsuhan.setOpaque(false);
@@ -773,9 +774,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         FormInput.add(jLabel37);
         jLabel37.setBounds(440, 190, 150, 23);
 
-        Alergi.setBackground(new java.awt.Color(255, 204, 204));
         Alergi.setFocusTraversalPolicyProvider(true);
-        Alergi.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Alergi.setName("Alergi"); // NOI18N
         Alergi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -788,11 +787,9 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         scrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane1.setName("scrollPane1"); // NOI18N
 
-        KeluhanUtama.setBackground(new java.awt.Color(255, 204, 204));
         KeluhanUtama.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         KeluhanUtama.setColumns(20);
         KeluhanUtama.setRows(5);
-        KeluhanUtama.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         KeluhanUtama.setName("KeluhanUtama"); // NOI18N
         KeluhanUtama.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -812,11 +809,9 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         scrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane2.setName("scrollPane2"); // NOI18N
 
-        RPD.setBackground(new java.awt.Color(255, 204, 204));
         RPD.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         RPD.setColumns(20);
         RPD.setRows(5);
-        RPD.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         RPD.setName("RPD"); // NOI18N
         RPD.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -836,11 +831,9 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         scrollPane4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane4.setName("scrollPane4"); // NOI18N
 
-        RPO.setBackground(new java.awt.Color(255, 204, 204));
         RPO.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         RPO.setColumns(20);
         RPO.setRows(5);
-        RPO.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         RPO.setName("RPO"); // NOI18N
         RPO.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -886,9 +879,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         FormInput.add(jLabel16);
         jLabel16.setBounds(540, 240, 50, 23);
 
-        Nadi.setBackground(new java.awt.Color(255, 204, 204));
         Nadi.setFocusTraversalPolicyProvider(true);
-        Nadi.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Nadi.setName("Nadi"); // NOI18N
         Nadi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -908,9 +899,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         FormInput.add(jLabel18);
         jLabel18.setBounds(608, 240, 40, 23);
 
-        Suhu.setBackground(new java.awt.Color(255, 204, 204));
         Suhu.setFocusTraversalPolicyProvider(true);
-        Suhu.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Suhu.setName("Suhu"); // NOI18N
         Suhu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -925,9 +914,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         FormInput.add(jLabel22);
         jLabel22.setBounds(276, 240, 30, 23);
 
-        TD.setBackground(new java.awt.Color(255, 204, 204));
         TD.setFocusTraversalPolicyProvider(true);
-        TD.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         TD.setName("TD"); // NOI18N
         TD.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -955,9 +942,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         FormInput.add(jLabel25);
         jLabel25.setBounds(815, 240, 50, 23);
 
-        RR.setBackground(new java.awt.Color(255, 204, 204));
         RR.setFocusTraversalPolicyProvider(true);
-        RR.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         RR.setName("RR"); // NOI18N
         RR.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -992,9 +977,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         FormInput.add(jLabel12);
         jLabel12.setBounds(326, 270, 30, 23);
 
-        BB.setBackground(new java.awt.Color(255, 204, 204));
         BB.setFocusTraversalPolicyProvider(true);
-        BB.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         BB.setName("BB"); // NOI18N
         BB.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1015,9 +998,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         FormInput.add(jLabel28);
         jLabel28.setBounds(720, 270, 70, 23);
 
-        GCS.setBackground(new java.awt.Color(255, 204, 204));
         GCS.setFocusTraversalPolicyProvider(true);
-        GCS.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         GCS.setName("GCS"); // NOI18N
         GCS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1320,7 +1301,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         PanelWall.setRound(false);
         PanelWall.setLayout(null);
         FormInput.add(PanelWall);
-        PanelWall.setBounds(45, 440, 809, 280);
+        PanelWall.setBounds(44, 440, 809, 280);
 
         jLabel79.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel79.setText("Keterangan :");
@@ -1387,13 +1368,13 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         jLabel108.setText("Terapi/Pengobatan :");
         jLabel108.setName("jLabel108"); // NOI18N
         FormInput.add(jLabel108);
-        jLabel108.setBounds(454, 1050, 190, 20);
+        jLabel108.setBounds(454, 1050, 190, 23);
 
         jLabel112.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel112.setText("Permasalahan :");
         jLabel112.setName("jLabel112"); // NOI18N
         FormInput.add(jLabel112);
-        jLabel112.setBounds(44, 1050, 190, 20);
+        jLabel112.setBounds(44, 1050, 190, 23);
 
         scrollPane20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane20.setName("scrollPane20"); // NOI18N
@@ -1433,7 +1414,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         jLabel113.setText("Tindakan/Rencana Tindakan :");
         jLabel113.setName("jLabel113"); // NOI18N
         FormInput.add(jLabel113);
-        jLabel113.setBounds(44, 1120, 320, 20);
+        jLabel113.setBounds(44, 1120, 320, 23);
 
         jSeparator21.setBackground(new java.awt.Color(239, 244, 234));
         jSeparator21.setForeground(new java.awt.Color(239, 244, 234));
@@ -1506,7 +1487,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-07-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1520,7 +1501,7 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-07-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2029,7 +2010,10 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());          
             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            param.put("lokalis",Sequel.cariGambar("select gambar.lokalisortho from gambar")); 
+            try {
+                param.put("lokalis",getClass().getResource("/picture/LokalisOrtho.png").openStream()); 
+            } catch (Exception e) {
+            }
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString())); 
             
@@ -2504,13 +2488,8 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
-                    "select reg_periksa.no_rkm_medis,pasien.nm_pasien, if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,reg_periksa.tgl_registrasi, "+
-                    "penilaian_awal_keperawatan_ralan.td,penilaian_awal_keperawatan_ralan.nadi,penilaian_awal_keperawatan_ralan.rr," +
-                    "penilaian_awal_keperawatan_ralan.suhu,penilaian_awal_keperawatan_ralan.gcs,penilaian_awal_keperawatan_ralan.bb," +
-                    "penilaian_awal_keperawatan_ralan.tb,penilaian_awal_keperawatan_ralan.keluhan_utama,penilaian_awal_keperawatan_ralan.rpd," +
-                    "penilaian_awal_keperawatan_ralan.rpk,penilaian_awal_keperawatan_ralan.rpo,penilaian_awal_keperawatan_ralan.alergi "+ 
+                    "select reg_periksa.no_rkm_medis,pasien.nm_pasien, if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,reg_periksa.tgl_registrasi "+
                     "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "left join penilaian_awal_keperawatan_ralan on penilaian_awal_keperawatan_ralan.no_rawat=reg_periksa.no_rawat "+ 
                     "where reg_periksa.no_rawat=?");
             try {
                 ps.setString(1,TNoRw.getText());
@@ -2521,17 +2500,6 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
                     TPasien.setText(rs.getString("nm_pasien"));
                     Jk.setText(rs.getString("jk"));
                     TglLahir.setText(rs.getString("tgl_lahir"));
-                    
-                    KeluhanUtama.setText(rs.getString("keluhan_utama"));
-                    RPD.setText(rs.getString("rpd"));
-                    RPO.setText(rs.getString("rpo"));
-                    Alergi.setText(rs.getString("alergi"));
-                    GCS.setText(rs.getString("gcs"));
-                    BB.setText(rs.getString("bb"));
-                    TD.setText(rs.getString("td"));
-                    Nadi.setText(rs.getString("nadi"));
-                    RR.setText(rs.getString("rr"));
-                    Suhu.setText(rs.getString("suhu"));
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
@@ -2558,7 +2526,6 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_medis_ralan_orthopedi());
         BtnHapus.setEnabled(akses.getpenilaian_awal_medis_ralan_orthopedi());
-        BtnEdit.setEnabled(akses.getpenilaian_awal_medis_ralan_orthopedi());
         BtnEdit.setEnabled(akses.getpenilaian_awal_medis_ralan_orthopedi());
         if(akses.getjml2()>=1){
             KdDokter.setEditable(false);

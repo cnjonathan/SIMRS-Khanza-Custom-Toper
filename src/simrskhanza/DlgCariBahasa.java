@@ -333,7 +333,7 @@ public final class DlgCariBahasa extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/bahasa.iyem")<8){
+            if(Valid.daysOld("./cache/bahasa.iyem")<30){
                 tampil2();
             }else{
                 tampil();
@@ -428,11 +428,19 @@ public final class DlgCariBahasa extends javax.swing.JDialog {
             Valid.tabelKosong(tabMode);
             response = root.path("bahasa");
             if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("Bahasa").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                if(TCari.getText().trim().equals("")){
+                    for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             list.path("ID").asText(),list.path("Bahasa").asText()
                         });
+                    } 
+                }else{
+                    for(JsonNode list:response){
+                        if(list.path("Bahasa").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            tabMode.addRow(new Object[]{
+                                list.path("ID").asText(),list.path("Bahasa").asText()
+                            });
+                        }
                     }
                 }
             }
