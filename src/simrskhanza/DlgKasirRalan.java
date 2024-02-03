@@ -9035,10 +9035,11 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                                         "	pasien p ON reg.no_rkm_medis = p.no_rkm_medis "+
                                         "INNER JOIN "+
                                         "	bridging_sep bs ON pr.no_rawat = bs.no_rawat "+
-                                        "INNER JOIN "+
+                                        "LEFT JOIN "+
                                         "	bridging_surat_kontrol_bpjs sk ON bs.no_sep = sk.no_sep "+
                                         "WHERE "+
-                                        "	pr.no_rawat = '"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 14)+"'";
+                                        "	pr.no_rawat = '"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 14)+"' AND"+
+                                        "	pr.nip = '"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0)+"'";
         System.out.println("query_surat_kontrol: "+query_surat_kontrol);
         Valid.MyReportqry("rptSuratKontrol.jasper","report","::[ Surat Kontrol BPJS ]::",query_surat_kontrol,param); 
         this.setCursor(Cursor.getDefaultCursor());
