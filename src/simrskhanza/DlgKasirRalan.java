@@ -9017,6 +9017,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString()+"\nID "+(finger.equals("")?tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString():finger)+"\n"+Valid.SetTgl3(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),15).toString()));
         String query_surat_kontrol =    "SELECT "+
                                         "    sk.no_surat, "+
+                                        "    reg.no_rkm_medis, "+
                                         "    p.nm_pasien, "+
                                         "    pr.penilaian, "+
                                         "    pr.rtl, "+
