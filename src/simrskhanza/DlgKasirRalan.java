@@ -6820,11 +6820,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         TNoReg.setHighlighter(null);
         TNoReg.setName("TNoReg"); // NOI18N
         TNoReg.setPreferredSize(new java.awt.Dimension(50, 23));
-        TNoReg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TNoRegActionPerformed(evt);
-            }
-        });
         TNoReg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TNoRegKeyPressed(evt);
