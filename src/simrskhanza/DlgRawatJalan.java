@@ -95,6 +95,7 @@ import rekammedis.RMPemantauanMEOWS;
 import rekammedis.RMPemantauanPEWS;
 import rekammedis.RMPemantauanEWSD;
 import rekammedis.RMPemantauanEWSNeonatus;
+import rekammedis.RMPenatalaksanaanTerapiOkupasi;
 import rekammedis.RMPengkajianRestrain;
 import rekammedis.RMPenilaianAwalKeperawatanBayiAnak;
 import rekammedis.RMPenilaianAwalKeperawatanGigi;
@@ -9296,7 +9297,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnIcareNIKKeyPressed
 
-private void BtnAwalMedisKulitKelaminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAwalMedisKulitKelaminActionPerformed
+    private void BtnAwalMedisKulitKelaminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAwalMedisKulitKelaminActionPerformed
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -9656,6 +9657,23 @@ private void BtnAwalMedisKulitKelaminActionPerformed(java.awt.event.ActionEvent 
         }
     } 
     
+    private void BtnPenatalaksanaanTerapiOkupasiActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMPenatalaksanaanTerapiOkupasi form=new RMPenatalaksanaanTerapiOkupasi(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.tampil();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    } 
     /**
     * @param args the command line arguments
     */
@@ -10012,7 +10030,7 @@ private void BtnAwalMedisKulitKelaminActionPerformed(java.awt.event.ActionEvent 
     private widget.Table tbTindakan2;
     private widget.Table tbTindakan3;
     // End of variables declaration//GEN-END:variables
-    private widget.Button BtnSkorBromagePascaAnestesi,BtnPenilaianPreInduksi,BtnHasilPemeriksaanUSGUrologi,BtnHasilPemeriksaanUSGGynecologi,BtnHasilPemeriksaanEKG;
+    private widget.Button BtnSkorBromagePascaAnestesi,BtnPenilaianPreInduksi,BtnHasilPemeriksaanUSGUrologi,BtnHasilPemeriksaanUSGGynecologi,BtnHasilPemeriksaanEKG,BtnPenatalaksanaanTerapiOkupasi;
     
     private void tampilDr() {
         Valid.tabelKosong(tabModeDr);
@@ -10712,6 +10730,10 @@ private void BtnAwalMedisKulitKelaminActionPerformed(java.awt.event.ActionEvent 
         }
         BtnHasilPemeriksaanEKG.setVisible(akses.gethasil_pemeriksaan_ekg()); 
         if(akses.gethasil_pemeriksaan_ekg()==true){
+            tinggi=tinggi+24;
+        }
+        BtnPenatalaksanaanTerapiOkupasi.setVisible(akses.getpenatalaksanaan_terapi_okupasi()); 
+        if(akses.getpenatalaksanaan_terapi_okupasi()==true){
             tinggi=tinggi+24;
         }
         FormMenu.setPreferredSize(new Dimension(195,(tinggi+10)));
@@ -12080,6 +12102,32 @@ private void BtnAwalMedisKulitKelaminActionPerformed(java.awt.event.ActionEvent 
         BtnHasilPemeriksaanEKG.setRoundRect(false);
         BtnHasilPemeriksaanEKG.addActionListener(this::BtnHasilPemeriksaanEKGActionPerformed);
         
+        BtnPenatalaksanaanTerapiOkupasi = new widget.Button();
+        BtnPenatalaksanaanTerapiOkupasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnPenatalaksanaanTerapiOkupasi.setText("Tatalaksana Terapi Okupasi");
+        BtnPenatalaksanaanTerapiOkupasi.setFocusPainted(false);
+        BtnPenatalaksanaanTerapiOkupasi.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        BtnPenatalaksanaanTerapiOkupasi.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenatalaksanaanTerapiOkupasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenatalaksanaanTerapiOkupasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenatalaksanaanTerapiOkupasi.setName("BtnPenatalaksanaanTerapiOkupasi"); 
+        BtnPenatalaksanaanTerapiOkupasi.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenatalaksanaanTerapiOkupasi.setRoundRect(false);
+        BtnPenatalaksanaanTerapiOkupasi.addActionListener(this::BtnPenatalaksanaanTerapiOkupasiActionPerformed);
+        
+        BtnPenilaianPsikolog = new widget.Button();
+        BtnPenilaianPsikolog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); 
+        BtnPenilaianPsikolog.setText("Penilaian Psikolog");
+        BtnPenilaianPsikolog.setFocusPainted(false);
+        BtnPenilaianPsikolog.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        BtnPenilaianPsikolog.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenilaianPsikolog.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenilaianPsikolog.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenilaianPsikolog.setName("BtnPenilaianPsikolog"); 
+        BtnPenilaianPsikolog.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenilaianPsikolog.setRoundRect(false);
+        BtnPenilaianPsikolog.addActionListener(this::BtnPenilaianPsikologActionPerformed);
+        
         FormMenu.add(BtnRiwayat);
         FormMenu.add(BtnResepObat);
         FormMenu.add(BtnCopyResep);
@@ -12104,6 +12152,7 @@ private void BtnAwalMedisKulitKelaminActionPerformed(java.awt.event.ActionEvent 
         FormMenu.add(BtnAwalKeperawatanGeriatri);
         FormMenu.add(BtnAwalFisioterapi);
         FormMenu.add(BtnAwalTerapiWicara);
+        FormMenu.add(BtnPenatalaksanaanTerapiOkupasi);
         FormMenu.add(BtnAwalMedisIGD);
         FormMenu.add(BtnAwalMedisIGDPsikiatri);
         FormMenu.add(BtnAwalMedis);

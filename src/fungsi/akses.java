@@ -1029,7 +1029,12 @@ public final class akses {
                             hasil_pemeriksaan_ekg=false,
                             hapus_edit_sep_bpjs=false,
                             satu_sehat_kirim_diet=false,
-                            satu_sehat_mapping_obat=false;
+                            satu_sehat_mapping_obat=false,
+                            dapur_ringkasan_pembelian=false,
+                            satu_sehat_kirim_medication=false,
+                            satu_sehat_kirim_medicationrequest=false,
+                            penatalaksanaan_terapi_okupasi=false,
+                            satu_sehat_kirim_medicationdispense=false;
     
     public static void setData(String user, String pass) {
         try {        
@@ -2038,6 +2043,30 @@ public final class akses {
                         akses.bpjs_mapping_obat_apotek=true;
                         akses.pembayaran_bank_mandiri=true;
                         akses.penilaian_ulang_nyeri=true;
+                        akses.penilaian_terapi_wicara=true;
+                        akses.bpjs_obat_23hari_apotek=true;
+                        akses.pengkajian_restrain=true;
+                        akses.bpjs_kunjungan_sep_apotek=true;
+                        akses.bpjs_monitoring_klaim_apotek=true;
+                        akses.bpjs_daftar_pelayanan_obat_apotek=true;
+                        akses.penilaian_awal_medis_ralan_paru=true;
+                        akses.catatan_keperawatan_ralan=true;
+                        akses.catatan_persalinan=true;
+                        akses.skor_aldrette_pasca_anestesi=true;
+                        akses.skor_steward_pasca_anestesi=true;
+                        akses.skor_bromage_pasca_anestesi=true;
+                        akses.penilaian_pre_induksi=true;
+                        akses.hasil_usg_urologi=true;
+                        akses.hasil_usg_gynecologi=true;
+                        akses.hasil_pemeriksaan_ekg=true;
+                        akses.hapus_edit_sep_bpjs=true;
+                        akses.satu_sehat_kirim_diet=true;
+                        akses.satu_sehat_mapping_obat=true;
+                        akses.dapur_ringkasan_pembelian=true;
+                        akses.satu_sehat_kirim_medication=true;
+                        akses.satu_sehat_kirim_medicationrequest=true;
+                        akses.penatalaksanaan_terapi_okupasi=true;
+                        akses.satu_sehat_kirim_medicationdispense=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -3030,6 +3059,30 @@ public final class akses {
                         akses.bpjs_mapping_obat_apotek=rs2.getBoolean("bpjs_mapping_obat_apotek");
                         akses.pembayaran_bank_mandiri=rs2.getBoolean("pembayaran_bank_mandiri");
                         akses.penilaian_ulang_nyeri=rs2.getBoolean("penilaian_ulang_nyeri");
+                        akses.penilaian_terapi_wicara=rs2.getBoolean("penilaian_terapi_wicara");
+                        akses.bpjs_obat_23hari_apotek=rs2.getBoolean("bpjs_obat_23hari_apotek");
+                        akses.pengkajian_restrain=rs2.getBoolean("pengkajian_restrain");
+                        akses.bpjs_kunjungan_sep_apotek=rs2.getBoolean("bpjs_kunjungan_sep_apotek");
+                        akses.bpjs_monitoring_klaim_apotek=rs2.getBoolean("bpjs_monitoring_klaim_apotek");
+                        akses.bpjs_daftar_pelayanan_obat_apotek=rs2.getBoolean("bpjs_daftar_pelayanan_obat_apotek");
+                        akses.penilaian_awal_medis_ralan_paru=rs2.getBoolean("penilaian_awal_medis_ralan_paru");
+                        akses.catatan_keperawatan_ralan=rs2.getBoolean("catatan_keperawatan_ralan");
+                        akses.catatan_persalinan=rs2.getBoolean("catatan_persalinan");
+                        akses.skor_aldrette_pasca_anestesi=rs2.getBoolean("skor_aldrette_pasca_anestesi");
+                        akses.skor_steward_pasca_anestesi=rs2.getBoolean("skor_steward_pasca_anestesi");
+                        akses.skor_bromage_pasca_anestesi=rs2.getBoolean("skor_bromage_pasca_anestesi");
+                        akses.penilaian_pre_induksi=rs2.getBoolean("penilaian_pre_induksi");
+                        akses.hasil_usg_urologi=rs2.getBoolean("hasil_usg_urologi");
+                        akses.hasil_usg_gynecologi=rs2.getBoolean("hasil_usg_gynecologi");
+                        akses.hasil_pemeriksaan_ekg=rs2.getBoolean("hasil_pemeriksaan_ekg");
+                        akses.hapus_edit_sep_bpjs=rs2.getBoolean("hapus_edit_sep_bpjs");
+                        akses.satu_sehat_kirim_diet=rs2.getBoolean("satu_sehat_kirim_diet");
+                        akses.satu_sehat_mapping_obat=rs2.getBoolean("satu_sehat_mapping_obat");
+                        akses.dapur_ringkasan_pembelian=rs2.getBoolean("dapur_ringkasan_pembelian");
+                        akses.satu_sehat_kirim_medication=rs2.getBoolean("satu_sehat_kirim_medication");
+                        akses.satu_sehat_kirim_medicationrequest=rs2.getBoolean("satu_sehat_kirim_medicationrequest");
+                        akses.penatalaksanaan_terapi_okupasi=rs2.getBoolean("penatalaksanaan_terapi_okupasi");
+                        akses.satu_sehat_kirim_medicationdispense=rs2.getBoolean("satu_sehat_kirim_medicationdispense");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         akses.kode="";                  
                         akses.penyakit= false;
@@ -4039,6 +4092,11 @@ public final class akses {
                         akses.hapus_edit_sep_bpjs=false;
                         akses.satu_sehat_kirim_diet=false;
                         akses.satu_sehat_mapping_obat=false;
+                        akses.dapur_ringkasan_pembelian=false;
+                        akses.satu_sehat_kirim_medication=false;
+                        akses.satu_sehat_kirim_medicationrequest=false;
+                        akses.penatalaksanaan_terapi_okupasi=false;
+                        akses.satu_sehat_kirim_medicationdispense=false;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -5068,6 +5126,11 @@ public final class akses {
         akses.hapus_edit_sep_bpjs=false;
         akses.satu_sehat_kirim_diet=false;
         akses.satu_sehat_mapping_obat=false;
+        akses.dapur_ringkasan_pembelian=false;
+        akses.satu_sehat_kirim_medication=false;
+        akses.satu_sehat_kirim_medicationrequest=false;
+        akses.penatalaksanaan_terapi_okupasi=false;
+        akses.satu_sehat_kirim_medicationdispense=false;
     }
     
     public static int getjml1() {return akses.jml1;}    
@@ -6116,4 +6179,9 @@ public final class akses {
     public static boolean gethapus_edit_sep_bpjs(){return akses.hapus_edit_sep_bpjs;}
     public static boolean getsatu_sehat_kirim_diet(){return akses.satu_sehat_kirim_diet;}
     public static boolean getsatu_sehat_mapping_obat(){return akses.satu_sehat_mapping_obat;}
+    public static boolean getdapur_ringkasan_pembelian(){return akses.dapur_ringkasan_pembelian;}
+    public static boolean getsatu_sehat_kirim_medication(){return akses.satu_sehat_kirim_medication;}
+    public static boolean getsatu_sehat_kirim_medicationrequest(){return akses.satu_sehat_kirim_medicationrequest;}
+    public static boolean getpenatalaksanaan_terapi_okupasi(){return akses.penatalaksanaan_terapi_okupasi;}
+    public static boolean getsatu_sehat_kirim_medicationdispense(){return akses.satu_sehat_kirim_medicationdispense;}
 }   
