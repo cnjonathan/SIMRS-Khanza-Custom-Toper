@@ -1910,6 +1910,11 @@ public class frmUtama extends javax.swing.JFrame {
                 cmbMenuItemStateChanged(evt);
             }
         });
+        cmbMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMenuActionPerformed(evt);
+            }
+        });
         panelisi2.add(cmbMenu);
 
         TCari.setName("TCari"); // NOI18N
@@ -1959,7 +1964,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23/08/2023" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31/01/2024" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -38865,6 +38870,27 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }                
         }
+        
+        if(akses.getworkstation()==true){
+            if(btnWorkstation.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnWorkstation);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getworkstationconfiglist()==true){
+            if(btnWorkstationConfigList.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnWorkstationConfigList);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getworkstationsetup()==true){
+            if(btnWorkstationSetup.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnWorkstationSetup);
+                jmlmenu++;
+            }                
+        }
     }
 
     private void initKhanza() {
@@ -42501,6 +42527,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnRekapPengadaanDapur.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRekapPengadaanDapur.addActionListener(this::btnRekapPengadaanDapurActionPerformed);
         
+        btnRingkasanPengadaanDapur = new widget.ButtonBig();
+        btnRingkasanPengadaanDapur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Rekap_Pengadaan_Dapur.png")));
+        btnRingkasanPengadaanDapur.setText("Ringkasan Pengadaan Dapur");
+        btnRingkasanPengadaanDapur.setIconTextGap(0);
+        btnRingkasanPengadaanDapur.setName("btnRingkasanPengadaanDapur"); 
+        btnRingkasanPengadaanDapur.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnRingkasanPengadaanDapur.addActionListener(this::btnRingkasanPengadaanDapurActionPerformed);
+        
         btnLimbahB3MedisCair = new widget.ButtonBig();
         btnLimbahB3MedisCair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/5958332_disease_drink water_epidemic_hydrate_infection_icon.png")));
         btnLimbahB3MedisCair.setText("Limbah Cair B3 Medis");
@@ -43013,6 +43047,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnPenilaianTerapiWicara.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianTerapiWicara.addActionListener(this::btnPenilaianTerapiWicaraActionPerformed);
         
+        btnPenatalaksanaanTerapiOkupasi = new widget.ButtonBig();
+        btnPenatalaksanaanTerapiOkupasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2185069_dental_dentist_halitosis_human_mouth_icon.png")));
+        btnPenatalaksanaanTerapiOkupasi.setText("Penatalaksanaan Terapi Okupasi");
+        btnPenatalaksanaanTerapiOkupasi.setIconTextGap(0);
+        btnPenatalaksanaanTerapiOkupasi.setName("btnPenatalaksanaanTerapiOkupasi"); 
+        btnPenatalaksanaanTerapiOkupasi.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPenatalaksanaanTerapiOkupasi.addActionListener(this::btnPenatalaksanaanTerapiOkupasiActionPerformed);
+        
         btnPengkajianRestrain = new widget.ButtonBig();
         btnPengkajianRestrain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/3841816_chain_hyperlink_interface_link_multimedia_icon.png")));
         btnPengkajianRestrain.setText("Pengkajian Restrain");
@@ -43140,5 +43182,29 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnMappingObatSatuSehat.setName("btnMappingObatSatuSehat"); 
         btnMappingObatSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnMappingObatSatuSehat.addActionListener(this::btnMappingObatSatuSehatActionPerformed);
+        
+        btnKirimMedicationSatuSehat = new widget.ButtonBig();
+        btnKirimMedicationSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
+        btnKirimMedicationSatuSehat.setText("Kirim Medication Satu Sehat");
+        btnKirimMedicationSatuSehat.setIconTextGap(0);
+        btnKirimMedicationSatuSehat.setName("btnKirimMedicationSatuSehat"); 
+        btnKirimMedicationSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnKirimMedicationSatuSehat.addActionListener(this::btnKirimMedicationSatuSehatActionPerformed);
+        
+        btnKirimMedicationRequestSatuSehat = new widget.ButtonBig();
+        btnKirimMedicationRequestSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
+        btnKirimMedicationRequestSatuSehat.setText("Kirim Medication Request Satu Sehat");
+        btnKirimMedicationRequestSatuSehat.setIconTextGap(0);
+        btnKirimMedicationRequestSatuSehat.setName("btnKirimMedicationRequestSatuSehat"); 
+        btnKirimMedicationRequestSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnKirimMedicationRequestSatuSehat.addActionListener(this::btnKirimMedicationRequestSatuSehatActionPerformed);
+        
+        btnKirimMedicationDispenseSatuSehat = new widget.ButtonBig();
+        btnKirimMedicationDispenseSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
+        btnKirimMedicationDispenseSatuSehat.setText("Kirim Medication Dispense Satu Sehat");
+        btnKirimMedicationDispenseSatuSehat.setIconTextGap(0);
+        btnKirimMedicationDispenseSatuSehat.setName("btnKirimMedicationDispenseSatuSehat"); 
+        btnKirimMedicationDispenseSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnKirimMedicationDispenseSatuSehat.addActionListener(this::btnKirimMedicationDispenseSatuSehatActionPerformed);
     }
 }
