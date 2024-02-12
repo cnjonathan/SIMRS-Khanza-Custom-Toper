@@ -9024,9 +9024,9 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                                         "    sk.nm_poli_bpjs, "+
                                         "    sk.nm_dokter_bpjs "+
                                         "FROM "+
-                                        "	pemeriksaan_ralan pr "+
+                                        "	reg_periksa reg "+
                                         "INNER JOIN "+
-                                        "	reg_periksa reg ON pr.no_rawat = reg.no_rawat "+
+                                        "	pemeriksaan_ralan pr ON pr.no_rawat = reg.no_rawat "+
                                         "INNER JOIN "+
                                         "	pasien p ON reg.no_rkm_medis = p.no_rkm_medis "+
                                         "INNER JOIN "+
@@ -9034,8 +9034,11 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                                         "LEFT JOIN "+
                                         "	bridging_surat_kontrol_bpjs sk ON bs.no_sep = sk.no_sep "+
                                         "WHERE "+
-                                        "	pr.no_rawat = '"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 14)+"' AND"+
-                                        "	pr.nip = '"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0)+"'";
+                                        "	reg.no_rkm_medis = '"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 3)+"' AND"+
+                                        "	reg.kd_poli = '"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 20)+"'"+
+                                        "GROUP BY reg.tgl_registrasi "+
+                                        "ORDER BY reg.tgl_registrasi DESC "+
+                                        "LIMIT 1,1; ";
         System.out.println("query_surat_kontrol: "+query_surat_kontrol);
         Valid.MyReportqry("rptSuratKontrol.jasper","report","::[ Surat Kontrol BPJS ]::",query_surat_kontrol,param); 
         this.setCursor(Cursor.getDefaultCursor());
