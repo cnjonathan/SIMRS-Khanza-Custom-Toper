@@ -16468,6 +16468,18 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             if(ChkTracker.isSelected()==true){
                 ctk();
             }
+            
+            // update database booking
+            String cek_booking_registrasi= Sequel.cariIsi("SELECT booking_registrasi.tanggal_periksa FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa=CURDATE() and booking_registrasi.no_rkm_medis=?",TNoRM.getText());
+            if(cek_booking_registrasi.equals("")){
+                System.out.println("tidak ada booking");
+                Sequel.queryu("UPDATE view_anjungan SET trace_progress = 'antri_poli', petugas_registrasi_at = CURRENT_TIMESTAMP(), param_2='"+TNoRw.getText()+"' WHERE view_anjungan.param_2='"+TNoRw.getText()+"' AND view_anjungan.param_1 = ?;", TNoRM.getText());
+            }else{
+                Sequel.queryu("UPDATE booking_registrasi SET status = 'Terdaftar' WHERE booking_registrasi.tanggal_periksa=CURDATE() AND no_rkm_medis = ?;", TNoRM.getText());
+                // update trigger di table view_anjungan set trace_progress menjadi antri_poli karena langsung ke poli
+                Sequel.queryu("UPDATE view_anjungan SET type_booking='sidoel', trace_progress = 'antri_poli', antri_poli_at = CURRENT_TIMESTAMP(), param_2='"+TNoRw.getText()+"' WHERE view_anjungan.param_2=CURDATE() AND view_anjungan.param_1 = ?;", TNoRM.getText());
+            }
+            
             if(TabRawat.getSelectedIndex()==0){
                 String kehadiran = Sequel.cariIsi("SELECT k.status_kehadiran FROM kehadiran_pasien_bpjs k WHERE k.no_rawat = '"+TNoRw.getText()+"' AND k.no_rm = '"+TNoRM.getText()+"'");
                     String ket_hadir = "";

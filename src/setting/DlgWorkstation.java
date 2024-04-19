@@ -316,16 +316,16 @@ public class DlgWorkstation extends javax.swing.JDialog {
 }//GEN-LAST:event_txtAlamatIpKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-//        if(txtWorkstation.getText().trim().equals("")){
-//            Valid.textKosong(txtWorkstation,"Workstation/Hostname");
-//        }else if(txtAlamatIp.getText().trim().equals("")){
-//            Valid.textKosong(txtAlamatIp,"Alamat IP");
-//        }else if(tabMode.getRowCount()==0){
+        if(txtWorkstation.getText().trim().equals("")){
+            Valid.textKosong(txtWorkstation,"Workstation/Hostname");
+        }else if(txtAlamatIp.getText().trim().equals("")){
+            Valid.textKosong(txtAlamatIp,"Alamat IP");
+        }else{
             System.out.println("Menyimpan workstation");
             Sequel.menyimpan("`workstation`(`ip_address`, `workstation`)","'"+txtAlamatIp.getText()+"','"+txtWorkstation.getText()+"'","Alamat IP");
             tampil();
             emptTeks();
-//        }
+        }
 //        else if(tabMode.getRowCount()>0){
 //            JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Admin Utama ...!!!!");
 //            txtWorkstation.requestFocus();

@@ -657,12 +657,11 @@ public final class validasi2 {
 
         File fileRpt;
         String fullPath = "";
-        System.out.println("Cek apakah file RptMaster.jrxml ada");
         if (dir.isDirectory()) {
             String[] isiDir = dir.list();
             for (String iDir : isiDir) {
                 fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
-                if (fileRpt.isFile()) { 
+                if (fileRpt.isFile()) { // Cek apakah file RptMaster.jrxml ada
                     fullPath = fileRpt.toString();
                     System.out.println("Found Report File at : " + fullPath);
                 } // end if

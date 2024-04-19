@@ -87,8 +87,25 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         initComponents();
         
         tabMode=new DefaultTableModel(null,new Object[]{
-            "P","Kode Periksa","Nama Pemeriksaan","Tarif","Bagian RS","BHP","Tarif Perujuk","Tarif Dokter","Tarif Petugas","Kso","Menejemen",
-            "Proyeksi","kV","mAS","FFD","BSF","Inak","Jml Penyinaran","Dosis Radiasi"
+            "P", //0
+            "Kode Periksa", //1
+            "Nama Pemeriksaan", //2
+            "Tarif", //3
+            "Bagian RS", //4
+            "BHP", //5
+            "Tarif Perujuk", //6
+            "Tarif Dokter", //7
+            "Tarif Petugas", //8
+            "Kso", //9
+            "Menejemen", //10
+            "Proyeksi", //11
+            "kV", //12
+            "mAS", //13
+            "FFD", //14
+            "BSF", //15
+            "Inak", //16
+            "Jml Penyinaran", //17
+            "Dosis Radiasi" //18
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -98,11 +115,25 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class,
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class,
+                java.lang.Object.class, 
+                java.lang.Object.class, 
+                java.lang.Double.class,
+                java.lang.Double.class, 
+                java.lang.Double.class, 
+                java.lang.Double.class, 
+                java.lang.Double.class,
+                java.lang.Double.class, 
+                java.lang.Double.class, 
+                java.lang.Double.class, 
+                java.lang.Object.class, 
+                java.lang.Object.class, 
+                java.lang.Object.class, 
+                java.lang.Object.class, 
+                java.lang.Object.class, 
+                java.lang.Object.class, 
+                java.lang.Object.class, 
+                java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -1497,7 +1528,16 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             pemeriksaan="";
             for(i=0;i<tbPemeriksaan.getRowCount();i++){
                 if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
-                    pemeriksaan=tbPemeriksaan.getValueAt(i,2).toString()+" dengan Proyeksi : "+tbPemeriksaan.getValueAt(i,11).toString()+", kV : "+tbPemeriksaan.getValueAt(i,12).toString()+", mAS : "+tbPemeriksaan.getValueAt(i,13).toString()+", FFD : "+tbPemeriksaan.getValueAt(i,14).toString()+", BSF : "+tbPemeriksaan.getValueAt(i,15).toString()+", Inak : "+tbPemeriksaan.getValueAt(i,16).toString()+", Jml Penyinaran : "+tbPemeriksaan.getValueAt(i,17).toString()+", Dosis Radiasi : "+tbPemeriksaan.getValueAt(i,18).toString()+", "+pemeriksaan;
+                    pemeriksaan=tbPemeriksaan.getValueAt(i,2).toString()+
+                            " dengan Proyeksi : "+tbPemeriksaan.getValueAt(i,11).toString()+
+                            ", kV : "+tbPemeriksaan.getValueAt(i,12).toString()+
+                            ", mAS : "+tbPemeriksaan.getValueAt(i,13).toString()+
+                            ", FFD : "+tbPemeriksaan.getValueAt(i,14).toString()+
+                            ", BSF : "+tbPemeriksaan.getValueAt(i,15).toString()+
+                            ", Inak : "+tbPemeriksaan.getValueAt(i,16).toString()+
+                            ", Jml Penyinaran : "+tbPemeriksaan.getValueAt(i,17).toString()+
+                            ", Dosis Radiasi : "+tbPemeriksaan.getValueAt(i,18).toString()+
+                            ", \n"+pemeriksaan;
                 }
             }
             Map<String, Object> param = new HashMap<>();
@@ -2086,13 +2126,27 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     public void tampil(String order) {         
         try{
             pspemeriksaan=koneksi.prepareStatement(
-                    "select jns_perawatan_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,jns_perawatan_radiologi.total_byr,"+
-                    "jns_perawatan_radiologi.bagian_rs,jns_perawatan_radiologi.bhp,jns_perawatan_radiologi.tarif_perujuk,"+
-                    "jns_perawatan_radiologi.tarif_tindakan_dokter,jns_perawatan_radiologi.tarif_tindakan_petugas,"+
-                    "jns_perawatan_radiologi.kso,jns_perawatan_radiologi.menejemen,penjab.png_jawab "+
-                    "from jns_perawatan_radiologi inner join penjab inner join permintaan_pemeriksaan_radiologi "+
-                    " on penjab.kd_pj=jns_perawatan_radiologi.kd_pj and jns_perawatan_radiologi.kd_jenis_prw=permintaan_pemeriksaan_radiologi.kd_jenis_prw where "+
-                    " permintaan_pemeriksaan_radiologi.noorder=? order by jns_perawatan_radiologi.kd_jenis_prw");            
+                    "select \n" +
+                    "  jns_perawatan_radiologi.kd_jenis_prw, \n" +
+                    "  jns_perawatan_radiologi.nm_perawatan, \n" +
+                    "  jns_perawatan_radiologi.total_byr, \n" +
+                    "  jns_perawatan_radiologi.bagian_rs, \n" +
+                    "  jns_perawatan_radiologi.bhp, \n" +
+                    "  jns_perawatan_radiologi.tarif_perujuk, \n" +
+                    "  jns_perawatan_radiologi.tarif_tindakan_dokter, \n" +
+                    "  jns_perawatan_radiologi.tarif_tindakan_petugas, \n" +
+                    "  jns_perawatan_radiologi.kso, \n" +
+                    "  jns_perawatan_radiologi.menejemen, \n" +
+                    "  penjab.png_jawab \n" +
+                    "from \n" +
+                    "  jns_perawatan_radiologi \n" +
+                    "  inner join penjab \n" +
+                    "  inner join permintaan_pemeriksaan_radiologi on penjab.kd_pj = jns_perawatan_radiologi.kd_pj \n" +
+                    "  and jns_perawatan_radiologi.kd_jenis_prw = permintaan_pemeriksaan_radiologi.kd_jenis_prw \n" +
+                    "where \n" +
+                    "  permintaan_pemeriksaan_radiologi.noorder = ? \n" +
+                    "order by \n" +
+                    "  jns_perawatan_radiologi.kd_jenis_prw");            
             try {
                 pspemeriksaan.setString(1,order);
                 rs=pspemeriksaan.executeQuery();                
@@ -2127,20 +2181,38 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                     " permintaan_pemeriksaan_radiologi.noorder=? order by jns_perawatan_radiologi.kd_jenis_prw");            
             try {
                 pspemeriksaan.setString(1,order);
-                rs=pspemeriksaan.executeQuery();                
-                while(rs.next()){      
+                System.out.println("pspemeriksaan: "+pspemeriksaan);
+                rs=pspemeriksaan.executeQuery();
+                while(rs.next()){
+                    System.out.println("nm_perawatan: "+rs.getString("nm_perawatan"));
                     pspemeriksaan2=koneksiradiologi.prepareStatement(
                             "select proyeksi, kV, mAS, FFD, BSF, inak, jml_penyinaran, dosis,link_ris from order_out where kode_tindakan=? and no_rontgen=?");
                     try {
                         pspemeriksaan2.setString(1,rs.getString("kd_jenis_prw"));
-                        pspemeriksaan2.setString(2,order);
+                        pspemeriksaan2.setString(2,order.replace("PR", ""));
+                        System.out.println("pspemeriksaan2: "+pspemeriksaan2);
                         rs2=pspemeriksaan2.executeQuery();
                         if(rs2.next()){
+                            System.out.println("link_ris: "+rs2.getString("link_ris"));
                             tabMode.addRow(new Object[]{
-                                true,rs.getString(1),rs.getString(2),rs.getDouble(3),rs.getDouble(4),rs.getDouble(5),rs.getDouble(6),
-                                rs.getDouble(7),rs.getDouble(8),rs.getDouble(9),rs.getDouble(10),rs2.getString("proyeksi"),rs2.getString("kV"),
-                                rs2.getString("mAS"),rs2.getString("FFD"),rs2.getString("BSF"),rs2.getString("inak"),rs2.getString("jml_penyinaran"),
-                                rs2.getString("dosis")
+                                true,rs.getString(1),
+                                rs.getString(2),
+                                rs.getDouble(3),
+                                rs.getDouble(4),
+                                rs.getDouble(5),
+                                rs.getDouble(6),
+                                rs.getDouble(7),
+                                rs.getDouble(8),
+                                rs.getDouble(9),
+                                rs.getDouble(10),
+                                (rs2.getString("proyeksi") != null ? rs2.getString("proyeksi") : "-"), //11
+                                (rs2.getString("kV") != null ? rs2.getString("kV") : "-"), //12
+                                (rs2.getString("mAS") != null ? rs2.getString("mAS") : "-"), //13
+                                (rs2.getString("FFD") != null ? rs2.getString("FFD") : "-"), //14
+                                (rs2.getString("BSF") != null ? rs2.getString("BSF") : "-"), //15
+                                (rs2.getString("inak") != null ? rs2.getString("inak") : "-"), //16
+                                (rs2.getString("jml_penyinaran") != null ? rs2.getString("jml_penyinaran") : "-"), //17
+                                (rs2.getString("dosis") != null ? rs2.getString("dosis") : "-") //18
                             });
                             url=rs2.getString("link_ris");
                             koneksiradiologi.prepareStatement("update order_out set statusupdate='1' where kode_tindakan='"+rs.getString("kd_jenis_prw")+"' and no_rontgen='"+order.replaceAll("PR","")+"'").executeUpdate();
@@ -2160,11 +2232,17 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                 pspemeriksaan2=koneksiradiologi.prepareStatement(
                         "select expertise_finding, expertise_conclusion, expertise_bookmark from order_out where no_rontgen=?");
                 try {
-                    pspemeriksaan2.setString(1,order);
+                    pspemeriksaan2.setString(1,order.replace("PR", ""));
+                    System.out.println("pspemeriksaan2: "+pspemeriksaan2);
                     rs2=pspemeriksaan2.executeQuery();
-                    if(rs2.next()){
-                        HasilPeriksa.setText("Finding : "+rs2.getString("expertise_finding")+", Konklusi : "+rs2.getString("expertise_conclusion")+", Bookmark : "+rs2.getString("expertise_bookmark"));
+                    String textHasilPeriksa = "";
+                    for(i=0;i<tbPemeriksaan.getRowCount();i++){
+                        if(rs2.next()){
+//                        HasilPeriksa.setText("Finding : "+rs2.getString("expertise_finding")+", Konklusi : "+rs2.getString("expertise_conclusion")+", Bookmark : "+rs2.getString("expertise_bookmark"));
+                          textHasilPeriksa = "Finding : "+rs2.getString("expertise_finding")+", Konklusi : "+rs2.getString("expertise_conclusion")+", Bookmark : "+rs2.getString("expertise_bookmark")+" \n\n"+textHasilPeriksa;
+                        }
                     }
+                    HasilPeriksa.setText(textHasilPeriksa);
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
                 } finally{

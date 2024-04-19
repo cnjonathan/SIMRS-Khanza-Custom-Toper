@@ -173,6 +173,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     public  DlgCariPegawai pegawai=new DlgCariPegawai(null,false);   
     private RMCari5SOAPTerakhir soapterakhir=new RMCari5SOAPTerakhir(null,false);       
     private PreparedStatement ps,ps2,ps3,ps4,ps5,ps6,pstindakan,psset_tarif,psrekening, pskasir;
+    private PreparedStatement ps_update_pasien_ke_registrasi;
     private ResultSet rs,rstindakan,rsset_tarif,rsrekening, rskasir;
     private int i=0,jmlparsial=0,jml=0,index=0,tinggi=0;
     private String aktifkanparsial="no",kode_poli="",kd_pj="",poli_ralan="No",cara_bayar_ralan="No",
@@ -6493,8 +6494,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             i=JOptionPane.showConfirmDialog(null, "Mau skalian update status pasien sudah diperiksa ????","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if(i==JOptionPane.YES_OPTION){
                 Sequel.mengedit("reg_periksa","no_rawat=?","stts=?",2,new String[]{"Sudah",TNoRw.getText()});
+                String update_trace_progress, progress = "";
+                String cek_payer = Sequel.cariIsi("SELECT kd_pj FROM reg_periksa WHERE no_rawat = ?", TNoRw.getText());
+                if (cek_payer.equals("BPJ") || cek_payer.equals("001") || cek_payer.equals("21") || cek_payer.equals("22") || cek_payer.equals("BP")) {
+                    update_trace_progress = "UPDATE view_anjungan SET trace_progress=?, antri_poli_at=CURRENT_TIMESTAMP() WHERE param_1=? AND param_2=?";
+                    progress = "antri_farmasi";
+                } else {
+                    update_trace_progress = "UPDATE view_anjungan SET trace_progress=?, antri_poli_at=CURRENT_TIMESTAMP() WHERE param_1=? AND param_2=?";
+                    progress = "antri_kasir";
+                }
+                ps_update_pasien_ke_registrasi = koneksi.prepareStatement(update_trace_progress);
+                ps_update_pasien_ke_registrasi.setString(1, progress);
+                ps_update_pasien_ke_registrasi.setString(2, TNoRM.getText());
+                ps_update_pasien_ke_registrasi.setString(3, TNoRw.getText());
+                ps_update_pasien_ke_registrasi.executeUpdate();
             }
         } catch (Exception e) {
+            System.out.println("Error: "+e);
         }
         dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
