@@ -6009,6 +6009,89 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
 
     public void tampil() {        
         Valid.tabelKosong(tabMode);
+        //  select 
+        //    bridging_sep.no_sep, 
+        //    bridging_sep.no_rawat, 
+        //    bridging_sep.nomr, 
+        //    bridging_sep.nama_pasien, 
+        //    bridging_sep.tglsep, 
+        //    bridging_sep.tglrujukan, 
+        //    bridging_sep.no_rujukan, 
+        //    bridging_sep.kdppkrujukan, 
+        //    bridging_sep.nmppkrujukan, 
+        //    bridging_sep.kdppkpelayanan, 
+        //    bridging_sep.nmppkpelayanan, 
+        //    if(
+        //      bridging_sep.jnspelayanan = '1', '1. Ranap', 
+        //      '2. Ralan'
+        //    ) as jnspelayanan, 
+        //    bridging_sep.catatan, 
+        //    bridging_sep.diagawal, 
+        //    bridging_sep.nmdiagnosaawal, 
+        //    bridging_sep.kdpolitujuan, 
+        //    bridging_sep.nmpolitujuan, 
+        //    if(
+        //      bridging_sep.klsrawat = '1', 
+        //      '1. Kelas 1', 
+        //      if(
+        //        bridging_sep.klsrawat = '2', '2. Kelas 2', 
+        //        '3. Kelas 3'
+        //      )
+        //    ) as klsrawat, 
+        //    bridging_sep.klsnaik, 
+        //    bridging_sep.pembiayaan, 
+        //    bridging_sep.pjnaikkelas, 
+        //    bridging_sep.lakalantas, 
+        //    bridging_sep.user, 
+        //    bridging_sep.tanggal_lahir, 
+        //    bridging_sep.peserta, 
+        //    bridging_sep.jkel, 
+        //    bridging_sep.no_kartu, 
+        //    bridging_sep.tglpulang, 
+        //    bridging_sep.asal_rujukan, 
+        //    bridging_sep.eksekutif, 
+        //    bridging_sep.cob, 
+        //    bridging_sep.notelep, 
+        //    bridging_sep.katarak, 
+        //    bridging_sep.tglkkl, 
+        //    bridging_sep.keterangankkl, 
+        //    bridging_sep.suplesi, 
+        //    bridging_sep.no_sep_suplesi, 
+        //    bridging_sep.kdprop, 
+        //    bridging_sep.nmprop, 
+        //    bridging_sep.kdkab, 
+        //    bridging_sep.nmkab, 
+        //    bridging_sep.kdkec, 
+        //    bridging_sep.nmkec, 
+        //    bridging_sep.noskdp, 
+        //    bridging_sep.kddpjp, 
+        //    bridging_sep.nmdpdjp, 
+        //    bridging_sep.tujuankunjungan, 
+        //    bridging_sep.flagprosedur, 
+        //    bridging_sep.penunjang, 
+        //    bridging_sep.asesmenpelayanan, 
+        //    bridging_sep.kddpjplayanan, 
+        //    bridging_sep.nmdpjplayanan 
+        //  from 
+        //    bridging_sep 
+        //  where 
+        //    bridging_sep.tglsep between ? 
+        //    and ? bridging_sep.nama_pasien like ? 
+        //    or bridging_sep.nmppkrujukan like ? 
+        //    or bridging_sep.diagawal like ? 
+        //    or bridging_sep.nmdiagnosaawal like ? 
+        //    or bridging_sep.no_rawat like ? 
+        //    or bridging_sep.no_kartu like ? 
+        //    or bridging_sep.nmprop like ? 
+        //    or bridging_sep.nmkab like ? 
+        //    or bridging_sep.nmkec like ? 
+        //    or bridging_sep.nmdpdjp like ? 
+        //    or bridging_sep.asal_rujukan like ? 
+        //    or bridging_sep.notelep like ? 
+        //    or bridging_sep.nmpolitujuan like ? 
+        //  order by 
+        //    bridging_sep.tglsep
+
         try{
             ps=koneksi.prepareStatement(
                     "select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,bridging_sep.tglrujukan,"+

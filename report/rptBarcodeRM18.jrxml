@@ -24,7 +24,7 @@
                     FROM pasien INNER JOIN kelurahan INNER JOIN kecamatan INNER JOIN kabupaten
                     INNER JOIN penjab ON pasien.kd_kel = kelurahan.kd_kel AND pasien.kd_kec = kecamatan.kd_kec AND pasien.kd_kab = kabupaten.kd_kab
                     INNER JOIN reg_periksa ON reg_periksa.kd_pj = penjab.kd_pj AND pasien.no_rkm_medis = reg_periksa.no_rkm_medis
-                    WHERE pasien.no_rkm_medis= $P{parameter} ]]>
+                    WHERE pasien.no_rkm_medis= $P{parameter}]]>
 	</queryString>
 	<field name="no_rkm_medis" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

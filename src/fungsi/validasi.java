@@ -9,6 +9,7 @@ package fungsi;
 import java.awt.Desktop;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -51,6 +52,24 @@ import widget.ComboBox;
 import widget.Tanggal;
 import widget.TextArea;
 import java.io.File;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.sql.SQLException;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.HashPrintServiceAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.PrintServiceAttributeSet;
+import javax.print.attribute.standard.Copies;
+import javax.print.attribute.standard.MediaPrintableArea;
+import javax.print.attribute.standard.MediaSizeName;
+import javax.print.attribute.standard.OrientationRequested;
+import javax.print.attribute.standard.PrinterName;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimplePrintServiceExporterConfiguration;
 import widget.TextBox;
 /**
  *
@@ -68,8 +87,8 @@ public final class validasi {
     private final DecimalFormat df3 = new DecimalFormat("######"); 
     private final DecimalFormat df6 = new DecimalFormat("######.###"); 
     private final DecimalFormat df7 = new DecimalFormat("######.#"); 
-    private PreparedStatement ps;
-    private ResultSet rs;
+    private PreparedStatement ps, ps_workstation;
+    private ResultSet rs, rs_workstation;
     private File file;
     private boolean status=true;
     private final Calendar now = Calendar.getInstance();
@@ -592,7 +611,54 @@ public final class validasi {
 
     @SuppressWarnings("empty-statement")
     public void MyReport(String reportName,String reportDirName,String judul,Map parameters){
+//        Properties systemProp = System.getProperties();
+//
+//        // Ambil current dir
+//        String currentDir = systemProp.getProperty("user.dir");
+//
+//        File dir = new File(currentDir);
+//
+//        File fileRpt;
+//        String fullPath = "";
+//        if (dir.isDirectory()) {
+//            String[] isiDir = dir.list();
+//            for (String iDir : isiDir) {
+//                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
+//                if (fileRpt.isFile()) { // Cek apakah file RptMaster.jasper ada
+//                    fullPath = fileRpt.toString();
+//                    System.out.println("Found Report File at : " + fullPath);
+//                } // end if
+//            } // end for i
+//        } // end if
+//
+//        try {
+//            try (Statement stm = connect.createStatement()) {
+//                try {
+//                    
+//                    String namafile="./"+reportDirName+"/"+reportName;
+//                    JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
+//                    
+//                    JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+//                    jasperViewer.setTitle(judul);
+//                    Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
+//                    jasperViewer.setSize(screen.width-50,screen.height-50);
+//                    jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+//                    jasperViewer.setLocationRelativeTo(null);
+//                    jasperViewer.setVisible(true);
+//                } catch (Exception rptexcpt) {
+//                    System.out.println("Report Can't view because : " + rptexcpt);
+//                    JOptionPane.showMessageDialog(null,"Report Can't view because : "+ rptexcpt);
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+
+        int copy = 1;
         Properties systemProp = System.getProperties();
+//        PreparedStatement ps_workstation;
+//        ResultSet rs_workstation;
+        System.out.println("MyReport");
 
         // Ambil current dir
         String currentDir = systemProp.getProperty("user.dir");
@@ -601,11 +667,12 @@ public final class validasi {
 
         File fileRpt;
         String fullPath = "";
+        System.out.println("Cek apakah file jasper report ada");
         if (dir.isDirectory()) {
             String[] isiDir = dir.list();
             for (String iDir : isiDir) {
                 fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
-                if (fileRpt.isFile()) { // Cek apakah file RptMaster.jasper ada
+                if (fileRpt.isFile()) { 
                     fullPath = fileRpt.toString();
                     System.out.println("Found Report File at : " + fullPath);
                 } // end if
@@ -613,25 +680,124 @@ public final class validasi {
         } // end if
 
         try {
-            try (Statement stm = connect.createStatement()) {
+//            ps=connect.prepareStatement(qry);
+//            System.out.println("try ps=connect.prepareStatement(qry)");
+            try {
+                String namafile="./"+reportDirName+"/"+reportName;
+                JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
+//                JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters);
+
+                //Get the printers names
+                PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
+
+                //Lets set the printer name based on the registered printers driver name (you can see the printer names in the services variable at debugging) 
+                //String selectedPrinter = "Toper Printer";   
+                InetAddress inetAddress = InetAddress.getLocalHost();
+                String hostname = InetAddress.getLocalHost().getHostName();
+                String ip_address = inetAddress.getHostAddress();
                 try {
+                    String query = "SELECT wc.*, w.ip_address, w.workstation, wcl.config_name, wcl.jasper_report_name\n" +
+                                   "FROM workstation_config wc\n" +
+                                   "LEFT JOIN workstation w ON wc.id_workstation = w.id_workstation\n" +
+                                   "LEFT JOIN workstation_config_list wcl ON wc.id_workstation_config = wcl.id_workstation_config\n"+
+                                   "WHERE w.ip_address  = '"+ip_address+"' AND w.workstation = '"+hostname+"' AND wcl.jasper_report_name = '"+reportName+"'";
+                    ps_workstation = connect.prepareStatement(query);
+                    rs_workstation = ps_workstation.executeQuery();
+                    System.out.println("try rs_workstation = ps_workstation.executeQuery");
+                    System.out.println("query: "+query);
                     
-                    String namafile="./"+reportDirName+"/"+reportName;
-                    JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
-                    
-                    JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
-                    jasperViewer.setTitle(judul);
-                    Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
-                    jasperViewer.setSize(screen.width-50,screen.height-50);
-                    jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
-                    jasperViewer.setLocationRelativeTo(null);
-                    jasperViewer.setVisible(true);
-                } catch (Exception rptexcpt) {
-                    System.out.println("Report Can't view because : " + rptexcpt);
-                    JOptionPane.showMessageDialog(null,"Report Can't view because : "+ rptexcpt);
+                    if (rs_workstation.next()) {
+                        System.out.println("Sharing printer: "+rs_workstation.getString("sharing_printer"));
+                        Integer x = rs_workstation.getInt("margin_x");
+                        Integer y = rs_workstation.getInt("margin_y");
+                        Integer width = rs_workstation.getInt("width");
+                        Integer height = rs_workstation.getInt("height");
+                        //String selectedPrinter = "\\\\10.77.41.99\\Canon LBP2900"; // examlpe to network shared printer
+                        
+                        String selectedPrinter = rs_workstation.getString("sharing_printer");
+                        System.out.println("IP Address: " + ip_address);
+                        System.out.println("Hostname: " + hostname);
+                        System.out.println("Share printer: " + selectedPrinter);
+                        System.out.println("Number of print services: " + services.length);
+                        PrintService selectedService = null;
+
+                        //Set the printing settings
+                        PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+//                        printRequestAttributeSet.add(MediaSizeName.ISO_A4);
+//                        x,y adalah margin; w, h adalah ukuran kertas (kertas label zebra zd230 menggunakan ukuran 66mm dan 35mm dengan margin 0
+                        if(x != 0 && y != 0 && width != 0 && height != 0){
+                            printRequestAttributeSet.add(new MediaPrintableArea(x, y, width, height, MediaPrintableArea.MM));
+                        }else{
+                            printRequestAttributeSet.add(MediaSizeName.ISO_A4);
+                            
+                        }
+                        printRequestAttributeSet.add(new Copies(copy));
+
+                        if (jasperPrint.getOrientationValue() == net.sf.jasperreports.engine.type.OrientationEnum.LANDSCAPE) { 
+                          printRequestAttributeSet.add(OrientationRequested.LANDSCAPE); 
+                        } else { 
+                          printRequestAttributeSet.add(OrientationRequested.PORTRAIT); 
+                        } 
+
+                        PrintServiceAttributeSet printServiceAttributeSet = new HashPrintServiceAttributeSet();
+                        printServiceAttributeSet.add(new PrinterName(selectedPrinter, null));
+
+                        JRPrintServiceExporter exporter = new JRPrintServiceExporter();
+                        SimplePrintServiceExporterConfiguration configuration = new SimplePrintServiceExporterConfiguration();
+                        configuration.setPrintRequestAttributeSet(printRequestAttributeSet);
+                        configuration.setPrintServiceAttributeSet(printServiceAttributeSet);
+                        configuration.setDisplayPageDialog(false);
+                        configuration.setDisplayPrintDialog(false);
+
+                        exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+                        exporter.setConfiguration(configuration);
+
+                        //Iterate through available printer, and once matched with our <selectedPrinter>, go ahead and print!
+                        if(services != null && services.length != 0){
+                          for(PrintService service : services){
+                              String existingPrinter = service.getName();
+                              if(existingPrinter.equals(selectedPrinter))
+                              {
+                                  selectedService = service;
+                                  break;
+                              }
+                          }
+                        }
+                        if(selectedService != null)
+                        {   
+                          try{
+                              //Lets the printer do its magic!
+                              exporter.exportReport();
+                          }catch(JRException e){
+                        System.out.println("JasperReport Error: "+e.getMessage());
+                          }
+                        }else{
+                          System.out.println("JasperReport Error: Printer not found!");
+                        }
+                    }else{
+                        JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+                        jasperViewer.setTitle(judul);
+                        Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
+                        jasperViewer.setSize(screen.width-50,screen.height-50);
+                        jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+                        jasperViewer.setLocationRelativeTo(null);
+                        jasperViewer.setVisible(true);
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            } catch (HeadlessException | UnknownHostException | JRException rptexcpt) {
+                System.out.println("Report Can't view because : " + rptexcpt);
+                JOptionPane.showMessageDialog(null,"Report Can't view because : "+ rptexcpt);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
                 }
             }
-        } catch (Exception e) {
+        } catch (HeadlessException | SQLException e) {
             System.out.println(e);
         }
     }
@@ -722,7 +888,444 @@ public final class validasi {
         }
     }
     
+    //Function untuk report query print jasper secara otomatis pilih
     public void MyReportqry(String reportName,String reportDirName,String judul,String qry,Map parameters){
+        Properties systemProp = System.getProperties();
+
+        // Ambil current dir
+        String currentDir = systemProp.getProperty("user.dir");
+        System.out.println("currentDir: "+currentDir);
+        File dir = new File(currentDir);
+
+        File fileRpt;
+        String fullPath = "";
+        if (dir.isDirectory()) {
+            String[] isiDir = dir.list();
+            for (String iDir : isiDir) {
+                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
+                if (fileRpt.isFile()) { // Cek apakah file RptMaster.jrxml ada
+                    fullPath = fileRpt.toString();
+                    System.out.println("Found Report File at : " + fullPath);
+                } // end if
+            } // end for i
+        } // end if
+
+        try {
+            ps=connect.prepareStatement(qry);
+            System.out.println("Query : "+qry);
+            try {
+                String namafile="./"+reportDirName+"/"+reportName;
+                rs=ps.executeQuery();
+                JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters,rsdt);
+                //Get the printers names
+                PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
+
+                //Lets set the printer name based on the registered printers driver name (you can see the printer names in the services variable at debugging) 
+                //String selectedPrinter = "Toper Printer";   
+                InetAddress inetAddress = InetAddress.getLocalHost();
+                String hostname = InetAddress.getLocalHost().getHostName();
+                String ip_address = inetAddress.getHostAddress();
+                String query = "SELECT wc.*, w.ip_address, w.workstation, wcl.config_name, wcl.jasper_report_name\n" +
+                                   "FROM workstation_config wc\n" +
+                                   "LEFT JOIN workstation w ON wc.id_workstation = w.id_workstation\n" +
+                                   "LEFT JOIN workstation_config_list wcl ON wc.id_workstation_config = wcl.id_workstation_config\n"+
+                                   "WHERE w.ip_address  = '"+ip_address+"' AND w.workstation = '"+hostname+"' AND wcl.jasper_report_name = '"+reportName+"'";
+                ps_workstation = connect.prepareStatement(query);
+                rs_workstation = ps_workstation.executeQuery();
+                if (rs_workstation.next()) {
+                    System.out.println("Query: "+query);
+                    System.out.println("Sharing printer: "+rs_workstation.getString("sharing_printer"));
+                    Integer x = rs_workstation.getInt("margin_x");
+                    Integer y = rs_workstation.getInt("margin_y");
+                    Integer width = rs_workstation.getInt("width");
+                    Integer height = rs_workstation.getInt("height");
+                    //String selectedPrinter = "\\\\10.77.41.99\\Canon LBP2900"; // examlpe to network shared printer
+
+                     String selectedPrinter = rs_workstation.getString("sharing_printer");
+                     System.out.println("IP Address: " + ip_address);
+                     System.out.println("Hostname: " + hostname);
+                     System.out.println("Share printer: " + selectedPrinter);
+                     System.out.println("Number of print services: " + services.length);
+                     PrintService selectedService = null;
+
+                     //Set the printing settings
+                     PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+//                        printRequestAttributeSet.add(MediaSizeName.ISO_A4);
+//                        x,y adalah margin; w, h adalah ukuran kertas (kertas label zebra zd230 menggunakan ukuran 66mm dan 35mm dengan margin 0
+                     printRequestAttributeSet.add(new MediaPrintableArea(x, y, width, height, MediaPrintableArea.MM));
+                     printRequestAttributeSet.add(new Copies(1));
+
+                     if (jasperPrint.getOrientationValue() == net.sf.jasperreports.engine.type.OrientationEnum.LANDSCAPE) { 
+                       printRequestAttributeSet.add(OrientationRequested.LANDSCAPE); 
+                     } else { 
+                       printRequestAttributeSet.add(OrientationRequested.PORTRAIT); 
+                     } 
+
+                     PrintServiceAttributeSet printServiceAttributeSet = new HashPrintServiceAttributeSet();
+                     printServiceAttributeSet.add(new PrinterName(selectedPrinter, null));
+
+                     JRPrintServiceExporter exporter = new JRPrintServiceExporter();
+                     SimplePrintServiceExporterConfiguration configuration = new SimplePrintServiceExporterConfiguration();
+                     configuration.setPrintRequestAttributeSet(printRequestAttributeSet);
+                     configuration.setPrintServiceAttributeSet(printServiceAttributeSet);
+                     configuration.setDisplayPageDialog(false);
+                     configuration.setDisplayPrintDialog(false);
+
+                     exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+                     exporter.setConfiguration(configuration);
+
+                     //Iterate through available printer, and once matched with our <selectedPrinter>, go ahead and print!
+                     if(services != null && services.length != 0){
+                       for(PrintService service : services){
+                           String existingPrinter = service.getName();
+                           if(existingPrinter.equals(selectedPrinter))
+                           {
+                               selectedService = service;
+                               break;
+                           }
+                       }
+                     }
+                     if(selectedService != null)
+                     {   
+                       try{
+                           //Lets the printer do its magic!
+                           exporter.exportReport();
+                       }catch(JRException e){
+                     System.out.println("JasperReport Error: "+e.getMessage());
+                       }
+                     }else{
+                       System.out.println("JasperReport Error: Printer not found!");
+                     }
+                }else{
+                    JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+                    jasperViewer.setTitle(judul);
+                    Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
+                    jasperViewer.setSize(screen.width-50,screen.height-50);
+                    jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+                    jasperViewer.setLocationRelativeTo(null);
+                    jasperViewer.setVisible(true);
+                }
+            } catch (HeadlessException | UnknownHostException | SQLException | JRException rptexcpt) {
+                System.out.println("Report Can't view because : " + rptexcpt);
+                JOptionPane.showMessageDialog(null,"Report Can't view because : "+ rptexcpt);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+        } catch (HeadlessException | SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void MyReport(String reportName,String reportDirName,String judul,Map parameters, Integer copy){
+        Properties systemProp = System.getProperties();
+//        PreparedStatement ps_workstation;
+//        ResultSet rs_workstation;
+        System.out.println("MyReport");
+
+        // Ambil current dir
+        String currentDir = systemProp.getProperty("user.dir");
+
+        File dir = new File(currentDir);
+
+        File fileRpt;
+        String fullPath = "";
+        System.out.println("Cek apakah file jasper report ada");
+        if (dir.isDirectory()) {
+            String[] isiDir = dir.list();
+            for (String iDir : isiDir) {
+                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
+                if (fileRpt.isFile()) { 
+                    fullPath = fileRpt.toString();
+                    System.out.println("Found Report File at : " + fullPath);
+                } // end if
+            } // end for i
+        } // end if
+
+        try {
+//            ps=connect.prepareStatement(qry);
+//            System.out.println("try ps=connect.prepareStatement(qry)");
+            try {
+//                System.out.println("try JRResultSetDataSource rsdt = new JRResultSetDataSource(rs)");
+                String namafile="./"+"report"+"/"+reportName;
+//                rs=ps.executeQuery();
+//                System.out.println("Query: "+qry);
+                JRResultSetDataSource rsdt = new JRResultSetDataSource(null);
+//                
+                JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters,rsdt);
+
+                //Get the printers names
+                PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
+
+                //Lets set the printer name based on the registered printers driver name (you can see the printer names in the services variable at debugging) 
+                //String selectedPrinter = "Toper Printer";   
+                InetAddress inetAddress = InetAddress.getLocalHost();
+                String hostname = InetAddress.getLocalHost().getHostName();
+                String ip_address = inetAddress.getHostAddress();
+                try {
+                    String query = "SELECT wc.*, w.ip_address, w.workstation, wcl.config_name, wcl.jasper_report_name\n" +
+                                   "FROM workstation_config wc\n" +
+                                   "LEFT JOIN workstation w ON wc.id_workstation = w.id_workstation\n" +
+                                   "LEFT JOIN workstation_config_list wcl ON wc.id_workstation_config = wcl.id_workstation_config\n"+
+                                   "WHERE w.ip_address  = '"+ip_address+"' AND w.workstation = '"+hostname+"' AND wcl.jasper_report_name = '"+reportName+"'";
+                    ps_workstation = connect.prepareStatement(query);
+                    rs_workstation = ps_workstation.executeQuery();
+                    System.out.println("try rs_workstation = ps_workstation.executeQuery");
+                    System.out.println("query: "+query);
+                    
+                    if (rs_workstation.next()) {
+                        System.out.println("Sharing printer: "+rs_workstation.getString("sharing_printer"));
+                        Integer x = rs_workstation.getInt("margin_x");
+                        Integer y = rs_workstation.getInt("margin_y");
+                        Integer width = rs_workstation.getInt("width");
+                        Integer height = rs_workstation.getInt("height");
+                        //String selectedPrinter = "\\\\10.77.41.99\\Canon LBP2900"; // examlpe to network shared printer
+                        
+                        String selectedPrinter = rs_workstation.getString("sharing_printer");
+                        System.out.println("IP Address: " + ip_address);
+                        System.out.println("Hostname: " + hostname);
+                        System.out.println("Share printer: " + selectedPrinter);
+                        System.out.println("Number of print services: " + services.length);
+                        PrintService selectedService = null;
+
+                        //Set the printing settings
+                        PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+//                        printRequestAttributeSet.add(MediaSizeName.ISO_A4);
+//                        x,y adalah margin; w, h adalah ukuran kertas (kertas label zebra zd230 menggunakan ukuran 66mm dan 35mm dengan margin 0
+                        if(x != 0 && y != 0 && width != 0 && height != 0){
+                            printRequestAttributeSet.add(new MediaPrintableArea(x, y, width, height, MediaPrintableArea.MM));
+                        }else{
+                            printRequestAttributeSet.add(MediaSizeName.ISO_A4);
+                            
+                        }
+                        printRequestAttributeSet.add(new Copies(copy));
+
+                        if (jasperPrint.getOrientationValue() == net.sf.jasperreports.engine.type.OrientationEnum.LANDSCAPE) { 
+                          printRequestAttributeSet.add(OrientationRequested.LANDSCAPE); 
+                        } else { 
+                          printRequestAttributeSet.add(OrientationRequested.PORTRAIT); 
+                        } 
+
+                        PrintServiceAttributeSet printServiceAttributeSet = new HashPrintServiceAttributeSet();
+                        printServiceAttributeSet.add(new PrinterName(selectedPrinter, null));
+
+                        JRPrintServiceExporter exporter = new JRPrintServiceExporter();
+                        SimplePrintServiceExporterConfiguration configuration = new SimplePrintServiceExporterConfiguration();
+                        configuration.setPrintRequestAttributeSet(printRequestAttributeSet);
+                        configuration.setPrintServiceAttributeSet(printServiceAttributeSet);
+                        configuration.setDisplayPageDialog(false);
+                        configuration.setDisplayPrintDialog(false);
+
+                        exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+                        exporter.setConfiguration(configuration);
+
+                        //Iterate through available printer, and once matched with our <selectedPrinter>, go ahead and print!
+                        if(services != null && services.length != 0){
+                          for(PrintService service : services){
+                              String existingPrinter = service.getName();
+                              if(existingPrinter.equals(selectedPrinter))
+                              {
+                                  selectedService = service;
+                                  break;
+                              }
+                          }
+                        }
+                        if(selectedService != null)
+                        {   
+                          try{
+                              //Lets the printer do its magic!
+                              exporter.exportReport();
+                          }catch(JRException e){
+                        System.out.println("JasperReport Error: "+e.getMessage());
+                          }
+                        }else{
+                          System.out.println("JasperReport Error: Printer not found!");
+                        }
+                    }else{
+                        JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+                        jasperViewer.setTitle(judul);
+                        Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
+                        jasperViewer.setSize(screen.width-50,screen.height-50);
+                        jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+                        jasperViewer.setLocationRelativeTo(null);
+                        jasperViewer.setVisible(true);
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            } catch (HeadlessException | UnknownHostException | JRException rptexcpt) {
+                System.out.println("Report Can't view because : " + rptexcpt);
+                JOptionPane.showMessageDialog(null,"Report Can't view because : "+ rptexcpt);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+        } catch (HeadlessException | SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void MyReportqry(String reportName,String reportDirName,String judul,String qry,Map parameters, Integer copy){
+        Properties systemProp = System.getProperties();
+        PreparedStatement ps_workstation;
+        ResultSet rs_workstation;
+        System.out.println("MyReportqry");
+
+        // Ambil current dir
+        String currentDir = systemProp.getProperty("user.dir");
+
+        File dir = new File(currentDir);
+
+        File fileRpt;
+        String fullPath = "";
+        System.out.println("Cek apakah file jasper report ada");
+        if (dir.isDirectory()) {
+            String[] isiDir = dir.list();
+            for (String iDir : isiDir) {
+                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
+                if (fileRpt.isFile()) { 
+                    fullPath = fileRpt.toString();
+                    System.out.println("Found Report File at : " + fullPath);
+                } // end if
+            } // end for i
+        } // end if
+
+        try {
+            ps=connect.prepareStatement(qry);
+            System.out.println("try ps=connect.prepareStatement(qry)");
+            try {
+                System.out.println("try JRResultSetDataSource rsdt = new JRResultSetDataSource(rs)");
+                String namafile="./"+"report"+"/"+reportName;
+                rs=ps.executeQuery();
+                System.out.println("Query: "+qry);
+                JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
+                
+                JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters,rsdt);
+
+                //Get the printers names
+                PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
+
+                //Lets set the printer name based on the registered printers driver name (you can see the printer names in the services variable at debugging) 
+                //String selectedPrinter = "Toper Printer";   
+                InetAddress inetAddress = InetAddress.getLocalHost();
+                String hostname = InetAddress.getLocalHost().getHostName();
+                String ip_address = inetAddress.getHostAddress();
+                try {
+                    String query = "SELECT wc.*, w.ip_address, w.workstation, wcl.config_name, wcl.jasper_report_name\n" +
+                                   "FROM workstation_config wc\n" +
+                                   "LEFT JOIN workstation w ON wc.id_workstation = w.id_workstation\n" +
+                                   "LEFT JOIN workstation_config_list wcl ON wc.id_workstation_config = wcl.id_workstation_config\n"+
+                                   "WHERE w.ip_address  = '"+ip_address+"' AND w.workstation = '"+hostname+"' AND wcl.jasper_report_name = '"+reportName+"'";
+                    ps_workstation = connect.prepareStatement(query);
+                    rs_workstation = ps_workstation.executeQuery();
+                    System.out.println("try rs_workstation = ps_workstation.executeQuery");
+                    System.out.println("query: "+query);
+                    
+                    if (rs_workstation.next()) {
+                        System.out.println("Sharing printer: "+rs_workstation.getString("sharing_printer"));
+                        Integer x = rs_workstation.getInt("margin_x");
+                        Integer y = rs_workstation.getInt("margin_y");
+                        Integer width = rs_workstation.getInt("width");
+                        Integer height = rs_workstation.getInt("height");
+                        //String selectedPrinter = "\\\\10.77.41.99\\Canon LBP2900"; // examlpe to network shared printer
+                        
+                        String selectedPrinter = rs_workstation.getString("sharing_printer");
+                        System.out.println("IP Address: " + ip_address);
+                        System.out.println("Hostname: " + hostname);
+                        System.out.println("Share printer: " + selectedPrinter);
+                        System.out.println("Number of print services: " + services.length);
+                        PrintService selectedService = null;
+
+                        //Set the printing settings
+                        PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+//                        printRequestAttributeSet.add(MediaSizeName.ISO_A4);
+//                        x,y adalah margin; w, h adalah ukuran kertas (kertas label zebra zd230 menggunakan ukuran 66mm dan 35mm dengan margin 0
+                        if(x != 0 && y != 0 && width != 0 && height != 0){
+                            printRequestAttributeSet.add(new MediaPrintableArea(x, y, width, height, MediaPrintableArea.MM));
+                        }else{
+                            printRequestAttributeSet.add(MediaSizeName.ISO_A4);
+                        }
+                        printRequestAttributeSet.add(new Copies(copy));
+
+                        if (jasperPrint.getOrientationValue() == net.sf.jasperreports.engine.type.OrientationEnum.LANDSCAPE) { 
+                          printRequestAttributeSet.add(OrientationRequested.LANDSCAPE); 
+                        } else { 
+                          printRequestAttributeSet.add(OrientationRequested.PORTRAIT); 
+                        } 
+
+                        PrintServiceAttributeSet printServiceAttributeSet = new HashPrintServiceAttributeSet();
+                        printServiceAttributeSet.add(new PrinterName(selectedPrinter, null));
+
+                        JRPrintServiceExporter exporter = new JRPrintServiceExporter();
+                        SimplePrintServiceExporterConfiguration configuration = new SimplePrintServiceExporterConfiguration();
+                        configuration.setPrintRequestAttributeSet(printRequestAttributeSet);
+                        configuration.setPrintServiceAttributeSet(printServiceAttributeSet);
+                        configuration.setDisplayPageDialog(false);
+                        configuration.setDisplayPrintDialog(false);
+
+                        exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+                        exporter.setConfiguration(configuration);
+
+                        //Iterate through available printer, and once matched with our <selectedPrinter>, go ahead and print!
+                        if(services != null && services.length != 0){
+                          for(PrintService service : services){
+                              String existingPrinter = service.getName();
+                              if(existingPrinter.equals(selectedPrinter))
+                              {
+                                  selectedService = service;
+                                  break;
+                              }
+                          }
+                        }
+                        if(selectedService != null)
+                        {   
+                          try{
+                              //Lets the printer do its magic!
+                              exporter.exportReport();
+                          }catch(JRException e){
+                        System.out.println("JasperReport Error: "+e.getMessage());
+                          }
+                        }else{
+                          System.out.println("JasperReport Error: Printer not found!");
+                        }
+                    }else{
+                        JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+                        jasperViewer.setTitle(judul);
+                        Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
+                        jasperViewer.setSize(screen.width-50,screen.height-50);
+                        jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+                        jasperViewer.setLocationRelativeTo(null);
+                        jasperViewer.setVisible(true);
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            } catch (HeadlessException | UnknownHostException | SQLException | JRException rptexcpt) {
+                System.out.println("Report Can't view because : " + rptexcpt);
+                JOptionPane.showMessageDialog(null,"Report Can't view because : "+ rptexcpt);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+        } catch (HeadlessException | SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void MyReportqryPrintManual(String reportName,String reportDirName,String judul,String qry,Map parameters){
         Properties systemProp = System.getProperties();
 
         // Ambil current dir
@@ -746,7 +1349,7 @@ public final class validasi {
         try {
             ps=connect.prepareStatement(qry);
             try {
-                String namafile="./"+reportDirName+"/"+reportName;
+                String namafile="./"+"report"+"/"+reportName;
                 rs=ps.executeQuery();
                 JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
                 
@@ -824,15 +1427,165 @@ public final class validasi {
 
     
     public void MyReport(String reportName,Map parameters,String title){
+//        try {
+//                JasperViewer jasperViewer =new JasperViewer(JasperFillManager.fillReport("./report/"+reportName,parameters,connect), false);
+//                jasperViewer.setTitle(title);
+//                jasperViewer.setLocationRelativeTo(null);
+//                jasperViewer.setVisible(true);
+//                //JasperViewer.viewReport(JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName),parameters,connect),false);
+//        } catch (Exception ex) {
+//           System.out.println("Notifikasi : "+ex);
+//        }
+//        System.out.println("parameters: "+parameters);
+        Properties systemProp = System.getProperties();
+        PreparedStatement ps_workstation;
+        ResultSet rs_workstation;
+        System.out.println("MyReportqry");
+
+        // Ambil current dir
+        String currentDir = systemProp.getProperty("user.dir");
+
+        File dir = new File(currentDir);
+
+        File fileRpt;
+        String fullPath = "";
+        System.out.println("Cek apakah file jasper report ada");
+        if (dir.isDirectory()) {
+            String[] isiDir = dir.list();
+            for (String iDir : isiDir) {
+                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + "report" + File.separatorChar + reportName);
+                if (fileRpt.isFile()) { 
+                    fullPath = fileRpt.toString();
+                    System.out.println("Found Report File at : " + fullPath);
+                } // end if
+            } // end for i
+        } // end if
+
         try {
-                JasperViewer jasperViewer =new JasperViewer(JasperFillManager.fillReport("./report/"+reportName,parameters,connect), false);
-                jasperViewer.setTitle(title);
-                jasperViewer.setLocationRelativeTo(null);
-                jasperViewer.setVisible(true);
-                //JasperViewer.viewReport(JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName),parameters,connect),false);
-        } catch (Exception ex) {
-           System.out.println("Notifikasi : "+ex);
-        } 
+            ps=connect.prepareStatement("SELECT CURDATE();");
+            System.out.println("try ps=connect.prepareStatement(qry)");
+            try {
+                // System.out.println("try JRResultSetDataSource rsdt = new JRResultSetDataSource(rs)");
+                String namafile="./"+"report"+"/"+reportName;
+                rs=ps.executeQuery();
+                JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
+                System.out.println("namafile: "+namafile);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
+//                JasperViewer jasperViewer =new JasperViewer(JasperFillManager.fillReport("./report/"+reportName,parameters,connect), false);
+
+                //Get the printers names
+                PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
+
+                //Lets set the printer name based on the registered printers driver name (you can see the printer names in the services variable at debugging) 
+                //String selectedPrinter = "Toper Printer";   
+                InetAddress inetAddress = InetAddress.getLocalHost();
+                String hostname = InetAddress.getLocalHost().getHostName();
+                String ip_address = inetAddress.getHostAddress();
+                try {
+                    String query = "SELECT wc.*, w.ip_address, w.workstation, wcl.config_name, wcl.jasper_report_name\n" +
+                                   "FROM workstation_config wc\n" +
+                                   "LEFT JOIN workstation w ON wc.id_workstation = w.id_workstation\n" +
+                                   "LEFT JOIN workstation_config_list wcl ON wc.id_workstation_config = wcl.id_workstation_config\n"+
+                                   "WHERE w.ip_address  = '"+ip_address+"' AND w.workstation = '"+hostname+"' AND wcl.jasper_report_name = '"+reportName+"'";
+                    ps_workstation = connect.prepareStatement(query);
+                    rs_workstation = ps_workstation.executeQuery();
+                    System.out.println("try rs_workstation = ps_workstation.executeQuery");
+                    System.out.println("query: "+query);
+                    
+                    if (rs_workstation.next()) {
+                        System.out.println("Sharing printer: "+rs_workstation.getString("sharing_printer"));
+                        Integer x = rs_workstation.getInt("margin_x");
+                        Integer y = rs_workstation.getInt("margin_y");
+                        Integer width = rs_workstation.getInt("width");
+                        Integer height = rs_workstation.getInt("height");
+                        //String selectedPrinter = "\\\\10.77.41.99\\Canon LBP2900"; // examlpe to network shared printer
+                        
+                        String selectedPrinter = rs_workstation.getString("sharing_printer");
+                        System.out.println("IP Address: " + ip_address);
+                        System.out.println("Hostname: " + hostname);
+                        System.out.println("Share printer: " + selectedPrinter);
+                        System.out.println("Number of print services: " + services.length);
+                        PrintService selectedService = null;
+
+                        //Set the printing settings
+                        PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
+//                        printRequestAttributeSet.add(MediaSizeName.ISO_A4);
+//                        x,y adalah margin; w, h adalah ukuran kertas (kertas label zebra zd230 menggunakan ukuran 66mm dan 35mm dengan margin 0
+                        if(x != 0 && y != 0 && width != 0 && height != 0){
+                            printRequestAttributeSet.add(new MediaPrintableArea(x, y, width, height, MediaPrintableArea.MM));
+                        }else{
+                            printRequestAttributeSet.add(MediaSizeName.ISO_A4);
+                            
+                        }
+                        printRequestAttributeSet.add(new Copies(1));
+
+                        if (jasperPrint.getOrientationValue() == net.sf.jasperreports.engine.type.OrientationEnum.LANDSCAPE) { 
+                          printRequestAttributeSet.add(OrientationRequested.LANDSCAPE); 
+                        } else { 
+                          printRequestAttributeSet.add(OrientationRequested.PORTRAIT); 
+                        } 
+
+                        PrintServiceAttributeSet printServiceAttributeSet = new HashPrintServiceAttributeSet();
+                        printServiceAttributeSet.add(new PrinterName(selectedPrinter, null));
+
+                        JRPrintServiceExporter exporter = new JRPrintServiceExporter();
+                        SimplePrintServiceExporterConfiguration configuration = new SimplePrintServiceExporterConfiguration();
+                        configuration.setPrintRequestAttributeSet(printRequestAttributeSet);
+                        configuration.setPrintServiceAttributeSet(printServiceAttributeSet);
+                        configuration.setDisplayPageDialog(false);
+                        configuration.setDisplayPrintDialog(false);
+
+                        exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+                        exporter.setConfiguration(configuration);
+
+                        //Iterate through available printer, and once matched with our <selectedPrinter>, go ahead and print!
+                        if(services != null && services.length != 0){
+                          for(PrintService service : services){
+                              String existingPrinter = service.getName();
+                              if(existingPrinter.equals(selectedPrinter))
+                              {
+                                  selectedService = service;
+                                  break;
+                              }
+                          }
+                        }
+                        if(selectedService != null)
+                        {   
+                          try{
+                              //Lets the printer do its magic!
+                              exporter.exportReport();
+                          }catch(JRException e){
+                        System.out.println("JasperReport Error: "+e.getMessage());
+                          }
+                        }else{
+                          System.out.println("JasperReport Error: Printer not found!");
+                        }
+                    }else{
+                        JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+                        jasperViewer.setTitle(title);
+                        Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
+                        jasperViewer.setSize(screen.width-50,screen.height-50);
+                        jasperViewer.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
+                        jasperViewer.setLocationRelativeTo(null);
+                        jasperViewer.setVisible(true);
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            } catch (HeadlessException | UnknownHostException | SQLException | JRException rptexcpt) {
+                System.out.println("Report Can't view because : " + rptexcpt);
+                JOptionPane.showMessageDialog(null,"Report Can't view because : "+ rptexcpt);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+        } catch (HeadlessException | SQLException e) {
+            System.out.println(e);
+        }
     }
 
 

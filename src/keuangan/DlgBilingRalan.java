@@ -179,6 +179,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             psdokterralan,psdokterralan2,pscariralandokter,pscariralanperawat,pscariralandrpr,pscarilab,pscariobat,psdetaillab,
             psobatlangsung,pstambahan,psbiling,pstemporary,pspotongan,psbilling,pscariradiologi,
             pstamkur,psnota,psoperasi,psobatoperasi,psakunbayar,psakunpiutang;
+    private PreparedStatement ps_update_pasien_ke_registrasi;
     private ResultSet rscekbilling,rscarirm,rscaripasien,rsreg,rscaripoli,rscarialamat,rsrekening,rsobatoperasi,
             rsdokterralan,rsdokterralan2,rscariralandokter,rscariralanperawat,rscariralandrpr,rscarilab,rscariobat,rsdetaillab,
             rsobatlangsung,rstambahan,rspotongan,rsbilling,rscariradiologi,rstamkur,rsoperasi,
@@ -1775,7 +1776,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(65, 23));
         panelGlass1.add(jLabel4);
 
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-08-2023 01:32:33" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-02-2024 08:28:17" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -2488,7 +2489,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     try{
                           biaya = (String)JOptionPane.showInputDialog(null,"Silahkan pilih nota yang mau dicetak!","Nota",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Nota", "Kwitansi", "Nota & Kwitansi","Kwitansi Piutang"},"Nota");
                           switch (biaya) {
-                                case "Nota":
+                                case "Nota": //trigger surat kontrol
                                       i=1;
                                       break;
                                 case "Kwitansi":
@@ -4080,6 +4081,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     // End of variables declaration//GEN-END:variables
 
     public void isRawat() {
+        System.out.println("isRawat");
         try {    
             pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
 	    try{
@@ -4236,12 +4238,14 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
              isHitung(); 
              status="belum";
          }else if(i>0){
+             System.out.println("int i: "+i);
              Valid.SetTgl2(DTPTgl,Sequel.cariIsi("select concat(nota_jalan.tanggal,' ',nota_jalan.jam) from nota_jalan where nota_jalan.no_rawat='"+TNoRw.getText()+"'"));
              Valid.tabelKosong(tabModeRwJlDr);
              try{                
                 psbilling=koneksi.prepareStatement(sqlpsbilling);    
                 try {
                     psbilling.setString(1,TNoRw.getText());
+                    System.out.println("psbilling: "+psbilling);
                     rsbilling=psbilling.executeQuery();
                     while(rsbilling.next()){
                         if(!rsbilling.getString("status").equals("Tagihan")){
@@ -4369,6 +4373,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     }
 
     private void prosesCariReg() {        
+        System.out.println("prosesCariReg");
         Valid.tabelKosong(tabModeRwJlDr);
         try{   
             psreg=koneksi.prepareStatement(sqlpsreg);
@@ -4376,7 +4381,9 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 psreg.setString(1,TNoRw.getText());
                 rsreg=psreg.executeQuery();            
                 if(rsreg.next()){
-                    tabModeRwJlDr.addRow(new Object[]{true,"No.Nota",": "+Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(nota_jalan.no_nota,4),signed)),0) from nota_jalan where nota_jalan.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10)+"' ",Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10).replaceAll("-","/")+"/RJ",4),"",null,null,null,null,"-"});                
+                    String query_cari_nota = "select ifnull(MAX(CONVERT(RIGHT(nota_jalan.no_nota,4),signed)),0) from nota_jalan where nota_jalan.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10)+"' ";
+                    System.out.println("query_cari_nota: "+query_cari_nota);
+                    tabModeRwJlDr.addRow(new Object[]{true,"No.Nota",": "+Valid.autoNomer3(query_cari_nota,Valid.SetTgl(DTPTgl.getSelectedItem()+"").substring(0,10).replaceAll("-","/")+"/RJ",4),"",null,null,null,null,"-"});                
                     pscaripoli=koneksi.prepareStatement(sqlpscaripoli);
                     try{
                         pscaripoli.setString(1,rsreg.getString("kd_poli"));
@@ -6062,7 +6069,19 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     Valid.editTable(tabModeRwJlDr,"reg_periksa","no_rawat",TNoRw,"status_bayar='Sudah Bayar'");
                     Sequel.meghapus("temporary_tambahan_potongan","no_rawat",TNoRw.getText());
                     Sequel.Commit();
-                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");     
+                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
+                    
+                    String update_trace_progress, progress = "";
+                    String cek_payer = Sequel.cariIsi("SELECT kd_pj FROM reg_periksa WHERE no_rawat = ?", TNoRw.getText());
+                    if (!cek_payer.equals("BPJ") || !cek_payer.equals("001") || !cek_payer.equals("21") || !cek_payer.equals("22") || !cek_payer.equals("BP")) {
+                        update_trace_progress = "UPDATE view_anjungan SET trace_progress=?, antri_farmasi_at=CURRENT_TIMESTAMP() WHERE param_1=? AND param_2=?";
+                        progress = "antri_farmasi";
+                        ps_update_pasien_ke_registrasi = koneksi.prepareStatement(update_trace_progress);
+                        ps_update_pasien_ke_registrasi.setString(1, progress);
+                        ps_update_pasien_ke_registrasi.setString(2, TNoRM.getText());
+                        ps_update_pasien_ke_registrasi.setString(3, TNoRw.getText());
+                        ps_update_pasien_ke_registrasi.executeUpdate();
+                    }
                 }else{
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     Sequel.RollBack();

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptNotaRalan" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="089b50d6-7cbc-4949-aa00-e4e969b8c58a">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+	<parameter name="namars" class="java.lang.String"/>
+	<parameter name="alamatrs" class="java.lang.String"/>
+	<parameter name="kotars" class="java.lang.String"/>
+	<parameter name="propinsirs" class="java.lang.String"/>
+	<parameter name="kontakrs" class="java.lang.String"/>
+	<parameter name="emailrs" class="java.lang.String"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="finger" class="java.lang.String"/>
+	<parameter name="petugas" class="java.lang.String"/>
+	<parameter name="tgl_bayar" class="java.lang.String"/>
+	<parameter name="ket_1" class="java.lang.String"/>
+	<parameter name="ket_2" class="java.lang.String"/>
+	<parameter name="ket_3" class="java.lang.String"/>
+	<parameter name="ket_4" class="java.lang.String"/>
+	<parameter name="ket_5" class="java.lang.String"/>
+	<parameter name="ket_6" class="java.lang.String"/>
+	<parameter name="bayar_1" class="java.lang.String"/>
+	<parameter name="bayar_2" class="java.lang.String"/>
+	<parameter name="bayar_3" class="java.lang.String"/>
+	<parameter name="bayar_4" class="java.lang.String"/>
+	<parameter name="bayar_5" class="java.lang.String"/>
+	<parameter name="bayar_6" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM nota_ralan]]>
+	</queryString>
+	<field name="no" class="java.lang.String"/>
+	<field name="nm_perawatan" class="java.lang.String"/>
+	<field name="pemisah" class="java.lang.String"/>
+	<field name="biaya" class="java.lang.String"/>
+	<field name="jumlah" class="java.lang.String"/>
+	<field name="tambahan" class="java.lang.String"/>
+	<field name="totalbiaya" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="89" splitType="Stretch">
+			<textField>
+				<reportElement x="115" y="50" width="440" height="18" uuid="deb9eb82-e9b6-47fa-85fd-d4582a46777a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="11"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{kontakrs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="69" width="440" height="18" uuid="2ed13a3a-1402-40dc-82fa-ab74223412c1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="11"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["E-mail : "+$P{emailrs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="30" width="440" height="18" uuid="55f90f9b-53c3-4d2d-9027-680976e1c893"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="11"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{alamatrs}+", "+$P{kotars}+", "+$P{propinsirs}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="20" y="0" width="80" height="80" uuid="1981725b-9f76-401f-9681-d74a8b2491a0"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="115" y="0" width="440" height="30" uuid="3c06aa49-6dce-4123-a749-4fc10c06e9cd"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="18"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-10" y="88" width="579" height="1" uuid="0825c9d7-5c21-4175-8f79-e31a7683b215"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="4" width="80" height="13" uuid="234050e8-8acd-4724-9a2b-572fc03726ea"/>
+				<textFieldExpression><![CDATA[$F{no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="4" width="100" height="13" uuid="a9d8ee3f-7173-4dde-ba2a-2091785c25e8"/>
+				<textFieldExpression><![CDATA[$F{nm_perawatan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="4" width="40" height="13" uuid="1391554d-dcea-4b17-a0ef-33c6b0fcd852"/>
+				<textFieldExpression><![CDATA[$F{pemisah}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="4" width="100" height="13" uuid="fb003255-eae3-4abe-b5c3-f53f84ecfbf7"/>
+				<textFieldExpression><![CDATA[$F{biaya}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="4" width="40" height="13" uuid="041db475-466d-4fb0-af35-862877b14de7"/>
+				<textFieldExpression><![CDATA[$F{jumlah}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="4" width="50" height="13" uuid="4f09e995-4bba-435e-bbd0-be38bb28cf4d"/>
+				<textFieldExpression><![CDATA[$F{tambahan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="4" width="100" height="13" uuid="aa2883d4-d14b-401d-aec8-4b69ddd4ad1c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{totalbiaya}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="83" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="5" width="100" height="13" uuid="860d7232-dd52-4071-aa3b-5090be5f97e4">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{ket_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="18" width="100" height="13" uuid="164e48cb-5b7c-4eb3-a5af-04a2b2c8d855"/>
+				<textFieldExpression><![CDATA[$P{ket_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="31" width="100" height="13" uuid="66b93b21-880c-41c9-937a-ce17a87ab925">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{ket_3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="44" width="100" height="13" uuid="302789ae-d484-4f1d-8007-4cda54cbdc8c"/>
+				<textFieldExpression><![CDATA[$P{ket_4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="57" width="100" height="13" uuid="c82c7c06-8880-4b32-90e6-a63638bea804"/>
+				<textFieldExpression><![CDATA[$P{ket_5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="58" width="100" height="12" uuid="9047d3a1-4121-4461-90f1-0325e7f8de7c"/>
+				<textFieldExpression><![CDATA[$P{ket_6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="5" width="100" height="13" uuid="99fbec07-faa8-43ed-99dc-20e5b49b7572"/>
+				<textFieldExpression><![CDATA[$P{bayar_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="18" width="100" height="13" uuid="a3964174-aaa1-46aa-b6f3-2346a91107d0"/>
+				<textFieldExpression><![CDATA[$P{bayar_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="31" width="100" height="13" uuid="5c0dd514-7ff6-456f-8eb3-3c083260904a"/>
+				<textFieldExpression><![CDATA[$P{bayar_3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="44" width="100" height="13" uuid="0dfce44b-dfe0-47d7-8418-63956979306b"/>
+				<textFieldExpression><![CDATA[$P{bayar_4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="57" width="100" height="13" uuid="92307e01-de61-4d7d-861d-7a299214278a"/>
+				<textFieldExpression><![CDATA[$P{bayar_5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="70" width="100" height="13" uuid="0f735e0a-596d-4a3b-a95e-bfb8c22bb124"/>
+				<textFieldExpression><![CDATA[$P{ket_6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="415" y="70" width="100" height="13" uuid="e56ff510-e55d-472d-b6bc-8da263bdad06"/>
+				<textFieldExpression><![CDATA[$P{bayar_6}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="177" splitType="Stretch">
+			<staticText>
+				<reportElement x="40" y="20" width="94" height="22" uuid="55c7ee38-15d6-4c62-981d-2e2eeeebfeb9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Petugas]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="41" y="42" width="94" height="97" uuid="5c35e616-327d-466b-9df4-d9bd7214e1e5"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$P{finger}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<textField>
+				<reportElement x="17" y="140" width="140" height="30" uuid="ad2214e5-3cb7-45df-8749-c9edfc890bb9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{petugas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="0" width="100" height="21" uuid="597bc139-98b1-4656-8907-0a22986068e5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{tgl_bayar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="410" y="21" width="145" height="20" uuid="692b713e-a5d4-4ed6-9076-5fc1d4589942"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Penanggung jawab pasien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="130" width="154" height="30" uuid="045b456a-3bdc-4779-b665-b06dc972e9db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[(..........................................)]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

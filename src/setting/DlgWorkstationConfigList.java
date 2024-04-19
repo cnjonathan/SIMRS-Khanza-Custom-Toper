@@ -322,16 +322,16 @@ public class DlgWorkstationConfigList extends javax.swing.JDialog {
 }//GEN-LAST:event_txtJasperReportNameKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-//        if(txtWorkstation.getText().trim().equals("")){
-//            Valid.textKosong(txtWorkstation,"Workstation/Hostname");
-//        }else if(txtAlamatIp.getText().trim().equals("")){
-//            Valid.textKosong(txtAlamatIp,"Alamat IP");
-//        }else if(tabMode.getRowCount()==0){
+        if(txtConfigName.getText().trim().equals("")){
+            Valid.textKosong(txtConfigName,"Config Name");
+        }else if(txtJasperReportName.getText().trim().equals("")){
+            Valid.textKosong(txtJasperReportName,"Jasper Report Name");
+        }else{
             System.out.println("Menyimpan workstation");
             Sequel.menyimpan("`workstation_config_list`(`config_name`, `jasper_report_name`)","'"+txtConfigName.getText()+"','"+txtJasperReportName.getText()+"'","Nama Config / Nama Jasper Report");
             tampil();
             emptTeks();
-//        }
+        }
 //        else if(tabMode.getRowCount()>0){
 //            JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Admin Utama ...!!!!");
 //            txtWorkstation.requestFocus();

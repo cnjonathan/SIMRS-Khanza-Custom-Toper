@@ -1617,6 +1617,13 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         LTotal.setText("0");
                         LPpn.setText("0");
                         LTotalTagihan.setText("0");
+                        PreparedStatement ps_update_pasien_ke_registrasi;
+                        String update_trace_progress = "UPDATE view_anjungan SET trace_progress=?, antri_farmasi_at=CURRENT_TIMESTAMP() WHERE param_1=? AND param_2=?";
+                        ps_update_pasien_ke_registrasi = koneksi.prepareStatement(update_trace_progress);
+                        ps_update_pasien_ke_registrasi.setString(1, "pulang");
+                        ps_update_pasien_ke_registrasi.setString(2, TNoRM.getText());
+                        ps_update_pasien_ke_registrasi.setString(3, LblNoRawat.getText());
+                        ps_update_pasien_ke_registrasi.executeUpdate();
                     }else{
                         sukses=false;
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");

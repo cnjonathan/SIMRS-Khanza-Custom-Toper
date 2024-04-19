@@ -714,6 +714,8 @@ import kepegawaian.DlgAuditSterilisasiAlat;
 import keuangan.DlgLhtBankJabar;
 import keuangan.DlgLhtBankMandiri;
 import keuangan.DlgLhtBankPapua;
+import keuangan.DlgPenjaminan;
+import keuangan.DlgPenjaminanProses;
 import keuangan.DlgRekapBiayaRegistrasi;
 import keuangan.KeuanganPengajuanBiaya;
 import keuangan.KeuanganPersetujuanPengajuanBiaya;
@@ -1661,6 +1663,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaboratoriumPA = new widget.ButtonBig();
         btnLaboratoriumMB = new widget.ButtonBig();
         btnWorkstationConfigList = new widget.ButtonBig();
+        btnPenjaminan = new widget.ButtonBig();
         internalFrame1 = new widget.InternalFrame();
         BtnMenu = new widget.ButtonBig();
         jSeparator4 = new javax.swing.JSeparator();
@@ -1964,7 +1967,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31/01/2024" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21/02/2024" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7048,6 +7051,17 @@ public class frmUtama extends javax.swing.JFrame {
         btnWorkstationConfigList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWorkstationConfigListActionPerformed(evt);
+            }
+        });
+
+        btnPenjaminan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/118888_generic_package_icon.png"))); // NOI18N
+        btnPenjaminan.setText("Menu Penjaminan");
+        btnPenjaminan.setIconTextGap(0);
+        btnPenjaminan.setName("btnPenjaminan"); // NOI18N
+        btnPenjaminan.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPenjaminan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPenjaminanActionPerformed(evt);
             }
         });
 
@@ -14631,6 +14645,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnWorkstationSetupActionPerformed
 
+    private void btnPenjaminanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenjaminanActionPerformed
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgPenjaminan proses=new DlgPenjaminan(this,false);
+        proses.emptTeks();
+        proses.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        proses.setLocationRelativeTo(PanelUtama);
+        proses.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnPenjaminanActionPerformed
+
     private void btnKategoriPerpustakaanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -21488,6 +21514,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.ButtonBig btnPengeluaranIpsrs;
     private widget.ButtonBig btnPenggajian;
     private widget.ButtonBig btnPenggunaObatResep;
+    private widget.ButtonBig btnPenjaminan;
     private widget.ButtonBig btnPenjualan;
     private widget.ButtonBig btnPenjualanPerTanggal;
     private widget.ButtonBig btnPenyakitPD3I;
@@ -22087,6 +22114,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getperkiraan_biaya_ranap()==true){                          
                 Panelmenu.add(btnPerkiraanBiayaRanap);
+                jmlmenu++;
+            }
+            
+            if(akses.getpenjaminan()==true){                          
+                Panelmenu.add(btnPenjaminan);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==1){ 
@@ -31908,6 +31940,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnRuangOperasi);
             jmlmenu++;
         }
+        
+        if(akses.getpenjaminan()==true){
+            Panelmenu.add(btnPenjaminan);
+            jmlmenu++;
+        }
     }
     
     private void isCariIsi() {
@@ -38888,6 +38925,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getworkstationsetup()==true){
             if(btnWorkstationSetup.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnWorkstationSetup);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getpenjaminan()==true){
+            if(btnPenjaminan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPenjaminan);
                 jmlmenu++;
             }                
         }

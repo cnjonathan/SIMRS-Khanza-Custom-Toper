@@ -54,6 +54,9 @@ public class DlgWorkstationSetup extends javax.swing.JDialog {
         initComponents();
         this.setLocation(10,10);
         setSize(457,249);
+        txtIdWorkstation.setEditable(false);
+        txtWorkstation.setEditable(false);
+        txtAlamatIp.setEditable(false);
         
 //        tabel workstation
         Object[] row={"ID",
@@ -176,6 +179,7 @@ public class DlgWorkstationSetup extends javax.swing.JDialog {
         txtWidth = new widget.TextBox();
         jLabel14 = new widget.Label();
         txtHeight = new widget.TextBox();
+        jLabel3 = new javax.swing.JLabel();
         Scroll = new widget.ScrollPane();
         tbWorkstation = new widget.Table();
         panelGlass5 = new widget.panelisi();
@@ -205,7 +209,7 @@ public class DlgWorkstationSetup extends javax.swing.JDialog {
         internalFrame1.setName("internalFrame1"); // NOI18N
 
         panelGlass7.setName("panelGlass7"); // NOI18N
-        panelGlass7.setPreferredSize(new java.awt.Dimension(44, 47));
+        panelGlass7.setPreferredSize(new java.awt.Dimension(10, 10));
         panelGlass7.setLayout(null);
 
         txtWorkstation.setHighlighter(null);
@@ -322,21 +326,22 @@ public class DlgWorkstationSetup extends javax.swing.JDialog {
         panelGlass7.add(txtNamaConfig);
         txtNamaConfig.setBounds(440, 40, 210, 24);
 
-        jLabel1.setText("Menggunakan double back slash");
+        jLabel1.setText("Format default (semua 0) adalah A4");
         jLabel1.setName("jLabel1"); // NOI18N
         panelGlass7.add(jLabel1);
-        jLabel1.setBounds(710, 30, 270, 20);
+        jLabel1.setBounds(10, 150, 270, 20);
 
         jLabel2.setText("Example Hotsname: \\\\\\\\10.77.1.2\\\\Canon LBP2900");
         jLabel2.setName("jLabel2"); // NOI18N
         panelGlass7.add(jLabel2);
-        jLabel2.setBounds(710, 10, 270, 20);
+        jLabel2.setBounds(10, 110, 270, 20);
 
         jLabel7.setText("X");
         jLabel7.setName("jLabel7"); // NOI18N
         panelGlass7.add(jLabel7);
-        jLabel7.setBounds(710, 70, 20, 23);
+        jLabel7.setBounds(10, 200, 20, 23);
 
+        txtMarginX.setText("0");
         txtMarginX.setName("txtMarginX"); // NOI18N
         txtMarginX.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -344,13 +349,14 @@ public class DlgWorkstationSetup extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(txtMarginX);
-        txtMarginX.setBounds(740, 70, 40, 24);
+        txtMarginX.setBounds(40, 200, 40, 24);
 
         jLabel9.setText("Y");
         jLabel9.setName("jLabel9"); // NOI18N
         panelGlass7.add(jLabel9);
-        jLabel9.setBounds(790, 70, 20, 23);
+        jLabel9.setBounds(90, 200, 20, 23);
 
+        txtMarginY.setText("0");
         txtMarginY.setName("txtMarginY"); // NOI18N
         txtMarginY.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -358,13 +364,14 @@ public class DlgWorkstationSetup extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(txtMarginY);
-        txtMarginY.setBounds(820, 70, 40, 24);
+        txtMarginY.setBounds(120, 200, 40, 24);
 
         jLabel13.setText("W");
         jLabel13.setName("jLabel13"); // NOI18N
         panelGlass7.add(jLabel13);
-        jLabel13.setBounds(870, 70, 20, 23);
+        jLabel13.setBounds(170, 200, 20, 23);
 
+        txtWidth.setText("0");
         txtWidth.setName("txtWidth"); // NOI18N
         txtWidth.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -372,13 +379,14 @@ public class DlgWorkstationSetup extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(txtWidth);
-        txtWidth.setBounds(900, 70, 40, 24);
+        txtWidth.setBounds(200, 200, 40, 24);
 
         jLabel14.setText("H");
         jLabel14.setName("jLabel14"); // NOI18N
         panelGlass7.add(jLabel14);
-        jLabel14.setBounds(950, 70, 20, 23);
+        jLabel14.setBounds(250, 200, 20, 23);
 
+        txtHeight.setText("0");
         txtHeight.setName("txtHeight"); // NOI18N
         txtHeight.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -386,7 +394,12 @@ public class DlgWorkstationSetup extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(txtHeight);
-        txtHeight.setBounds(980, 70, 40, 24);
+        txtHeight.setBounds(280, 200, 40, 24);
+
+        jLabel3.setText("Menggunakan double back slash");
+        jLabel3.setName("jLabel3"); // NOI18N
+        panelGlass7.add(jLabel3);
+        jLabel3.setBounds(10, 130, 270, 20);
 
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
@@ -507,7 +520,7 @@ public class DlgWorkstationSetup extends javax.swing.JDialog {
 
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
-        Scroll2.setPreferredSize(new java.awt.Dimension(452, 300));
+        Scroll2.setPreferredSize(new java.awt.Dimension(10, 10));
 
         tbConfig.setAutoCreateRowSorter(true);
         tbConfig.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
@@ -543,10 +556,10 @@ public class DlgWorkstationSetup extends javax.swing.JDialog {
             .addGroup(internalFrame1Layout.createSequentialGroup()
                 .addGroup(internalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(internalFrame1Layout.createSequentialGroup()
-                        .addComponent(panelGlass7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelGlass7, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Scroll2, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
-                    .addComponent(Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Scroll2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelGlass5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -569,6 +582,8 @@ public class DlgWorkstationSetup extends javax.swing.JDialog {
             Valid.textKosong(txtIdConfig,"Config");
         }else if(txtPrinterSharing.getText().trim().equals("")){
             Valid.textKosong(txtPrinterSharing,"Printer Sharing");
+        }else if(txtNamaConfig.getText().trim().equals("")){
+            Valid.textKosong(txtNamaConfig,"Pilih nama config terlebih dahulu");
         }else{
             System.out.println("Menyimpan workstation: "+txtIdWorkstation.getText()+", "+txtIdConfig.getText()+", "+txtPrinterSharing.getText());
             Sequel.menyimpan("`workstation_config`(`id_workstation`, `id_workstation_config`, `sharing_printer`, `margin_x`, `margin_y`, `width`, `height`)","'"+txtIdWorkstation.getText()+"','"+txtIdConfig.getText()+"', '"+txtPrinterSharing.getText()+"', '"+txtMarginX.getText()+"', '"+txtMarginY.getText()+"', '"+txtWidth.getText()+"', '"+txtHeight.getText()+"'","Workstation Config");
@@ -806,6 +821,7 @@ public class DlgWorkstationSetup extends javax.swing.JDialog {
     private widget.Label jLabel13;
     private widget.Label jLabel14;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private widget.Label jLabel4;
     private widget.Label jLabel5;
     private widget.Label jLabel6;

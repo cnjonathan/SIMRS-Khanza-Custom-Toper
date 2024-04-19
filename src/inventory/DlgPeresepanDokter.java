@@ -3100,6 +3100,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             Valid.tabelKosong(tabModeResepRacikan);
             Valid.tabelKosong(tabModeDetailResepRacikan);
             copy=true;
+            System.out.println("STOKKOSONGRESEP: "+STOKKOSONGRESEP);
             if(kenaikan>0){
                 if(aktifkanbatch.equals("yes")){
                     qrystokkosong="";
@@ -3175,6 +3176,8 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     }
                 }                                   
             }else{    
+                System.out.println("Tidak ada kenaikan");
+                System.out.println("aktifkanbatch: "+aktifkanbatch);
                 if(aktifkanbatch.equals("yes")){
                     qrystokkosong="";
                     if(STOKKOSONGRESEP.equals("no")){
@@ -3212,6 +3215,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 try{
                     psresep.setString(1,bangsal);
                     psresep.setString(2,no_resep);
+                    System.out.println("psresep: "+psresep);
                     rsobat=psresep.executeQuery();
                     if(STOKKOSONGRESEP.equals("no")){
                         while(rsobat.next()){

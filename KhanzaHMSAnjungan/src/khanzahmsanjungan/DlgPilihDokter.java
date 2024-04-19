@@ -22,7 +22,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -465,7 +469,47 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                                         if(sisahari <= 0){
                                             printLabelAtasSaja(LblNoRm.getText(), "Rujukan anda sudah expired, ");
                                         }else if(sisahari > 1){
-                                            pilih.setVisible(true);
+                                            //#########################################
+                                            //||                                     ||
+                                            //||cek surat kontrol apakah ada dan bisa||
+                                            //||                                     ||
+                                            //#########################################
+                                            String query_cek_bridging_sk = "SELECT "+
+                                                                            "	bs.no_sep, "+
+                                                                            "   bs.kdpolitujuan, "+
+                                                                            "	sk.tgl_rencana "+
+                                                                            "FROM "+
+                                                                            "	bridging_sep bs "+
+                                                                            "INNER JOIN "+
+                                                                            "	bridging_surat_kontrol_bpjs sk ON bs.no_sep = sk.no_sep "+
+                                                                            "WHERE "+
+                                                                            "	bs.nomr = '"+LblNoRm.getText()+"' "+
+                                                                            "	AND bs.kdpolitujuan = '"+maping_kd_poli+"' "+
+                                                                            "ORDER BY sk.tgl_rencana DESC; ";
+                                            System.out.println("query_cek_bridging_sk: "+query_cek_bridging_sk);
+                                            PreparedStatement ps_query_cek_bridging_sk = koneksi.prepareStatement(query_cek_bridging_sk);
+                                            ResultSet rs_query_cek_bridging_sk = ps_query_cek_bridging_sk.executeQuery();
+                                            rs_query_cek_bridging_sk.next();
+
+                                            // tanggal hari ini
+                                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                            Date tanggal_hari_ini = new Date();
+                                            Date tanggal_rencana_kontrol;
+                                            try {
+                                              tanggal_rencana_kontrol = dateFormat.parse(rs_query_cek_bridging_sk.getString("tgl_rencana"));
+                                              System.out.println("tanggal_rencana_kontrol: "+tanggal_rencana_kontrol.toString());
+                                              if (tanggal_rencana_kontrol.compareTo(tanggal_hari_ini) < 0) {
+                                                System.out.println("tanggal hari ini lebih besar daripada tanggal rencana kontrol, bisa lanjut");
+                                                pilih.setVisible(true);
+                                                // regis.setVisible(true);
+                                                } else {
+                                                    System.out.println("tanggal hari ini lebih kecil daripada tanggal rencana kontrol alias maju");
+                                                    JOptionPane.showMessageDialog(null,"Anda kontrol tanggal lebih maju dari yang seharusnya, daftarlah sesuai dengan tanggal kontrol atau tanggal lebih mundur dari seharusnya. ");
+                                                }
+                                            } catch (ParseException ex) {
+                                                Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                            System.out.println("tanggal hari ini: "+tanggal_hari_ini.toString());
                                         }
                                     }else{
                                         printLabelAtasSaja(LblNoRm.getText(), "Tujuan Poliklinik anda tidak sama dengan Poli Rujukan,");

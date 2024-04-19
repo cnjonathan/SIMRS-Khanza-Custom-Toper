@@ -1,0 +1,2494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" columnCount="2" pageWidth="935" pageHeight="609" orientation="Landscape" columnWidth="433" leftMargin="34" rightMargin="34" topMargin="34" bottomMargin="34" uuid="f71eddde-54e0-4c95-bb40-f4df24903e9d">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="143"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="33"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="956"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="koneksi"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="455"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="531"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#FCFEFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="penanggung" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="namars" class="java.lang.String"/>
+	<parameter name="alamatrs" class="java.lang.String"/>
+	<parameter name="kotars" class="java.lang.String"/>
+	<parameter name="propinsirs" class="java.lang.String"/>
+	<parameter name="kontakrs" class="java.lang.String"/>
+	<parameter name="emailrs" class="java.lang.String"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="tanggal" class="java.lang.String"/>
+	<parameter name="jam" class="java.lang.String"/>
+	<parameter name="norawat" class="java.lang.String"/>
+	<parameter name="pasien" class="java.lang.String"/>
+	<parameter name="norm" class="java.lang.String"/>
+	<parameter name="peresep" class="java.lang.String"/>
+	<parameter name="noresep" class="java.lang.String"/>
+	<parameter name="no_kartu" class="java.lang.String"/>
+	<parameter name="no_sep" class="java.lang.String"/>
+	<parameter name="prb" class="java.lang.String"/>
+	<parameter name="no_sep_bridging" class="java.lang.String"/>
+	<parameter name="no_rawat" class="java.lang.String"/>
+	<parameter name="nomr" class="java.lang.String"/>
+	<parameter name="nama_pasien" class="java.lang.String"/>
+	<parameter name="tglsep" class="java.lang.String"/>
+	<parameter name="tglrujukan" class="java.lang.String"/>
+	<parameter name="no_rujukan" class="java.lang.String"/>
+	<parameter name="kdppkrujukan" class="java.lang.String"/>
+	<parameter name="nmppkrujukan" class="java.lang.String"/>
+	<parameter name="kdppkpelayanan" class="java.lang.String"/>
+	<parameter name="nmppkpelayanan" class="java.lang.String"/>
+	<parameter name="jnspelayanan" class="java.lang.String"/>
+	<parameter name="catatan" class="java.lang.String"/>
+	<parameter name="diagawal" class="java.lang.String"/>
+	<parameter name="nmdiagnosaawal" class="java.lang.String"/>
+	<parameter name="kdpolitujuan" class="java.lang.String"/>
+	<parameter name="nmpolitujuan" class="java.lang.String"/>
+	<parameter name="klsrawat" class="java.lang.String"/>
+	<parameter name="klsnaik" class="java.lang.String"/>
+	<parameter name="pembiayaan" class="java.lang.String"/>
+	<parameter name="pjnaikkelas" class="java.lang.String"/>
+	<parameter name="lakalantas" class="java.lang.String"/>
+	<parameter name="user" class="java.lang.String"/>
+	<parameter name="tanggal_lahir" class="java.lang.String"/>
+	<parameter name="peserta" class="java.lang.String"/>
+	<parameter name="jkel" class="java.lang.String"/>
+	<parameter name="no_kartu_bridging" class="java.lang.String"/>
+	<parameter name="tglpulang" class="java.lang.String"/>
+	<parameter name="eksekutif" class="java.lang.String"/>
+	<parameter name="asal_rujukan" class="java.lang.String"/>
+	<parameter name="cob" class="java.lang.String"/>
+	<parameter name="notelep" class="java.lang.String"/>
+	<parameter name="katarak" class="java.lang.String"/>
+	<parameter name="tglkkl" class="java.lang.String"/>
+	<parameter name="keterangankkl" class="java.lang.String"/>
+	<parameter name="suplesi" class="java.lang.String"/>
+	<parameter name="no_sep_suplesi" class="java.lang.String"/>
+	<parameter name="kdprop" class="java.lang.String"/>
+	<parameter name="nmprop" class="java.lang.String"/>
+	<parameter name="kdkab" class="java.lang.String"/>
+	<parameter name="nmkab" class="java.lang.String"/>
+	<parameter name="kdkec" class="java.lang.String"/>
+	<parameter name="nmkec" class="java.lang.String"/>
+	<parameter name="noskdp" class="java.lang.String"/>
+	<parameter name="kddpjp" class="java.lang.String"/>
+	<parameter name="nmdpdjp" class="java.lang.String"/>
+	<parameter name="tujuankunjungan" class="java.lang.String"/>
+	<parameter name="flagprosedur" class="java.lang.String"/>
+	<parameter name="penunjang" class="java.lang.String"/>
+	<parameter name="asesmenpelayanan" class="java.lang.String"/>
+	<parameter name="kddpjplayanan" class="java.lang.String"/>
+	<parameter name="nmdpjplayanan" class="java.lang.String"/>
+	<parameter name="if($P{jnspelayanan}=&apos;1&apos;,&apos;Rawat Inap&apos;,&apos;Rawat Jalan&apos;)" class="java.lang.String"/>
+	<parameter name="if($P{klsrawat}=&apos;1&apos;,&apos;Kelas 1&apos;,if($P{klsrawat}=&apos;2&apos;,&apos;Kelas 2&apos;,&apos;Kelas 3&apos;))" class="java.lang.String"/>
+	<parameter name="logo_bpjs" class="java.io.InputStream"/>
+	<queryString>
+		<![CDATA[select 
+  bridging_sep.no_sep, 
+  bridging_sep.no_rawat, 
+  bridging_sep.nomr, 
+  bridging_sep.nama_pasien, 
+  bridging_sep.tglsep, 
+  bridging_sep.tglrujukan, 
+  bridging_sep.no_rujukan, 
+  bridging_sep.kdppkrujukan, 
+  bridging_sep.nmppkrujukan, 
+  bridging_sep.kdppkpelayanan, 
+  bridging_sep.nmppkpelayanan, 
+  if(
+    bridging_sep.jnspelayanan = '1', 'Rawat Inap', 
+    'Rawat Jalan'
+  ), 
+  bridging_sep.catatan, 
+  bridging_sep.diagawal, 
+  bridging_sep.nmdiagnosaawal, 
+  bridging_sep.kdpolitujuan, 
+  bridging_sep.nmpolitujuan, 
+  if(
+    bridging_sep.klsrawat = '1', 
+    'Kelas 1', 
+    if(
+      bridging_sep.klsrawat = '2', 'Kelas 2', 
+      'Kelas 3'
+    )
+  ), 
+  if(
+    bridging_sep.lakalantas = '0', 'Kasus Kecelakaan', 
+    'Bukan Kasus Kecelakaan'
+  ), 
+  concat(
+    bridging_sep.nmkec, ', ', bridging_sep.nmkab, 
+    ', ', bridging_sep.nmprop
+  ) as lokasilaka, 
+  bridging_sep.user, 
+  bridging_sep.tanggal_lahir, 
+  bridging_sep.peserta, 
+  bridging_sep.jkel, 
+  bridging_sep.no_kartu, 
+  bridging_sep.asal_rujukan, 
+  bridging_sep.eksekutif, 
+  bridging_sep.cob, 
+  bridging_sep.notelep, 
+  bridging_sep.tujuankunjungan, 
+  bridging_sep.flagprosedur, 
+  bridging_sep.klsnaik, 
+  bridging_sep.pembiayaan, 
+  bridging_sep.nmdpdjp, 
+  bridging_sep.lakalantas 
+from 
+  bridging_sep 
+where 
+  no_sep = $P{no_sep}]]>
+	</queryString>
+	<field name="no" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="no"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp4" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp4"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp5" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp5"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp6" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp6"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp7" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp7"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp8" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp8"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp9" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp9"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp10" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp10"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp11" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp11"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp12" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp12"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp13" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp13"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp14" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp14"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp15" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp15"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp16" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp16"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp17" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp17"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp18" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp18"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp19" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp19"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp20" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp20"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp21" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp21"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp22" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp22"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp23" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp23"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp24" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp24"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp25" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp25"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp26" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp26"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp27" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp27"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp28" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp28"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp29" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp29"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp30" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp30"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp31" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp31"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp32" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp32"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp33" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp33"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp34" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp34"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp35" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp35"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp36" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp36"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<field name="temp37" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="temp37"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="temporary_resep"/>
+	</field>
+	<variable name="no" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{no}]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="151">
+			<rectangle>
+				<reportElement isPrintRepeatedValues="false" x="310" y="101" width="73" height="35" isPrintInFirstWholeBand="true" uuid="46084d56-d34d-4a57-879c-b5ae5a1f7e62"/>
+			</rectangle>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="80" y="24" width="300" height="14" isPrintInFirstWholeBand="true" uuid="31498202-9007-4a25-814a-401a5c13ac09"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{alamatrs}+", "+$P{kotars}+", "+$P{propinsirs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="80" y="45" width="300" height="14" isPrintInFirstWholeBand="true" uuid="73e85403-89cd-40d2-8f5c-6399f58d2d25"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["E-mail : "+$P{emailrs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="80" y="36" width="300" height="14" isPrintInFirstWholeBand="true" uuid="3be313cc-f94e-4637-b5fc-af2c58beb2db"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{kontakrs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="80" y="11" width="300" height="17" isPrintInFirstWholeBand="true" uuid="d8be6aea-f634-4f94-9b05-67ac12748fa0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="10"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement isPrintRepeatedValues="false" x="10" y="1" width="54" height="57" isPrintInFirstWholeBand="true" uuid="40e08252-a127-4364-8425-09cfd759a35c"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement isPrintRepeatedValues="false" x="2" y="63" width="381" height="1" isPrintInFirstWholeBand="true" uuid="e6004156-b6ea-49d1-b94b-eaf94eb9b73f"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="10" y="67" width="148" height="9" isPrintInFirstWholeBand="true" uuid="a6990a46-7241-4ee3-b662-b111b56b35e7"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nama Pasien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="10" y="77" width="148" height="9" isPrintInFirstWholeBand="true" uuid="f57f0d69-3f54-4d22-a1e3-d3491acff7fc"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No. R.M.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="232" y="67" width="148" height="9" isPrintInFirstWholeBand="true" uuid="ace49622-3dd8-4493-adf1-786efc5635ff"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Jenis Pasien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="232" y="77" width="148" height="9" isPrintInFirstWholeBand="true" uuid="56db52a1-97ee-4f2d-a345-4d3c70dc56fa"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Pemberi Resep]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="232" y="88" width="148" height="9" isPrintInFirstWholeBand="true" uuid="ec67475b-5c21-44ee-9ab3-b0406dccc6bc"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="Tahoma" size="7" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No. SEP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="67" y="77" width="90" height="9" isPrintInFirstWholeBand="true" uuid="c6d94a5b-6b36-41ba-9e37-1dbfc3c66572"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="67" y="67" width="91" height="9" isPrintInFirstWholeBand="true" uuid="16ca4e52-ed02-42db-b321-605f24dcf75e"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="289" y="77" width="90" height="9" isPrintInFirstWholeBand="true" uuid="3e9219d2-6e3b-44ca-8701-4b1ef2887fa9"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="289" y="67" width="90" height="9" isPrintInFirstWholeBand="true" uuid="dee3092e-5d8c-431c-be08-9301f2d10372"/>
+				<textElement markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="289" y="88" width="90" height="9" isPrintInFirstWholeBand="true" uuid="d4725de7-1540-4490-9ed2-40fea2a76c89"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="67" y="89" width="90" height="9" isPrintInFirstWholeBand="true" uuid="96ecb7e2-7d84-499c-9310-252a00682d62"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="10" y="89" width="148" height="9" isPrintInFirstWholeBand="true" uuid="e846b41c-33b4-4a61-a864-39220d38a21e"/>
+				<textElement verticalAlignment="Top" markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No. Kartu BPJS]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="310" y="101" width="72" height="18" isPrintInFirstWholeBand="true" uuid="9117798b-3821-452f-93fb-ab331cfb783e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{norm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="72" y="67" width="67" height="9" isPrintInFirstWholeBand="true" uuid="999600e0-6804-4ddf-a931-8e67594bda3b"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pasien}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="72" y="77" width="67" height="9" isPrintInFirstWholeBand="true" uuid="17668c28-f830-4241-ae32-63a60bf9b543"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{norm}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="310" y="120" width="72" height="16" isPrintInFirstWholeBand="true" uuid="a62b657e-33c9-423e-907b-d8397a8746d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="10" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{temp36}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="294" y="77" width="85" height="9" isPrintInFirstWholeBand="true" uuid="a4dd6735-384f-405f-a22a-a1b6ead62a69"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{peresep}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="294" y="67" width="85" height="9" isPrintInFirstWholeBand="true" uuid="61106c6f-5148-4067-b816-a0b0721ff315"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{penanggung}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement isPrintRepeatedValues="false" x="2" y="119" width="381" height="1" isPrintInFirstWholeBand="true" uuid="45a268fe-4879-4414-b5a0-57b8c3821a33"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="80" y="0" width="300" height="11" isPrintInFirstWholeBand="true" uuid="deddc8d5-0ce6-4da1-a3ef-f788b349d822"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PEMERINTAH KABUPATEN KARANGANYAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="149" y="124" width="88" height="15" isPrintInFirstWholeBand="true" uuid="23d77141-2d57-4ccb-ba7c-01397c0cc3be"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[RESEP]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="294" y="88" width="85" height="13" isPrintInFirstWholeBand="true" uuid="45c4781d-99c9-439b-a456-dfa64bda7605"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no_sep}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="72" y="88" width="85" height="13" isPrintInFirstWholeBand="true" uuid="08295c70-2de3-4080-abcd-445a70b732d0"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no_kartu}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="498" y="33" width="112" height="13" isPrintInFirstWholeBand="true" uuid="592d0eef-e1d3-4139-9a60-c6314d4e3757"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no_sep_bridging}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="33" width="30" height="13" isPrintInFirstWholeBand="true" uuid="574ef470-0831-467d-8708-52b7ce02efe8"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No. SEP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="491" y="33" width="7" height="13" isPrintInFirstWholeBand="true" uuid="fbd67118-2954-4ca6-9bda-c7b75435248b"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="498" y="47" width="112" height="8" isPrintInFirstWholeBand="true" uuid="16bb4fdb-ccf9-4a8c-ba8a-c6735033184d"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tglsep}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="47" width="30" height="8" isPrintInFirstWholeBand="true" uuid="b805a5aa-63cd-4899-a803-3754cefb0d64"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tgl. SEP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="491" y="47" width="1" height="8" isPrintInFirstWholeBand="true" uuid="5232efef-78d3-4ea4-b8c5-b33ffa2733fd"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="498" y="53" width="112" height="8" isPrintInFirstWholeBand="true" uuid="15e63043-37f4-4df0-a7da-9dbe128fb468"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no_kartu_bridging}+" ( MR : "+$P{nomr}+" )"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="53" width="30" height="8" isPrintInFirstWholeBand="true" uuid="7910b803-c621-4bd3-b970-d08ca14b1923"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No. Kartu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="491" y="53" width="1" height="8" isPrintInFirstWholeBand="true" uuid="af8d89a7-33d4-432b-a45d-d15f7ac61fed"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="491" y="61" width="7" height="11" isPrintInFirstWholeBand="true" uuid="e06f29d6-9a76-46b6-b8b9-38ebb240e846"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="498" y="61" width="112" height="11" isPrintInFirstWholeBand="true" uuid="08b0a738-09e6-4ac2-940b-8612b7e39ba2"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nama_pasien}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="61" width="30" height="11" isPrintInFirstWholeBand="true" uuid="d5f25cbd-5357-4ea8-b285-884775a10cd5"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nama Peserta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="72" width="30" height="8" isPrintInFirstWholeBand="true" uuid="4c87c22d-a697-41ef-963c-806e2ef3828f"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tgl. Lahir]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="498" y="72" width="112" height="8" isPrintInFirstWholeBand="true" uuid="36665ae4-02e9-465c-9bb7-05a2b5d11808"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tanggal_lahir}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="491" y="72" width="1" height="8" isPrintInFirstWholeBand="true" uuid="c01011b7-e814-47fd-b7e0-bd7c58a27221"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="78" width="30" height="10" isPrintInFirstWholeBand="true" uuid="e96400da-48b8-48a6-b377-7a3eeeb80a2d"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No.Telepon]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="498" y="78" width="112" height="10" isPrintInFirstWholeBand="true" uuid="7a492668-53c7-44cb-9a14-0853194ae7df"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{notelep}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="491" y="78" width="1" height="10" isPrintInFirstWholeBand="true" uuid="e24e733d-9d6a-4d38-ba7c-5717c460c455"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="491" y="84" width="1" height="10" isPrintInFirstWholeBand="true" uuid="54b32726-395b-46e1-8041-f9e75731fca0"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="498" y="84" width="112" height="10" isPrintInFirstWholeBand="true" uuid="219269c6-a7cc-4e75-8903-ffee8c90fa7e"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmpolitujuan}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="84" width="30" height="10" isPrintInFirstWholeBand="true" uuid="a3fe1c24-7314-41cf-8344-c3fb95bd8660"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Sub/Spesialis]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="559" y="10" width="275" height="14" isPrintInFirstWholeBand="true" uuid="1fe89abe-0a66-40cc-bf3c-1471eb4db901"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement isPrintRepeatedValues="false" x="462" y="4" width="85" height="20" isPrintInFirstWholeBand="true" uuid="54015861-d5e0-4571-9fb8-5b0e023fb0ee"/>
+				<imageExpression><![CDATA[$P{logo_bpjs}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="491" y="96" width="1" height="10" isPrintInFirstWholeBand="true" uuid="1be25cd0-8bd5-4c47-9e04-6112bca49840"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="498" y="96" width="112" height="10" isPrintInFirstWholeBand="true" uuid="4375de84-ef3b-44f1-8718-377fffd03d77"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmppkrujukan}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="96" width="30" height="10" isPrintInFirstWholeBand="true" uuid="a9aa1e40-5fb0-40a4-b226-0a5f7b8a12b7"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Faskes Perujuk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="491" y="102" width="1" height="10" isPrintInFirstWholeBand="true" uuid="f11101ef-f071-4b04-ab4c-162dca5c4cd8"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="498" y="102" width="112" height="15" isPrintInFirstWholeBand="true" uuid="6378332e-c6d6-4524-b851-8f58fe3451f3"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmdiagnosaawal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="102" width="30" height="10" isPrintInFirstWholeBand="true" uuid="de8193e9-ecaf-4aaf-934b-44e940ccc968"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Diagnosa Awal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="491" y="113" width="1" height="12" isPrintInFirstWholeBand="true" uuid="34d5735f-d769-4ece-bcf6-646b84f0dd0f"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="498" y="113" width="112" height="19" isPrintInFirstWholeBand="true" uuid="4f4f23ca-4e77-46a0-af64-37e2ecc45024"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{catatan}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="113" width="30" height="12" isPrintInFirstWholeBand="true" uuid="f0fe3a06-befb-4e37-af6c-7c5d6887ca37"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Catatan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="126" width="173" height="11" isPrintInFirstWholeBand="true" uuid="a61d4ca0-bc15-42ae-93f6-d4c3dcea1dfb"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="4" isBold="false" isItalic="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[*Saya Menyetujui BPJS Kesehatan menggunakan informasi Medis Pasien jika diperlukan.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="132" width="173" height="11" isPrintInFirstWholeBand="true" uuid="af2a809c-4a3d-4fb4-90a3-660ebb8abcd1"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="4" isBold="false" isItalic="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[*SEP bukan sebagai bukti penjaminan peserta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="138" width="31" height="11" isPrintInFirstWholeBand="true" uuid="c4060c3e-a96d-4333-8a13-04759d88fb44"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="4" isBold="false" isItalic="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Cetakan ke 1]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h:mm:ss a" isBlankWhenNull="false">
+				<reportElement key="textField" isPrintRepeatedValues="false" x="509" y="138" width="75" height="11" isPrintInFirstWholeBand="true" forecolor="#000000" backcolor="#FFFFFF" uuid="20c08d7b-d551-4629-bdad-0474ce65671f"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="4" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="642" y="83" width="7" height="10" isPrintInFirstWholeBand="true" uuid="216dbc45-5c7e-4728-a710-1844e14fa28a"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="657" y="83" width="177" height="10" isPrintInFirstWholeBand="true" uuid="f3e0010a-5a5a-46b6-9d93-07b7cfc637ee"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{klsrawat}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="616" y="83" width="25" height="10" isPrintInFirstWholeBand="true" uuid="ac43714c-8442-4230-99a9-2a83dfa9ad75"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Kls. Hak]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="697" y="109" width="107" height="8" isPrintInFirstWholeBand="true" uuid="57b78f85-d45e-4b50-ad0d-aa493db2c15a"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Pasien/Keluarga Pasien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="642" y="89" width="7" height="10" isPrintInFirstWholeBand="true" uuid="786b1f37-e098-4096-9a48-3432adbe339c"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="616" y="89" width="25" height="10" isPrintInFirstWholeBand="true" uuid="ba8d42b4-1c4d-488d-929c-542e3f4a7827"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Kls. Rawat]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="657" y="89" width="177" height="10" isPrintInFirstWholeBand="true" uuid="a032b940-3d35-493f-97d4-072cc6ffb2b5"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{klsnaik}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="642" y="95" width="7" height="10" isPrintInFirstWholeBand="true" uuid="57403bc3-8195-46d0-a066-3877bd33d89f"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="616" y="95" width="25" height="10" isPrintInFirstWholeBand="true" uuid="5081de60-b6c9-4350-825f-aaffb1e5390c"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Penjamin]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="657" y="95" width="177" height="10" isPrintInFirstWholeBand="true" uuid="08a2e0fd-baaf-48ec-9d01-80e4afb134a8"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{lakalantas}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement isPrintRepeatedValues="false" x="697" y="117" width="98" height="17" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="64b1e044-f5ac-4e6a-a4f0-66c100dc4203"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="H">
+					<jr:codeExpression><![CDATA["Dikeluarkan di "+$P{namars}+", Kabupaten/Kota "+$P{kotars}+"\n Ditandatangani secara elektronik oleh \n "+$P{nama_pasien}+" \nID "+$P{no_kartu_bridging}+"\n"+$P{tglsep}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="491" y="90" width="1" height="10" isPrintInFirstWholeBand="true" uuid="257b580a-d7cf-4ee2-959e-054300ffba91"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="461" y="90" width="30" height="10" isPrintInFirstWholeBand="true" uuid="3d1442db-7c2c-40f9-b489-111c5381afd4"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Dokter]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="498" y="90" width="112" height="10" isPrintInFirstWholeBand="true" uuid="fd390df2-12de-4d00-8cb3-1b021ddfcc47"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmdpdjp}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="697" y="138" width="107" height="8" isPrintInFirstWholeBand="true" uuid="a7ad1da0-1504-4c8f-83de-76b223d0f4a0"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nama_pasien}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="642" y="77" width="7" height="10" isPrintInFirstWholeBand="true" uuid="99eede94-bc99-43ad-9e6c-d16b577a585c"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="616" y="77" width="25" height="10" isPrintInFirstWholeBand="true" uuid="f4ff16f3-d60a-4bce-9b63-6a3963c3a246"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Poli Perujuk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="657" y="77" width="64" height="6" isPrintInFirstWholeBand="true" uuid="fd5a0807-8537-43aa-899c-258ec74d4050"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="4" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="657" y="53" width="177" height="16" isPrintInFirstWholeBand="true" uuid="42117920-3940-49a8-98d4-952f97e0d23f"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tujuankunjungan}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="657" y="65" width="177" height="12" isPrintInFirstWholeBand="true" uuid="e5f2397c-ed97-4736-ba70-a4cca911009a"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{flagprosedur}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="642" y="65" width="7" height="10" isPrintInFirstWholeBand="true" uuid="609a7d84-7235-4965-9b4a-c4f7900ee780"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="616" y="65" width="25" height="10" isPrintInFirstWholeBand="true" uuid="715a58d6-a88d-44c6-8214-2c79efe1489d"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Jns.Kunjungan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="616" y="47" width="25" height="8" isPrintInFirstWholeBand="true" uuid="cb64eba0-a963-46ab-a2ba-8a4670593b62"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Jns. Rawat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="642" y="47" width="7" height="8" isPrintInFirstWholeBand="true" uuid="8507f4bd-c169-411e-a83d-1f02ba21dac2"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="657" y="47" width="177" height="8" isPrintInFirstWholeBand="true" uuid="8e182321-d56e-4ad1-b3cb-b35d31f6fe82"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{jnspelayanan}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="657" y="41" width="177" height="8" isPrintInFirstWholeBand="true" uuid="f28d21dc-9c41-4e27-ad4a-b71a4a2a21c5"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{peserta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="642" y="41" width="7" height="8" isPrintInFirstWholeBand="true" uuid="9d8e53c2-9485-45c1-a505-44b9ec25d30a"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="616" y="41" width="25" height="8" isPrintInFirstWholeBand="true" uuid="5e789a90-10ee-4e43-9f95-acf5f486fc84"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Tahoma" size="5" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Peserta]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="610" y="33" width="224" height="10" isPrintInFirstWholeBand="true" uuid="9411f147-d92f-49f8-8afa-b768fb86166f"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="5"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prb}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement isPrintRepeatedValues="false" x="559" y="22" width="275" height="10" isPrintInFirstWholeBand="true" uuid="a25ab28f-6d54-4600-a286-8c37c9e24099"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barHeight="45">
+					<jr:codeExpression><![CDATA[$P{no_sep_bridging}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="559" y="0" width="275" height="10" isPrintInFirstWholeBand="true" uuid="2086f044-2e5c-4c61-8915-17a73a519645"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[SURAT ELEGIBILITAS PESERTA]]></text>
+			</staticText>
+			<line>
+				<reportElement isPrintRepeatedValues="false" x="1" y="150" width="774" height="1" isPrintInFirstWholeBand="true" uuid="b2566572-a072-48fb-bacf-6ff71d2ba661"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Immediate"/>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Prevent">
+			<property name="com.jaspersoft.studio.layout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Transparent" x="31" y="0" width="349" height="16" uuid="b94f7c44-3742-48d8-b751-bf008502fe96"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{temp1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="0" width="21" height="9" uuid="5df7cfbc-91c2-494e-bbb9-17ddaad1dcb9"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[R/]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Transparent" x="342" y="0" width="39" height="9" uuid="c009f027-99cd-4d1b-81d0-1393c0787015"/>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{temp3}+" "+$F{temp4}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Transparent" x="71" y="16" width="309" height="9" uuid="db597fec-1351-4c35-b555-2e860706ebe4"/>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{temp2}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="28" y="25" width="352" height="1" uuid="d462c4a6-684d-4eb6-8a42-64f4bdd83185"/>
+				<graphicElement>
+					<pen lineWidth="0.4" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="11" y="16" width="26" height="10" uuid="b3378bd2-bc13-42ac-b28e-6952d1409d09"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[S]]></text>
+			</staticText>
+			<line>
+				<reportElement x="48" y="21" width="11" height="1" uuid="bab8e0ca-1bdc-4516-b438-2a98802bbe78"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="12"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="124">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="0" width="378" height="10" isPrintInFirstWholeBand="true" uuid="c3438eea-f528-4a75-82eb-62a92c09b550"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIISI PETUGAS FARMASI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="11" width="95" height="9" isPrintInFirstWholeBand="true" uuid="75c1ce96-c1ac-4076-86e2-12a51f911fec"/>
+				<textElement>
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telaah Resep]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="21" width="10" height="8" isPrintInFirstWholeBand="true" uuid="a01c9ec1-dc4e-429c-906b-65bbbc933c8a"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="470" y="21" width="37" height="8" isPrintInFirstWholeBand="true" uuid="eb9d9500-8200-4732-8e74-9d4a9b92bb84"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kegiatan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="551" y="21" width="20" height="8" isPrintInFirstWholeBand="true" uuid="bfcf0ffd-f546-4470-b3c6-11241b86dfac"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Konf]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="535" y="21" width="16" height="8" isPrintInFirstWholeBand="true" uuid="1051ee00-8479-44b8-a67e-1833c344b9e4"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tdk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="507" y="21" width="28" height="8" isPrintInFirstWholeBand="true" uuid="12bf8925-48dc-4fde-94e6-7f112bc63928"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ya]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="29" width="10" height="8" isPrintInFirstWholeBand="true" uuid="90263159-918a-462c-82db-fe67f03230b0"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="470" y="29" width="37" height="8" isPrintInFirstWholeBand="true" uuid="e5ee2929-397c-45f1-8f99-dd38ebb8e85b"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Identitas Pasien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="507" y="29" width="28" height="8" isPrintInFirstWholeBand="true" uuid="49133eff-eae7-4762-b6e6-d135196f19a2"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="551" y="29" width="20" height="8" isPrintInFirstWholeBand="true" uuid="42ebd7a2-7a52-4fdb-a2cc-42af381d1737"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="535" y="29" width="16" height="8" isPrintInFirstWholeBand="true" uuid="e000f6d6-ad85-4585-b1cc-dfe8714418af"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="37" width="10" height="8" isPrintInFirstWholeBand="true" uuid="474fc378-664e-4379-8d9d-40cd6bd14942"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="470" y="37" width="37" height="8" isPrintInFirstWholeBand="true" uuid="b9380e40-b1ea-434d-831d-bfb5de1a2fc9"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Berat Badan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="45" width="10" height="8" isPrintInFirstWholeBand="true" uuid="ff6811f5-f0fc-4042-a0ee-6e1a35f4b7c2"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="470" y="45" width="37" height="8" isPrintInFirstWholeBand="true" uuid="ca05ed91-fafd-4b03-8603-35171cfb2f98"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Nama & SIP Dokter]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="53" width="10" height="8" isPrintInFirstWholeBand="true" uuid="418d2c1c-2a5b-4ea7-abb1-88edc8c7eaaa"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="470" y="53" width="37" height="8" isPrintInFirstWholeBand="true" uuid="ec5a2ad1-2c8d-47ca-b336-cce506b1ddbf"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[Tanggal Resep]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="61" width="10" height="8" isPrintInFirstWholeBand="true" uuid="bb831458-57cb-4019-bc75-a593321b86cf"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="470" y="61" width="37" height="8" isPrintInFirstWholeBand="true" uuid="27034447-bfa2-4847-8689-d7763e9701aa"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Nama Obat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="69" width="10" height="8" isPrintInFirstWholeBand="true" uuid="7e463bd2-b1ec-4865-b062-661603afb697"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="470" y="69" width="37" height="8" isPrintInFirstWholeBand="true" uuid="8396bb4c-dad7-4b7f-96f4-59fcf09bf839"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Bentuk Sediaan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="77" width="10" height="8" isPrintInFirstWholeBand="true" uuid="d55c120b-9d29-4834-8407-d6e6b3e88158"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="470" y="77" width="37" height="8" isPrintInFirstWholeBand="true" uuid="10476e4a-da3d-47ff-986f-d483045f056d"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Kekuatan & Jumlah Obat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="85" width="10" height="8" isPrintInFirstWholeBand="true" uuid="18049e57-4080-4a3b-a792-eab2adefd67d"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[8]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="470" y="85" width="37" height="8" isPrintInFirstWholeBand="true" uuid="a40fbb0a-894d-431e-a83a-f32e05b99e93"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Aturan Pemakaian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="507" y="37" width="28" height="8" isPrintInFirstWholeBand="true" uuid="b210c692-313f-41fa-97ba-84326f533808"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="535" y="37" width="16" height="8" isPrintInFirstWholeBand="true" uuid="4f58590b-a7f3-4e43-af90-c0954613c3a7"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="551" y="37" width="20" height="8" isPrintInFirstWholeBand="true" uuid="ba81eff4-f43b-4b9f-a4f0-250eece69a07"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="507" y="45" width="28" height="8" isPrintInFirstWholeBand="true" uuid="cd986305-d168-476c-9b8c-66f780f607bc"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="535" y="45" width="16" height="8" isPrintInFirstWholeBand="true" uuid="4c21d58d-b20d-4171-89ca-924636842731"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="551" y="45" width="20" height="8" isPrintInFirstWholeBand="true" uuid="3d59698f-a961-4d0c-8e28-0a56c6be932f"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="507" y="53" width="28" height="8" isPrintInFirstWholeBand="true" uuid="07bf3cfa-af2e-4ea8-96f0-9a6540a547c8"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="535" y="53" width="16" height="8" isPrintInFirstWholeBand="true" uuid="be0cd5d1-00c7-48f8-8eac-5bcf1e94d103"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="551" y="53" width="20" height="8" isPrintInFirstWholeBand="true" uuid="a6ec0263-4d6c-45cf-82fe-c450a1211a9f"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="507" y="61" width="28" height="8" isPrintInFirstWholeBand="true" uuid="a18372eb-01a3-4f68-b535-633e47b61ea6"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="535" y="61" width="16" height="8" isPrintInFirstWholeBand="true" uuid="557ed946-512d-45b4-8354-34e97cca316a"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="551" y="61" width="20" height="8" isPrintInFirstWholeBand="true" uuid="147d157a-3569-4df7-88c1-3bc54bf77a8a"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="507" y="69" width="28" height="8" isPrintInFirstWholeBand="true" uuid="05aed93a-bb81-423b-ba7e-33ecccf06f6b"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="535" y="69" width="16" height="8" isPrintInFirstWholeBand="true" uuid="f4cc58ce-7833-4a24-9218-beb95ea5e1d9"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="551" y="69" width="20" height="8" isPrintInFirstWholeBand="true" uuid="2c9ad448-5c4b-46f9-ad12-367df3deb184"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="507" y="77" width="28" height="8" isPrintInFirstWholeBand="true" uuid="1ec76af1-c2d4-49b9-8477-f5c4d9864a1e"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="535" y="77" width="16" height="8" isPrintInFirstWholeBand="true" uuid="30377805-90a7-4309-82c4-9be9222e05fc"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="551" y="77" width="20" height="8" isPrintInFirstWholeBand="true" uuid="ab99ed34-e8b7-468d-9833-ded82c8dd80f"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="507" y="85" width="28" height="8" isPrintInFirstWholeBand="true" uuid="19eebae1-3c4e-41cf-83a5-353a5eb62bc4"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="535" y="85" width="16" height="8" isPrintInFirstWholeBand="true" uuid="28d9ad7c-db64-41f4-9cf5-e67fe1c1733f"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="551" y="85" width="20" height="8" isPrintInFirstWholeBand="true" uuid="471f3bc8-fa36-4599-b3fc-f31c1f501308"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="96" width="242" height="9" isPrintInFirstWholeBand="true" uuid="616e9f05-abdb-4f1a-9acd-6ac68e81c86c"/>
+				<textElement>
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Penelaah Resep :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="716" y="11" width="112" height="9" isPrintInFirstWholeBand="true" uuid="79cd041a-b92f-49a3-acdb-c0908125cd99"/>
+				<textElement>
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telaah Obat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="716" y="61" width="10" height="8" isPrintInFirstWholeBand="true" uuid="a19e97e6-124c-4155-a443-a7b4823d829e"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="798" y="29" width="16" height="8" isPrintInFirstWholeBand="true" uuid="a171165a-edfe-49f2-8aaf-75cb84600ba5"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="726" y="37" width="54" height="8" isPrintInFirstWholeBand="true" uuid="005c3fdb-c688-4c08-a20f-581d3a60f18d"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Dosis Sesuai]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="814" y="29" width="14" height="8" isPrintInFirstWholeBand="true" uuid="44732d62-4502-4644-a7fb-b4fed0cfbc4a"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="780" y="61" width="18" height="8" isPrintInFirstWholeBand="true" uuid="401d4b2f-77fb-4a27-b76a-09fdc1bbb7b6"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="726" y="29" width="54" height="8" isPrintInFirstWholeBand="true" uuid="db08d079-c965-4317-b902-b2dccd7f27c8"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Obat Sesuai Resep]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="726" y="21" width="54" height="8" isPrintInFirstWholeBand="true" uuid="2d12260a-9241-479c-9c64-51eb28f8d712"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kegiatan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="780" y="21" width="18" height="8" isPrintInFirstWholeBand="true" uuid="33ac8016-e29c-4954-8f15-58211a6ad20d"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ya]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="798" y="45" width="16" height="8" isPrintInFirstWholeBand="true" uuid="3d868221-05ef-455a-a557-0163a997fcee"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="726" y="45" width="54" height="8" isPrintInFirstWholeBand="true" uuid="9d6ff05d-6552-4112-bea2-0b620052b656"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Frekuensi Obat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="798" y="61" width="16" height="8" isPrintInFirstWholeBand="true" uuid="3757ae28-0a33-4e98-8678-7c128267373a"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="716" y="29" width="10" height="8" isPrintInFirstWholeBand="true" uuid="335e2a88-9f80-476e-90fc-d4cc050f0150"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="716" y="45" width="10" height="8" isPrintInFirstWholeBand="true" uuid="e8eccfc6-8ef5-4ed0-a190-01573dc12649"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="814" y="21" width="14" height="8" isPrintInFirstWholeBand="true" uuid="25cae38a-8262-4073-b35d-e3451a3c1698"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ctt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="716" y="37" width="10" height="8" isPrintInFirstWholeBand="true" uuid="e4d54ed7-b8d4-4d43-bb96-177cc9c899f3"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="726" y="53" width="54" height="8" isPrintInFirstWholeBand="true" uuid="96ec246d-917e-4aa5-8c2a-9d590ccebe85"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Rute Obat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="814" y="37" width="14" height="8" isPrintInFirstWholeBand="true" uuid="efccef5b-2c7f-4d93-8cf7-6eb9aacb0d91"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="780" y="29" width="18" height="8" isPrintInFirstWholeBand="true" uuid="ec11dd0d-7037-47d2-91ef-9e6f7dfc5071"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="716" y="21" width="10" height="8" isPrintInFirstWholeBand="true" uuid="27c71fbe-17f5-43e7-9539-00013c9bbc5f"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="726" y="61" width="54" height="8" isPrintInFirstWholeBand="true" uuid="3cf70e67-fbef-4334-b9f4-fd6ab98b7e2d"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Tepat Pasien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="814" y="61" width="14" height="8" isPrintInFirstWholeBand="true" uuid="d308cf16-1b70-48f5-b309-e0d6232869d5"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="798" y="37" width="16" height="8" isPrintInFirstWholeBand="true" uuid="7a99834e-fd85-4dea-8e91-84346bcfc093"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="780" y="45" width="18" height="8" isPrintInFirstWholeBand="true" uuid="0a2b2f0c-2a39-484c-87fd-9605a329294b"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="814" y="53" width="14" height="8" isPrintInFirstWholeBand="true" uuid="b4ff6118-f732-4d57-bd54-51563157681a"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="716" y="53" width="10" height="8" isPrintInFirstWholeBand="true" uuid="15c89223-2e34-4938-8649-201fca11c322"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="814" y="45" width="14" height="8" isPrintInFirstWholeBand="true" uuid="5ca0a8da-659c-41de-9f49-861affeea3bb"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="798" y="21" width="16" height="8" isPrintInFirstWholeBand="true" uuid="7d0c0292-ee2d-4287-8da9-d852f00502e8"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tdk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="780" y="37" width="18" height="8" isPrintInFirstWholeBand="true" uuid="18e1a88d-57e0-4f64-91e8-28b3f42fbebe"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="780" y="53" width="18" height="8" isPrintInFirstWholeBand="true" uuid="0d14a889-ef4b-4742-b7f0-57313ad53d59"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="798" y="53" width="16" height="8" isPrintInFirstWholeBand="true" uuid="a1b51c3a-e10b-499f-9395-9b50f2531c61"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="716" y="71" width="112" height="9" isPrintInFirstWholeBand="true" uuid="d529db8b-f56b-4848-960f-150754403025"/>
+				<textElement>
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Penelaah Obat:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="716" y="83" width="112" height="9" isPrintInFirstWholeBand="true" uuid="7fccaa84-6c42-4900-a3cf-86608c162eeb"/>
+				<textElement>
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Yang menyerahkan obat :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="716" y="96" width="112" height="9" isPrintInFirstWholeBand="true" uuid="dcf9bfaf-412d-4141-b539-81ec14220051"/>
+				<textElement>
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Penerima Obat :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="579" y="29" width="10" height="8" isPrintInFirstWholeBand="true" uuid="e060d156-01ad-479e-8afe-c0758af95b37"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[9]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="687" y="29" width="16" height="8" isPrintInFirstWholeBand="true" uuid="ab926f35-03d2-4343-89da-b8183a4a8051"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="643" y="29" width="28" height="8" isPrintInFirstWholeBand="true" uuid="2cb03951-2387-4578-b132-d7e4816cf9cd"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="589" y="29" width="54" height="8" isPrintInFirstWholeBand="true" uuid="05eb73ba-ab0f-43d8-8801-bbdcbbcd7647"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Cara Menggunakan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="671" y="29" width="16" height="8" isPrintInFirstWholeBand="true" uuid="a427337e-f350-4586-ac7f-b42326a796d6"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="579" y="37" width="10" height="8" isPrintInFirstWholeBand="true" uuid="5cfab4f6-90ab-4781-a714-599f86e0ca9b"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="687" y="37" width="16" height="8" isPrintInFirstWholeBand="true" uuid="20a2a008-5451-4a6f-ab25-49a07a7d4bc1"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="643" y="37" width="28" height="8" isPrintInFirstWholeBand="true" uuid="f64b6d3e-8a7d-464b-b028-2de0f2d1e515"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="589" y="37" width="54" height="8" isPrintInFirstWholeBand="true" uuid="cd359811-ba63-4d3b-9cdd-a3a39307f072"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Tepat Waktu Pemberian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="671" y="37" width="16" height="8" isPrintInFirstWholeBand="true" uuid="30cef756-301b-41bf-be90-89e41eafbb18"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="579" y="45" width="10" height="8" isPrintInFirstWholeBand="true" uuid="df89ce2f-3b18-4494-b497-a6fa0d5cbec4"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[11]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="687" y="45" width="16" height="8" isPrintInFirstWholeBand="true" uuid="cb202bfb-8c2c-4832-ace8-3bc8cff273df"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="643" y="45" width="28" height="8" isPrintInFirstWholeBand="true" uuid="c0afadae-fd88-48e6-9b25-348a63ec5168"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="589" y="45" width="54" height="8" isPrintInFirstWholeBand="true" uuid="fba6eece-ef5e-4d96-8eb4-264f0496092d"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[Tepat Indikasi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="671" y="45" width="16" height="8" isPrintInFirstWholeBand="true" uuid="f15e2723-692c-4ef1-a016-b9fab8c62cfa"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="579" y="53" width="10" height="8" isPrintInFirstWholeBand="true" uuid="b44bf4ac-0c66-4219-9aa5-c24c248022f2"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[12]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="589" y="53" width="54" height="8" isPrintInFirstWholeBand="true" uuid="6e51265b-2a2b-4a42-b658-40213c399438"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Tepat Dosis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="687" y="53" width="16" height="8" isPrintInFirstWholeBand="true" uuid="edb4b4a1-0b1a-4bf6-b875-d4626743e2b3"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="671" y="53" width="16" height="8" isPrintInFirstWholeBand="true" uuid="c154ee31-542f-43cb-a0db-e65da0c4736a"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="643" y="53" width="28" height="8" isPrintInFirstWholeBand="true" uuid="4e40caf4-4583-43fc-b6c1-e6eb47521d2e"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="579" y="61" width="10" height="8" isPrintInFirstWholeBand="true" uuid="8c1b559a-b3f8-4207-9f42-97fd2a30d56c"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[13]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="589" y="61" width="54" height="8" isPrintInFirstWholeBand="true" uuid="0fc8f49b-286a-44c4-828d-6d4f9a896625"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Duplikasi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="687" y="61" width="16" height="8" isPrintInFirstWholeBand="true" uuid="b81538c8-277b-41d3-aae7-471964152d93"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="671" y="61" width="16" height="8" isPrintInFirstWholeBand="true" uuid="e43061be-3b73-4bec-84bc-4dfc93dd73eb"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="643" y="61" width="28" height="8" isPrintInFirstWholeBand="true" uuid="fb6c4da4-0963-4eaa-96f1-32b384eacc14"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="643" y="69" width="28" height="8" isPrintInFirstWholeBand="true" uuid="7801f4f7-37d2-4341-9b1a-37f8f49f0730"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="579" y="69" width="10" height="8" isPrintInFirstWholeBand="true" uuid="8b89c47c-9ac3-420b-b6a2-9f2f8671b5a1"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[14]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="589" y="69" width="54" height="8" isPrintInFirstWholeBand="true" uuid="916a36e7-5154-489f-9ccd-e189c047fa4a"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Alergi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="671" y="69" width="16" height="8" isPrintInFirstWholeBand="true" uuid="7428425d-576f-491b-9143-21bc173eb507"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="687" y="69" width="16" height="8" isPrintInFirstWholeBand="true" uuid="758fbb1f-3465-42f5-952a-07dc9a6edcb1"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="579" y="85" width="10" height="8" isPrintInFirstWholeBand="true" uuid="e8db9d27-ee87-4c37-bd3b-0fd4704b05b4"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[16]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="643" y="85" width="28" height="8" isPrintInFirstWholeBand="true" uuid="a0494349-0b69-459b-be77-7e23e60b8526"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="643" y="77" width="28" height="8" isPrintInFirstWholeBand="true" uuid="e66bca9a-11f7-42a4-814e-af28d0d657af"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="589" y="85" width="54" height="8" isPrintInFirstWholeBand="true" uuid="3b9650ee-7cd7-46c7-b48b-d0b1ca2458a9"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Kontraindikasi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="579" y="77" width="10" height="8" isPrintInFirstWholeBand="true" uuid="7ba7b196-0d83-4835-977d-c9a018930b28"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[15]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="589" y="77" width="54" height="8" isPrintInFirstWholeBand="true" uuid="14c07bf0-3d66-4eb2-8c08-7608b48b38bb"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[ Interaksi Obat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="671" y="77" width="16" height="8" isPrintInFirstWholeBand="true" uuid="e4f4e1e9-f29e-4da0-abdb-beadd22405f5"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="687" y="85" width="16" height="8" isPrintInFirstWholeBand="true" uuid="e3fc7d12-685e-40fa-bcdd-7606577930e9"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="671" y="85" width="16" height="8" isPrintInFirstWholeBand="true" uuid="d3feb09d-6030-4034-9aa3-11d312aa4b42"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="687" y="77" width="16" height="8" isPrintInFirstWholeBand="true" uuid="34a8e2e6-7b2b-4095-8ac5-93aab36c37fd"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="687" y="21" width="16" height="8" isPrintInFirstWholeBand="true" uuid="5bf9b052-5e78-4d94-a899-e15cf117a07e"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Konf]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="589" y="21" width="54" height="8" isPrintInFirstWholeBand="true" uuid="ca0bbf34-9343-4457-999a-8b6f11f717b8"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kegiatan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="643" y="21" width="28" height="8" isPrintInFirstWholeBand="true" uuid="95da0750-5e54-4b16-b1e9-4634021628cd"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ya]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="671" y="21" width="16" height="8" isPrintInFirstWholeBand="true" uuid="d649b4c6-da89-4157-a9a1-7839f7385b09"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tdk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="579" y="21" width="10" height="8" isPrintInFirstWholeBand="true" uuid="f2f53c07-b7ed-4178-81e5-cfccd38b55c5"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="460" y="108" width="72" height="16" isPrintInFirstWholeBand="true" uuid="ca54c7f3-854f-4c1c-9ed3-c73348968440"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ SKRINING 1 :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="534" y="108" width="69" height="16" isPrintInFirstWholeBand="true" uuid="1f58b71d-1f53-4a37-a672-c1a2764ed4c4"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ SKRINING 2 :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="605" y="108" width="76" height="16" isPrintInFirstWholeBand="true" uuid="48181e1f-29d3-4817-b5d4-0551334c2012"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ SKRINING 3 :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="684" y="108" width="73" height="16" isPrintInFirstWholeBand="true" uuid="6e628bdf-9a38-4548-9eb3-3026adfc7378"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ DOBEL CEK 1 :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="760" y="108" width="70" height="16" isPrintInFirstWholeBand="true" uuid="760b17ea-635a-45ba-8089-dbdfbe1ffa93"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ DOBEL CEK 2 :]]></text>
+			</staticText>
+			<line>
+				<reportElement isPrintRepeatedValues="false" x="709" y="10" width="1" height="95" isPrintInFirstWholeBand="true" uuid="be9dd5d9-479c-4f3e-987f-3e5bd074ab57"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Transparent" x="218" y="0" width="165" height="10" uuid="212c36ed-beb1-4cb1-ad3a-b5b80692b242"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="7"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{kotars}+", "+$P{tanggal}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="261" y="12" width="80" height="26" uuid="ba103e6e-48d6-41bd-9b10-97c491dfeed0"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$P{peresep}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<textField>
+				<reportElement x="218" y="44" width="165" height="10" uuid="f85d433c-0ca6-4da7-aec5-9e3697295f92"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{peresep}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
