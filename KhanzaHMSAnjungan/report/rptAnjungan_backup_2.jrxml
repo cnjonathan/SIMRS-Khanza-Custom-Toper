@@ -55,7 +55,7 @@ WHERE
 		<band/>
 	</background>
 	<title>
-		<band height="55">
+		<band height="51">
 			<textField pattern="">
 				<reportElement mode="Opaque" x="20" y="5" width="100" height="11" uuid="fc41c518-554d-461e-8b3f-30894b692a2e"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -90,6 +90,50 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA["Dokter "+$F{nm_dokter}]]></textFieldExpression>
 			</textField>
+			<textField pattern="">
+				<reportElement mode="Opaque" x="175" y="5" width="100" height="11" uuid="0b68ea00-0830-4793-9243-2dbe16eb78b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_pasien}+" ("+$F{jk}+")"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Transparent" x="175" y="13" width="100" height="11" uuid="9150d8ba-c87c-464a-a291-0452e7cf0557"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Poli "+$F{nm_poli}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="175" y="27" width="100" height="11" uuid="db0090cb-fc2f-4e3f-a873-9b7434c9c25d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["No Antrian: "+$F{no_reg}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Transparent" x="175" y="20" width="100" height="11" uuid="c4309105-fdc1-4a4a-9660-0ea6b7f0d0dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dokter "+$F{nm_dokter}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="175" y="34" width="100" height="11" uuid="777a267d-93ca-4eba-a401-054d45a90160">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Tahoma" size="6" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NIK: "+$F{no_ktp}]]></textFieldExpression>
+			</textField>
 			<textField>
 				<reportElement x="20" y="34" width="100" height="11" uuid="b6afce01-d44a-4845-825a-4690bbe77962">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -100,12 +144,6 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA["NIK: "+$F{no_ktp}]]></textFieldExpression>
 			</textField>
-			<componentElement>
-				<reportElement x="180" y="5" width="100" height="40" uuid="0a06c6ed-46b1-42d2-9a6a-49ce782d9da5"/>
-				<jr:Codabar xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<jr:codeExpression><![CDATA[$F{no_ktp}]]></jr:codeExpression>
-				</jr:Codabar>
-			</componentElement>
 		</band>
 	</title>
 </jasperReport>

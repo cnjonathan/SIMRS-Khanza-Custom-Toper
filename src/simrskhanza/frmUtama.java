@@ -464,6 +464,8 @@ import bridging.MobileJKNPembatalanPendaftaran;
 import bridging.MobileJKNReferensiPendaftaran;
 import bridging.PCareCekKartu;
 import bridging.PCareCekReferensiTACC;
+import bridging.SatuSehatCariAllergy;
+import bridging.SatuSehatKirimAllergyIntollerance;
 import bridging.SatuSehatKirimClinicalImpression;
 import bridging.SatuSehatKirimCondition;
 import bridging.SatuSehatKirimDiet;
@@ -956,6 +958,7 @@ import simrskhanza.DlgRujukMasuk;
 import simrskhanza.DlgSatuanPolri;
 import simrskhanza.DlgSatuanTNI;
 import simrskhanza.DlgSuku;
+import simrskhanza.DlgDataAlergiPasien;
 import setting.DlgWorkstation;
 import setting.DlgWorkstationConfigList;
 import setting.DlgWorkstationSetup;
@@ -1664,6 +1667,9 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaboratoriumMB = new widget.ButtonBig();
         btnWorkstationConfigList = new widget.ButtonBig();
         btnPenjaminan = new widget.ButtonBig();
+        btnSatuSehatCariAllergy = new widget.ButtonBig();
+        btnSatuSehatKirimAllergyIntollerance = new widget.ButtonBig();
+        btnDlgDataAlergiPasien = new widget.ButtonBig();
         internalFrame1 = new widget.InternalFrame();
         BtnMenu = new widget.ButtonBig();
         jSeparator4 = new javax.swing.JSeparator();
@@ -1913,11 +1919,6 @@ public class frmUtama extends javax.swing.JFrame {
                 cmbMenuItemStateChanged(evt);
             }
         });
-        cmbMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbMenuActionPerformed(evt);
-            }
-        });
         panelisi2.add(cmbMenu);
 
         TCari.setName("TCari"); // NOI18N
@@ -1967,7 +1968,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21/02/2024" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07/05/2024" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7062,6 +7063,39 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenjaminan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPenjaminanActionPerformed(evt);
+            }
+        });
+
+        btnSatuSehatCariAllergy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/local_network.png"))); // NOI18N
+        btnSatuSehatCariAllergy.setText("Satu Sehat Cari Allergy");
+        btnSatuSehatCariAllergy.setIconTextGap(0);
+        btnSatuSehatCariAllergy.setName("btnSatuSehatCariAllergy"); // NOI18N
+        btnSatuSehatCariAllergy.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSatuSehatCariAllergy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSatuSehatCariAllergyActionPerformed(evt);
+            }
+        });
+
+        btnSatuSehatKirimAllergyIntollerance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/local_network.png"))); // NOI18N
+        btnSatuSehatKirimAllergyIntollerance.setText("Satu Sehat Kirim Allergy Intollerance");
+        btnSatuSehatKirimAllergyIntollerance.setIconTextGap(0);
+        btnSatuSehatKirimAllergyIntollerance.setName("btnSatuSehatKirimAllergyIntollerance"); // NOI18N
+        btnSatuSehatKirimAllergyIntollerance.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSatuSehatKirimAllergyIntollerance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSatuSehatKirimAllergyIntolleranceActionPerformed(evt);
+            }
+        });
+
+        btnDlgDataAlergiPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/local_network.png"))); // NOI18N
+        btnDlgDataAlergiPasien.setText("Satu Sehat Kirim Allergy Intollerance");
+        btnDlgDataAlergiPasien.setIconTextGap(0);
+        btnDlgDataAlergiPasien.setName("btnDlgDataAlergiPasien"); // NOI18N
+        btnDlgDataAlergiPasien.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnDlgDataAlergiPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDlgDataAlergiPasienActionPerformed(evt);
             }
         });
 
@@ -14599,10 +14633,6 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnInfoMobileJKNActionPerformed
 
-    private void cmbMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMenuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbMenuActionPerformed
-
     private void btnWorkstationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkstationActionPerformed
         // TODO add your handling code here:
         isTutup();
@@ -14656,6 +14686,42 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnPenjaminanActionPerformed
+
+    private void btnSatuSehatCariAllergyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSatuSehatCariAllergyActionPerformed
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SatuSehatCariAllergy cariallergy=new SatuSehatCariAllergy(this,false);
+        cariallergy.emptTeks();
+        cariallergy.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        cariallergy.setLocationRelativeTo(PanelUtama);
+        cariallergy.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnSatuSehatCariAllergyActionPerformed
+
+    private void btnSatuSehatKirimAllergyIntolleranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSatuSehatKirimAllergyIntolleranceActionPerformed
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SatuSehatKirimAllergyIntollerance kirimallergy=new SatuSehatKirimAllergyIntollerance(this,false);
+//        kirimallergy.emptTeks();
+        kirimallergy.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        kirimallergy.setLocationRelativeTo(PanelUtama);
+        kirimallergy.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnSatuSehatKirimAllergyIntolleranceActionPerformed
+
+    private void btnDlgDataAlergiPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDlgDataAlergiPasienActionPerformed
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgDataAlergiPasien allergypasien=new DlgDataAlergiPasien(this,false);
+        allergypasien.emptTeks();
+        allergypasien.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        allergypasien.setLocationRelativeTo(PanelUtama);
+        allergypasien.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnDlgDataAlergiPasienActionPerformed
 
     private void btnKategoriPerpustakaanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
@@ -21316,6 +21382,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.ButtonBig btnDiet;
     private widget.ButtonBig btnDisplay;
     private widget.ButtonBig btnDisplayApotek;
+    private widget.ButtonBig btnDlgDataAlergiPasien;
     private widget.ButtonBig btnDokter;
     private widget.ButtonBig btnFrekuensiRalan;
     private widget.ButtonBig btnFrekuensiRanap;
@@ -21615,6 +21682,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.ButtonBig btnSKDPBPJS;
     private widget.ButtonBig btnSMS;
     private widget.ButtonBig btnSaldoAkunPerBulan;
+    private widget.ButtonBig btnSatuSehatCariAllergy;
+    private widget.ButtonBig btnSatuSehatKirimAllergyIntollerance;
     private widget.ButtonBig btnSatuan;
     private widget.ButtonBig btnSatuanPolri;
     private widget.ButtonBig btnSatuanTNI;
@@ -22119,6 +22188,10 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getpenjaminan()==true){                          
                 Panelmenu.add(btnPenjaminan);
+                jmlmenu++;
+            }
+            if(akses.getdata_alergi_pasien()==true){                          
+                Panelmenu.add(btnDlgDataAlergiPasien);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==1){ 
@@ -24914,6 +24987,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getsatu_sehat_kirim_medicationdispense()==true){
                 Panelmenu.add(btnKirimMedicationDispenseSatuSehat);
+                jmlmenu++;
+            }
+            if(akses.getsatu_sehat_cari_allergy()==true){
+                Panelmenu.add(btnSatuSehatCariAllergy);
+                jmlmenu++;
+            }
+            if(akses.getsatu_sehat_kirim_allergy_intollerance()==true){
+                Panelmenu.add(btnSatuSehatKirimAllergyIntollerance);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==12){ 
@@ -31945,6 +32026,21 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnPenjaminan);
             jmlmenu++;
         }
+        
+        if(akses.getdata_alergi_pasien()==true){
+            Panelmenu.add(btnDlgDataAlergiPasien);
+            jmlmenu++;
+        }
+        
+        if(akses.getsatu_sehat_cari_allergy()==true){
+            Panelmenu.add(btnSatuSehatCariAllergy);
+            jmlmenu++;
+        }
+        
+        if(akses.getsatu_sehat_kirim_allergy_intollerance()==true){
+            Panelmenu.add(btnSatuSehatKirimAllergyIntollerance);
+            jmlmenu++;
+        }
     }
     
     private void isCariIsi() {
@@ -38932,6 +39028,27 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getpenjaminan()==true){
             if(btnPenjaminan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPenjaminan);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getdata_alergi_pasien()==true){
+            if(btnDlgDataAlergiPasien.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnDlgDataAlergiPasien);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getsatu_sehat_cari_allergy()==true){
+            if(btnSatuSehatCariAllergy.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSatuSehatCariAllergy);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getsatu_sehat_kirim_allergy_intollerance()==true){
+            if(btnSatuSehatKirimAllergyIntollerance.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSatuSehatKirimAllergyIntollerance);
                 jmlmenu++;
             }                
         }
