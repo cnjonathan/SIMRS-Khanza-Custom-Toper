@@ -395,6 +395,9 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         BtnSimpan4 = new widget.Button();
         jLabel26 = new widget.Label();
         TanggalPulang = new widget.Tanggal();
+        BtnKirimDataFuji = new widget.Button();
+        BtnAmbilDataFUJI = new widget.Button();
+        BtnAmbilDataFUJI1 = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         jPanel2 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -450,10 +453,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         BtnCetakHasilRadiologi = new widget.Button();
         BtnBarcodePermintaan = new widget.Button();
         BtnBarcodePermintaan2 = new widget.Button();
-        BtnKirimDataFuji = new widget.Button();
-        BtnAmbilDataFUJI = new widget.Button();
         BtnKirimDataCareStream = new widget.Button();
-        BtnAmbilDataFUJI1 = new widget.Button();
 
         WindowAmbilSampel.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowAmbilSampel.setName("WindowAmbilSampel"); // NOI18N
@@ -495,7 +495,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-03-2023 11:30:14" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-04-2024 09:28:59" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -504,6 +504,54 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         TanggalPulang.setBounds(110, 32, 150, 23);
 
         WindowAmbilSampel.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
+
+        BtnKirimDataFuji.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKirimDataFuji.setText("Kirim Permintaan ke RIS FUJI");
+        BtnKirimDataFuji.setFocusPainted(false);
+        BtnKirimDataFuji.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKirimDataFuji.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKirimDataFuji.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKirimDataFuji.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimDataFuji.setName("BtnKirimDataFuji"); // NOI18N
+        BtnKirimDataFuji.setPreferredSize(new java.awt.Dimension(215, 23));
+        BtnKirimDataFuji.setRoundRect(false);
+        BtnKirimDataFuji.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimDataFujiActionPerformed(evt);
+            }
+        });
+
+        BtnAmbilDataFUJI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnAmbilDataFUJI.setText("Ambil Hasil dari RIS FUJI");
+        BtnAmbilDataFUJI.setFocusPainted(false);
+        BtnAmbilDataFUJI.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnAmbilDataFUJI.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAmbilDataFUJI.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAmbilDataFUJI.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAmbilDataFUJI.setName("BtnAmbilDataFUJI"); // NOI18N
+        BtnAmbilDataFUJI.setPreferredSize(new java.awt.Dimension(215, 23));
+        BtnAmbilDataFUJI.setRoundRect(false);
+        BtnAmbilDataFUJI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAmbilDataFUJIActionPerformed(evt);
+            }
+        });
+
+        BtnAmbilDataFUJI1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnAmbilDataFUJI1.setText("Ambil Hasil dari RIS Care Stream");
+        BtnAmbilDataFUJI1.setFocusPainted(false);
+        BtnAmbilDataFUJI1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnAmbilDataFUJI1.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAmbilDataFUJI1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAmbilDataFUJI1.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAmbilDataFUJI1.setName("BtnAmbilDataFUJI1"); // NOI18N
+        BtnAmbilDataFUJI1.setPreferredSize(new java.awt.Dimension(215, 23));
+        BtnAmbilDataFUJI1.setRoundRect(false);
+        BtnAmbilDataFUJI1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAmbilDataFUJI1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -537,9 +585,15 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         label11.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass8.add(label11);
 
+        Tgl1.setActionCommand("");
         Tgl1.setDisplayFormat("dd-MM-yyyy");
         Tgl1.setName("Tgl1"); // NOI18N
         Tgl1.setPreferredSize(new java.awt.Dimension(90, 23));
+        Tgl1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Tgl1ActionPerformed(evt);
+            }
+        });
         Tgl1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Tgl1KeyPressed(evt);
@@ -1087,42 +1141,8 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         });
         FormMenu.add(BtnBarcodePermintaan2);
 
-        BtnKirimDataFuji.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnKirimDataFuji.setText("Kirim Permintaan ke RIS FUJI");
-        BtnKirimDataFuji.setFocusPainted(false);
-        BtnKirimDataFuji.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnKirimDataFuji.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnKirimDataFuji.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnKirimDataFuji.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnKirimDataFuji.setName("BtnKirimDataFuji"); // NOI18N
-        BtnKirimDataFuji.setPreferredSize(new java.awt.Dimension(215, 23));
-        BtnKirimDataFuji.setRoundRect(false);
-        BtnKirimDataFuji.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKirimDataFujiActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnKirimDataFuji);
-
-        BtnAmbilDataFUJI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnAmbilDataFUJI.setText("Ambil Hasil dari RIS FUJI");
-        BtnAmbilDataFUJI.setFocusPainted(false);
-        BtnAmbilDataFUJI.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnAmbilDataFUJI.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnAmbilDataFUJI.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnAmbilDataFUJI.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnAmbilDataFUJI.setName("BtnAmbilDataFUJI"); // NOI18N
-        BtnAmbilDataFUJI.setPreferredSize(new java.awt.Dimension(215, 23));
-        BtnAmbilDataFUJI.setRoundRect(false);
-        BtnAmbilDataFUJI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAmbilDataFUJIActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnAmbilDataFUJI);
-
         BtnKirimDataCareStream.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnKirimDataCareStream.setText("Kirim Permintaan ke RIS Care Stream");
+        BtnKirimDataCareStream.setText("Kirim Permintaan ke INTIWID");
         BtnKirimDataCareStream.setFocusPainted(false);
         BtnKirimDataCareStream.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         BtnKirimDataCareStream.setGlassColor(new java.awt.Color(255, 255, 255));
@@ -1137,23 +1157,6 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
             }
         });
         FormMenu.add(BtnKirimDataCareStream);
-
-        BtnAmbilDataFUJI1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnAmbilDataFUJI1.setText("Ambil Hasil dari RIS Care Stream");
-        BtnAmbilDataFUJI1.setFocusPainted(false);
-        BtnAmbilDataFUJI1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnAmbilDataFUJI1.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnAmbilDataFUJI1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnAmbilDataFUJI1.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnAmbilDataFUJI1.setName("BtnAmbilDataFUJI1"); // NOI18N
-        BtnAmbilDataFUJI1.setPreferredSize(new java.awt.Dimension(215, 23));
-        BtnAmbilDataFUJI1.setRoundRect(false);
-        BtnAmbilDataFUJI1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAmbilDataFUJI1ActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnAmbilDataFUJI1);
 
         ScrollMenu.setViewportView(FormMenu);
 
@@ -2291,6 +2294,10 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         }
     }//GEN-LAST:event_BtnAmbilDataFUJI1ActionPerformed
 
+    private void Tgl1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tgl1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Tgl1ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2409,7 +2416,8 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                     ps.setString(10,"%"+TCari.getText()+"%");
                     ps.setString(11,"%"+TCari.getText()+"%");
                 } 
-                    
+                
+                System.out.println("query ralan: "+ps);
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new String[]{

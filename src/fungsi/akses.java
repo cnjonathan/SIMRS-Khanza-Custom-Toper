@@ -1035,7 +1035,10 @@ public final class akses {
                             satu_sehat_kirim_medicationrequest=false,
                             penatalaksanaan_terapi_okupasi=false,
                             satu_sehat_kirim_medicationdispense=false,
-                            penjaminan=false;
+                            penjaminan=false,
+                            satusehatcariallergy=false,
+                            satusehatkirimallergyintollerance=false,
+                            dataalergipasien=false;
     
     public static void setData(String user, String pass) {
         try {        
@@ -2069,6 +2072,9 @@ public final class akses {
                         akses.penatalaksanaan_terapi_okupasi=true;
                         akses.satu_sehat_kirim_medicationdispense=true;
                         akses.penjaminan=true;
+                        akses.satusehatcariallergy=true;
+                        akses.satusehatkirimallergyintollerance=true;
+                        akses.dataalergipasien=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -3086,6 +3092,9 @@ public final class akses {
                         akses.penatalaksanaan_terapi_okupasi=rs2.getBoolean("penatalaksanaan_terapi_okupasi");
                         akses.satu_sehat_kirim_medicationdispense=rs2.getBoolean("satu_sehat_kirim_medicationdispense");
                         akses.penjaminan=rs2.getBoolean("penjaminan");
+                        akses.satusehatcariallergy=rs2.getBoolean("satusehatcariallergy");
+                        akses.satusehatkirimallergyintollerance=rs2.getBoolean("satusehatkirimallergyintollerance");
+                        akses.dataalergipasien=rs2.getBoolean("dataalergipasien");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         akses.kode="";                  
                         akses.penyakit= false;
@@ -4101,6 +4110,9 @@ public final class akses {
                         akses.penatalaksanaan_terapi_okupasi=false;
                         akses.satu_sehat_kirim_medicationdispense=false;
                         akses.penjaminan=false;
+                        akses.satusehatcariallergy=false;
+                        akses.satusehatkirimallergyintollerance=false;
+                        akses.dataalergipasien=false;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -5136,6 +5148,9 @@ public final class akses {
         akses.penatalaksanaan_terapi_okupasi=false;
         akses.satu_sehat_kirim_medicationdispense=false;
         akses.penjaminan=false;
+        akses.satusehatcariallergy=false;
+        akses.satusehatkirimallergyintollerance=false;
+        akses.dataalergipasien=false;
     }
     
     public static int getjml1() {return akses.jml1;}    
@@ -6190,4 +6205,7 @@ public final class akses {
     public static boolean getpenatalaksanaan_terapi_okupasi(){return akses.penatalaksanaan_terapi_okupasi;}
     public static boolean getsatu_sehat_kirim_medicationdispense(){return akses.satu_sehat_kirim_medicationdispense;}
     public static boolean getpenjaminan(){return akses.penjaminan;}
+    public static boolean getdata_alergi_pasien(){return akses.dataalergipasien;}
+    public static boolean getsatu_sehat_cari_allergy(){return akses.satusehatcariallergy;}
+    public static boolean getsatu_sehat_kirim_allergy_intollerance(){return akses.satusehatkirimallergyintollerance;}
 }   
