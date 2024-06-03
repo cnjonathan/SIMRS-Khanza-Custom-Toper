@@ -3251,7 +3251,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void panggilform() {
         DlgCariObat dlgobt=new DlgCariObat(null,false);
-        dlgobt.setNoRm(NoRawat,NoRM,Pasien,TglPeresepan,JamPeresepan);
+        dlgobt.setNoRm(NoRawat,NoRM,Pasien,TglPeresepan,JamPeresepan, KodeDokter);
         dlgobt.isCek();
         dlgobt.tampilobat2(NoResep);
         dlgobt.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);

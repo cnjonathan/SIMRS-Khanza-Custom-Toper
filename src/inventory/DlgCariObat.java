@@ -3437,7 +3437,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         BtnGudang.setEnabled(akses.getakses_depo_obat());
     }
     
-    public void setNoRm(String norwt,String norm,String nama,String tanggal, String jam) {        
+    public void setNoRm(String norwt,String norm,String nama,String tanggal, String jam, String KodeDokter) {        
         aktifpcare="no";
         TNoRw.setText(norwt);
         LblNoRawat.setText(norwt);
@@ -3448,8 +3448,8 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         Jam.setText(jam);  
         KdPj.setText(Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",norwt));
         kenaikan=Sequel.cariIsiAngka("select (set_harga_obat_ralan.hargajual/100) from set_harga_obat_ralan where set_harga_obat_ralan.kd_pj=?",KdPj.getText());
-        String kode = Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",norwt);
-        Sequel.cariIsiText("select pemeriksaan_ralan.penilaian from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat=? and pemeriksaan_ralan.nip=? ",asesText,norwt,kode);
+//        String kode = Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",norwt);
+        Sequel.cariIsiText("select pemeriksaan_ralan.penilaian from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat=? and pemeriksaan_ralan.nip=? ",asesText,norwt,KodeDokter);
         TCari.requestFocus();
     }
     
