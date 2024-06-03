@@ -1203,10 +1203,10 @@ public final class validasi {
             ps=connect.prepareStatement(qry);
             System.out.println("try ps=connect.prepareStatement(qry)");
             try {
-                System.out.println("try JRResultSetDataSource rsdt = new JRResultSetDataSource(rs)");
+//                System.out.println("try JRResultSetDataSource rsdt = new JRResultSetDataSource(rs)");
                 String namafile="./"+"report"+"/"+reportName;
                 rs=ps.executeQuery();
-                System.out.println("Query: "+qry);
+                System.out.println("Query data: "+qry+"\n");
                 JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
                 
                 JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters,rsdt);
@@ -1227,11 +1227,11 @@ public final class validasi {
                                    "WHERE w.ip_address  = '"+ip_address+"' AND w.workstation = '"+hostname+"' AND wcl.jasper_report_name = '"+reportName+"'";
                     ps_workstation = connect.prepareStatement(query);
                     rs_workstation = ps_workstation.executeQuery();
-                    System.out.println("try rs_workstation = ps_workstation.executeQuery");
-                    System.out.println("query: "+query);
+//                    System.out.println("try rs_workstation = ps_workstation.executeQuery");
+                    System.out.println("query workstation: "+query+"\n");
                     
                     if (rs_workstation.next()) {
-                        System.out.println("Sharing printer: "+rs_workstation.getString("sharing_printer"));
+                        System.out.println("Sharing printer: "+rs_workstation.getString("sharing_printer")+"\n");
                         Integer x = rs_workstation.getInt("margin_x");
                         Integer y = rs_workstation.getInt("margin_y");
                         Integer width = rs_workstation.getInt("width");
@@ -1242,7 +1242,10 @@ public final class validasi {
                         System.out.println("IP Address: " + ip_address);
                         System.out.println("Hostname: " + hostname);
                         System.out.println("Share printer: " + selectedPrinter);
-                        System.out.println("Number of print services: " + services.length);
+                        System.out.println("Width: " + width);
+                        System.out.println("Height: " + height);
+                        System.out.println("Copy: " + copy+"\n");
+//                        System.out.println("Number of print services: " + services.length);
                         PrintService selectedService = null;
 
                         //Set the printing settings
@@ -1292,10 +1295,10 @@ public final class validasi {
                               //Lets the printer do its magic!
                               exporter.exportReport();
                           }catch(JRException e){
-                        System.out.println("JasperReport Error: "+e.getMessage());
+                        System.out.println("JasperReport Error: "+e.getMessage()+"\n");
                           }
                         }else{
-                          System.out.println("JasperReport Error: Printer not found!");
+                          System.out.println("JasperReport Error: Printer not found!"+"\n");
                         }
                     }else{
                         JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
@@ -1307,11 +1310,11 @@ public final class validasi {
                         jasperViewer.setVisible(true);
                     }
                 } catch (SQLException e) {
-                    System.out.println(e);
+                    System.out.println(e+"\n");
                 }
             } catch (HeadlessException | UnknownHostException | SQLException | JRException rptexcpt) {
                 System.out.println("Report Can't view because : " + rptexcpt);
-                JOptionPane.showMessageDialog(null,"Report Can't view because : "+ rptexcpt);
+                JOptionPane.showMessageDialog(null,"Report Can't view because : "+ rptexcpt+"\n");
             } finally{
                 if(rs!=null){
                     rs.close();
