@@ -34,7 +34,6 @@ import kepegawaian.DlgCariDokter;
 import simrskhanza.DlgCariBangsal;
 import simrskhanza.DlgCariPoli;
 import simrskhanza.DlgPeriksaRadiologi;
-import simrskhanza.DlgViewHasilRadiologi;
 
 public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabMode2,tabMode3,tabMode4;
@@ -455,16 +454,13 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         BtnBarcodePermintaan = new widget.Button();
         BtnBarcodePermintaan2 = new widget.Button();
         BtnKirimDataCareStream = new widget.Button();
-        BtnWebView = new widget.Button();
-        BtnLihatHasil = new widget.Button();
 
         WindowAmbilSampel.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowAmbilSampel.setName("WindowAmbilSampel"); // NOI18N
         WindowAmbilSampel.setUndecorated(true);
         WindowAmbilSampel.setResizable(false);
-        WindowAmbilSampel.getContentPane().setLayout(new java.awt.BorderLayout());
 
-        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder("::[ Update Waktu Pengambilan Sampel ]::"));
+        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Waktu Pengambilan Sampel ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame5.setName("internalFrame5"); // NOI18N
         internalFrame5.setLayout(null);
 
@@ -499,7 +495,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2024 13:01:20" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-04-2024 09:28:59" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -508,7 +504,6 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         TanggalPulang.setBounds(110, 32, 150, 23);
 
         WindowAmbilSampel.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
-        internalFrame5.getAccessibleContext().setAccessibleName("");
 
         BtnKirimDataFuji.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnKirimDataFuji.setText("Kirim Permintaan ke RIS FUJI");
@@ -572,8 +567,8 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                 formWindowOpened(evt);
             }
         });
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Permintaan Radiologi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -583,7 +578,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
 
         panelGlass8.setName("panelGlass8"); // NOI18N
         panelGlass8.setPreferredSize(new java.awt.Dimension(44, 44));
-        panelGlass8.setLayout(new java.awt.FlowLayout(0, 3, 9));
+        panelGlass8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 9));
 
         label11.setText("Tanggal :");
         label11.setName("label11"); // NOI18N
@@ -657,7 +652,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
 
         panelisi1.setName("panelisi1"); // NOI18N
         panelisi1.setPreferredSize(new java.awt.Dimension(100, 56));
-        panelisi1.setLayout(new java.awt.FlowLayout(0, 5, 9));
+        panelisi1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
         BtnHapus.setMnemonic('H');
@@ -799,7 +794,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         panelGlass9.setBorder(null);
         panelGlass9.setName("panelGlass9"); // NOI18N
         panelGlass9.setPreferredSize(new java.awt.Dimension(44, 41));
-        panelGlass9.setLayout(new java.awt.FlowLayout(0, 5, 9));
+        panelGlass9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         jLabel14.setText("Dokter :");
         jLabel14.setName("jLabel14"); // NOI18N
@@ -928,7 +923,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         panelGlass10.setBorder(null);
         panelGlass10.setName("panelGlass10"); // NOI18N
         panelGlass10.setPreferredSize(new java.awt.Dimension(44, 41));
-        panelGlass10.setLayout(new java.awt.FlowLayout(0, 5, 9));
+        panelGlass10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         jLabel15.setText("Dokter :");
         jLabel15.setName("jLabel15"); // NOI18N
@@ -1093,7 +1088,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         FormMenu.setBorder(null);
         FormMenu.setName("FormMenu"); // NOI18N
         FormMenu.setPreferredSize(new java.awt.Dimension(115, 43));
-        FormMenu.setLayout(new java.awt.FlowLayout(1, 1, 1));
+        FormMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 1, 1));
 
         BtnCetakHasilRadiologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnCetakHasilRadiologi.setText("Cetak Permintaan Radiologi");
@@ -1163,40 +1158,6 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         });
         FormMenu.add(BtnKirimDataCareStream);
 
-        BtnWebView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnWebView.setText("Lihat Hasil Intiwid");
-        BtnWebView.setFocusPainted(false);
-        BtnWebView.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnWebView.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnWebView.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnWebView.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnWebView.setName("BtnWebView"); // NOI18N
-        BtnWebView.setPreferredSize(new java.awt.Dimension(215, 23));
-        BtnWebView.setRoundRect(false);
-        BtnWebView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnWebViewActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnWebView);
-
-        BtnLihatHasil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnLihatHasil.setText("Lihat Hasil");
-        BtnLihatHasil.setFocusPainted(false);
-        BtnLihatHasil.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnLihatHasil.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnLihatHasil.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnLihatHasil.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnLihatHasil.setName("BtnLihatHasil"); // NOI18N
-        BtnLihatHasil.setPreferredSize(new java.awt.Dimension(215, 23));
-        BtnLihatHasil.setRoundRect(false);
-        BtnLihatHasil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnLihatHasilActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnLihatHasil);
-
         ScrollMenu.setViewportView(FormMenu);
 
         PanelAccor.add(ScrollMenu, java.awt.BorderLayout.CENTER);
@@ -1204,7 +1165,6 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
         internalFrame1.add(PanelAccor, java.awt.BorderLayout.WEST);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
-        internalFrame1.getAccessibleContext().setAccessibleName("::[ Data Permintaan Radiologi ]::");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2338,19 +2298,6 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
         // TODO add your handling code here:
     }//GEN-LAST:event_Tgl1ActionPerformed
 
-    private void BtnWebViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnWebViewActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgViewHasilRadiologi viewhasil = new DlgViewHasilRadiologi(null, false);
-//        viewhasil.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-//        viewhasil.setLocationRelativeTo(internalFrame1);
-        viewhasil.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());
-    }//GEN-LAST:event_BtnWebViewActionPerformed
-
-    private void BtnLihatHasilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLihatHasilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnLihatHasilActionPerformed
-
     /**
     * @param args the command line arguments
     */
@@ -2381,7 +2328,6 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
     private widget.Button BtnKeluar;
     private widget.Button BtnKirimDataCareStream;
     private widget.Button BtnKirimDataFuji;
-    private widget.Button BtnLihatHasil;
     private widget.Button BtnPrint;
     private widget.Button BtnSampel;
     private widget.Button BtnSeek3;
@@ -2389,7 +2335,6 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
     private widget.Button BtnSeek5;
     private widget.Button BtnSeek6;
     private widget.Button BtnSimpan4;
-    private widget.Button BtnWebView;
     private widget.CekBox ChkAccor;
     private widget.TextBox CrDokter;
     private widget.TextBox CrDokter2;
