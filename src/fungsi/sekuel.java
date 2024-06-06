@@ -811,7 +811,7 @@ public final class sekuel {
         bool=true;
         try {
             ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
-            try{                        
+            try{
                 ps.executeUpdate();  
                 bool=true;
              }catch(Exception e){

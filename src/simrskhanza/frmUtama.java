@@ -1969,7 +1969,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31/05/2024" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03/06/2024" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7432,6 +7432,7 @@ public class frmUtama extends javax.swing.JFrame {
         jLabel7.setName("jLabel7"); // NOI18N
         jLabel7.setPreferredSize(new java.awt.Dimension(550, 23));
         internalFrame4.add(jLabel7);
+        jLabel7.getAccessibleContext().setAccessibleName(" Didesain & dibuat oleh Khanza.Soft Media A.K.A Tim IT RSUD Kartini Karanganyar Version 2024.06.05");
 
         jSeparator8.setBackground(new java.awt.Color(255, 81, 102));
         jSeparator8.setForeground(new java.awt.Color(255, 81, 102));
