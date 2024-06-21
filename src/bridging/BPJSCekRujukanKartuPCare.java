@@ -1589,7 +1589,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
                     PropinsiPj.setEditable(rs.getBoolean("propinsi"));
                 }
             } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
+                System.out.println("Notifikasi 1: "+e);
             } finally{
                 if(rs!=null){
                     rs.close();
@@ -1643,7 +1643,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
                     p_propinsipj=rs.getInt("p_propinsipj");
                 }
             } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
+                System.out.println("Notifikasi 2: "+e);
             } finally{
                 if(rs!=null){
                     rs.close();
@@ -1663,7 +1663,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
                     posisitahun=rs.getString("posisi_tahun_bulan");
                 }
             } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
+                System.out.println("Notifikasi 3: "+e);
             } finally{
                 if(rs!=null){
                     rs.close();
@@ -5652,7 +5652,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
                 }
             }catch (Exception ex) {
-                System.out.println("Notifikasi Bridging : "+ex);
+                System.out.println("Notifikasi Bridging 1: "+ex);
                 if(ex.toString().contains("UnknownHostException")){
                     JOptionPane.showMessageDialog(null,"Koneksi ke server BPJS terputus...!");
                 }
@@ -5699,7 +5699,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
                 }
             }catch (Exception ex) {
-                System.out.println("Notifikasi Bridging : "+ex);
+                System.out.println("Notifikasi Bridging 2: "+ex);
                 if(ex.toString().contains("UnknownHostException")){
                     JOptionPane.showMessageDialog(null,"Koneksi ke server BPJS terputus...!");
                 }
@@ -5746,7 +5746,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
                 }
             }catch (Exception ex) {
-                System.out.println("Notifikasi Bridging : "+ex);
+                System.out.println("Notifikasi Bridging 3: "+ex);
                 if(ex.toString().contains("UnknownHostException")){
                     JOptionPane.showMessageDialog(null,"Koneksi ke server BPJS terputus...!");
                 }
@@ -5793,7 +5793,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
                 }
             }catch (Exception ex) {
-                System.out.println("Notifikasi Bridging : "+ex);
+                System.out.println("Notifikasi Bridging 4: "+ex);
                 if(ex.toString().contains("UnknownHostException")){
                     JOptionPane.showMessageDialog(null,"Koneksi ke server BPJS terputus...!");
                 }
@@ -5827,7 +5827,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null,response.path("status").asText());
                 }
             }catch (Exception ex) {
-                System.out.println("Notifikasi Bridging : "+ex);
+                System.out.println("Notifikasi Bridging 5: "+ex);
                 if(ex.toString().contains("UnknownHostException")){
                     JOptionPane.showMessageDialog(null,"Koneksi ke server BPJS terputus...!");
                 }
@@ -6558,7 +6558,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
             }   
         } catch (Exception ex) {
-            System.out.println("Notifikasi Peserta : "+ex);
+            System.out.println("Notifikasi Peserta 1: "+ex);
             if(ex.toString().contains("UnknownHostException")){
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
@@ -6844,7 +6844,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
                     }
                 }
             }catch(Exception e){
-                System.out.println("Notifikasi : "+e);
+                System.out.println("Notifikasi 4: "+e);
             }finally{
                 if(rs != null){
                     rs.close();
@@ -7090,7 +7090,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
                     }                                
                 }
             } catch (Exception e) {
-                System.out.println("Notifikasi Umur : "+e);
+                System.out.println("Notifikasi Umur 1: "+e);
             } finally{
                 if(rs!=null){
                     rs.close();
@@ -7100,7 +7100,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
+            System.out.println("Notifikasi 5: "+e);
         }
         
         status="Baru";
@@ -7405,7 +7405,7 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
             if(statuspasien.equals("Baru")){
                 Sequel.meghapus3("pasien","no_rkm_medis",TNo.getText());
             }
-            System.out.println("Notifikasi Bridging : "+ex);
+            System.out.println("Notifikasi Bridging 6: "+ex);
             if(ex.toString().contains("UnknownHostException")){
                 JOptionPane.showMessageDialog(null,"Koneksi ke server BPJS terputus...!");
             }

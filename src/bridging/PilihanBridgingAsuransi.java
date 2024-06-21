@@ -41,15 +41,26 @@ public final class PilihanBridgingAsuransi extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnCekBPJSRujukanKartuPCare = new widget.ButtonBig();
         internalFrame1 = new widget.InternalFrame();
         panelGlass6 = new widget.panelisi();
         BtnKeluar = new widget.Button();
         panelGlass7 = new widget.panelisi();
         btnCekBPJSKartu = new widget.ButtonBig();
-        btnCekBPJSRujukanKartuPCare = new widget.ButtonBig();
         btnCekBPJSRujukanKartuRS = new widget.ButtonBig();
         btnPCarePendaftaran = new widget.ButtonBig();
         btnCekEligibilitasInhealth = new widget.ButtonBig();
+
+        btnCekBPJSRujukanKartuPCare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
+        btnCekBPJSRujukanKartuPCare.setText("Cek Rujukan Kartu PCare di VClaim");
+        btnCekBPJSRujukanKartuPCare.setIconTextGap(0);
+        btnCekBPJSRujukanKartuPCare.setName("btnCekBPJSRujukanKartuPCare"); // NOI18N
+        btnCekBPJSRujukanKartuPCare.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnCekBPJSRujukanKartuPCare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCekBPJSRujukanKartuPCareActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(null);
@@ -95,18 +106,6 @@ public final class PilihanBridgingAsuransi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(btnCekBPJSKartu);
-
-        btnCekBPJSRujukanKartuPCare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
-        btnCekBPJSRujukanKartuPCare.setText("Cek Rujukan Kartu PCare di VClaim");
-        btnCekBPJSRujukanKartuPCare.setIconTextGap(0);
-        btnCekBPJSRujukanKartuPCare.setName("btnCekBPJSRujukanKartuPCare"); // NOI18N
-        btnCekBPJSRujukanKartuPCare.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCekBPJSRujukanKartuPCare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCekBPJSRujukanKartuPCareActionPerformed(evt);
-            }
-        });
-        panelGlass7.add(btnCekBPJSRujukanKartuPCare);
 
         btnCekBPJSRujukanKartuRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png"))); // NOI18N
         btnCekBPJSRujukanKartuRS.setText("Cek Rujukan Kartu RS di VClaim");
