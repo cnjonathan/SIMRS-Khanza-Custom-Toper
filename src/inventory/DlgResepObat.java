@@ -2681,6 +2681,33 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 System.out.println("Notif : "+e);
             }
             
+            // cari nama poli dari reg_periksa atau rujukan internal poli
+            String nm_poli = "", kd_poli = "";
+            PreparedStatement ps_internal;
+            try {
+                ps_internal = koneksi.prepareStatement("SELECT \n" +
+                        "  rujukan_internal_poli.kd_poli, \n" +
+                        "  poliklinik.nm_poli \n" +
+                        "FROM \n" +
+                        "  rujukan_internal_poli \n" +
+                        "  LEFT JOIN poliklinik ON rujukan_internal_poli.kd_poli = poliklinik.kd_poli \n" +
+                        "WHERE \n" +
+                        "  rujukan_internal_poli.no_rawat= ? AND \n"+
+                        "  rujukan_internal_poli.kd_dokter = ?");
+                ps_internal.setString(1, TNoRw.getText());
+                ps_internal.setString(2, KdDokter.getText());
+                ResultSet rs_internal = ps_internal.executeQuery();
+                if(rs_internal.next()){
+                    kd_poli = rs_internal.getString("kd_poli");
+                    nm_poli = rs_internal.getString("nm_poli")+" Rujukan Internal";
+                }else{
+                    kd_poli = Sequel.cariIsi("select kd_poli from reg_periksa where no_rawat=?",TNoRw.getText());
+                    nm_poli = Sequel.cariIsi("select poliklinik.nm_poli from poliklinik where poliklinik.kd_poli=?",kd_poli);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DlgResepObat.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             Map<String, Object> param = new HashMap<>();  
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -2696,7 +2723,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             param.put("norm",TNoRm.getText());
             param.put("peresep",NmDokter.getText());
             param.put("noresep",NoResep.getText());
-            param.put("poli",Sequel.cariIsi("select poliklinik.nm_poli from poliklinik where poliklinik.kd_poli=?",Sequel.cariIsi("select kd_poli from reg_periksa where no_rawat=?",TNoRw.getText())));   
+            param.put("poli",nm_poli);   
             param.put("jam",cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
             

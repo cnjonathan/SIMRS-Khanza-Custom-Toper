@@ -2842,38 +2842,97 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         try{  
             semua=CrDokter.getText().trim().equals("")&&CrPoli.getText().trim().equals("")&&TCari.getText().trim().equals("");
             if(DEPOAKTIFOBAT.equals("")){
-                ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
-                        " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,"+
-                        " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,poliklinik.nm_poli, "+
-                        " reg_periksa.kd_poli,penjab.png_jawab,if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
-                        " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam,"+
-                        " if(resep_obat.tgl_penyerahan='0000-00-00','',resep_obat.tgl_penyerahan) as tgl_penyerahan,"+
-                        " if(resep_obat.jam_penyerahan='00:00:00','',resep_obat.jam_penyerahan) as jam_penyerahan from resep_obat "+
-                        " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
-                        " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                        " inner join dokter on resep_obat.kd_dokter=dokter.kd_dokter "+
-                        " inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
-                        " inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                        " where resep_obat.tgl_peresepan<>'0000-00-00' and resep_obat.status='ralan' and resep_obat.tgl_peresepan between ? and ? "+
+                ps=koneksi.prepareStatement("select \n" +
+                                            "  resep_obat.no_resep, \n" +
+                                            "  resep_obat.tgl_peresepan, \n" +
+                                            "  resep_obat.jam_peresepan, \n" +
+                                            "  resep_obat.no_rawat, \n" +
+                                            "  pasien.no_rkm_medis, \n" +
+                                            "  pasien.nm_pasien, \n" +
+                                            "  resep_obat.kd_dokter, \n" +
+                                            "  dokter.nm_dokter, \n" +
+                                            "  if(\n" +
+                                            "    resep_obat.tgl_perawatan = '0000-00-00', \n" +
+                                            "    'Belum Terlayani', 'Sudah Terlayani'\n" +
+                                            "  ) as status, \n" +
+                                            "  poliklinik.nm_poli, \n" +
+                                            "  reg_periksa.kd_poli, \n" +
+                                            "  penjab.png_jawab, \n" +
+                                            "  if(\n" +
+                                            "    resep_obat.tgl_perawatan = '0000-00-00', \n" +
+                                            "    '', resep_obat.tgl_perawatan\n" +
+                                            "  ) as tgl_perawatan, \n" +
+                                            "  if(\n" +
+                                            "    resep_obat.jam = '00:00:00', '', resep_obat.jam\n" +
+                                            "  ) as jam, \n" +
+                                            "  if(\n" +
+                                            "    resep_obat.tgl_penyerahan = '0000-00-00', \n" +
+                                            "    '', resep_obat.tgl_penyerahan\n" +
+                                            "  ) as tgl_penyerahan, \n" +
+                                            "  if(\n" +
+                                            "    resep_obat.jam_penyerahan = '00:00:00', \n" +
+                                            "    '', resep_obat.jam_penyerahan\n" +
+                                            "  ) as jam_penyerahan \n" +
+                                            "from \n" +
+                                            "  resep_obat \n" +
+                                            "  inner join reg_periksa on resep_obat.no_rawat = reg_periksa.no_rawat \n" +
+                                            "  inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis \n" +
+                                            "  inner join dokter on resep_obat.kd_dokter = dokter.kd_dokter \n" +
+                                            "  inner join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli \n" +
+                                            "  inner join penjab on reg_periksa.kd_pj = penjab.kd_pj \n" +
+                                            "where \n" +
+                                            "  resep_obat.tgl_peresepan <> '0000-00-00' \n" +
+                                            "  and resep_obat.status = 'ralan' \n" +
+                                            "  and resep_obat.tgl_peresepan between ? \n" +
+                                            "  and ?"+
                         (semua?"":"and dokter.nm_dokter like ? and poliklinik.nm_poli like ? and "+
                         "(resep_obat.no_resep like ? or resep_obat.no_rawat like ? or "+
                         "pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
                         "dokter.nm_dokter like ? or penjab.png_jawab like ?)")+" order by resep_obat.tgl_peresepan desc,resep_obat.jam_peresepan desc");
             }else{
-                ps=koneksi.prepareStatement("select resep_obat.no_resep,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,"+
-                        " resep_obat.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_obat.kd_dokter,dokter.nm_dokter,"+
-                        " if(resep_obat.tgl_perawatan='0000-00-00','Belum Terlayani','Sudah Terlayani') as status,poliklinik.nm_poli, "+
-                        " reg_periksa.kd_poli,penjab.png_jawab,if(resep_obat.tgl_perawatan='0000-00-00','',resep_obat.tgl_perawatan) as tgl_perawatan,"+
-                        " if(resep_obat.jam='00:00:00','',resep_obat.jam) as jam,"+
-                        " if(resep_obat.tgl_penyerahan='0000-00-00','',resep_obat.tgl_penyerahan) as tgl_penyerahan,"+
-                        " if(resep_obat.jam_penyerahan='00:00:00','',resep_obat.jam_penyerahan) as jam_penyerahan from resep_obat "+
-                        " inner join reg_periksa on resep_obat.no_rawat=reg_periksa.no_rawat "+
-                        " inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                        " inner join dokter on resep_obat.kd_dokter=dokter.kd_dokter "+
-                        " inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
-                        " inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                        " inner join set_depo_ralan on set_depo_ralan.kd_poli=reg_periksa.kd_poli "+
-                        " where set_depo_ralan.kd_bangsal='"+DEPOAKTIFOBAT+"' and resep_obat.tgl_peresepan<>'0000-00-00' and resep_obat.status='ralan' and resep_obat.tgl_peresepan between ? and ? "+
+                ps=koneksi.prepareStatement("select \n" +
+                                            "  resep_obat.no_resep, \n" +
+                                            "  resep_obat.tgl_peresepan, \n" +
+                                            "  resep_obat.jam_peresepan, \n" +
+                                            "  resep_obat.no_rawat, \n" +
+                                            "  pasien.no_rkm_medis, \n" +
+                                            "  pasien.nm_pasien, \n" +
+                                            "  resep_obat.kd_dokter, \n" +
+                                            "  dokter.nm_dokter, \n" +
+                                            "  if(\n" +
+                                            "    resep_obat.tgl_perawatan = '0000-00-00', \n" +
+                                            "    'Belum Terlayani', 'Sudah Terlayani'\n" +
+                                            "  ) as status, \n" +
+                                            "  poliklinik.nm_poli, \n" +
+                                            "  reg_periksa.kd_poli, \n" +
+                                            "  penjab.png_jawab, \n" +
+                                            "  if(\n" +
+                                            "    resep_obat.tgl_perawatan = '0000-00-00', \n" +
+                                            "    '', resep_obat.tgl_perawatan\n" +
+                                            "  ) as tgl_perawatan, \n" +
+                                            "  if(\n" +
+                                            "    resep_obat.jam = '00:00:00', '', resep_obat.jam\n" +
+                                            "  ) as jam, \n" +
+                                            "  if(\n" +
+                                            "    resep_obat.tgl_penyerahan = '0000-00-00', \n" +
+                                            "    '', resep_obat.tgl_penyerahan\n" +
+                                            "  ) as tgl_penyerahan, \n" +
+                                            "  if(\n" +
+                                            "    resep_obat.jam_penyerahan = '00:00:00', \n" +
+                                            "    '', resep_obat.jam_penyerahan\n" +
+                                            "  ) as jam_penyerahan \n" +
+                                            "from \n" +
+                                            "  resep_obat \n" +
+                                            "  inner join reg_periksa on resep_obat.no_rawat = reg_periksa.no_rawat \n" +
+                                            "  inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis \n" +
+                                            "  inner join dokter on resep_obat.kd_dokter = dokter.kd_dokter \n" +
+                                            "  inner join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli \n" +
+                                            "  inner join penjab on reg_periksa.kd_pj = penjab.kd_pj \n" +
+                                            "  inner join set_depo_ralan on set_depo_ralan.kd_poli = reg_periksa.kd_poli"+
+                                            " where set_depo_ralan.kd_bangsal='"+DEPOAKTIFOBAT+"' and "+ 
+                                            "  resep_obat.tgl_peresepan<>'0000-00-00' and "+ 
+                                            "  resep_obat.status='ralan' and "+ 
+                                            "  resep_obat.tgl_peresepan between ? and ? "+
                         (semua?"":"and dokter.nm_dokter like ? and poliklinik.nm_poli like ? and "+
                         "(resep_obat.no_resep like ? or resep_obat.no_rawat like ? or "+
                         "pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
@@ -2894,23 +2953,87 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(10,"%"+TCari.getText()+"%");
                 } 
                 rs=ps.executeQuery();
+                System.out.println("query daftar permintaan resep: "+ps.toString());
                 if(cmbStatus.getSelectedItem().toString().equals("Semua")){
                     while(rs.next()){
+                        String nm_poli = "", kd_poli = "";
+                        PreparedStatement ps_internal = koneksi.prepareStatement("SELECT \n" +
+                                                                                    "  rujukan_internal_poli.kd_poli, \n" +
+                                                                                    "  poliklinik.nm_poli \n" +
+                                                                                    "FROM \n" +
+                                                                                    "  rujukan_internal_poli \n" +
+                                                                                    "  LEFT JOIN poliklinik ON rujukan_internal_poli.kd_poli = poliklinik.kd_poli \n" +
+                                                                                    "WHERE \n" +
+                                                                                    "  rujukan_internal_poli.no_rawat= ? AND \n"+ 
+                                                                                    "  rujukan_internal_poli.kd_dokter = ?");
+                        ps_internal.setString(1, rs.getString("no_rawat"));
+                        ps_internal.setString(2, rs.getString("kd_dokter"));
+                        ResultSet rs_internal = ps_internal.executeQuery();
+                        if(rs_internal.next()){
+                            kd_poli = rs_internal.getString("kd_poli");
+                            nm_poli = rs_internal.getString("nm_poli")+" Rujukan Internal";
+                        }else{
+                            kd_poli = rs.getString("kd_poli");
+                            nm_poli = rs.getString("nm_poli");
+                        }
                         tabMode.addRow(new String[]{
-                            rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
-                            rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
-                            rs.getString("kd_dokter"),rs.getString("nm_poli"),rs.getString("kd_poli"),rs.getString("png_jawab"),
-                            rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("tgl_penyerahan"),rs.getString("jam_penyerahan")
+                            rs.getString("no_resep"),
+                            rs.getString("tgl_peresepan"),
+                            rs.getString("jam_peresepan"),
+                            rs.getString("no_rawat"),
+                            rs.getString("no_rkm_medis"),
+                            rs.getString("nm_pasien"),
+                            rs.getString("nm_dokter"),
+                            rs.getString("status"),
+                            rs.getString("kd_dokter"),
+                            nm_poli,
+                            kd_poli,
+                            rs.getString("png_jawab"),
+                            rs.getString("tgl_perawatan"),
+                            rs.getString("jam"),
+                            rs.getString("tgl_penyerahan"),rs.getString("jam_penyerahan")
                         });              
                     }  
                 }else{
                     while(rs.next()){
                         if(rs.getString("status").equals(cmbStatus.getSelectedItem().toString())){
+                            String nm_poli = "", kd_poli = "";
+                            PreparedStatement ps_internal = koneksi.prepareStatement("SELECT \n" +
+                                                                                        "  rujukan_internal_poli.kd_poli, \n" +
+                                                                                        "  poliklinik.nm_poli \n" +
+                                                                                        "FROM \n" +
+                                                                                        "  rujukan_internal_poli \n" +
+                                                                                        "  LEFT JOIN poliklinik ON rujukan_internal_poli.kd_poli = poliklinik.kd_poli \n" +
+                                                                                        "WHERE \n" +
+                                                                                        "  rujukan_internal_poli.no_rawat= ? AND \n"+ 
+                                                                                        "  rujukan_internal_poli.kd_dokter = ?");
+                            ps_internal.setString(1, rs.getString("no_rawat"));
+                            ps_internal.setString(2, rs.getString("kd_dokter"));
+                            ResultSet rs_internal = ps_internal.executeQuery();
+                            if(rs_internal.next()){
+                                kd_poli = rs_internal.getString("kd_poli");
+                                nm_poli = rs_internal.getString("nm_poli")+" Rujukan Internal";
+                            }else{
+                                kd_poli = rs.getString("kd_poli");
+                                nm_poli = rs.getString("nm_poli");
+                            }
                             tabMode.addRow(new String[]{
-                                rs.getString("no_resep"),rs.getString("tgl_peresepan"),rs.getString("jam_peresepan"),rs.getString("no_rawat"),
-                                rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nm_dokter"),rs.getString("status"),
-                                rs.getString("kd_dokter"),rs.getString("nm_poli"),rs.getString("kd_poli"),rs.getString("png_jawab"),
-                                rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("tgl_penyerahan"),rs.getString("jam_penyerahan")
+                                rs.getString("no_resep"),
+                                rs.getString("tgl_peresepan"),
+                                rs.getString("jam_peresepan"),
+                                rs.getString("no_rawat"),
+                                rs.getString("no_rkm_medis"),
+                                rs.getString("nm_pasien"),
+                                rs.getString("nm_dokter"),
+                                rs.getString("status"),
+                                rs.getString("kd_dokter"),
+                                nm_poli,
+                                kd_poli,
+                                rs.getString("png_jawab"),
+                                rs.getString("tgl_perawatan"),
+                                rs.getString("jam"),
+                                rs.getString("tgl_penyerahan"),
+                                rs.getString("jam_penyerahan")
                             });
                         }                    
                     }  
