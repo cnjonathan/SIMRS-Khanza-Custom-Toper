@@ -14,12 +14,20 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -31,6 +39,8 @@ public class FormUmum extends javax.swing.JFrame {
     private String validasiregistrasi=Sequel.cariIsi("select set_validasi_registrasi.wajib_closing_kasir from set_validasi_registrasi");
     private String cek_booking_registrasi, cek_reg_periksa, cek_booking_poli, cek_booking_kddokter, cek_reg_periksa_poli, cek_reg_periksa_kddokter = "";
     Integer sisahari = 0;
+    private Timer timer;
+    private static final int TIMEOUT = 30000; // 30 seconds
         
     /** Creates new form frmUtama */
     public FormUmum() {
@@ -39,6 +49,41 @@ public class FormUmum extends javax.swing.JFrame {
 //        this.setSize(600,screen.height);
         int anjunganHeight = (int) (Math.round(screen.height * 0.80));
         this.setSize(600,anjunganHeight);
+        
+        // Initialize Timer
+        timer = new Timer(TIMEOUT, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                // System.exit(0); // Optionally exit the application
+            }
+        });
+
+        // Start Timer
+        timer.setRepeats(false);
+        timer.start();
+
+        // Add Listeners to detect user activity
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                resetTimer();
+            }
+        });
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                resetTimer();
+            }
+        });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                requestFocusInWindow();
+            }
+        });
     }    
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();  
     /** This method is called from within the constructor to
@@ -158,6 +203,9 @@ public class FormUmum extends javax.swing.JFrame {
         TCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TCariKeyTyped(evt);
             }
         });
         panel1.add(TCari);
@@ -550,10 +598,14 @@ public class FormUmum extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
-        welcomeScreen menuUtama = new welcomeScreen();
-        menuUtama.setVisible(true);
+//        welcomeScreen menuUtama = new welcomeScreen();
+//        menuUtama.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnKembaliActionPerformed
+
+    private void TCariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyTyped
+        resetTimer();
+    }//GEN-LAST:event_TCariKeyTyped
 
     /**
      * @param args the command line arguments
@@ -612,7 +664,7 @@ public class FormUmum extends javax.swing.JFrame {
                 regis.setSize(this.getWidth(),this.getHeight());
                 regis.setLocationRelativeTo(this);
                 //public void setPasien(String norm,String kodepoli,String kddokter)
-                regis.setPasien(noRm, cek_booking_poli, cek_booking_kddokter, "false", "umum", "Anjungan");
+                regis.setPasien(noRm, cek_booking_poli, cek_booking_kddokter, "false", "umum", "Anjungan", "");
                 regis.setVisible(true);
             }
 //            else if(sisahari<=15){
@@ -631,10 +683,13 @@ public class FormUmum extends javax.swing.JFrame {
             System.out.println("form umum noRm: "+noRm);
             System.out.println("form umum cek_booking_poli: "+cek_reg_periksa_poli);
             System.out.println("form umum cek_booking_kddokter: "+cek_reg_periksa_kddokter);
-            regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "true", "umum", "Anjungan");
+            regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "true", "umum", "Anjungan", "");
             regis.setVisible(true);
         }
-        
-        
+    }
+    
+    void resetTimer() {
+        System.out.println("Reset timer");
+        timer.restart();
     }
 }

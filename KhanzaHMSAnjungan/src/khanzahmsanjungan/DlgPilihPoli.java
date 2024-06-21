@@ -16,7 +16,12 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,7 +67,34 @@ public class DlgPilihPoli extends javax.swing.JDialog {
             }
         }
         tbAdmin.setDefaultRenderer(Object.class, new WarnaTable());
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));             
+        
+        FormBPJS bpjs=new FormBPJS(null, false);
+        FormUmum umum=new FormUmum();
+        
+        // Add Listeners to detect user activity
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                bpjs.resetTimer();
+                umum.resetTimer();
+            }
+        });
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                bpjs.resetTimer();
+                umum.resetTimer();
+            }
+        });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                requestFocusInWindow();
+            }
+        });
         
     }
 

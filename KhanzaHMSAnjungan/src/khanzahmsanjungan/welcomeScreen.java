@@ -27,8 +27,8 @@ public class welcomeScreen extends javax.swing.JFrame {
         initComponents();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
 //        this.setSize(600,screen.height);
-        int anjunganHeight = (int) (Math.round(screen.height * 0.90));
-        this.setSize(600,anjunganHeight);
+        int anjunganHeight = (int) (Math.round(screen.height * 0.96));
+        this.setSize(700,anjunganHeight);
     }
     
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();  
@@ -215,15 +215,22 @@ public class welcomeScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        FormBPJS form=new FormBPJS();
+        FormBPJS form=new FormBPJS(new javax.swing.JFrame(), true);
+        form.setSize(jPanel3.getWidth(),jPanel3.getHeight());
+        form.setLocationRelativeTo(jPanel3);
+        form.setAlwaysOnTop(false);
         form.setVisible(true);
-        this.dispose();
+//        form.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         FormUmum form=new FormUmum();
+        form.setSize(jPanel3.getWidth(),jPanel3.getHeight());
+        form.setLocationRelativeTo(jPanel3);
+        form.setAlwaysOnTop(false);
         form.setVisible(true);
-        this.dispose();
+//        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

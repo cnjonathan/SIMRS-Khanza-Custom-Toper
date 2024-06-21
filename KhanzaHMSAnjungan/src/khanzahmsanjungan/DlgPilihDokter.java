@@ -359,7 +359,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                             pilih.setSize(this.getWidth(),this.getHeight());
                             pilih.setLocationRelativeTo(this);
 //                            try {
-                                pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan");
+                                pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan", "");
 //                            } catch (SQLException ex) {
 //                                Logger.getLogger(DlgPilihDokter.class.getName()).log(Level.SEVERE, null, ex);
 //                            }
@@ -371,7 +371,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                         pilih.setSize(this.getWidth(),this.getHeight());
                         pilih.setLocationRelativeTo(this);
 //                        try {
-                            pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan");
+                            pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan", "");
 //                        } catch (SQLException ex) {
 //                            Logger.getLogger(DlgPilihDokter.class.getName()).log(Level.SEVERE, null, ex);
 //                        }
@@ -394,14 +394,14 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                         DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                         pilih.setSize(this.getWidth(),this.getHeight());
                         pilih.setLocationRelativeTo(this);
-                        pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan");
+                        pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan", "");
                         pilih.setVisible(true);
                     }                    
                 }else{
                     DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                     pilih.setSize(this.getWidth(),this.getHeight());
                     pilih.setLocationRelativeTo(this);
-                    pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan");
+                    pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString(), "false", LblPenjab.getText(), "Anjungan", "");
                     
                     DlgRegistrasi regis=new DlgRegistrasi(null,true);
                     regis.setSize(this.getWidth(),this.getHeight());
@@ -489,34 +489,45 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                                             System.out.println("query_cek_bridging_sk: "+query_cek_bridging_sk);
                                             PreparedStatement ps_query_cek_bridging_sk = koneksi.prepareStatement(query_cek_bridging_sk);
                                             ResultSet rs_query_cek_bridging_sk = ps_query_cek_bridging_sk.executeQuery();
-                                            rs_query_cek_bridging_sk.next();
+                                            // rs_query_cek_bridging_sk.next();
+                                            if(rs_query_cek_bridging_sk.next()){
+                                                // tanggal hari ini
+                                                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                                Date tanggal_hari_ini = new Date();
+                                                Date tanggal_rencana_kontrol;
+                                                try {
+                                                  tanggal_rencana_kontrol = dateFormat.parse(rs_query_cek_bridging_sk.getString("tgl_rencana"));
+                                                  System.out.println("tanggal_rencana_kontrol: "+tanggal_rencana_kontrol.toString());
+                                                  if (tanggal_rencana_kontrol.compareTo(tanggal_hari_ini) < 0) {
+                                                    System.out.println("tanggal hari ini lebih besar daripada tanggal rencana kontrol, bisa lanjut");
+                                                    pilih.setVisible(true);
+                                                    // regis.setVisible(true);
+                                                    } else {
+                                                        System.out.println("tanggal hari ini lebih kecil daripada tanggal rencana kontrol alias maju");
+                                                        JOptionPane.showMessageDialog(null,"Anda kontrol tanggal lebih maju dari yang seharusnya, daftarlah sesuai dengan tanggal kontrol atau tanggal lebih mundur dari seharusnya. ");
 
-                                            // tanggal hari ini
-                                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                            Date tanggal_hari_ini = new Date();
-                                            Date tanggal_rencana_kontrol;
-                                            try {
-                                              tanggal_rencana_kontrol = dateFormat.parse(rs_query_cek_bridging_sk.getString("tgl_rencana"));
-                                              System.out.println("tanggal_rencana_kontrol: "+tanggal_rencana_kontrol.toString());
-                                              if (tanggal_rencana_kontrol.compareTo(tanggal_hari_ini) < 0) {
-                                                System.out.println("tanggal hari ini lebih besar daripada tanggal rencana kontrol, bisa lanjut");
-                                                pilih.setVisible(true);
-                                                // regis.setVisible(true);
-                                                } else {
-                                                    System.out.println("tanggal hari ini lebih kecil daripada tanggal rencana kontrol alias maju");
-                                                    JOptionPane.showMessageDialog(null,"Anda kontrol tanggal lebih maju dari yang seharusnya, daftarlah sesuai dengan tanggal kontrol atau tanggal lebih mundur dari seharusnya. ");
+                                                        // kembali ke menu utama
+                                                        welcomeScreen menuUtama = new welcomeScreen();
+                                                        menuUtama.setVisible(true);
+                                                        this.dispose();
+                                                    }
+                                                } catch (ParseException ex) {
+                                                    Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
                                                 }
-                                            } catch (ParseException ex) {
-                                                Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
+                                                System.out.println("tanggal hari ini: "+tanggal_hari_ini.toString());
+                                            }else{
+                                                JOptionPane.showMessageDialog(null, "Surat Kontrol tidak ditemukan, silahkan ke petugas untuk informasi lebih lanjut. ");
+                                                dispose();
                                             }
-                                            System.out.println("tanggal hari ini: "+tanggal_hari_ini.toString());
                                         }
                                     }else{
                                         printLabelAtasSaja(LblNoRm.getText(), "Tujuan Poliklinik anda tidak sama dengan Poli Rujukan,");
+                                        dispose();
                                     }
                                 }else{
                                     JOptionPane.showMessageDialog(null,"Anda tidak punya rujukan, \n"+
                                             "Silahkan membuat rujukan yang baru ke Faskes Pertama untuk membuat rujukan yang baru.");
+                                            dispose();
                                 }
                             } catch (SQLException ex) {
                                 Logger.getLogger(DlgRegistrasi.class.getName()).log(Level.SEVERE, null, ex);
@@ -755,6 +766,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         } else {
             // no option
             JOptionPane.showMessageDialog(null,"Silahkan membuat rujukan yang baru ke Faskes Pertama untuk membuat rujukan yang baru. ");
+            dispose();
         }
     }
 }

@@ -16,7 +16,15 @@ import fungsi.validasi;
 import fungsi.validasi2;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +38,10 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+
 
 /**
  *
@@ -44,14 +55,16 @@ public class FormBPJS extends javax.swing.JFrame {
     private PreparedStatement ps;
     private ResultSet rs;
     private String validasiregistrasi=Sequel.cariIsi("select set_validasi_registrasi.wajib_closing_kasir from set_validasi_registrasi");
-    private String cek_booking_registrasi, cek_booking_mobile_jkn, cek_reg_periksa, cek_booking_poli, cek_booking_kddokter, cek_reg_periksa_poli, cek_reg_periksa_kddokter, cek_rujukan_bridging_sep, cek_status_checkin, cek_status_checkin_mobile_jkn = "";
+    private String cek_booking_registrasi, cek_booking_mobile_jkn, cek_reg_periksa, cek_booking_poli, cek_booking_kddokter, cek_reg_periksa_poli, cek_reg_periksa_kddokter, cek_rujukan_bridging_sep, cek_status_checkin, cek_status_checkin_mobile_jkn, no_sep = "";
     Integer sisahari, cek_rujukan_expired = 0;
     boolean booking, checkin = false;
     private String nama_instansi, alamat_instansi, kabupaten, propinsi,kontak,email,poli,
             antrian,nama,norm,dokter,no_rawat,bayar,penjab;
+    private Timer timer;
+    private static final int TIMEOUT = 30000; // 30 seconds
         
     /** Creates new form frmUtama */
-    public FormBPJS() {
+    public FormBPJS(JFrame jFrame, boolean par) {
         initComponents();
         
         try {
@@ -75,6 +88,41 @@ public class FormBPJS extends javax.swing.JFrame {
 //        int anjunganHeight = (int) (Math.round(ySize * 0.80));
         int anjunganHeight = (int) (Math.round(screen.height * 0.80));
         this.setSize(600,anjunganHeight);
+        
+        // Initialize Timer
+        timer = new Timer(TIMEOUT, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                // System.exit(0); // Optionally exit the application
+            }
+        });
+
+        // Start Timer
+        timer.setRepeats(false);
+        timer.start();
+
+        // Add Listeners to detect user activity
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                resetTimer();
+            }
+        });
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                resetTimer();
+            }
+        });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                requestFocusInWindow();
+            }
+        });
     }    
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();  
     /** This method is called from within the constructor to
@@ -119,6 +167,9 @@ public class FormBPJS extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -197,6 +248,9 @@ public class FormBPJS extends javax.swing.JFrame {
         TCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TCariKeyTyped(evt);
             }
         });
         panel1.add(TCari);
@@ -605,17 +659,24 @@ public class FormBPJS extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
-        welcomeScreen menuUtama = new welcomeScreen();
-        menuUtama.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnKembaliActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
+
+    private void TCariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyTyped
+        resetTimer();
+    }//GEN-LAST:event_TCariKeyTyped
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new FormBPJS().setVisible(true);
+            FormBPJS dialog = new FormBPJS(new javax.swing.JFrame(), true);
+            dialog.setVisible(true);
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -811,7 +872,7 @@ public class FormBPJS extends javax.swing.JFrame {
                             
                             rs_rujukan_bridging_sep.next();
                             String kode_poli_bpjs = rs_rujukan_bridging_sep.getString("kd_poli_bpjs")+" ";
-                            if(kode_poli_bpjs.equals(kd_poli_bpjs+" ")){
+                            if(kode_poli_bpjs.equals(kd_poli_bpjs+" ")){ //kode_poli_bpjs = bridging_bpjs, kd_poli_bpjs = booking_registrasi
                             // if(!rs_rujukan_bridging_sep.wasNull()){
                               System.out.println("line 735 "+rs_rujukan_bridging_sep.getString("kd_poli_bpjs"));
                               sisahari = rs_rujukan_bridging_sep.getInt("sisahari");
@@ -865,37 +926,47 @@ public class FormBPJS extends javax.swing.JFrame {
                                     System.out.println("query_cek_bridging_sk: "+query_cek_bridging_sk);
                                     PreparedStatement ps_query_cek_bridging_sk = koneksi.prepareStatement(query_cek_bridging_sk);
                                     ResultSet rs_query_cek_bridging_sk = ps_query_cek_bridging_sk.executeQuery();
-                                    rs_query_cek_bridging_sk.next();
                                     
-                                    // tanggal hari ini
-                                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                    Date tanggal_hari_ini = new Date();
-                                    Date tanggal_rencana_kontrol;
-                                    try {
-                                      tanggal_rencana_kontrol = dateFormat.parse(rs_query_cek_bridging_sk.getString("tgl_rencana"));
-                                      System.out.println("tanggal_rencana_kontrol: "+tanggal_rencana_kontrol.toString());
-                                      if (tanggal_rencana_kontrol.compareTo(tanggal_hari_ini) < 0) {
-                                        System.out.println("tanggal hari ini lebih besar daripada tanggal rencana kontrol, bisa lanjut");
-                                        if(!cek_reg_periksa.equals("")){
-                                        // langsung cetak
-                                        regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "true", "bpjs", "Si Doel");
-                                        }else{
-                                            regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs", "Si Doel");
+                                    if(rs_query_cek_bridging_sk.next()){
+                                        // tanggal hari ini
+                                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                        Date tanggal_hari_ini = new Date();
+                                        Date tanggal_rencana_kontrol;
+                                        try {
+                                          no_sep = rs_query_cek_bridging_sk.getString("no_sep");
+                                          System.out.println("cek_booking_registrasi no_sep: "+no_sep);
+                                          tanggal_rencana_kontrol = dateFormat.parse(rs_query_cek_bridging_sk.getString("tgl_rencana"));
+                                          System.out.println("tanggal_rencana_kontrol: "+tanggal_rencana_kontrol.toString());
+                                          if (tanggal_rencana_kontrol.compareTo(tanggal_hari_ini) < 0) {
+                                            System.out.println("tanggal hari ini lebih besar daripada tanggal rencana kontrol, bisa lanjut");
+                                            if(!cek_reg_periksa.equals("")){
+                                                // langsung cetak
+                                                regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "true", "bpjs", "Si Doel", no_sep);
+                                            }else{
+                                                regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs", "Si Doel", no_sep);
+                                            }
+                                            regis.setVisible(true);
+                                            } else {
+                                                System.out.println("tanggal hari ini lebih kecil daripada tanggal rencana kontrol alias maju");
+                                                JOptionPane.showMessageDialog(null,"Anda kontrol tanggal lebih maju dari yang seharusnya, daftarlah sesuai dengan tanggal kontrol atau tanggal lebih mundur dari seharusnya. ");
+                                                dispose();
+                                            }
+                                        } catch (ParseException ex) {
+                                            Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
                                         }
-                                        regis.setVisible(true);
-                                        } else {
-                                            System.out.println("tanggal hari ini lebih kecil daripada tanggal rencana kontrol alias maju");
-                                            JOptionPane.showMessageDialog(null,"Anda kontrol tanggal lebih maju dari yang seharusnya, daftarlah sesuai dengan tanggal kontrol atau tanggal lebih mundur dari seharusnya. ");
-                                        }
-                                    } catch (ParseException ex) {
-                                        Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
+                                        System.out.println("tanggal hari ini: "+tanggal_hari_ini.toString());
+                                    }else{
+                                        JOptionPane.showMessageDialog(null,"Surat Kontrol anda tidak terdaftar di sistem kami,  \n"+
+                                                                                    "silahkan ambil antrian ke petugas registrasi.");
+                                        printLabelAtasSajaTanpaOpsi(noRm);
+                                        dispose();
                                     }
-                                    System.out.println("tanggal hari ini: "+tanggal_hari_ini.toString());
                                 }
                             }else{
                                 JOptionPane.showMessageDialog(null,"Tujuan Poliklinik anda ("+kd_poli_bpjs+") tidak sama dengan Poli Rujukan("+rs_rujukan_bridging_sep.getString("kd_poli_bpjs")+"), \n"+
                                                                                     "silahkan konfirmasi ke petugas registrasi.");
                                 printLabelAtasSajaTanpaOpsi(noRm);
+                                dispose();
                             }
                         }
                         
@@ -919,7 +990,8 @@ public class FormBPJS extends javax.swing.JFrame {
                                                           "reg_periksa.tgl_registrasi=CURDATE() AND \n"+
                                                           "kd_pj = 'BPJ' AND \n"+
                                                           "reg_periksa.no_rkm_medis=?",noRm);
-                    regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs", "Mobile JKN");
+                    System.out.println("cek_booking_mobile_jkn no_sep: "+no_sep);
+                    regis.setPasien(noRm, cek_reg_periksa_poli, cek_reg_periksa_kddokter, "false", "bpjs", "Mobile JKN", no_sep);
                     regis.setVisible(true);
                 }
             }
@@ -1132,5 +1204,10 @@ public class FormBPJS extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FormBPJS.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    void resetTimer() {
+        System.out.println("Reset timer");
+        timer.restart();
     }
 }
