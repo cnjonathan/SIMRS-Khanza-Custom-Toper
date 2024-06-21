@@ -375,6 +375,7 @@ public final class DlgCariDiet extends javax.swing.JDialog {
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2)});
+                    System.out.println(rs.getString(1)+": "+rs.getString(2));
                     iyem=iyem+"{\"KodeDiet\":\""+rs.getString(1)+"\",\"NamaDiet\":\""+rs.getString(2)+"\"},";
                 }
             } catch (Exception e) {

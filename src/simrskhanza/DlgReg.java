@@ -11166,14 +11166,14 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptBarcodeRM18.jasper","report","::[ Label Rekam Medis ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
+            Valid.MyReportqry("rptBarcodeRM18_new.jasper","report","::[ Label Rekam Medis ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
                 "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
                 "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
                 "pasien.pnd, pasien.keluarga, pasien.namakeluarga,penjab.png_jawab,pasien.pekerjaanpj,"+
                 "concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj) as alamatpj from pasien "+
                 "inner join kelurahan inner join kecamatan inner join kabupaten "+
                 "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
-                "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+TNoRM.getText()+"' ",param);
+                "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+TNoRM.getText()+"' ",param, 6);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_MnBarcodeRM9ActionPerformed
@@ -16321,32 +16321,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             status="Lama";
         }
         
-        if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
-                new String[]{
-                    TNoReg.getText(),
-                    TNoRw.getText(),
-                    Valid.SetTgl(DTPReg.getSelectedItem()+""),
-                    CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                    KdDokter.getText(),
-                    TNoRM.getText(),
-                    kdpoli.getText(),
-                    TPngJwb.getText(),
-                    TAlmt.getText(),
-                    THbngn.getText(),
-                    TBiaya.getText(),
-                    "Belum",
-                    TStatus.getText(),
-                    "Ralan",
-                    kdpnj.getText(),
-                    umur,
-                    sttsumur,
-                    "Belum Bayar",
-                    status
-                })==true){
-            ceksukses=true;
-        }else{
-            isNumber();
-            if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+        while (!ceksukses) {
+            if (Sequel.menyimpantf2("reg_periksa", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "No.Rawat", 19,
                     new String[]{
                         TNoReg.getText(),
                         TNoRw.getText(),
@@ -16367,91 +16343,18 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                         sttsumur,
                         "Belum Bayar",
                         status
-                    })==true){
-                ceksukses=true;            
-            }else{
+                    }) == true) {
+                ceksukses = true;
+            } else {
                 isNumber();
-                if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
-                        new String[]{
-                            TNoReg.getText(),
-                            TNoRw.getText(),
-                            Valid.SetTgl(DTPReg.getSelectedItem()+""),
-                            CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                            KdDokter.getText(),
-                            TNoRM.getText(),
-                            kdpoli.getText(),
-                            TPngJwb.getText(),
-                            TAlmt.getText(),
-                            THbngn.getText(),
-                            TBiaya.getText(),
-                            "Belum",
-                            TStatus.getText(),
-                            "Ralan",
-                            kdpnj.getText(),
-                            umur,
-                            sttsumur,
-                            "Belum Bayar",
-                            status
-                        })==true){
-                    ceksukses=true;
-                }else{
-                    isNumber();
-                    if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
-                            new String[]{
-                                TNoReg.getText(),
-                                TNoRw.getText(),
-                                Valid.SetTgl(DTPReg.getSelectedItem()+""),
-                                CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                                KdDokter.getText(),
-                                TNoRM.getText(),
-                                kdpoli.getText(),
-                                TPngJwb.getText(),
-                                TAlmt.getText(),
-                                THbngn.getText(),
-                                TBiaya.getText(),
-                                "Belum",
-                                TStatus.getText(),
-                                "Ralan",
-                                kdpnj.getText(),
-                                umur,
-                                sttsumur,
-                                "Belum Bayar",
-                                status
-                            })==true){
-                        ceksukses=true;
-                    }else{
-                        isNumber();
-                        if(Sequel.menyimpantf("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
-                                new String[]{
-                                    TNoReg.getText(),
-                                    TNoRw.getText(),
-                                    Valid.SetTgl(DTPReg.getSelectedItem()+""),
-                                    CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                                    KdDokter.getText(),
-                                    TNoRM.getText(),
-                                    kdpoli.getText(),
-                                    TPngJwb.getText(),
-                                    TAlmt.getText(),
-                                    THbngn.getText(),
-                                    TBiaya.getText(),
-                                    "Belum",
-                                    TStatus.getText(),
-                                    "Ralan",
-                                    kdpnj.getText(),
-                                    umur,
-                                    sttsumur,
-                                    "Belum Bayar",
-                                    status
-                                })==true){
-                            ceksukses=true;            
-                        }else{
-                            TNoRM.requestFocus();
-                            isNumber();
-                        } 
-                    } 
-                } 
-            }                
-        } 
+                // Tambahkan jeda waktu untuk menghindari loop tanpa henti
+                try {
+                    Thread.sleep(1000); // Menunggu 1 detik sebelum mencoba lagi
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         
         if(ceksukses==true){
             UpdateUmur(); 
