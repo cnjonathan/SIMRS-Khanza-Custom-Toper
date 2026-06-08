@@ -1,0 +1,46 @@
+documentasi database
+
+trigger reg periksa
+IF (
+  SELECT 
+    count(*) 
+  FROM 
+    view_anjungan 
+  WHERE 
+    view_anjungan.param_1 = NEW.no_rkm_medis && view_anjungan.param_2 = NEW.tgl_registrasi
+) = 1 THEN 
+UPDATE 
+  view_anjungan 
+SET 
+  param_2 = NEW.no_rawat, 
+  trace_progress = 'antri_poli', 
+  antri_poli_at = CURRENT_TIMESTAMP() 
+WHERE 
+  param_1 = NEW.no_rkm_medis 
+  AND param_2 = CURDATE();
+ELSE INSERT INTO view_anjungan(
+  type_booking, 
+  param_1, 
+  param_2, 
+  trace_progress
+) 
+VALUES 
+  (
+    'petugas_registrasi', 
+    NEW.no_rkm_medis, 
+    NEW.no_rawat, 
+    'antri_poli'
+  );
+END IF
+
+
+
+trigger reg periksa ke surat kontrol
+IF (NEW.kd_pj = '001' OR 
+    NEW.kd_pj = '21' OR 
+    NEW.kd_pj = '22' OR 
+    NEW.kd_pj = 'BP' OR 
+    NEW.kd_pj = 'BPJ') 
+THEN
+    INSERT INTO surat_kontrol_bpjs(no_rawat) VALUES (NEW.no_rawat);
+END IF

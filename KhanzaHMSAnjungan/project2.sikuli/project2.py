@@ -1,0 +1,7 @@
+click("1721701686622.png")
+click("1721451319149.png")
+rightClick("1721716326421.png")
+rightClick("1721717877796.png")
+print('copas nik')
+click("1721717844990.png")
+print('sukses')

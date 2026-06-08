@@ -1,0 +1,17 @@
+build/*
+nbproject/*
+setting/*
+dist/*
+lib/*
+KhanzaHMSAnjungan/build/*
+KhanzaHMSAnjungan/dist/*
+KhanzaHMSAnjungan/nbproject/private/*
+KhanzaHMSAnjungan/setting/*
+KhanzaHMSAnjungan/nbproject/*
+/KhanzaHMSServiceSatuSehat_0/build/
+/KhanzaHMSServiceSatuSehat_0/nbproject/private/
+/KhanzaHMSServiceSatuSehat/dist/
+database/*
+export_pdf/*
+export_pdf_resume_medis_ralan/*
+merged_pdf/*
