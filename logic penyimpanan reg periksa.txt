@@ -1,0 +1,270 @@
+logic si doel:
+
+if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+                new String[]{
+                    LblNoReg.getText(),
+                    LblNoRawat.getText(),
+                    LblTanggal.getText(),
+                    LblJam.getText(),
+                    LblKdDokter.getText(),
+                    LblNoRm.getText(),
+                    LblKdPoli.getText(),
+                    PngJawab.getText(),
+                    AlamatPngJawab.getText(),
+                    HubunganPngJawab.getText(),
+                    Biaya.getText(),
+                    "Belum",
+                    Status.getText(),
+                    "Ralan",
+                    KdBayar.getText(),
+                    umur,
+                    sttsumur,
+                    "Belum Bayar",
+                    status
+                })==true){
+
+                    // update database booking
+                    cek_booking_registrasi= Sequel.cariIsi("SELECT booking_registrasi.tanggal_periksa FROM booking_registrasi WHERE booking_registrasi.tanggal_periksa=CURDATE() and booking_registrasi.no_rkm_medis=?",LblNoRm.getText());
+                    if(cek_booking_registrasi.equals("")){
+                        System.out.println("tidak ada booking");
+                    }else{
+                        Sequel.queryu("UPDATE booking_registrasi SET status = 'Terdaftar' WHERE booking_registrasi.tanggal_periksa=CURDATE() AND no_rkm_medis = ?;", LblNoRm.getText());
+                        // update trigger di table view_anjungan set trace_progress menjadi antri_poli karena langsung ke poli
+                        Sequel.queryu("UPDATE view_anjungan SET trace_progress = 'antri_poli', antri_poli_at = CURRENT_TIMESTAMP(), param_2='"+LblNoRawat.getText()+"' WHERE view_anjungan.param_2=CURDATE() AND view_anjungan.param_1 = ?;", LblNoRm.getText());
+                    }
+                }else{
+                    LblJam.setText(Sequel.cariIsi("select current_time()"));
+                    isNumber();
+                    LblNoReg.setText(NoReg.getText());
+                    LblNoRawat.setText(NoRawat.getText());
+                    if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+                        new String[]{LblNoReg.getText(),LblNoRawat.getText(),LblTanggal.getText(),LblJam.getText(),
+                        LblKdDokter.getText(),LblNoRm.getText(),LblKdPoli.getText(),PngJawab.getText(),
+                        AlamatPngJawab.getText(),HubunganPngJawab.getText(),Biaya.getText(),"Belum",
+                        Status.getText(),"Ralan",KdBayar.getText(),umur,sttsumur,"Belum Bayar",status})==true){
+                            UpdateUmur();
+                            DlgCetak cetak=new DlgCetak(null,true);
+                            cetak.setSize(this.getWidth(),this.getHeight());
+                            cetak.setLocationRelativeTo(this);
+                            cetak.setPasien(LblNoRawat.getText(),LblNamaPoli.getText(),LblNoReg.getText(),LblNama.getText(),
+                                LblNoRm.getText(),LblDokter.getText(),NmBayar.getText(),PngJawab.getText());
+                            cetak.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(rootPane,"Silahkan hubungi petugas kami, terjadi masalah pada system..!!!");
+                        PngJawab.requestFocus();
+                    }
+                }
+
+
+
+logic anjungan mandiri:
+
+if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+                new String[]{
+                    LblNoReg.getText(),
+                    LblNoRawat.getText(),
+                    LblTanggal.getText(),
+                    LblJam.getText(),
+                    LblKdDokter.getText(),
+                    LblNoRm.getText(),
+                    LblKdPoli.getText(),
+                    PngJawab.getText(),
+                    AlamatPngJawab.getText(),
+                    HubunganPngJawab.getText(),
+                    Biaya.getText(),
+                    "Belum",
+                    Status.getText(),
+                    "Ralan",
+                    KdBayar.getText(),
+                    umur,
+                    sttsumur,
+                    "Belum Bayar",
+                    status
+                })==true){
+                   // System.out.println("Anjungan tersimpan");
+                   // update view anjungan (mr dan no rawat)
+                   PreparedStatement ps_update_pasien_ke_registrasi;
+                    try {
+                        String update_trace_progress = "UPDATE view_anjungan SET type_booking=?, trace_progress=?, antri_poli_at=CURRENT_TIMESTAMP() WHERE param_1=? AND param_2=?";
+                        ps_update_pasien_ke_registrasi = koneksi.prepareStatement(update_trace_progress);
+                        ps_update_pasien_ke_registrasi.setString(1, "anjungan");
+                        ps_update_pasien_ke_registrasi.setString(2, "antri_poli");
+                        ps_update_pasien_ke_registrasi.setString(3, LblNoRm.getText());
+                        ps_update_pasien_ke_registrasi.setString(4, LblNoRawat.getText());
+                        ps_update_pasien_ke_registrasi.executeUpdate();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(DlgRegistrasi.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    LblJam.setText(Sequel.cariIsi("select current_time()"));
+                    isNumber();
+                    LblNoReg.setText(NoReg.getText());
+                    LblNoRawat.setText(NoRawat.getText());
+                    if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+                        new String[]{
+                            LblNoReg.getText(),
+                            LblNoRawat.getText(),
+                            LblTanggal.getText(),
+                            LblJam.getText(),
+                            LblKdDokter.getText(),
+                            LblNoRm.getText(),
+                            LblKdPoli.getText(),
+                            PngJawab.getText(),
+                            AlamatPngJawab.getText(),
+                            HubunganPngJawab.getText(),
+                            Biaya.getText(),
+                            "Belum",
+                            Status.getText(),
+                            "Ralan",
+                            KdBayar.getText(),
+                            umur,
+                            sttsumur,
+                            "Belum Bayar",
+                            status
+                        })==true){
+                            UpdateUmur();
+                            DlgCetak cetak=new DlgCetak(null,true);
+                            cetak.setSize(this.getWidth(),this.getHeight());
+                            cetak.setLocationRelativeTo(this);
+                            cetak.setPasien(LblNoRawat.getText(),LblNamaPoli.getText(),LblNoReg.getText(),LblNama.getText(),
+                                LblNoRm.getText(),LblDokter.getText(),NmBayar.getText(),PngJawab.getText());
+                            cetak.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(rootPane,"Silahkan hubungi petugas kami, terjadi masalah pada system..!!!");
+                        PngJawab.requestFocus();
+                    }
+                }
+
+
+logic di dlg reg:
+//        if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+//                new String[]{
+//                    TNoReg.getText(),
+//                    TNoRw.getText(),
+//                    Valid.SetTgl(DTPReg.getSelectedItem()+""),
+//                    CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
+//                    KdDokter.getText(),
+//                    TNoRM.getText(),
+//                    kdpoli.getText(),
+//                    TPngJwb.getText(),
+//                    TAlmt.getText(),
+//                    THbngn.getText(),
+//                    TBiaya.getText(),
+//                    "Belum",
+//                    TStatus.getText(),
+//                    "Ralan",
+//                    kdpnj.getText(),
+//                    umur,
+//                    sttsumur,
+//                    "Belum Bayar",
+//                    status
+//                })==true){
+//            ceksukses=true;
+//        }else{
+//            isNumber();
+//            if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+//                    new String[]{
+//                        TNoReg.getText(),
+//                        TNoRw.getText(),
+//                        Valid.SetTgl(DTPReg.getSelectedItem()+""),
+//                        CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
+//                        KdDokter.getText(),
+//                        TNoRM.getText(),
+//                        kdpoli.getText(),
+//                        TPngJwb.getText(),
+//                        TAlmt.getText(),
+//                        THbngn.getText(),
+//                        TBiaya.getText(),
+//                        "Belum",
+//                        TStatus.getText(),
+//                        "Ralan",
+//                        kdpnj.getText(),
+//                        umur,
+//                        sttsumur,
+//                        "Belum Bayar",
+//                        status
+//                    })==true){
+//                ceksukses=true;            
+//            }else{
+//                isNumber();
+//                if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+//                        new String[]{
+//                            TNoReg.getText(),
+//                            TNoRw.getText(),
+//                            Valid.SetTgl(DTPReg.getSelectedItem()+""),
+//                            CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
+//                            KdDokter.getText(),
+//                            TNoRM.getText(),
+//                            kdpoli.getText(),
+//                            TPngJwb.getText(),
+//                            TAlmt.getText(),
+//                            THbngn.getText(),
+//                            TBiaya.getText(),
+//                            "Belum",
+//                            TStatus.getText(),
+//                            "Ralan",
+//                            kdpnj.getText(),
+//                            umur,
+//                            sttsumur,
+//                            "Belum Bayar",
+//                            status
+//                        })==true){
+//                    ceksukses=true;
+//                }else{
+//                    isNumber();
+//                    if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+//                            new String[]{
+//                                TNoReg.getText(),
+//                                TNoRw.getText(),
+//                                Valid.SetTgl(DTPReg.getSelectedItem()+""),
+//                                CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
+//                                KdDokter.getText(),
+//                                TNoRM.getText(),
+//                                kdpoli.getText(),
+//                                TPngJwb.getText(),
+//                                TAlmt.getText(),
+//                                THbngn.getText(),
+//                                TBiaya.getText(),
+//                                "Belum",
+//                                TStatus.getText(),
+//                                "Ralan",
+//                                kdpnj.getText(),
+//                                umur,
+//                                sttsumur,
+//                                "Belum Bayar",
+//                                status
+//                            })==true){
+//                        ceksukses=true;
+//                    }else{
+//                        isNumber();
+//                        if(Sequel.menyimpantf("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,
+//                                new String[]{
+//                                    TNoReg.getText(),
+//                                    TNoRw.getText(),
+//                                    Valid.SetTgl(DTPReg.getSelectedItem()+""),
+//                                    CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
+//                                    KdDokter.getText(),
+//                                    TNoRM.getText(),
+//                                    kdpoli.getText(),
+//                                    TPngJwb.getText(),
+//                                    TAlmt.getText(),
+//                                    THbngn.getText(),
+//                                    TBiaya.getText(),
+//                                    "Belum",
+//                                    TStatus.getText(),
+//                                    "Ralan",
+//                                    kdpnj.getText(),
+//                                    umur,
+//                                    sttsumur,
+//                                    "Belum Bayar",
+//                                    status
+//                                })==true){
+//                            ceksukses=true;            
+//                        }else{
+//                            TNoRM.requestFocus();
+//                            isNumber();
+//                        } 
+//                    } 
+//                } 
+//            }                
+//        } 

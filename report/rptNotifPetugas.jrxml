@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="300" pageHeight="382" columnWidth="294" leftMargin="3" rightMargin="3" topMargin="3" bottomMargin="3" uuid="7dfc8716-95f5-43a2-8a45-5137aec55f9b">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="253"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="namars" class="java.lang.String"/>
+	<parameter name="alamatrs" class="java.lang.String"/>
+	<parameter name="kotars" class="java.lang.String"/>
+	<parameter name="propinsirs" class="java.lang.String"/>
+	<parameter name="kontakrs" class="java.lang.String"/>
+	<parameter name="emailrs" class="java.lang.String"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="parameter" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+	reg_periksa.no_reg, 
+	reg_periksa.no_rkm_medis, 
+	pasien.no_ktp,
+	pasien.nm_pasien, 
+	pasien.jk, 
+	poliklinik.nm_poli, 
+	reg_periksa.tgl_registrasi, 
+	dokter.nm_dokter 
+FROM 
+	reg_periksa 
+LEFT JOIN 
+	poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli 
+LEFT JOIN 
+	pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis 
+LEFT JOIN 
+	dokter ON reg_periksa.kd_dokter = dokter.kd_dokter 
+WHERE 
+	reg_periksa.no_rkm_medis = $P{parameter} AND 
+	reg_periksa.tgl_registrasi = CURDATE()]]>
+	</queryString>
+	<field name="tgl_registrasi" class="java.sql.Date"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="67">
+			<staticText>
+				<reportElement x="11" y="8" width="273" height="30" uuid="0d58e1fc-83d4-49a3-838e-bfb11fac8ab4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Silahkan mengambil antrian untuk verifikasi data ke petugas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="97" y="42" width="100" height="20" uuid="ebf28aa7-1a0b-4654-abaa-d05b75995bf2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tgl_registrasi}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>
