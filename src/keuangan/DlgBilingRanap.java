@@ -2061,7 +2061,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(65, 23));
         panelGlass1.add(jLabel4);
 
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2023 07:41:51" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-06-2025 13:34:43" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -5757,12 +5757,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         tagihanppn=besarppn+total;
         TagihanPPn.setText(Valid.SetAngka3(tagihanppn));
         
+        // perlu di cek kembali
         if(uangdeposit>tagihanppn){
             sisadeposit=uangdeposit-tagihanppn;
             Valid.tabelKosong(tabModeAkunBayar);
             Valid.tabelKosong(tabModeAkunPiutang);
         }
-       
+        
+        // cek penamaan label kekurangan dan kembali
         if(piutang<=0){
             kekurangan=(bayar+uangdeposit+besarppn)-tagihanppn;
             jLabel5.setText("Bayar : Rp.");
@@ -7066,7 +7068,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             
             Sequel.AutoComitFalse();
             sukses=true;              
-            for(i=0;i<tbBilling.getRowCount();i++){  
+            for(i=0;i<tbBilling.getRowCount();i++){
                 psbiling=koneksi.prepareStatement(sqlpsbiling);
                 try {
                     psbiling.setInt(1,i);

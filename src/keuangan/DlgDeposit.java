@@ -452,7 +452,7 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2022" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-06-2022" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -466,7 +466,7 @@ public class DlgDeposit extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2022" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-06-2022" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -559,7 +559,7 @@ public class DlgDeposit extends javax.swing.JDialog {
 
         DTPTgl.setEditable(false);
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2022" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-06-2022" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -813,11 +813,11 @@ public class DlgDeposit extends javax.swing.JDialog {
                 TCari.requestFocus();
             }else{
                 Sequel.AutoComitFalse();
-                sukses=true;
-                if(Sequel.menyimpantf2("deposit","?,?,?,?,?,?,?,?","Deposit",8,new String[]{
+                sukses=false;
+                while (Sequel.menyimpantf2("deposit","?,?,?,?,?,?,?,?","Deposit",8,new String[]{
                     Nomor.getText(),TNoRw.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
                     AkunBayar.getSelectedItem().toString(),nilaippn+"",BesarDeposit.getText(),KodePetugas.getText(),Keterangan.getText()
-                })==true){
+                })) {                    
                     try {
                         myObj = new FileReader("./cache/akunbayar.iyem");
                         root = mapper.readTree(myObj);
@@ -836,12 +836,39 @@ public class DlgDeposit extends javax.swing.JDialog {
                            }
                         }
                         myObj.close();
+                        sukses=true;
                     } catch (Exception e) {
                         sukses=false;
                     }
-                }else{
-                    sukses=false;
-                }  
+                }
+//                if(Sequel.menyimpantf2("deposit","?,?,?,?,?,?,?,?","Deposit",8,new String[]{
+//                    Nomor.getText(),TNoRw.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
+//                    AkunBayar.getSelectedItem().toString(),nilaippn+"",BesarDeposit.getText(),KodePetugas.getText(),Keterangan.getText()
+//                })==true){
+//                    try {
+//                        myObj = new FileReader("./cache/akunbayar.iyem");
+//                        root = mapper.readTree(myObj);
+//                        response = root.path("akunbayar");
+//                        if(response.isArray()){
+//                           for(JsonNode list:response){
+//                               if(list.path("NamaAkun").asText().equals(AkunBayar.getSelectedItem().toString())){
+//                                    Sequel.queryu("delete from tampjurnal");                    
+//                                    Sequel.menyimpan("tampjurnal","'"+list.path("KodeRek").asText()+"','"+AkunBayar.getSelectedItem()+"','"+BesarDeposit.getText()+"','0'","Rekening"); 
+//                                    Sequel.menyimpan("tampjurnal","'"+Uang_Muka_Ranap+"','UANG MUKA RANAP','0','"+BesarDeposit.getText()+"'","Rekening");    
+//                                    sukses=jur.simpanJurnal(Nomor.getText(),"U","DEPOSIT PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", OLEH "+akses.getkode()); 
+//                                    if(sukses==true){
+//                                        sukses=Sequel.menyimpantf2("tagihan_sadewa","'"+Nomor.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','-','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"','Uang Muka','"+BesarDeposit.getText()+"','"+BesarDeposit.getText()+"','Belum','"+akses.getkode()+"'","No.Deposit");
+//                                    }
+//                               }
+//                           }
+//                        }
+//                        myObj.close();
+//                    } catch (Exception e) {
+//                        sukses=false;
+//                    }
+//                }else{
+//                    sukses=false;
+//                }  
 
                 if(sukses==true){
                     Sequel.Commit();
