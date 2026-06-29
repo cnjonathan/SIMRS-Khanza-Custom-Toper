@@ -904,7 +904,13 @@ public final class DlgReg extends javax.swing.JDialog {
                     if(poli.getTable().getSelectedRow()!= -1){                    
                         if(pilihan==1){
                             kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
-                            Location_SatuSehat.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
+                            String location = "";
+                            if(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString().isEmpty()){
+                                location = "-";
+                            }else{
+                                location = poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString();
+                            }
+                            Location_SatuSehat.setText(location);
                             TPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
                             switch (TStatus.getText()) {
                                 case "Baru":
@@ -11799,9 +11805,9 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                         rs.getString("id_user") == null ? "-" : rs.getString("id_user"),
                         rs.getString("ip_computer") == null ? "-" : rs.getString("ip_computer"),
                         rs.getString("hostname") == null ? "-" : rs.getString("hostname"),
-                        rs.getString("practitioner_ihs"),
+                        rs.getString("practitioner_ihs") == null ? "-" : rs.getString("practitioner_ihs"),
                         rs.getString("nm_pasien"),
-                        rs.getString("id_lokasi_satusehat"),
+                        rs.getString("id_lokasi_satusehat") == null ? "-" : rs.getString("id_lokasi_satusehat"),
                         rs.getString("ihs_number") == null ? "-" : rs.getString("ihs_number"),
                         encounter_id
                     });

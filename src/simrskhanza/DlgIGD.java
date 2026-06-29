@@ -12066,9 +12066,9 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                         rs.getString("id_user") == null ? "-" : rs.getString("id_user"),
                         rs.getString("ip_computer") == null ? "-" : rs.getString("ip_computer"),
                         rs.getString("hostname") == null ? "-" : rs.getString("hostname"),
-                        rs.getString("practitioner_ihs"),
+                        rs.getString("practitioner_ihs")== null ? "-" : rs.getString("practitioner_ihs"),
                         rs.getString("nm_pasien"),
-                        rs.getString("id_lokasi_satusehat"),
+                        rs.getString("id_lokasi_satusehat")== null ? "-" : rs.getString("id_lokasi_satusehat"),
                         rs.getString("ihs_number") == null ? "-" : rs.getString("ihs_number"),
                         encounter_id
                     });
@@ -12139,6 +12139,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         TNoRM.requestFocus();
         kdpnj.setText("");
         nmpnj.setText("");
+        IHS_SatuSehat.setText("");
+        Patient_SatuSehat.setText("");
     }
 
     private void getData() {
