@@ -1798,213 +1798,223 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             rssep.beforeFirst();
 
             System.out.println("Jumlah data SEP: " + size);
-            if (rssep.next()) {
-                System.out.println("Data SEP: " + rssep.getString(1));
-
-                no_sep = rssep.getString(1);
-
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars", akses.getnamars());
-                param.put("alamatrs", akses.getalamatrs());
-                param.put("kotars", akses.getkabupatenrs());
-                param.put("propinsirs", akses.getpropinsirs());
-                param.put("emailrs", akses.getemailrs());
-                param.put("kontakrs", akses.getkontakrs());
-                param.put("penanggung",
-                        Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?",
-                                Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",
-                                        TNoRw.getText())));
-                param.put("propinsirs", akses.getpropinsirs());
-                finger = Sequel.cariIsi(
-                        "select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",
-                        Sequel.cariIsi("SELECT kd_dokter FROM maping_dokter_dpjpvclaim WHERE kd_dokter_bpjs = '"
-                                + rssep.getString("kddpjp") + "'"));
-                param.put("finger",
-                        "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs()
-                                + "\nDitandatangani secara elektronik oleh " + rssep.getString("nmdpdjp") + "\nID "
-                                + (finger.equals("") ? Sequel.cariIsi(
-                                        "SELECT kd_dokter FROM maping_dokter_dpjpvclaim WHERE kd_dokter_bpjs = '"
-                                                + rssep.getString("kddpjp") + "'")
-                                        : finger)
-                                + "\n");
-                param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                param.put("logo_bpjs", Sequel.cariGambar("select gambar.bpjs from gambar"));
-                param.put("no_sep", no_sep);
-                param.put("no_kartu",
-                        Sequel.cariIsi("select bridging_sep.no_kartu from bridging_sep where bridging_sep.no_rawat=?",
-                                TNoRw.getText()));
-                param.put("prb", Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?", no_sep));
-                param.put("noreg",
-                        Sequel.cariIsi("SELECT no_reg FROM reg_periksa WHERE no_rawat=?", TNoRw.getText()));
-                param.put("no_sep_bridging", rssep.getString("no_sep"));
-                param.put("no_rawat", rssep.getString("no_rawat"));
-                param.put("nomr", rssep.getString("nomr"));
-                param.put("nama_pasien", rssep.getString("nama_pasien"));
-                param.put("tglsep", rssep.getString("tglsep"));
-                param.put("tglrujukan", rssep.getString("tglrujukan"));
-                param.put("no_rujukan", rssep.getString("no_rujukan"));
-                param.put("kdppkrujukan", rssep.getString("kdppkrujukan"));
-                param.put("nmppkrujukan", rssep.getString("nmppkrujukan"));
-                param.put("kdppkpelayanan", rssep.getString("kdppkpelayanan"));
-                param.put("nmppkpelayanan", rssep.getString("nmppkpelayanan"));
-                if (rssep.getString("jnspelayanan") == "1") {
-                    param.put("jnspelayanan", "Rawat Inap");
-                } else {
-                    param.put("jnspelayanan", "Rawat Jalan");
+            if (size > 0) {
+                javax.swing.JTabbedPane tabbedPane = null;
+                if (size > 1) {
+                    tabbedPane = new javax.swing.JTabbedPane();
                 }
-                param.put("catatan", rssep.getString("catatan"));
-                param.put("diagawal", rssep.getString("diagawal"));
-                param.put("nmdiagnosaawal", rssep.getString("nmdiagnosaawal"));
-                param.put("kdpolitujuan", rssep.getString("kdpolitujuan"));
-                param.put("nmpolitujuan", rssep.getString("nmpolitujuan"));
 
-                switch (rssep.getString("klsrawat")) {
-                    case "1":
+                while (rssep.next()) {
+                    System.out.println("Data SEP: " + rssep.getString(1));
+
+                    no_sep = rssep.getString(1);
+
+                    Map<String, Object> param = new HashMap<>();
+                    param.put("namars", akses.getnamars());
+                    param.put("alamatrs", akses.getalamatrs());
+                    param.put("kotars", akses.getkabupatenrs());
+                    param.put("propinsirs", akses.getpropinsirs());
+                    param.put("emailrs", akses.getemailrs());
+                    param.put("kontakrs", akses.getkontakrs());
+                    param.put("penanggung",
+                            Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?",
+                                    Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",
+                                            TNoRw.getText())));
+                    param.put("propinsirs", akses.getpropinsirs());
+                    finger = Sequel.cariIsi(
+                            "select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",
+                            Sequel.cariIsi("SELECT kd_dokter FROM maping_dokter_dpjpvclaim WHERE kd_dokter_bpjs = '"
+                                    + rssep.getString("kddpjp") + "'"));
+                    param.put("finger",
+                            "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs()
+                                    + "\nDitandatangani secara elektronik oleh " + rssep.getString("nmdpdjp") + "\nID "
+                                    + (finger.equals("") ? Sequel.cariIsi(
+                                            "SELECT kd_dokter FROM maping_dokter_dpjpvclaim WHERE kd_dokter_bpjs = '"
+                                                    + rssep.getString("kddpjp") + "'")
+                                            : finger)
+                                    + "\n");
+                    param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                    param.put("logo_bpjs", Sequel.cariGambar("select gambar.bpjs from gambar"));
+                    param.put("no_sep", no_sep);
+                    param.put("no_kartu",
+                            Sequel.cariIsi("select bridging_sep.no_kartu from bridging_sep where bridging_sep.no_rawat=?",
+                                    TNoRw.getText()));
+                    param.put("prb", Sequel.cariIsi("select bpjs_prb.prb from bpjs_prb where bpjs_prb.no_sep=?", no_sep));
+                    param.put("noreg",
+                            Sequel.cariIsi("SELECT no_reg FROM reg_periksa WHERE no_rawat=?", TNoRw.getText()));
+                    param.put("no_sep_bridging", rssep.getString("no_sep"));
+                    param.put("no_rawat", rssep.getString("no_rawat"));
+                    param.put("nomr", rssep.getString("nomr"));
+                    param.put("nama_pasien", rssep.getString("nama_pasien"));
+                    param.put("tglsep", rssep.getString("tglsep"));
+                    param.put("tglrujukan", rssep.getString("tglrujukan"));
+                    param.put("no_rujukan", rssep.getString("no_rujukan"));
+                    param.put("kdppkrujukan", rssep.getString("kdppkrujukan"));
+                    param.put("nmppkrujukan", rssep.getString("nmppkrujukan"));
+                    param.put("kdppkpelayanan", rssep.getString("kdppkpelayanan"));
+                    param.put("nmppkpelayanan", rssep.getString("nmppkpelayanan"));
+
+                    String jnspelayanan = rssep.getString("jnspelayanan");
+                    if (jnspelayanan != null && (jnspelayanan.startsWith("1") || jnspelayanan.contains("Ranap"))) {
+                        param.put("jnspelayanan", "Rawat Inap");
+                    } else {
+                        param.put("jnspelayanan", "Rawat Jalan");
+                    }
+
+                    param.put("catatan", rssep.getString("catatan"));
+                    param.put("diagawal", rssep.getString("diagawal"));
+                    param.put("nmdiagnosaawal", rssep.getString("nmdiagnosaawal"));
+                    param.put("kdpolitujuan", rssep.getString("kdpolitujuan"));
+                    param.put("nmpolitujuan", rssep.getString("nmpolitujuan"));
+
+                    String klsrawat = rssep.getString("klsrawat");
+                    if (klsrawat != null && (klsrawat.startsWith("1") || klsrawat.equals("1"))) {
                         param.put("klsrawat", "Kelas 1");
-                        break;
-                    case "2":
+                    } else if (klsrawat != null && (klsrawat.startsWith("2") || klsrawat.equals("2"))) {
                         param.put("klsrawat", "Kelas 2");
-                        break;
-                    case "3":
+                    } else if (klsrawat != null && (klsrawat.startsWith("3") || klsrawat.equals("3"))) {
                         param.put("klsrawat", "Kelas 3");
-                        break;
-                    default:
-                        // throw new AssertionError();
+                    } else {
                         param.put("klsrawat", "-");
+                    }
+
+                    switch (rssep.getString("klsnaik")) {
+                        case "1":
+                            param.put("klsnaik", "VVIP");
+                            break;
+                        case "2":
+                            param.put("klsnaik", "VIP");
+                            break;
+                        case "3":
+                            param.put("klsnaik", "Kelas I");
+                            break;
+                        case "4":
+                            param.put("klsnaik", "Kelas II");
+                            break;
+                        case "5":
+                            param.put("klsnaik", "Kelas III");
+                            break;
+                        case "6":
+                            param.put("klsnaik", "ICCU");
+                            break;
+                        case "7":
+                            param.put("klsnaik", "ICU");
+                            break;
+                        case "8":
+                            param.put("klsnaik", "Diatas Kelas 1");
+                            break;
+                        default:
+                            param.put("klsnaik", "-");
+                    }
+
+                    param.put("pembiayaan", rssep.getString("pembiayaan"));
+                    param.put("pjnaikkelas", rssep.getString("pjnaikkelas"));
+
+                    switch (rssep.getString("lakalantas")) {
+                        case "0":
+                            param.put("lakalantas", "BPJS Kesehatan");
+                            break;
+                        case "1":
+                            param.put("lakalantas", "Jasa Raharja");
+                            break;
+                        case "2":
+                            param.put("lakalantas", "Jasa Raharja & BPJS Ketenagakerjaan/Taspen");
+                            break;
+                        case "3":
+                            param.put("lakalantas", "BPJS Ketenagakerjaan, Taspen, dll");
+                            break;
+                        default:
+                            param.put("lakalantas", "-");
+                    }
+
+                    param.put("user", rssep.getString("user"));
+                    param.put("tanggal_lahir", rssep.getString("tanggal_lahir"));
+                    param.put("peserta", rssep.getString("peserta"));
+                    param.put("jkel", rssep.getString("jkel"));
+                    param.put("no_kartu_bridging", rssep.getString("no_kartu"));
+                    param.put("tglpulang", rssep.getString("tglpulang"));
+                    param.put("asal_rujukan", rssep.getString("asal_rujukan"));
+                    param.put("eksekutif", rssep.getString("eksekutif"));
+                    param.put("cob", rssep.getString("cob"));
+                    param.put("notelep", rssep.getString("notelep"));
+                    param.put("katarak", rssep.getString("katarak"));
+                    param.put("tglkkl", rssep.getString("tglkkl"));
+                    param.put("keterangankkl", rssep.getString("keterangankkl"));
+                    param.put("suplesi", rssep.getString("suplesi"));
+                    param.put("no_sep_suplesi", rssep.getString("no_sep_suplesi"));
+                    param.put("kdprop", rssep.getString("kdprop"));
+                    param.put("nmprop", rssep.getString("nmprop"));
+                    param.put("kdkab", rssep.getString("kdkab"));
+                    param.put("nmkab", rssep.getString("nmkab"));
+                    param.put("kdkec", rssep.getString("kdkec"));
+                    param.put("nmkec", rssep.getString("nmkec"));
+                    param.put("noskdp", rssep.getString("noskdp"));
+                    param.put("kddpjp", rssep.getString("kddpjp"));
+                    param.put("nmdpdjp", rssep.getString("nmdpdjp"));
+
+                    if ("0".equals(rssep.getString("tujuankunjungan"))) {
+                        param.put("tujuankunjungan", "Konsultasi dokter(pertama)");
+                    } else {
+                        param.put("tujuankunjungan", "Kunjungan Kontrol(ulangan)");
+                    }
+
+                    switch (rssep.getString("flagprosedur")) {
+                        case "0":
+                            param.put("flagprosedur", "- Prosedur Tidak Berkelanjutan");
+                            break;
+                        case "1":
+                            param.put("flagprosedur", "- Prosedur dan Terapi Berkelanjutan");
+                            break;
+                        default:
+                            param.put("flagprosedur", "-");
+                    }
+
+                    param.put("penunjang", rssep.getString("penunjang"));
+                    param.put("asesmenpelayanan", rssep.getString("asesmenpelayanan"));
+                    param.put("kddpjplayanan", rssep.getString("kddpjplayanan"));
+                    param.put("nmdpjplayanan", rssep.getString("nmdpjplayanan"));
+
+                    Properties systemProp = System.getProperties();
+                    String currentDir = systemProp.getProperty("user.dir");
+                    File dir = new File(currentDir);
+                    File fileRpt;
+                    String fullPath = "";
+                    if (dir.isDirectory()) {
+                        String[] isiDir = dir.list();
+                        for (String iDir : isiDir) {
+                            String path = currentDir + File.separatorChar + iDir + File.separatorChar
+                                    + "rptSEP.jasper";
+                            fileRpt = new File(path);
+                            if (fileRpt.isFile()) {
+                                fullPath = fileRpt.toString();
+                            }
+                        }
+                    }
+
+                    PreparedStatement ps_rsdt = koneksi.prepareStatement("select current_date as tanggal;");
+                    ResultSet rs_rsdt = ps_rsdt.executeQuery();
+                    JRResultSetDataSource rsdt = new JRResultSetDataSource(rs_rsdt);
+
+                    JasperPrint jprint = JasperFillManager.fillReport(fullPath, param, rsdt);
+                    JRViewer v = new JRViewer(jprint);
+
+                    rs_rsdt.close();
+                    ps_rsdt.close();
+
+                    if (size > 1) {
+                        String serviceType = (jnspelayanan != null && (jnspelayanan.startsWith("1") || jnspelayanan.contains("Ranap"))) ? "Ranap" : "Ralan";
+                        String tabTitle = "SEP " + serviceType + " (" + no_sep + ")";
+                        tabbedPane.addTab(tabTitle, v);
+                    } else {
+                        panelSEP.setLayout(new BorderLayout());
+                        panelSEP.add(v);
+                    }
                 }
 
-                switch (rssep.getString("klsnaik")) {
-                    case "1":
-                        param.put("klsnaik", "VVIP");
-                        break;
-                    case "2":
-                        param.put("klsnaik", "VIP");
-                        break;
-                    case "3":
-                        param.put("klsnaik", "Kelas I");
-                        break;
-                    case "4":
-                        param.put("klsnaik", "Kelas II");
-                        break;
-                    case "5":
-                        param.put("klsnaik", "Kelas III");
-                        break;
-                    case "6":
-                        param.put("klsnaik", "ICCU");
-                        break;
-                    case "7":
-                        param.put("klsnaik", "ICU");
-                        break;
-                    case "8":
-                        param.put("klsnaik", "Diatas Kelas 1");
-                        break;
-                    default:
-                        // throw new AssertionError();
-                        param.put("klsnaik", "-");
+                if (size > 1) {
+                    panelSEP.setLayout(new BorderLayout());
+                    panelSEP.add(tabbedPane, BorderLayout.CENTER);
                 }
-
-                param.put("pembiayaan", rssep.getString("pembiayaan"));
-                param.put("pjnaikkelas", rssep.getString("pjnaikkelas"));
-
-                switch (rssep.getString("lakalantas")) {
-                    case "0":
-                        param.put("lakalantas", "BPJS Kesehatan");
-                        break;
-                    case "1":
-                        param.put("lakalantas", "Jasa Raharja");
-                        break;
-                    case "2":
-                        param.put("lakalantas", "Jasa Raharja & BPJS Ketenagakerjaan/Taspen");
-                        break;
-                    case "3":
-                        param.put("lakalantas", "BPJS Ketenagakerjaan, Taspen, dll");
-                        break;
-                    default:
-                        // throw new AssertionError();
-                        param.put("lakalantas", "-");
-                }
-
-                param.put("user", rssep.getString("user"));
-                param.put("tanggal_lahir", rssep.getString("tanggal_lahir"));
-                param.put("peserta", rssep.getString("peserta"));
-                param.put("jkel", rssep.getString("jkel"));
-                param.put("no_kartu_bridging", rssep.getString("no_kartu"));
-                param.put("tglpulang", rssep.getString("tglpulang"));
-                param.put("asal_rujukan", rssep.getString("asal_rujukan"));
-                param.put("eksekutif", rssep.getString("eksekutif"));
-                param.put("cob", rssep.getString("cob"));
-                param.put("notelep", rssep.getString("notelep"));
-                param.put("katarak", rssep.getString("katarak"));
-                param.put("tglkkl", rssep.getString("tglkkl"));
-                param.put("keterangankkl", rssep.getString("keterangankkl"));
-                param.put("suplesi", rssep.getString("suplesi"));
-                param.put("no_sep_suplesi", rssep.getString("no_sep_suplesi"));
-                param.put("kdprop", rssep.getString("kdprop"));
-                param.put("nmprop", rssep.getString("nmprop"));
-                param.put("kdkab", rssep.getString("kdkab"));
-                param.put("nmkab", rssep.getString("nmkab"));
-                param.put("kdkec", rssep.getString("kdkec"));
-                param.put("nmkec", rssep.getString("nmkec"));
-                param.put("noskdp", rssep.getString("noskdp"));
-                param.put("kddpjp", rssep.getString("kddpjp"));
-                param.put("nmdpdjp", rssep.getString("nmdpdjp"));
-
-                if (rssep.getString("tujuankunjungan") == "0") {
-                    param.put("tujuankunjungan", "Konsultasi dokter(pertama)");
-                } else {
-                    param.put("tujuankunjungan", "Kunjungan Kontrol(ulangan)");
-                }
-
-                switch (rssep.getString("flagprosedur")) {
-                    case "0":
-                        param.put("flagprosedur", "- Prosedur Tidak Berkelanjutan");
-                        break;
-                    case "1":
-                        param.put("flagprosedur", "- Prosedur dan Terapi Berkelanjutan");
-                        break;
-                    default:
-                        // throw new AssertionError();
-                        param.put("flagprosedur", "-");
-                }
-
-                param.put("penunjang", rssep.getString("penunjang"));
-                param.put("asesmenpelayanan", rssep.getString("asesmenpelayanan"));
-                param.put("kddpjplayanan", rssep.getString("kddpjplayanan"));
-                param.put("nmdpjplayanan", rssep.getString("nmdpjplayanan"));
-
-                Properties systemProp = System.getProperties();
-
-                // Ambil current dir
-                String currentDir = systemProp.getProperty("user.dir");
-                System.out.println("currentDir: " + currentDir);
-
-                File dir = new File(currentDir);
-
-                File fileRpt;
-                String fullPath = "";
-                if (dir.isDirectory()) {
-                    String[] isiDir = dir.list();
-                    for (String iDir : isiDir) {
-                        String path = currentDir + File.separatorChar + iDir + File.separatorChar
-                                + "rptSEP.jasper";
-                        System.out.println("fullPath: " + path);
-                        fileRpt = new File(path);
-                        if (fileRpt.isFile()) { // Cek apakah file rptNotaRalan.jrxml ada
-                            fullPath = fileRpt.toString();
-                            System.out.println("Found Report File at : " + fullPath);
-                        } // end if
-                    } // end for i
-                } // end if
-
-                PreparedStatement ps_rsdt = koneksi.prepareStatement("select current_date as tanggal;");
-                ResultSet rs_rsdt = ps_rsdt.executeQuery();
-
-                JRResultSetDataSource rsdt = new JRResultSetDataSource(rs_rsdt);
-
-                JasperPrint jprint = JasperFillManager.fillReport(fullPath, param, rsdt);
-                JRViewer v = new JRViewer(jprint);
-                panelSEP.setLayout(new BorderLayout());
-                panelSEP.add(v);
             } else {
                 JOptionPane.showMessageDialog(null, "SEP Tidak ada data");
                 JLabel label = new JLabel();

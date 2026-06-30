@@ -5688,7 +5688,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel19.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass5.add(jLabel19);
 
-        DTPCariTTE1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-02-2026" }));
+        DTPCariTTE1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-06-2026" }));
         DTPCariTTE1.setDisplayFormat("dd-MM-yyyy");
         DTPCariTTE1.setName("DTPCariTTE1"); // NOI18N
         DTPCariTTE1.setOpaque(false);
@@ -5701,7 +5701,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel41.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass5.add(jLabel41);
 
-        DTPCariTTE2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-02-2026" }));
+        DTPCariTTE2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-06-2026" }));
         DTPCariTTE2.setDisplayFormat("dd-MM-yyyy");
         DTPCariTTE2.setName("DTPCariTTE2"); // NOI18N
         DTPCariTTE2.setOpaque(false);
@@ -5727,7 +5727,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel42.setPreferredSize(new java.awt.Dimension(100, 23));
         panelGlass5.add(jLabel42);
 
-        cmbStatusTTE.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Belum", "Sudah", "Batal" }));
+        cmbStatusTTE.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Belum", "Sudah" }));
         cmbStatusTTE.setName("cmbStatusTTE"); // NOI18N
         cmbStatusTTE.setPreferredSize(new java.awt.Dimension(150, 23));
         panelGlass5.add(cmbStatusTTE);
@@ -6468,7 +6468,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-06-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6491,7 +6491,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel22.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel22);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-06-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6517,7 +6517,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R3.setPreferredSize(new java.awt.Dimension(75, 23));
         panelCari.add(R3);
 
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-02-2026" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-06-2026" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -6540,7 +6540,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel25);
 
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-02-2026" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-06-2026" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -18624,17 +18624,16 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             case "Semua":
                 status = "";
                 break;
-            case "Draft":
-                status = " AND resume_pasien_ranap_idrg.status = 'draft' ";
+            case "Belum":
+                status = " AND (dokumen_tte.status_tte IS NULL OR (dokumen_tte.status_tte != 'Sudah TTE' AND dokumen_tte.status_tte != 'Barcode Khanza')) ";
                 break;
-            case "Approved":
-                status = " AND resume_pasien_ranap_idrg.status = 'approved' ";
+            case "Sudah":
+                status = " AND (dokumen_tte.status_tte = 'Sudah TTE' OR dokumen_tte.status_tte = 'Barcode Khanza') ";
                 break;
-            case "Canceled":
+            case "Batal":
                 status = " AND resume_pasien_ranap_idrg.status = 'canceled' ";
                 break;
             default:
-                //throw new AssertionError();
                 status = " ";
         }
         String query_ranap = "SELECT \n" +
@@ -18660,7 +18659,10 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 "    kamar_inap.stts_pulang, \n" +
                                 "    kamar_inap.lama, \n" +
                                 "    /* Ambil nama dokter Utama secara dinamis */\n" +
-                                "    IFNULL(dokter_utama.nm_dokter, 'Belum ada DPJP') as nm_dokter,\n" +
+                                "    IFNULL((SELECT GROUP_CONCAT(d.nm_dokter ORDER BY FIELD(dr.status, 'Utama', 'Pendukung') ASC SEPARATOR ', ') \n" +
+                                "            FROM dpjp_ranap dr \n" +
+                                "            JOIN dokter d ON dr.kd_dokter = d.kd_dokter \n" +
+                                "            WHERE dr.no_rawat = kamar_inap.no_rawat), 'Belum ada DPJP') as nm_dokter,\n" +
                                 "    kamar_inap.kd_kamar, \n" +
                                 "    reg_periksa.kd_pj, \n" +
                                 "    CONCAT(reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur) AS umur, \n" +
@@ -18668,7 +18670,8 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 "    pasien.agama, \n" +
                                 "    satu_sehat_encounter_imp.id_encounter, \n" +
                                 "    resume_idrg.id_resume_idrg, \n" +
-                                "    resume_pasien_ranap_idrg.status AS status_tte \n" +
+                                "    resume_pasien_ranap_idrg.status AS status_tte_idrg, \n" +
+                                "    dokumen_tte.status_tte AS status_tte_dokumen \n" +
                                 "FROM \n" +
                                 "    kamar_inap \n" +
                                 "    INNER JOIN reg_periksa ON kamar_inap.no_rawat = reg_periksa.no_rawat \n" +
@@ -18676,22 +18679,21 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 "    INNER JOIN kamar ON kamar_inap.kd_kamar = kamar.kd_kamar \n" +
                                 "    INNER JOIN bangsal ON kamar.kd_bangsal = bangsal.kd_bangsal \n" +
                                 "    LEFT JOIN penjab ON reg_periksa.kd_pj = penjab.kd_pj \n" +
-                                "    LEFT JOIN bridging_sep ON kamar_inap.no_rawat = bridging_sep.no_rawat \n" +
+                                "    LEFT JOIN bridging_sep ON kamar_inap.no_rawat = bridging_sep.no_rawat AND bridging_sep.jnspelayanan = '1' \n" +
                                 "    LEFT JOIN nota_inap ON kamar_inap.no_rawat = nota_inap.no_rawat \n" +
                                 "    LEFT JOIN satu_sehat_encounter_imp ON kamar_inap.no_rawat = satu_sehat_encounter_imp.no_rawat \n" +
                                 "    LEFT JOIN surat_kontrol_bpjs ON kamar_inap.no_rawat = surat_kontrol_bpjs.no_rawat \n" +
                                 "    LEFT JOIN resume_idrg ON reg_periksa.no_rawat = resume_idrg.no_rawat \n" +
                                 "    LEFT JOIN resume_pasien_ranap_idrg ON reg_periksa.no_rawat = resume_pasien_ranap_idrg.no_rawat \n" +
-                                "    /* Join khusus untuk mencari dokter utama */\n" +
-                                "    LEFT JOIN dpjp_ranap ON kamar_inap.no_rawat = dpjp_ranap.no_rawat \n" +
-                                "    LEFT JOIN dokter AS dokter_utama ON dpjp_ranap.kd_dokter = dokter_utama.kd_dokter AND dpjp_ranap.status = 'Utama' OR dpjp_ranap.kd_dokter = '"+akses.getkode()+"' \n" +
+                                "    LEFT JOIN dokumen_tte ON reg_periksa.no_rawat = dokumen_tte.no_rawat AND dokumen_tte.status = 'Ranap' \n" +
                                 "WHERE kamar_inap.tgl_keluar between '"+Valid.SetTgl(DTPCariTTE1.getSelectedItem()+"")+"' AND '"+Valid.SetTgl(DTPCariTTE2.getSelectedItem()+"'")+"' \n"+
+                                " AND kamar_inap.stts_pulang NOT IN ('-', 'Pindah Kamar') \n" +
                                 " AND reg_periksa.status_bayar like '%%' ";
         
         String query_search = "AND (reg_periksa.no_rawat LIKE '%"+search+"%' "+
                                 "OR reg_periksa.no_rkm_medis LIKE '%"+search+"%' "+
                                 "OR pasien.nm_pasien LIKE '%"+search+"%' "+
-                                "OR nm_dokter LIKE '%"+search+"%' "+
+                                "OR EXISTS (SELECT 1 FROM dpjp_ranap dr JOIN dokter d ON dr.kd_dokter = d.kd_dokter WHERE dr.no_rawat = kamar_inap.no_rawat AND d.nm_dokter LIKE '%"+search+"%') "+
                                 "OR kamar.kd_kamar LIKE '%"+search+"%' "+
                                 "OR bangsal.nm_bangsal LIKE '%"+search+"%' "+
                                 "OR penjab.png_jawab LIKE '%"+search+"%') ";
@@ -18702,9 +18704,20 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    String status_tte = "Draft";
-                    if(rs.getString("status_tte") != null){
-                        switch (rs.getString("status_tte")) {
+                    String status_tte = "Belum Ada Draft";
+                    String status_dokumen = rs.getString("status_tte_dokumen");
+                    String status_idrg = rs.getString("status_tte_idrg");
+                    
+                    if (status_dokumen != null && !status_dokumen.trim().equals("")) {
+                        if (status_dokumen.equals("Sudah TTE")) {
+                            status_tte = "Sudah TTE";
+                        } else if (status_dokumen.equals("Barcode Khanza")) {
+                            status_tte = "Barcode Khanza";
+                        } else {
+                            status_tte = status_dokumen;
+                        }
+                    } else if (status_idrg != null && !status_idrg.trim().equals("")) {
+                        switch (status_idrg) {
                             case "draft":
                                 status_tte = "Draft";
                                 break;
@@ -18717,7 +18730,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                             default:
                                 status_tte = "Draft";
                         }
-                    }else{
+                    } else {
                         status_tte = "Belum Ada Draft";
                     }
                     
@@ -19093,7 +19106,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     .addFormDataPart("file", fileToUpload.getName(),
                             RequestBody.create(MediaType.parse("application/pdf"), fileToUpload))
                     .addFormDataPart("no_rawat", txt_no_rawat.getText())
-                    .addFormDataPart("status_tte", "Belum TTE")
+                    .addFormDataPart("status_tte", "Barcode Khanza")
                     .addFormDataPart("status_lanjut", "Ranap")
                     .build();
 

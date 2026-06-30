@@ -5253,7 +5253,50 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
         }else if(RPS.getText().trim().equals("")){
             Valid.textKosong(RPS,"Riwayat Penyakit Sekarang");
         }else{
-            if(Sequel.menyimpantf("penilaian_awal_keperawatan_ranap","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",193,new String[]{
+            if(Sequel.queryu2tf("insert into penilaian_awal_keperawatan_ranap(" +
+                    "no_rawat,tanggal,informasi,ket_informasi,tiba_diruang_rawat,kasus_trauma,cara_masuk,rps,rpd,rpk,rpo," +
+                    "riwayat_pembedahan,riwayat_dirawat_dirs,alat_bantu_dipakai,riwayat_kehamilan,riwayat_kehamilan_perkiraan," +
+                    "riwayat_tranfusi,riwayat_alergi,riwayat_merokok,riwayat_merokok_jumlah,riwayat_alkohol,riwayat_alkohol_jumlah," +
+                    "riwayat_narkoba,riwayat_olahraga,pemeriksaan_mental,pemeriksaan_keadaan_umum,pemeriksaan_gcs,pemeriksaan_td," +
+                    "pemeriksaan_nadi,pemeriksaan_rr,pemeriksaan_suhu,pemeriksaan_spo2,pemeriksaan_bb,pemeriksaan_tb," +
+                    "pemeriksaan_susunan_kepala,pemeriksaan_susunan_kepala_keterangan,pemeriksaan_susunan_wajah," +
+                    "pemeriksaan_susunan_wajah_keterangan,pemeriksaan_susunan_leher,pemeriksaan_susunan_kejang," +
+                    "pemeriksaan_susunan_kejang_keterangan,pemeriksaan_susunan_sensorik,pemeriksaan_kardiovaskuler_denyut_nadi," +
+                    "pemeriksaan_kardiovaskuler_sirkulasi,pemeriksaan_kardiovaskuler_sirkulasi_keterangan,pemeriksaan_kardiovaskuler_pulsasi," +
+                    "pemeriksaan_respirasi_pola_nafas,pemeriksaan_respirasi_retraksi,pemeriksaan_respirasi_suara_nafas," +
+                    "pemeriksaan_respirasi_volume_pernafasan,pemeriksaan_respirasi_jenis_pernafasan,pemeriksaan_respirasi_jenis_pernafasan_keterangan," +
+                    "pemeriksaan_respirasi_irama_nafas,pemeriksaan_respirasi_batuk,pemeriksaan_gastrointestinal_mulut,pemeriksaan_gastrointestinal_mulut_keterangan," +
+                    "pemeriksaan_gastrointestinal_gigi,pemeriksaan_gastrointestinal_gigi_keterangan,pemeriksaan_gastrointestinal_lidah,pemeriksaan_gastrointestinal_lidah_keterangan," +
+                    "pemeriksaan_gastrointestinal_tenggorokan,pemeriksaan_gastrointestinal_tenggorokan_keterangan,pemeriksaan_gastrointestinal_abdomen," +
+                    "pemeriksaan_gastrointestinal_abdomen_keterangan,pemeriksaan_gastrointestinal_peistatik_usus,pemeriksaan_gastrointestinal_anus," +
+                    "pemeriksaan_neurologi_pengelihatan,pemeriksaan_neurologi_pengelihatan_keterangan,pemeriksaan_neurologi_alat_bantu_penglihatan," +
+                    "pemeriksaan_neurologi_pendengaran,pemeriksaan_neurologi_bicara,pemeriksaan_neurologi_bicara_keterangan,pemeriksaan_neurologi_sensorik," +
+                    "pemeriksaan_neurologi_motorik,pemeriksaan_neurologi_kekuatan_otot,pemeriksaan_integument_warnakulit,pemeriksaan_integument_turgor," +
+                    "pemeriksaan_integument_kulit,pemeriksaan_integument_dekubitas,pemeriksaan_muskuloskletal_pergerakan_sendi,pemeriksaan_muskuloskletal_kekauatan_otot," +
+                    "pemeriksaan_muskuloskletal_nyeri_sendi,pemeriksaan_muskuloskletal_nyeri_sendi_keterangan,pemeriksaan_muskuloskletal_oedema,pemeriksaan_muskuloskletal_oedema_keterangan," +
+                    "pemeriksaan_muskuloskletal_fraktur,pemeriksaan_muskuloskletal_fraktur_keterangan,pemeriksaan_eliminasi_bab_frekuensi_jumlah," +
+                    "pemeriksaan_eliminasi_bab_frekuensi_durasi,pemeriksaan_eliminasi_bab_konsistensi,pemeriksaan_eliminasi_bab_warna,pemeriksaan_eliminasi_bak_frekuensi_jumlah," +
+                    "pemeriksaan_eliminasi_bak_frekuensi_durasi,pemeriksaan_eliminasi_bak_warna,pemeriksaan_eliminasi_bak_lainlain,pola_aktifitas_makanminum," +
+                    "pola_aktifitas_mandi,pola_aktifitas_eliminasi,pola_aktifitas_berpakaian,pola_aktifitas_berpindah,pola_nutrisi_frekuesi_makan,pola_nutrisi_jenis_makanan," +
+                    "pola_nutrisi_porsi_makan,pola_tidur_lama_tidur,pola_tidur_gangguan,pengkajian_fungsi_kemampuan_sehari,pengkajian_fungsi_aktifitas," +
+                    "pengkajian_fungsi_berjalan,pengkajian_fungsi_berjalan_keterangan,pengkajian_fungsi_ambulasi,pengkajian_fungsi_ekstrimitas_atas," +
+                    "pengkajian_fungsi_ekstrimitas_atas_keterangan,pengkajian_fungsi_ekstrimitas_bawah,pengkajian_fungsi_ekstrimitas_bawah_keterangan," +
+                    "pengkajian_fungsi_menggenggam,pengkajian_fungsi_menggenggam_keterangan,pengkajian_fungsi_koordinasi,pengkajian_fungsi_koordinasi_keterangan," +
+                    "pengkajian_fungsi_kesimpulan,riwayat_psiko_kondisi_psiko,riwayat_psiko_gangguan_jiwa,riwayat_psiko_perilaku,riwayat_psiko_perilaku_keterangan," +
+                    "riwayat_psiko_hubungan_keluarga,riwayat_psiko_tinggal,riwayat_psiko_tinggal_keterangan,riwayat_psiko_nilai_kepercayaan,riwayat_psiko_nilai_kepercayaan_keterangan," +
+                    "riwayat_psiko_pendidikan_pj,riwayat_psiko_edukasi_diberikan,riwayat_psiko_edukasi_diberikan_keterangan,penilaian_nyeri,penilaian_nyeri_penyebab," +
+                    "penilaian_nyeri_ket_penyebab,penilaian_nyeri_kualitas,penilaian_nyeri_ket_kualitas,penilaian_nyeri_lokasi,penilaian_nyeri_menyebar," +
+                    "penilaian_nyeri_skala,penilaian_nyeri_waktu,penilaian_nyeri_hilang,penilaian_nyeri_ket_hilang,penilaian_nyeri_diberitahukan_dokter,penilaian_nyeri_jam_diberitahukan_dokter," +
+                    "penilaian_jatuhmorse_skala1,penilaian_jatuhmorse_nilai1,penilaian_jatuhmorse_skala2,penilaian_jatuhmorse_nilai2,penilaian_jatuhmorse_skala3,penilaian_jatuhmorse_nilai3," +
+                    "penilaian_jatuhmorse_skala4,penilaian_jatuhmorse_nilai4,penilaian_jatuhmorse_skala5,penilaian_jatuhmorse_nilai5,penilaian_jatuhmorse_skala6,penilaian_jatuhmorse_nilai6," +
+                    "penilaian_jatuhmorse_totalnilai,penilaian_jatuhsydney_skala1,penilaian_jatuhsydney_nilai1,penilaian_jatuhsydney_skala2,penilaian_jatuhsydney_nilai2," +
+                    "penilaian_jatuhsydney_skala3,penilaian_jatuhsydney_nilai3,penilaian_jatuhsydney_skala4,penilaian_jatuhsydney_nilai4,penilaian_jatuhsydney_skala5,penilaian_jatuhsydney_nilai5," +
+                    "penilaian_jatuhsydney_skala6,penilaian_jatuhsydney_nilai6,penilaian_jatuhsydney_skala7,penilaian_jatuhsydney_nilai7,penilaian_jatuhsydney_skala8,penilaian_jatuhsydney_nilai8," +
+                    "penilaian_jatuhsydney_skala9,penilaian_jatuhsydney_nilai9,penilaian_jatuhsydney_skala10,penilaian_jatuhsydney_nilai10,penilaian_jatuhsydney_skala11,penilaian_jatuhsydney_nilai11," +
+                    "penilaian_jatuhsydney_totalnilai,skrining_gizi1,nilai_gizi1,skrining_gizi2,nilai_gizi2,nilai_total_gizi,skrining_gizi_diagnosa_khusus," +
+                    "skrining_gizi_ket_diagnosa_khusus,skrining_gizi_diketahui_dietisen,skrining_gizi_jam_diketahui_dietisen,rencana,nip1,nip2,kd_dokter) " +
+                    "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                    193,new String[]{
                     TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),Anamnesis.getSelectedItem().toString(),KetAnamnesis.getText(),TibadiRuang.getSelectedItem().toString(),MacamKasus.getSelectedItem().toString(), 
                     CaraMasuk.getSelectedItem().toString(),RPS.getText(),RPD.getText(),RPK.getText(),RPO.getText(),RPembedahan.getText(),RDirawatRS.getText(),AlatBantuDipakai.getSelectedItem().toString(),SedangMenyusui.getSelectedItem().toString(),KetSedangMenyusui.getText(),RTranfusi.getText(), 
                     Alergi.getText(),KebiasaanMerokok.getSelectedItem().toString(),KebiasaanJumlahRokok.getText(),KebiasaanAlkohol.getSelectedItem().toString(),KebiasaanJumlahAlkohol.getText(),KebiasaanNarkoba.getSelectedItem().toString(),OlahRaga.getSelectedItem().toString(),KesadaranMental.getText(), 

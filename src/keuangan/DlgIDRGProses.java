@@ -7096,8 +7096,11 @@ public class DlgIDRGProses extends javax.swing.JDialog {
         txtHospitalAdmissionID
                 .setText(Sequel.cariIsi("SELECT admission_id FROM claim_idrg WHERE no_rawat = '" + no_rawat + "'"));
 
-        String no_sep = Sequel
-                .cariIsi("SELECT no_sep FROM bridging_sep WHERE no_rawat = '" + txtNorawat.getText() + "'");
+        String no_sep = Sequel.cariIsi(
+                "SELECT bridging_sep.no_sep FROM bridging_sep " +
+                "INNER JOIN reg_periksa ON bridging_sep.no_rawat = reg_periksa.no_rawat " +
+                "WHERE bridging_sep.no_rawat = '" + txtNorawat.getText() + "' " +
+                "ORDER BY (bridging_sep.jnspelayanan = IF(reg_periksa.status_lanjut = 'Ranap', '1', '2')) DESC, bridging_sep.tglsep DESC LIMIT 1");
 
         String ihs = Sequel.cariIsi("SELECT ihs_number FROM satu_sehat_pasien WHERE no_rkm_medis = '" + no_rm + "'");
         String nama = Sequel.cariIsi("SELECT nm_pasien FROM pasien WHERE no_rkm_medis = '" + no_rm + "'");
@@ -7122,7 +7125,7 @@ public class DlgIDRGProses extends javax.swing.JDialog {
                 + "FROM reg_periksa "
                 + "LEFT JOIN penjab ON reg_periksa.kd_pj = penjab.kd_pj "
                 + "LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli "
-                + "LEFT JOIN bridging_sep ON reg_periksa.no_rawat = bridging_sep.no_rawat "
+                + "LEFT JOIN bridging_sep ON bridging_sep.no_sep = (SELECT b.no_sep FROM bridging_sep b WHERE b.no_rawat = reg_periksa.no_rawat ORDER BY (b.jnspelayanan = IF(reg_periksa.status_lanjut = 'Ranap', '1', '2')) DESC, b.tglsep DESC LIMIT 1) "
                 + "LEFT JOIN satu_sehat_encounter ON reg_periksa.no_rawat = satu_sehat_encounter.no_rawat "
                 + "LEFT JOIN satu_sehat_encounter_imp ON reg_periksa.no_rawat = satu_sehat_encounter_imp.no_rawat "
                 + "WHERE reg_periksa.no_rawat = ?";
@@ -15318,10 +15321,11 @@ public class DlgIDRGProses extends javax.swing.JDialog {
                 "  bridging_sep.nmdpjplayanan \n" +
                 "from \n" +
                 "  bridging_sep \n" +
+                "  inner join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat \n" +
                 "where \n" +
-                // " bridging_sep.tglsep between ? and ? and\n" +
                 "  bridging_sep.no_rawat = ? \n" +
                 "order by \n" +
+                "  (bridging_sep.jnspelayanan = if(reg_periksa.status_lanjut = 'Ranap', '1', '2')) desc, \n" +
                 "  bridging_sep.tglsep";
 
         PreparedStatement pssep;
@@ -16309,7 +16313,7 @@ public class DlgIDRGProses extends javax.swing.JDialog {
                         "  LEFT JOIN satu_sehat_pasien ON reg_periksa.no_rkm_medis = satu_sehat_pasien.no_rkm_medis \n"
                         +
                         "  LEFT JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli \n" +
-                        "  LEFT JOIN bridging_sep ON reg_periksa.no_rawat = bridging_sep.no_rawat \n" +
+                        "  LEFT JOIN bridging_sep ON reg_periksa.no_rawat = bridging_sep.no_rawat AND bridging_sep.jnspelayanan = '2' \n" +
                         "  LEFT JOIN bridging_surat_kontrol_bpjs ON bridging_sep.no_sep = bridging_surat_kontrol_bpjs.no_sep \n"
                         +
                         "  LEFT JOIN pemeriksaan_ralan ON reg_periksa.no_rawat = pemeriksaan_ralan.no_rawat \n" +
@@ -16391,7 +16395,7 @@ public class DlgIDRGProses extends javax.swing.JDialog {
                         "  LEFT JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis \n" +
                         "  LEFT JOIN satu_sehat_pasien ON reg_periksa.no_rkm_medis = satu_sehat_pasien.no_rkm_medis \n"
                         +
-                        "  LEFT JOIN bridging_sep ON reg_periksa.no_rawat = bridging_sep.no_rawat \n" +
+                        "  LEFT JOIN bridging_sep ON reg_periksa.no_rawat = bridging_sep.no_rawat AND bridging_sep.jnspelayanan = '1' \n" +
                         "  LEFT JOIN bridging_surat_kontrol_bpjs ON bridging_sep.no_sep = bridging_surat_kontrol_bpjs.no_sep \n"
                         +
                         "  LEFT JOIN kamar_inap ON reg_periksa.no_rawat = kamar_inap.no_rawat \n" +

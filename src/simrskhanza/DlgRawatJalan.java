@@ -1798,6 +1798,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAll = new widget.Button();
         jLabel10 = new widget.Label();
         LCount = new widget.Label();
+        jLabel2 = new javax.swing.JLabel();
+        txt_status_tte = new javax.swing.JLabel();
         BtnKeluar = new widget.Button();
         panelGlass9 = new widget.panelisi();
         jLabel19 = new widget.Label();
@@ -2300,6 +2302,15 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         LCount.setPreferredSize(new java.awt.Dimension(87, 30));
         panelGlass8.add(LCount);
 
+        jLabel2.setText("Status TTE:");
+        jLabel2.setName("jLabel2"); // NOI18N
+        panelGlass8.add(jLabel2);
+
+        txt_status_tte.setText("-");
+        txt_status_tte.setName("txt_status_tte"); // NOI18N
+        txt_status_tte.setPreferredSize(new java.awt.Dimension(150, 16));
+        panelGlass8.add(txt_status_tte);
+
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
@@ -2330,7 +2341,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-06-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2344,7 +2355,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-06-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -4334,7 +4345,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-02-2026" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-06-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -7557,7 +7568,12 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         pasien.dispose();
         try {
             javax.swing.JPanel panel = new javax.swing.JPanel(new java.awt.GridLayout(5, 1));
-            panel.add(new javax.swing.JLabel("Mau skalian update status pasien sudah diperiksa dan lakukan TTE?"));
+            String labelText = "Mau skalian update status pasien sudah diperiksa dan lakukan TTE?";
+            String statusTTE = Sequel.cariIsi("select status_tte from dokumen_tte where no_rawat=?", TNoRw.getText());
+            if (statusTTE != null && (statusTTE.equals("Sudah TTE") || statusTTE.equals("Barcode Khanza"))) {
+                labelText = "Sudah pernah TTE, apakah ingin memperbarui TTE resume medis ini?";
+            }
+            panel.add(new javax.swing.JLabel(labelText));
             javax.swing.JCheckBox chkSetuju = new javax.swing.JCheckBox("Saya setuju untuk tanda tangan elektronik");
             panel.add(chkSetuju);
 
@@ -11744,6 +11760,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     private widget.Label jLabel17;
     private widget.Label jLabel18;
     private widget.Label jLabel19;
+    private javax.swing.JLabel jLabel2;
     private widget.Label jLabel20;
     private widget.Label jLabel21;
     private widget.Label jLabel22;
@@ -11860,6 +11877,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     private widget.Table tb_hasil_radiologi;
     private javax.swing.JTextArea textPemeriksaanFull;
     private javax.swing.JTextArea text_area_hasil_radiologi;
+    private javax.swing.JLabel txt_status_tte;
     // End of variables declaration//GEN-END:variables
     private widget.Button BtnSkorBromagePascaAnestesi, BtnPenilaianPreInduksi, BtnHasilPemeriksaanUSGUrologi,
             BtnHasilPemeriksaanUSGGynecologi, BtnHasilPemeriksaanEKG, BtnPenatalaksanaanTerapiOkupasi;
@@ -11925,6 +11943,22 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         LCount.setText("" + tabModeDr.getRowCount());
     }
 
+    private void checkStatusTTE() {
+        if (txt_status_tte == null) return;
+        try {
+            String statusTTE = Sequel.cariIsi("select status_tte from dokumen_tte where no_rawat=?", TNoRw.getText());
+            if (statusTTE != null && statusTTE.equals("Sudah TTE")) {
+                txt_status_tte.setText("Sudah TTE");
+            } else if (statusTTE != null && statusTTE.equals("Barcode Khanza")) {
+                txt_status_tte.setText("Barcode Khanza");
+            } else {
+                txt_status_tte.setText("Belum TTE (Pemeriksaan Baru)");
+            }
+        } catch (Exception e) {
+            txt_status_tte.setText("Belum TTE (Pemeriksaan Baru)");
+        }
+    }
+
     private void getDataDr() {
         if (tbRawatDr.getSelectedRow() != -1) {
             TNoRw.setText(tbRawatDr.getValueAt(tbRawatDr.getSelectedRow(), 1).toString());
@@ -11936,6 +11970,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             cmbMnt.setSelectedItem(tbRawatDr.getValueAt(tbRawatDr.getSelectedRow(), 8).toString().substring(3, 5));
             cmbDtk.setSelectedItem(tbRawatDr.getValueAt(tbRawatDr.getSelectedRow(), 8).toString().substring(6, 8));
             Valid.SetTgl(DTPTgl, tbRawatDr.getValueAt(tbRawatDr.getSelectedRow(), 7).toString());
+            checkStatusTTE();
         }
     }
 
@@ -12011,6 +12046,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             cmbMnt.setSelectedItem(tbRawatPr.getValueAt(tbRawatPr.getSelectedRow(), 8).toString().substring(3, 5));
             cmbDtk.setSelectedItem(tbRawatPr.getValueAt(tbRawatPr.getSelectedRow(), 8).toString().substring(6, 8));
             Valid.SetTgl(DTPTgl, tbRawatPr.getValueAt(tbRawatPr.getSelectedRow(), 7).toString());
+            checkStatusTTE();
         }
     }
 
@@ -12093,6 +12129,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             cmbMnt.setSelectedItem(tbRawatDrPr.getValueAt(tbRawatDrPr.getSelectedRow(), 10).toString().substring(3, 5));
             cmbDtk.setSelectedItem(tbRawatDrPr.getValueAt(tbRawatDrPr.getSelectedRow(), 10).toString().substring(6, 8));
             Valid.SetTgl(DTPTgl, tbRawatDrPr.getValueAt(tbRawatDrPr.getSelectedRow(), 9).toString());
+            checkStatusTTE();
         }
     }
 
@@ -12129,6 +12166,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         isForm3();
         ChkInput3.setSelected(true);
         isForm4();
+        checkStatusTTE();
         TabRawatMouseClicked(null);
         // Sequel.cariIsiText("select pemeriksaan_ralan.penilaian from pemeriksaan_ralan
         // where pemeriksaan_ralan.no_rawat=? and pemeriksaan_ralan.nip=?
@@ -12802,6 +12840,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             cmbDtk.setSelectedItem(
                     tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(), 6).toString().substring(6, 8));
             Valid.SetTgl(DTPTgl, tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(), 5).toString());
+            checkStatusTTE();
         }
     }
 
@@ -12817,6 +12856,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             cmbMnt.setSelectedItem(tbCatatan.getValueAt(tbCatatan.getSelectedRow(), 5).toString().substring(3, 5));
             cmbDtk.setSelectedItem(tbCatatan.getValueAt(tbCatatan.getSelectedRow(), 5).toString().substring(6, 8));
             Valid.SetTgl(DTPTgl, tbCatatan.getValueAt(tbCatatan.getSelectedRow(), 4).toString());
+            checkStatusTTE();
         }
     }
 
@@ -12934,6 +12974,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     tbPemeriksaanObstetri.getValueAt(tbPemeriksaanObstetri.getSelectedRow(), 24).toString());
             cmbFeto.setSelectedItem(
                     tbPemeriksaanObstetri.getValueAt(tbPemeriksaanObstetri.getSelectedRow(), 25).toString());
+            checkStatusTTE();
         }
     }
 
@@ -13013,6 +13054,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         TDokter.setText(namadokter);
         TDokter2.setText(namadokter);
         TDokter3.setText(namadokter);
+        checkStatusTTE();
     }
 
     public void SetPoli(String KodePoli) {
@@ -13153,6 +13195,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     tbPemeriksaanGinekologi.getValueAt(tbPemeriksaanGinekologi.getSelectedRow(), 21).toString());
             TCavumDouglas.setText(
                     tbPemeriksaanGinekologi.getValueAt(tbPemeriksaanGinekologi.getSelectedRow(), 22).toString());
+            checkStatusTTE();
         }
     }
 
@@ -14975,12 +15018,41 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(null, "Error upload/simpan TTE: " + e.getMessage());
                     }
                 } else {
+                    String responseBodyStr = "";
+                    if (response.body() != null) {
+                        try {
+                            responseBodyStr = response.body().string();
+                        } catch (Exception e) {
+                            responseBodyStr = "Gagal membaca detail error: " + e.getMessage();
+                        }
+                    }
+
+                    String errorMessageDetail = responseBodyStr;
+                    if (responseBodyStr != null && !responseBodyStr.trim().isEmpty() && responseBodyStr.trim().startsWith("{")) {
+                        try {
+                            org.json.JSONObject jsonObj = new org.json.JSONObject(responseBodyStr);
+                            if (jsonObj.has("message")) {
+                                errorMessageDetail = jsonObj.getString("message");
+                            } else if (jsonObj.has("error")) {
+                                errorMessageDetail = jsonObj.getString("error");
+                            } else if (jsonObj.has("message_error")) {
+                                errorMessageDetail = jsonObj.getString("message_error");
+                            }
+                        } catch (Exception e) {
+                            // Abaikan jika gagal parsing JSON
+                        }
+                    }
+
                     System.out.println("Gagal mendapatkan file. Kode: " + response.code());
                     System.out.println("Pesan: " + response.message());
-                    // status_tte = "false";
+                    System.out.println("Detail: " + errorMessageDetail);
+                    
                     this.setCursor(Cursor.getDefaultCursor());
                     JOptionPane.showMessageDialog(null,
-                            "Gagal mendapatkan file. Kode: " + response.code() + "\n" + "Pesan: " + response.message());
+                            "Gagal melakukan TTE.\n" +
+                            "Kode HTTP: " + response.code() + "\n" +
+                            "Status: " + response.message() + "\n" +
+                            "Detail Error: " + errorMessageDetail);
                     upload_tanpa_tte(nama_file_export);
                 }
             } catch (IOException ex) {
@@ -15010,7 +15082,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     .addFormDataPart("file", fileToUpload.getName(),
                             RequestBody.create(MediaType.parse("application/pdf"), fileToUpload))
                     .addFormDataPart("no_rawat", TNoRw.getText())
-                    .addFormDataPart("status_tte", "Belum TTE")
+                    .addFormDataPart("status_tte", "Barcode Khanza")
                     .addFormDataPart("status_lanjut", "Ralan")
                     .build();
 

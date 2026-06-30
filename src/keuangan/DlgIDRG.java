@@ -864,7 +864,7 @@ public class DlgIDRG extends javax.swing.JDialog {
                                     "  idrg.status_compile "+
                                     "FROM "+
                                     "  reg_periksa rp "+
-                                    "  LEFT JOIN bridging_sep bs ON rp.no_rawat = bs.no_rawat "+
+                                    "  LEFT JOIN bridging_sep bs ON bs.no_sep = (SELECT b.no_sep FROM bridging_sep b WHERE b.no_rawat = rp.no_rawat ORDER BY (b.jnspelayanan = IF(rp.status_lanjut = 'Ranap', '1', '2')) DESC, b.tglsep DESC LIMIT 1) "+
                                     "  LEFT JOIN nota_jalan nj ON rp.no_rawat = nj.no_rawat "+
                                     "  LEFT JOIN surat_kontrol_bpjs skb ON skb.no_rawat = rp.no_rawat "+
                                     "  LEFT JOIN pasien p ON rp.no_rkm_medis = p.no_rkm_medis "+
@@ -875,7 +875,8 @@ public class DlgIDRG extends javax.swing.JDialog {
                                     "  LEFT JOIN resume_idrg idrg ON rp.no_rawat = idrg.no_rawat "+
                                     "WHERE "+
                                     "  rp.tgl_registrasi BETWEEN '"+date_1+"' AND '"+date_2+"' AND "+
-                                    "  rp.stts = 'Sudah'"+
+                                    "  rp.stts = 'Sudah' "+
+                                    "GROUP BY rp.no_rawat "+
                                     // "  rp.status_lanjut = 'Ralan' AND rp.stts = 'Sudah'"+
                                     // "  (rp.kd_pj = '001' OR rp.kd_pj = '21' OR rp.kd_pj = '22' OR rp.kd_pj = '30' OR rp.kd_pj = 'BP' OR rp.kd_pj = 'BPJ') "+
                                     "";
@@ -1069,13 +1070,13 @@ public class DlgIDRG extends javax.swing.JDialog {
                                 "  left join dpjp_ranap on kamar_inap.no_rawat = dpjp_ranap.no_rawat AND dpjp_ranap.`status` = 'Utama' \n" +
                                 "  left join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter \n" +
                                 "  left join penjab on reg_periksa.kd_pj = penjab.kd_pj \n" +
-                                "  left join bridging_sep on kamar_inap.no_rawat = bridging_sep.no_rawat \n" +
+                                "  left join bridging_sep on kamar_inap.no_rawat = bridging_sep.no_rawat and bridging_sep.jnspelayanan = '1' \n" +
                                 "  left join nota_inap on kamar_inap.no_rawat = nota_inap.no_rawat \n" +
                                 "  left join satu_sehat_encounter_imp on kamar_inap.no_rawat = satu_sehat_encounter_imp.no_rawat \n" +
                                 "  left join surat_kontrol_bpjs on kamar_inap.no_rawat = surat_kontrol_bpjs.no_rawat \n" +
                                 "  left join resume_idrg on reg_periksa.no_rawat = resume_idrg.no_rawat \n" +
                                 "where kamar_inap.tgl_keluar between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+
-                                "' and reg_periksa.status_bayar like '%%' ";
+                                "' and reg_periksa.status_bayar like '%%' group by kamar_inap.no_rawat ";
         
         String query_search = "AND (reg_periksa.no_rawat LIKE '%"+search+"%' "+
                                 "OR reg_periksa.no_rkm_medis LIKE '%"+search+"%' "+
