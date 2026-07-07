@@ -85,6 +85,7 @@ import bridging.PilihanBridgingAsuransi;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonElement;
 import fungsi.ButtonEditor;
 import fungsi.ButtonEditorIHSPasien;
 import fungsi.ButtonRenderer;
@@ -704,52 +705,154 @@ public final class DlgReg extends javax.swing.JDialog {
                                     }
 
                                     IHS_SatuSehat.setText(idSatuSehat);
+                                    // Parse address fields
+                                    String line = "";
+                                    String postalCode = "";
+                                    String provinceCode = "";
+                                    String provinceName = "";
+                                    String cityCode = "";
+                                    String cityName = "";
+                                    String districtCode = "";
+                                    String districtName = "";
+                                    String villageCode = "";
+                                    String villageName = "";
+                                    String rtVal = "";
+                                    String rwVal = "";
+
+                                    if (resource.has("address")) {
+                                        JsonArray addressArray = resource.getAsJsonArray("address");
+                                        if (addressArray.size() > 0) {
+                                            JsonObject addressObj = addressArray.get(0).getAsJsonObject();
+                                            if (addressObj.has("line")) {
+                                                JsonArray lineArr = addressObj.getAsJsonArray("line");
+                                                if (lineArr.size() > 0) {
+                                                    line = lineArr.get(0).getAsString();
+                                                }
+                                            }
+                                            if (addressObj.has("postalCode")) {
+                                                postalCode = addressObj.get("postalCode").getAsString();
+                                            }
+                                            if (addressObj.has("extension")) {
+                                                JsonArray extArray = addressObj.getAsJsonArray("extension");
+                                                for (JsonElement extEl : extArray) {
+                                                    JsonObject extObj = extEl.getAsJsonObject();
+                                                    if (extObj.has("extension")) {
+                                                        JsonArray subExtArray = extObj.getAsJsonArray("extension");
+                                                        for (JsonElement subExtEl : subExtArray) {
+                                                            JsonObject subExtObj = subExtEl.getAsJsonObject();
+                                                            if (subExtObj.has("url") && subExtObj.has("valueCode")) {
+                                                                String url = subExtObj.get("url").getAsString();
+                                                                String codeVal = subExtObj.get("valueCode").getAsString();
+                                                                if (url.equals("province")) {
+                                                                    provinceCode = codeVal;
+                                                                } else if (url.equals("city")) {
+                                                                    cityCode = codeVal;
+                                                                } else if (url.equals("district")) {
+                                                                    districtCode = codeVal;
+                                                                } else if (url.equals("village")) {
+                                                                    villageCode = codeVal;
+                                                                } else if (url.equals("rt")) {
+                                                                    rtVal = codeVal;
+                                                                } else if (url.equals("rw")) {
+                                                                    rwVal = codeVal;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    // Lookup names
+                                    provinceName = getWilayahName(provinceCode, "propinsi");
+                                    cityName = getWilayahName(cityCode, "kabupaten");
+                                    districtName = getWilayahName(districtCode, "kecamatan");
+                                    villageName = getWilayahName(villageCode, "kelurahan");
+
+                                    if (provinceCode != null && !provinceCode.isEmpty()) {
+                                        Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{provinceCode, provinceName});
+                                    }
+                                    if (cityCode != null && !cityCode.isEmpty()) {
+                                        Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{cityCode, cityName});
+                                    }
+                                    if (districtCode != null && !districtCode.isEmpty()) {
+                                        Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{districtCode, districtName});
+                                    }
+                                    if (villageCode != null && !villageCode.isEmpty()) {
+                                        Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{villageCode, villageName});
+                                    }
+
                                     String query = "INSERT INTO satu_sehat_pasien ("
-                                                        + "no_rkm_medis, "
-                                                        + "status, "
-                                                        + "country, "
-                                                        + "birthdate, "
-                                                        + "language_code, "
-                                                        + "language_display, "
-                                                        + "contact_name, "
-                                                        + "relationship_code, "
-                                                        + "telecom_system, "
-                                                        + "telecom_use, "
-                                                        + "telecom_value, "
-                                                        + "gender, "
-                                                        + "id_satu_sehat, "
-                                                        + "nik, "
-                                                        + "ihs_number, "
-                                                        + "maritalstatus_code, "
-                                                        + "maritalstatus_display, "
-                                                        + "patient_name_satu_sehat, "
-                                                        + "resource_type, "
-                                                        + "patient_contact_mobile, "
-                                                        + "patient_contact_mail"
-                                                        + ")\n" +
-                                                    "VALUES ("
-                                                        + "'"+no_rekam_medis+"', "
-                                                        + "'true', "
-                                                        + "'ID', "
-                                                        + "'"+birthdate+"', "
-                                                        + "'id-ID', "
-                                                        + "'Indonesian', "
-                                                        + "'"+nama_keluarga+"', "
-                                                        + "'C', "
-                                                        + "'phone', "
-                                                        + "'mobile', "
-                                                        + "'"+no_telp+"', "
-                                                        + "'"+jenis_kelamin_satu_sehat+"', "
-                                                        + "'"+idSatuSehat+"', "
-                                                        + "'"+no_ktp+"', "
-                                                        + "'"+idSatuSehat+"', "
-                                                        + "'"+kode_status_nikah_satu_sehat+"', "
-                                                        + "'"+display_status_nikah_satu_sehat+"', "
-                                                        + "'"+contact_name+"', "
-                                                        + "'Patient', "
-                                                        + "'"+no_telp+"', "
-                                                        + "'"+email+"'"
-                                                        + ");";
+                                                         + "no_rkm_medis, "
+                                                         + "status, "
+                                                         + "city, "
+                                                         + "country, "
+                                                         + "id_province, "
+                                                         + "province_name, "
+                                                         + "id_city, "
+                                                         + "city_name, "
+                                                         + "id_district, "
+                                                         + "district_name, "
+                                                         + "id_village, "
+                                                         + "village_name, "
+                                                         + "id_rw, "
+                                                         + "id_rt, "
+                                                         + "postal_code, "
+                                                         + "birthdate, "
+                                                         + "language_code, "
+                                                         + "language_display, "
+                                                         + "contact_name, "
+                                                         + "relationship_code, "
+                                                         + "telecom_system, "
+                                                         + "telecom_use, "
+                                                         + "telecom_value, "
+                                                         + "gender, "
+                                                         + "id_satu_sehat, "
+                                                         + "nik, "
+                                                         + "ihs_number, "
+                                                         + "maritalstatus_code, "
+                                                         + "maritalstatus_display, "
+                                                         + "patient_name_satu_sehat, "
+                                                         + "resource_type, "
+                                                         + "patient_contact_mobile, "
+                                                         + "patient_contact_mail"
+                                                         + ")\n" +
+                                                     "VALUES ("
+                                                         + "'"+no_rekam_medis+"', "
+                                                         + "'true', "
+                                                         + "'"+cityName+"', "
+                                                         + "'ID', "
+                                                         + "'"+provinceCode+"', "
+                                                         + "'"+provinceName+"', "
+                                                         + "'"+cityCode+"', "
+                                                         + "'"+cityName+"', "
+                                                         + "'"+districtCode+"', "
+                                                         + "'"+districtName+"', "
+                                                         + "'"+villageCode+"', "
+                                                         + "'"+villageName+"', "
+                                                         + "'"+rwVal+"', "
+                                                         + "'"+rtVal+"', "
+                                                         + "'"+postalCode+"', "
+                                                         + "'"+birthdate+"', "
+                                                         + "'id-ID', "
+                                                         + "'Indonesian', "
+                                                         + "'"+nama_keluarga+"', "
+                                                         + "'C', "
+                                                         + "'phone', "
+                                                         + "'mobile', "
+                                                         + "'"+no_telp+"', "
+                                                         + "'"+jenis_kelamin_satu_sehat+"', "
+                                                         + "'"+idSatuSehat+"', "
+                                                         + "'"+no_ktp+"', "
+                                                         + "'"+idSatuSehat+"', "
+                                                         + "'"+kode_status_nikah_satu_sehat+"', "
+                                                         + "'"+display_status_nikah_satu_sehat+"', "
+                                                         + "'"+contact_name+"', "
+                                                         + "'Patient', "
+                                                         + "'"+no_telp+"', "
+                                                         + "'"+email+"'"
+                                                         + ");";
                                     ps = koneksi.prepareStatement(query);
                                     int affected_row = ps.executeUpdate();
                                     if(affected_row > 0){
@@ -17640,5 +17743,74 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         } catch (SQLException ex) {
             Logger.getLogger(DlgPasien.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private String getWilayahName(String id, String level) {
+        if (id == null || id.trim().isEmpty() || id.equals("-") || id.equals("0")) {
+            return "";
+        }
+        String name = Sequel.cariIsi("SELECT nm_wilayah FROM satu_sehat_wilayah WHERE id = '" + id + "'");
+        if (name != null && !name.trim().isEmpty()) {
+            return name;
+        }
+        switch (level) {
+            case "kelurahan":
+                name = Sequel.cariIsi("SELECT nm_kel FROM kelurahan WHERE kd_kel = '" + id + "'");
+                break;
+            case "kecamatan":
+                name = Sequel.cariIsi("SELECT nm_kec FROM kecamatan WHERE kd_kec = '" + id + "'");
+                break;
+            case "kabupaten":
+                name = Sequel.cariIsi("SELECT nm_kab FROM kabupaten WHERE kd_kab = '" + id + "'");
+                break;
+            case "propinsi":
+                name = Sequel.cariIsi("SELECT nm_prop FROM propinsi WHERE kd_prop = '" + id + "'");
+                break;
+        }
+        if (name != null && !name.trim().isEmpty()) {
+            return name;
+        }
+        try {
+            String cacheFile = "";
+            String arrayKey = "";
+            switch (level) {
+                case "kelurahan":
+                    cacheFile = "./cache/kelurahan.iyem";
+                    arrayKey = "kelurahan";
+                    break;
+                case "kecamatan":
+                    cacheFile = "./cache/kecamatan.iyem";
+                    arrayKey = "kecamatan";
+                    break;
+                case "kabupaten":
+                    cacheFile = "./cache/kabupaten.iyem";
+                    arrayKey = "kabupaten";
+                    break;
+                case "propinsi":
+                    cacheFile = "./cache/propinsi.iyem";
+                    arrayKey = "propinsi";
+                    break;
+            }
+            java.io.File file = new java.io.File(cacheFile);
+            if (file.exists()) {
+                try (java.io.FileReader reader = new java.io.FileReader(file)) {
+                    JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
+                    JsonArray arr = root.getAsJsonArray(arrayKey);
+                    if (arr != null) {
+                        for (JsonElement el : arr) {
+                            JsonObject obj = el.getAsJsonObject();
+                            if (obj.get("id").getAsString().equalsIgnoreCase(id)) {
+                                name = obj.get("nama").getAsString();
+                                Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{id, name});
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error reading cache: " + e);
+        }
+        return name != null ? name : "";
     }
 }

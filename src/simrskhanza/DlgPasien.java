@@ -9508,6 +9508,33 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
             CmbStts.setSelectedItem(cekViaSatuSehat.maritalStatus.toUpperCase());
             TTlp.setText(cekViaSatuSehat.phone);
             EMail.setText(cekViaSatuSehat.email);
+            
+            idProvinceSatuSehat.setText(cekViaSatuSehat.province);
+            namaProvinceSatuSehat.setText(cekViaSatuSehat.provincename);
+            idSatuSehatCity.setText(cekViaSatuSehat.city);
+            namaCitySatuSehat.setText(cekViaSatuSehat.cityname);
+            idSatuSehatDistrict.setText(cekViaSatuSehat.district);
+            namaDistrictSatuSehat.setText(cekViaSatuSehat.districtname);
+            idSatuSehatSubDistrict.setText(cekViaSatuSehat.village);
+            namaSubDistrictSatuSehat.setText(cekViaSatuSehat.villagename);
+            
+            idProvinceSatuSehatPJ.setText(cekViaSatuSehat.province);
+            namaProvinceSatuSehatPJ.setText(cekViaSatuSehat.provincename);
+            idSatuSehatCityPJ.setText(cekViaSatuSehat.city);
+            namaCitySatuSehatPJ.setText(cekViaSatuSehat.cityname);
+            idSatuSehatDistrictPJ.setText(cekViaSatuSehat.district);
+            namaDistrictSatuSehatPJ.setText(cekViaSatuSehat.districtname);
+            idSatuSehatSubDistrictPJ.setText(cekViaSatuSehat.village);
+            namaSubDistrictSatuSehatPJ.setText(cekViaSatuSehat.villagename);
+            
+            AlamatSatuSehatRW.setText(cekViaSatuSehat.rw);
+            AlamatSatuSehatRT.setText(cekViaSatuSehat.rt);
+            AlamatSatuSehatRWPJ.setText(cekViaSatuSehat.rw);
+            AlamatSatuSehatRTPJ.setText(cekViaSatuSehat.rt);
+            AlamatSatuSehat.setText(cekViaSatuSehat.line);
+            AlamatSatuSehatPJ.setText(cekViaSatuSehat.line);
+            KodePos.setText(cekViaSatuSehat.postalCode);
+            
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_MnViaSatuSehatNikActionPerformed
@@ -9637,6 +9664,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         if (baris != -1) {
             String kode = table_province.getValueAt(baris, 1).toString(); // kolom ke-1 adalah "code"
             String nama = table_province.getValueAt(baris, 2).toString(); // kolom ke-2 adalah "nama"
+            Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{kode, nama});
             switch (alamat_satu_sehat) {
                 case "pasien":
                     idProvinceSatuSehat.setText(kode);
@@ -9662,6 +9690,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         if (baris != -1) {
             String kode = table_city.getValueAt(baris, 1).toString(); // kolom ke-1 adalah "code"
             String nama = table_city.getValueAt(baris, 2).toString(); // kolom ke-2 adalah "nama"
+            Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{kode, nama});
             switch (alamat_satu_sehat) {
                 case "pasien":
                     idSatuSehatCity.setText(kode);
@@ -9687,6 +9716,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         if (baris != -1) {
             String kode = table_district.getValueAt(baris, 1).toString(); // kolom ke-1 adalah "code"
             String nama = table_district.getValueAt(baris, 2).toString(); // kolom ke-2 adalah "nama"
+            Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{kode, nama});
             switch (alamat_satu_sehat) {
                 case "pasien":
                     idSatuSehatDistrict.setText(kode);
@@ -9712,6 +9742,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         if (baris != -1) {
             String kode = table_sub_district.getValueAt(baris, 1).toString(); // kolom ke-1 adalah "code"
             String nama = table_sub_district.getValueAt(baris, 2).toString(); // kolom ke-2 adalah "nama"
+            Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{kode, nama});
             switch (alamat_satu_sehat) {
                 case "pasien":
                     idSatuSehatSubDistrict.setText(kode);
@@ -10612,13 +10643,37 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
                     rs_satu_sehat_detail_pasien = ps_satu_sehat_detail_pasien.executeQuery();
                     if(rs_satu_sehat_detail_pasien.next()){
                         village = rs_satu_sehat_detail_pasien.getString("village_name");
+                        if (village == null || village.trim().isEmpty()) {
+                            village = getWilayahName(rs.getString("kd_kel"), "kelurahan");
+                        }
                         district = rs_satu_sehat_detail_pasien.getString("district_name");
+                        if (district == null || district.trim().isEmpty()) {
+                            district = getWilayahName(rs.getString("kd_kec"), "kecamatan");
+                        }
                         city = rs_satu_sehat_detail_pasien.getString("city_name");
+                        if (city == null || city.trim().isEmpty()) {
+                            city = getWilayahName(rs.getString("kd_kab"), "kabupaten");
+                        }
                         province = rs_satu_sehat_detail_pasien.getString("province_name");
+                        if (province == null || province.trim().isEmpty()) {
+                            province = getWilayahName(rs.getString("kd_prop"), "propinsi");
+                        }
                         village_pj = rs_satu_sehat_detail_pasien.getString("village_name_pj");
+                        if (village_pj == null || village_pj.trim().isEmpty()) {
+                            village_pj = getWilayahName(rs.getString("kelurahanpj"), "kelurahan");
+                        }
                         district_pj = rs_satu_sehat_detail_pasien.getString("district_name_pj");
+                        if (district_pj == null || district_pj.trim().isEmpty()) {
+                            district_pj = getWilayahName(rs.getString("kecamatanpj"), "kecamatan");
+                        }
                         city_pj = rs_satu_sehat_detail_pasien.getString("city_name_pj");
+                        if (city_pj == null || city_pj.trim().isEmpty()) {
+                            city_pj = getWilayahName(rs.getString("kabupatenpj"), "kabupaten");
+                        }
                         province_pj = rs_satu_sehat_detail_pasien.getString("province_name_pj");
+                        if (province_pj == null || province_pj.trim().isEmpty()) {
+                            province_pj = getWilayahName(rs.getString("propinsipj"), "propinsi");
+                        }
                         detail_alamat_pasien = village+", "+district+", "+city+", "+province;
                         detail_alamat_pj = village_pj+", "+district_pj+", "+city_pj+", "+province_pj;
                         id_kel=rs.getString("kd_kel");
@@ -10636,26 +10691,27 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
                         rt_pj=rs_satu_sehat_detail_pasien.getString("rt_pj");
                         emergency_contact=rs_satu_sehat_detail_pasien.getString("emergency_contact");
                     }else{
-                        village = Sequel.cariIsi("SELECT nm_kel FROM kelurahan WHERE kd_kel = '"+rs.getString("kd_kel")+"'");
-                        district = Sequel.cariIsi("SELECT nm_kec FROM kecamatan WHERE kd_kec = '"+rs.getString("kd_kec")+"'");
-                        city = Sequel.cariIsi("SELECT nm_kab FROM kabupaten WHERE kd_kab = '"+rs.getString("kd_kab")+"'");
-                        province = Sequel.cariIsi("SELECT nm_prop FROM propinsi WHERE kd_prop = '"+rs.getString("kd_prop")+"'");
+                        village = getWilayahName(rs.getString("kd_kel"), "kelurahan");
+                        district = getWilayahName(rs.getString("kd_kec"), "kecamatan");
+                        city = getWilayahName(rs.getString("kd_kab"), "kabupaten");
+                        province = getWilayahName(rs.getString("kd_prop"), "propinsi");
                         detail_alamat_pasien = village+", ";
                         detail_alamat_pasien += district+", ";
                         detail_alamat_pasien += city+", ";
                         detail_alamat_pasien += province;
-                        village_pj = rs.getString("kelurahanpj");
-                        district_pj = rs.getString("kecamatanpj");
-                        city_pj = rs.getString("kabupatenpj");
-                        province_pj = rs.getString("propinsipj");
+                        village_pj = getWilayahName(rs.getString("kelurahanpj"), "kelurahan");
+                        district_pj = getWilayahName(rs.getString("kecamatanpj"), "kecamatan");
+                        city_pj = getWilayahName(rs.getString("kabupatenpj"), "kabupaten");
+                        province_pj = getWilayahName(rs.getString("propinsipj"), "propinsi");
+                        detail_alamat_pj = village_pj+", "+district_pj+", "+city_pj+", "+province_pj;
                         id_kel=rs.getString("kd_kel");
                         id_kec=rs.getString("kd_kec");
                         id_kab=rs.getString("kd_kab");
                         id_prov=rs.getString("kd_prop");
-                        id_kel_pj="-";
-                        id_kec_pj="-";
-                        id_kab_pj="-";
-                        id_prov_pj="-";
+                        id_kel_pj=rs.getString("kelurahanpj");
+                        id_kec_pj=rs.getString("kecamatanpj");
+                        id_kab_pj=rs.getString("kabupatenpj");
+                        id_prov_pj=rs.getString("propinsipj");
                         postal_code="-";
                         id_rw="-";
                         id_rt="-";
@@ -11916,6 +11972,91 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
                 System.out.println("ID Pasien: " + idSatuSehat);
                 id_satu_sehat.setText(idSatuSehat);
                 id_satu_sehat_pasien = idSatuSehat;
+
+                // Parse address fields
+                String line = "";
+                String postalCode = "";
+                String provinceCode = "";
+                String cityCode = "";
+                String districtCode = "";
+                String villageCode = "";
+                String rtVal = "";
+                String rwVal = "";
+
+                if (resource.has("address")) {
+                    JsonArray addressArray = resource.getAsJsonArray("address");
+                    if (addressArray.size() > 0) {
+                        JsonObject addressObj = addressArray.get(0).getAsJsonObject();
+                        if (addressObj.has("line")) {
+                            JsonArray lineArr = addressObj.getAsJsonArray("line");
+                            if (lineArr.size() > 0) {
+                                line = lineArr.get(0).getAsString();
+                            }
+                        }
+                        if (addressObj.has("postalCode")) {
+                            postalCode = addressObj.get("postalCode").getAsString();
+                        }
+                        if (addressObj.has("extension")) {
+                            JsonArray extArray = addressObj.getAsJsonArray("extension");
+                            for (JsonElement extEl : extArray) {
+                                JsonObject extObj = extEl.getAsJsonObject();
+                                if (extObj.has("extension")) {
+                                    JsonArray subExtArray = extObj.getAsJsonArray("extension");
+                                    for (JsonElement subExtEl : subExtArray) {
+                                        JsonObject subExtObj = subExtEl.getAsJsonObject();
+                                        if (subExtObj.has("url") && subExtObj.has("valueCode")) {
+                                            String url = subExtObj.get("url").getAsString();
+                                            String codeVal = subExtObj.get("valueCode").getAsString();
+                                            if (url.equals("province")) {
+                                                provinceCode = codeVal;
+                                            } else if (url.equals("city")) {
+                                                cityCode = codeVal;
+                                            } else if (url.equals("district")) {
+                                                districtCode = codeVal;
+                                            } else if (url.equals("village")) {
+                                                villageCode = codeVal;
+                                            } else if (url.equals("rt")) {
+                                                rtVal = codeVal;
+                                            } else if (url.equals("rw")) {
+                                                rwVal = codeVal;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Populate UI fields if they are empty or default
+                if (idProvinceSatuSehat.getText().equals("ID") || idProvinceSatuSehat.getText().isEmpty()) {
+                    idProvinceSatuSehat.setText(provinceCode);
+                    namaProvinceSatuSehat.setText(getWilayahName(provinceCode, "propinsi"));
+                }
+                if (idSatuSehatCity.getText().equals("ID") || idSatuSehatCity.getText().isEmpty()) {
+                    idSatuSehatCity.setText(cityCode);
+                    namaCitySatuSehat.setText(getWilayahName(cityCode, "kabupaten"));
+                }
+                if (idSatuSehatDistrict.getText().equals("ID") || idSatuSehatDistrict.getText().isEmpty()) {
+                    idSatuSehatDistrict.setText(districtCode);
+                    namaDistrictSatuSehat.setText(getWilayahName(districtCode, "kecamatan"));
+                }
+                if (idSatuSehatSubDistrict.getText().equals("ID") || idSatuSehatSubDistrict.getText().isEmpty()) {
+                    idSatuSehatSubDistrict.setText(villageCode);
+                    namaSubDistrictSatuSehat.setText(getWilayahName(villageCode, "kelurahan"));
+                }
+                if (AlamatSatuSehatRW.getText().equals("RW PJ") || AlamatSatuSehatRW.getText().isEmpty()) {
+                    AlamatSatuSehatRW.setText(rwVal);
+                }
+                if (AlamatSatuSehatRT.getText().equals("RT PJ") || AlamatSatuSehatRT.getText().isEmpty()) {
+                    AlamatSatuSehatRT.setText(rtVal);
+                }
+                if (AlamatSatuSehat.getText().equals("ALAMAT SATU SEHAT") || AlamatSatuSehat.getText().isEmpty()) {
+                    AlamatSatuSehat.setText(line);
+                }
+                if (KodePos.getText().equals("Kode Pos") || KodePos.getText().isEmpty()) {
+                    KodePos.setText(postalCode);
+                }
             } else {
                 System.out.println("Pasien tidak ditemukan");
                 id_satu_sehat.setText("Pasien tidak ditemukan");
@@ -11923,6 +12064,102 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
             }
         } catch (IOException ex) {
             Logger.getLogger(DlgPasien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private String getWilayahName(String id, String level) {
+        if (id == null || id.trim().isEmpty() || id.equals("-") || id.equals("0")) {
+            return "";
+        }
+        String name = Sequel.cariIsi("SELECT nm_wilayah FROM satu_sehat_wilayah WHERE id = '" + id + "'");
+        if (name != null && !name.trim().isEmpty()) {
+            return name;
+        }
+        switch (level) {
+            case "kelurahan":
+                name = Sequel.cariIsi("SELECT nm_kel FROM kelurahan WHERE kd_kel = '" + id + "'");
+                break;
+            case "kecamatan":
+                name = Sequel.cariIsi("SELECT nm_kec FROM kecamatan WHERE kd_kec = '" + id + "'");
+                break;
+            case "kabupaten":
+                name = Sequel.cariIsi("SELECT nm_kab FROM kabupaten WHERE kd_kab = '" + id + "'");
+                break;
+            case "propinsi":
+                name = Sequel.cariIsi("SELECT nm_prop FROM propinsi WHERE kd_prop = '" + id + "'");
+                break;
+        }
+        if (name != null && !name.trim().isEmpty()) {
+            return name;
+        }
+        try {
+            String cacheFile = "";
+            String arrayKey = "";
+            switch (level) {
+                case "kelurahan":
+                    cacheFile = "./cache/kelurahan.iyem";
+                    arrayKey = "kelurahan";
+                    break;
+                case "kecamatan":
+                    cacheFile = "./cache/kecamatan.iyem";
+                    arrayKey = "kecamatan";
+                    break;
+                case "kabupaten":
+                    cacheFile = "./cache/kabupaten.iyem";
+                    arrayKey = "kabupaten";
+                    break;
+                case "propinsi":
+                    cacheFile = "./cache/propinsi.iyem";
+                    arrayKey = "propinsi";
+                    break;
+            }
+            java.io.File file = new java.io.File(cacheFile);
+            if (file.exists()) {
+                try (java.io.FileReader reader = new java.io.FileReader(file)) {
+                    JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
+                    JsonArray arr = root.getAsJsonArray(arrayKey);
+                    if (arr != null) {
+                        for (JsonElement el : arr) {
+                            JsonObject obj = el.getAsJsonObject();
+                            if (obj.get("id").getAsString().equalsIgnoreCase(id)) {
+                                name = obj.get("nama").getAsString();
+                                Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{id, name});
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error reading cache: " + e);
+        }
+        return name != null ? name : "";
+    }
+
+    private void simpanSatuSehatWilayah() {
+        if (!idProvinceSatuSehat.getText().equals("ID") && !idProvinceSatuSehat.getText().trim().isEmpty() && !namaProvinceSatuSehat.getText().equals("PROPINSI SATU SEHAT") && !namaProvinceSatuSehat.getText().trim().isEmpty()) {
+            Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{idProvinceSatuSehat.getText(), namaProvinceSatuSehat.getText()});
+        }
+        if (!idSatuSehatCity.getText().equals("ID") && !idSatuSehatCity.getText().trim().isEmpty() && !namaCitySatuSehat.getText().equals("KABUPATEN/KOTA SATU SEHAT") && !namaCitySatuSehat.getText().trim().isEmpty()) {
+            Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{idSatuSehatCity.getText(), namaCitySatuSehat.getText()});
+        }
+        if (!idSatuSehatDistrict.getText().equals("ID") && !idSatuSehatDistrict.getText().trim().isEmpty() && !namaDistrictSatuSehat.getText().equals("KECAMATAN SATU SEHAT") && !namaDistrictSatuSehat.getText().trim().isEmpty()) {
+            Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{idSatuSehatDistrict.getText(), namaDistrictSatuSehat.getText()});
+        }
+        if (!idSatuSehatSubDistrict.getText().equals("ID") && !idSatuSehatSubDistrict.getText().trim().isEmpty() && !namaSubDistrictSatuSehat.getText().equals("KELURAHAN SATU SEHAT") && !namaSubDistrictSatuSehat.getText().trim().isEmpty()) {
+            Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{idSatuSehatSubDistrict.getText(), namaSubDistrictSatuSehat.getText()});
+        }
+        if (!idProvinceSatuSehatPJ.getText().equals("ID") && !idProvinceSatuSehatPJ.getText().trim().isEmpty() && !namaProvinceSatuSehatPJ.getText().equals("PROPINSI PJ SATU SEHAT") && !namaProvinceSatuSehatPJ.getText().trim().isEmpty()) {
+            Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{idProvinceSatuSehatPJ.getText(), namaProvinceSatuSehatPJ.getText()});
+        }
+        if (!idSatuSehatCityPJ.getText().equals("ID") && !idSatuSehatCityPJ.getText().trim().isEmpty() && !namaCitySatuSehatPJ.getText().equals("KABUPATEN/KOTA PJ SATU SEHAT") && !namaCitySatuSehatPJ.getText().trim().isEmpty()) {
+            Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{idSatuSehatCityPJ.getText(), namaCitySatuSehatPJ.getText()});
+        }
+        if (!idSatuSehatDistrictPJ.getText().equals("ID") && !idSatuSehatDistrictPJ.getText().trim().isEmpty() && !namaDistrictSatuSehatPJ.getText().equals("KECAMATAN PJ SATU SEHAT") && !namaDistrictSatuSehatPJ.getText().trim().isEmpty()) {
+            Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{idSatuSehatDistrictPJ.getText(), namaDistrictSatuSehatPJ.getText()});
+        }
+        if (!idSatuSehatSubDistrictPJ.getText().equals("ID") && !idSatuSehatSubDistrictPJ.getText().trim().isEmpty() && !namaSubDistrictSatuSehatPJ.getText().equals("KELURAHAN PJ SATU SEHAT") && !namaSubDistrictSatuSehatPJ.getText().trim().isEmpty()) {
+            Sequel.menyimpanignore("satu_sehat_wilayah", "?,?", 2, new String[]{idSatuSehatSubDistrictPJ.getText(), namaSubDistrictSatuSehatPJ.getText()});
         }
     }
 
@@ -12317,6 +12554,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
     }
 
     private void kirim_satu_sehat() {
+        simpanSatuSehatWilayah();
         if(id_satu_sehat.getText().equals("Pasien tidak ditemukan")){
             // jenis kelamin
             id_satu_sehat_pasien = id_satu_sehat.getText();
@@ -12793,6 +13031,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
     private void insert_new_satu_sehat_pasien() {
         // cek id satu sehat
         cek_pasien_satu_sehat();
+        simpanSatuSehatWilayah();
         int jml_data_satu_sehat = Integer.parseInt(Sequel.cariIsi("SELECT COUNT(*) AS jml FROM satu_sehat_pasien WHERE nik='"+TKtp.getText()+"'"));
         System.out.println("Jumlah data satu sehat: "+jml_data_satu_sehat);
         if(jml_data_satu_sehat > 0){
