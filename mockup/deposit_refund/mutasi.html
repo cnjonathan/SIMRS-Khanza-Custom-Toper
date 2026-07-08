@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Mutasi Deposit - SIM RSUD KARTINI KARANGANYAR</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e2e2e2",
+                        "surface-container": "#eeeeee",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-fixed": "#001c3a",
+                        "surface-bright": "#f9f9f9",
+                        "primary": "#b0004a",
+                        "on-surface-variant": "#5a4044",
+                        "on-tertiary-fixed-variant": "#354a53",
+                        "on-secondary-fixed-variant": "#004786",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#5e737e",
+                        "secondary-fixed-dim": "#a5c8ff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#e9f7ff",
+                        "inverse-primary": "#ffb2bf",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e2e2e2",
+                        "outline-variant": "#e3bdc3",
+                        "outline": "#8e6f74",
+                        "surface-dim": "#dadada",
+                        "primary-fixed-dim": "#ffb2bf",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-tint": "#bc004f",
+                        "on-primary": "#ffffff",
+                        "surface": "#f9f9f9",
+                        "surface-container-high": "#e8e8e8",
+                        "tertiary-fixed-dim": "#b4cad6",
+                        "on-primary-fixed-variant": "#90003b",
+                        "on-primary-container": "#fff2f3",
+                        "on-background": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "background": "#f9f9f9",
+                        "on-secondary-container": "#003567",
+                        "primary-fixed": "#ffd9de",
+                        "secondary-fixed": "#d4e3ff",
+                        "on-primary-fixed": "#3f0016",
+                        "secondary": "#005faf",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f3f3f3",
+                        "secondary-container": "#54a0fe",
+                        "on-tertiary-fixed": "#071e27",
+                        "primary-container": "#d81b60",
+                        "inverse-surface": "#2f3131",
+                        "tertiary-fixed": "#cfe6f2",
+                        "tertiary": "#465b65",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "form-gutter": "12px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "table-cell-padding": "6px 10px"
+                    },
+                    "fontFamily": {
+                        "header-section": ["Inter"],
+                        "status-bar": ["Inter"],
+                        "body-md": ["Inter"],
+                        "table-data": ["Inter"],
+                        "header-app": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "header-section": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "status-bar": ["11px", { "lineHeight": "14px", "fontWeight": "400" }],
+                        "body-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "table-data": ["12px", { "lineHeight": "14px", "fontWeight": "400" }],
+                        "header-app": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "label-bold": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F0F0F0;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .java-swing-input {
+            border: 1px solid #CCCCCC;
+            height: 32px;
+            padding: 0 8px;
+            font-size: 12px;
+            background-color: #FFFFFF;
+        }
+
+        .java-swing-input:focus {
+            outline: none;
+            border-color: #1976D2;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .zebra-table tr:nth-child(even) {
+            background-color: #FFFFFF;
+        }
+
+        .zebra-table tr:nth-child(odd) {
+            background-color: #F9F9F9;
+        }
+
+        .zebra-table tr:hover {
+            background-color: #FFF9C4;
+            cursor: pointer;
+        }
+
+        .status-stripe-green {
+            border-left: 4px solid #2e7d32;
+        }
+
+        .status-stripe-red {
+            border-left: 4px solid #c62828;
+        }
+
+        .status-stripe-blue {
+            border-left: 4px solid #1976D2;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col">
+    <!-- TopAppBar -->
+    <header
+        class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container flex justify-between items-center w-full px-md h-[48px] border-b border-outline-variant fixed top-0 z-[50]">
+        <div class="flex items-center gap-md">
+            <span class="text-header-app font-header-app font-bold text-on-primary">SIM RSUD KARTINI KARANGANYAR</span>
+            <nav class="hidden md:flex gap-md ml-lg">
+                <a class="text-on-primary opacity-80 font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors px-2 py-1"
+                    href="#">File</a>
+                <a class="text-on-primary font-bold border-b-2 border-on-primary pb-1 font-label-md text-label-md px-2"
+                    href="#">Pendaftaran</a>
+                <a class="text-on-primary opacity-80 font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors px-2 py-1"
+                    href="#">Billing</a>
+                <a class="text-on-primary opacity-80 font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors px-2 py-1"
+                    href="#">Laporan</a>
+                <a class="text-on-primary opacity-80 font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors px-2 py-1"
+                    href="#">Utility</a>
+                <a class="text-on-primary opacity-80 font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors px-2 py-1"
+                    href="#">Help</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-sm">
+            <button class="p-1 hover:bg-primary-container rounded transition-colors"><span
+                    class="material-symbols-outlined">account_circle</span></button>
+            <button class="p-1 hover:bg-primary-container rounded transition-colors"><span
+                    class="material-symbols-outlined">settings</span></button>
+            <button class="p-1 hover:bg-primary-container rounded transition-colors"><span
+                    class="material-symbols-outlined">logout</span></button>
+        </div>
+    </header>
+    <div class="flex flex-1 pt-[48px] pb-[28px] overflow-hidden">
+        <!-- SideNavBar -->
+        <aside
+            class="hidden md:flex flex-col h-full w-[240px] bg-surface-container-low dark:bg-surface-dim border-r border-outline-variant sticky top-[48px]">
+            <div class="p-md">
+                <h2 class="font-header-section text-header-section text-primary">Transaksi Deposit</h2>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Rawat Inap</p>
+            </div>
+            <nav class="flex flex-col gap-xs mt-sm">
+                <a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-variant px-md py-sm transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">payments</span>
+                    <span class="font-label-bold text-label-bold">Deposit Pasien</span>
+                </a>
+                <a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-variant px-md py-sm transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">keyboard_return</span>
+                    <span class="font-label-bold text-label-bold">Refund Deposit</span>
+                </a>
+                <a class="flex items-center gap-sm bg-secondary-container text-on-secondary-container border-r-4 border-secondary px-md py-sm scale-[0.98] transition-transform"
+                    href="#">
+                    <span class="material-symbols-outlined">swap_horiz</span>
+                    <span class="font-label-bold text-label-bold">Mutasi Deposit</span>
+                </a>
+            </nav>
+        </aside>
+        <!-- Main Workspace -->
+        <main class="flex-1 flex flex-col overflow-hidden bg-surface">
+            <!-- Patient Info Section -->
+            <section class="p-md bg-white border-b border-outline-variant">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-lg max-w-5xl">
+                    <div class="flex flex-col gap-xs">
+                        <div class="flex items-center">
+                            <label
+                                class="w-32 text-right mr-md font-label-bold text-label-bold text-on-surface-variant">No.
+                                Rawat :</label>
+                            <input class="java-swing-input flex-1 font-body-md text-body-md bg-surface-container-low"
+                                readonly="" type="text" value="2023/10/24/000152" />
+                        </div>
+                        <div class="flex items-center mt-xs">
+                            <label
+                                class="w-32 text-right mr-md font-label-bold text-label-bold text-on-surface-variant">No.
+                                RM :</label>
+                            <input class="java-swing-input flex-1 font-body-md text-body-md bg-surface-container-low"
+                                readonly="" type="text" value="054432" />
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-xs md:col-span-2">
+                        <div class="flex items-center">
+                            <label
+                                class="w-32 text-right mr-md font-label-bold text-label-bold text-on-surface-variant">Nama
+                                Pasien :</label>
+                            <input class="java-swing-input flex-1 font-body-md text-body-md bg-surface-container-low"
+                                readonly="" type="text" value="NY. SITI AMINAH" />
+                        </div>
+                        <div class="flex items-center mt-xs">
+                            <label
+                                class="w-32 text-right mr-md font-label-bold text-label-bold text-on-surface-variant">Kamar/Kelas
+                                :</label>
+                            <input class="java-swing-input flex-1 font-body-md text-body-md bg-surface-container-low"
+                                readonly="" type="text" value="MAWAR 01 / KELAS 1" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Summary Cards -->
+            <section class="p-md grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+                <div class="bg-white p-sm shadow-sm status-stripe-blue flex flex-col">
+                    <span class="text-label-md font-label-md text-on-surface-variant">Total Deposit</span>
+                    <span class="text-header-section font-header-section text-secondary mt-1">Rp 5.000.000,00</span>
+                </div>
+                <div class="bg-white p-sm shadow-sm status-stripe-red flex flex-col">
+                    <span class="text-label-md font-label-md text-on-surface-variant">Total Pemakaian</span>
+                    <span class="text-header-section font-header-section text-error mt-1">Rp 3.250.000,00</span>
+                </div>
+                <div class="bg-white p-sm shadow-sm status-stripe-red flex flex-col">
+                    <span class="text-label-md font-label-md text-on-surface-variant">Total Refund</span>
+                    <span class="text-header-section font-header-section text-error mt-1">Rp 0,00</span>
+                </div>
+                <div class="bg-white p-sm shadow-sm status-stripe-green flex flex-col">
+                    <span class="text-label-md font-label-md text-on-surface-variant">Saldo Akhir</span>
+                    <span class="text-header-section font-header-section text-on-surface mt-1">Rp 1.750.000,00</span>
+                </div>
+            </section>
+            <!-- Transaction Ledger Table -->
+            <section class="flex-1 px-md pb-md overflow-hidden flex flex-col">
+                <div class="flex-1 overflow-auto border border-outline-variant bg-white">
+                    <table class="w-full text-left zebra-table border-collapse">
+                        <thead class="sticky top-0 bg-surface-container-high z-10">
+                            <tr class="border-b border-outline">
+                                <th
+                                    class="p-table-cell-padding font-label-bold text-label-bold border-r border-outline-variant">
+                                    Tanggal</th>
+                                <th
+                                    class="p-table-cell-padding font-label-bold text-label-bold border-r border-outline-variant">
+                                    Jenis Transaksi</th>
+                                <th
+                                    class="p-table-cell-padding font-label-bold text-label-bold border-r border-outline-variant">
+                                    Referensi</th>
+                                <th
+                                    class="p-table-cell-padding font-label-bold text-label-bold border-r border-outline-variant text-right">
+                                    Debit</th>
+                                <th
+                                    class="p-table-cell-padding font-label-bold text-label-bold border-r border-outline-variant text-right">
+                                    Kredit</th>
+                                <th
+                                    class="p-table-cell-padding font-label-bold text-label-bold border-r border-outline-variant text-right">
+                                    Saldo Berjalan</th>
+                                <th class="p-table-cell-padding font-label-bold text-label-bold">User</th>
+                            </tr>
+                        </thead>
+                        <tbody class="font-table-data text-table-data">
+                            <tr>
+                                <td class="p-table-cell-padding border-r border-outline-variant">24/10/2023 08:30:12
+                                </td>
+                                <td
+                                    class="p-table-cell-padding border-r border-outline-variant font-bold text-secondary">
+                                    DEPOSIT</td>
+                                <td class="p-table-cell-padding border-r border-outline-variant">DEP-20231024001</td>
+                                <td class="p-table-cell-padding border-r border-outline-variant text-right">5.000.000,00
+                                </td>
+                                <td class="p-table-cell-padding border-r border-outline-variant text-right">0,00</td>
+                                <td class="p-table-cell-padding border-r border-outline-variant text-right font-bold">
+                                    5.000.000,00</td>
+                                <td class="p-table-cell-padding">KASIR_01</td>
+                            </tr>
+                            <tr>
+                                <td class="p-table-cell-padding border-r border-outline-variant">25/10/2023 14:20:05
+                                </td>
+                                <td class="p-table-cell-padding border-r border-outline-variant font-bold text-error">
+                                    PEMAKAIAN BILLING</td>
+                                <td class="p-table-cell-padding border-r border-outline-variant">BILL-20231025112</td>
+                                <td class="p-table-cell-padding border-r border-outline-variant text-right">0,00</td>
+                                <td class="p-table-cell-padding border-r border-outline-variant text-right">2.150.000,00
+                                </td>
+                                <td class="p-table-cell-padding border-r border-outline-variant text-right font-bold">
+                                    2.850.000,00</td>
+                                <td class="p-table-cell-padding">SYSTEM_AUTO</td>
+                            </tr>
+                            <tr>
+                                <td class="p-table-cell-padding border-r border-outline-variant">26/10/2023 10:15:44
+                                </td>
+                                <td class="p-table-cell-padding border-r border-outline-variant font-bold text-error">
+                                    PEMAKAIAN BILLING</td>
+                                <td class="p-table-cell-padding border-r border-outline-variant">BILL-20231026045</td>
+                                <td class="p-table-cell-padding border-r border-outline-variant text-right">0,00</td>
+                                <td class="p-table-cell-padding border-r border-outline-variant text-right">1.100.000,00
+                                </td>
+                                <td class="p-table-cell-padding border-r border-outline-variant text-right font-bold">
+                                    1.750.000,00</td>
+                                <td class="p-table-cell-padding">SYSTEM_AUTO</td>
+                            </tr>
+                            <!-- Empty rows to fill space style Khanza -->
+                            <tr class="h-8">
+                                <td class="border-b border-outline-variant" colspan="7"></td>
+                            </tr>
+                            <tr class="h-8">
+                                <td class="border-b border-outline-variant" colspan="7"></td>
+                            </tr>
+                            <tr class="h-8">
+                                <td class="border-b border-outline-variant" colspan="7"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <!-- Bottom Control Bar -->
+            <section
+                class="px-md py-sm bg-surface-container flex items-center justify-between border-t border-outline-variant">
+                <div class="flex gap-sm">
+                    <button
+                        class="bg-[#1976D2] text-white px-md py-1 flex items-center gap-xs rounded hover:bg-secondary-container transition-colors font-label-bold text-label-bold">
+                        <span class="material-symbols-outlined !text-[16px]">print</span>
+                        Cetak Mutasi
+                    </button>
+                    <button
+                        class="bg-white border border-[#455A64] text-[#455A64] px-md py-1 flex items-center gap-xs rounded hover:bg-surface-variant transition-colors font-label-bold text-label-bold">
+                        <span class="material-symbols-outlined !text-[16px]">description</span>
+                        Export Excel
+                    </button>
+                </div>
+                <div class="flex gap-sm">
+                    <button
+                        class="bg-white border border-[#455A64] text-[#455A64] px-sm py-1 flex items-center gap-xs rounded hover:bg-surface-variant transition-colors font-label-bold text-label-bold"
+                        title="Refresh Data">
+                        <span class="material-symbols-outlined !text-[16px]">refresh</span>
+                        Refresh
+                    </button>
+                    <button
+                        class="bg-white border border-error text-error px-sm py-1 flex items-center gap-xs rounded hover:bg-error-container transition-colors font-label-bold text-label-bold">
+                        <span class="material-symbols-outlined !text-[16px]">close</span>
+                        Keluar
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- Footer -->
+    <footer
+        class="bg-tertiary-container dark:bg-tertiary text-on-tertiary-container dark:text-on-tertiary fixed bottom-0 left-0 w-full z-[100] flex justify-between items-center px-md py-xs h-[28px] border-t border-outline">
+        <div class="font-status-bar text-status-bar">
+            User: ADM_SIMRS | Server: 192.168.1.100 | Database: SIMRS_PROD | Time: 20:45:12
+        </div>
+        <div class="flex gap-md">
+            <a class="font-status-bar text-status-bar text-on-tertiary-container opacity-90 hover:underline"
+                href="#">System Status</a>
+            <a class="font-status-bar text-status-bar text-on-tertiary-container opacity-90 hover:underline"
+                href="#">Helpdesk</a>
+        </div>
+    </footer>
+    <script>
+        // Micro-interaction for table rows
+        document.querySelectorAll('.zebra-table tbody tr').forEach(row => {
+            row.addEventListener('click', function () {
+                document.querySelectorAll('.zebra-table tbody tr').forEach(r => r.classList.remove('!bg-[#E3F2FD]'));
+                if (this.innerText.trim() !== "") {
+                    this.classList.add('!bg-[#E3F2FD]');
+                }
+            });
+        });
+
+        // Update real-time in footer
+        setInterval(() => {
+            const footerText = document.querySelector('footer .font-status-bar');
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' +
+                now.getMinutes().toString().padStart(2, '0') + ':' +
+                now.getSeconds().toString().padStart(2, '0');
+            if (footerText) {
+                const baseStr = "User: ADM_SIMRS | Server: 192.168.1.100 | Database: SIMRS_PROD | Time: ";
+                footerText.innerText = baseStr + timeStr;
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>

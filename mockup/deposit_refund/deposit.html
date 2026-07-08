@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F0F0;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+            vertical-align: middle;
+            font-size: 18px;
+        }
+
+        /* Custom scrollbar for high-density tables */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #999;
+        }
+
+        /* Java Swing Inset Effect */
+        .swing-inset {
+            box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Zebra Table */
+        .zebra-table tr:nth-child(even) {
+            background-color: #FFFFFF;
+        }
+
+        .zebra-table tr:nth-child(odd) {
+            background-color: #F9F9F9;
+        }
+
+        .zebra-table tr:hover {
+            background-color: #FFF9C4 !important;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e2e2e2",
+                        "surface-container": "#eeeeee",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-fixed": "#001c3a",
+                        "surface-bright": "#f9f9f9",
+                        "primary": "#b0004a",
+                        "on-surface-variant": "#5a4044",
+                        "on-tertiary-fixed-variant": "#354a53",
+                        "on-secondary-fixed-variant": "#004786",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#5e737e",
+                        "secondary-fixed-dim": "#a5c8ff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#e9f7ff",
+                        "inverse-primary": "#ffb2bf",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e2e2e2",
+                        "outline-variant": "#e3bdc3",
+                        "outline": "#8e6f74",
+                        "surface-dim": "#dadada",
+                        "primary-fixed-dim": "#ffb2bf",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-tint": "#bc004f",
+                        "on-primary": "#ffffff",
+                        "surface": "#f9f9f9",
+                        "surface-container-high": "#e8e8e8",
+                        "tertiary-fixed-dim": "#b4cad6",
+                        "on-primary-fixed-variant": "#90003b",
+                        "on-primary-container": "#fff2f3",
+                        "on-background": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "background": "#f9f9f9",
+                        "on-secondary-container": "#003567",
+                        "primary-fixed": "#ffd9de",
+                        "secondary-fixed": "#d4e3ff",
+                        "on-primary-fixed": "#3f0016",
+                        "secondary": "#005faf",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f3f3f3",
+                        "secondary-container": "#54a0fe",
+                        "on-tertiary-fixed": "#071e27",
+                        "primary-container": "#d81b60",
+                        "inverse-surface": "#2f3131",
+                        "tertiary-fixed": "#cfe6f2",
+                        "tertiary": "#465b65",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "form-gutter": "12px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "table-cell-padding": "6px 10px"
+                    },
+                    "fontFamily": {
+                        "header-section": ["Inter"],
+                        "status-bar": ["Inter"],
+                        "body-md": ["Inter"],
+                        "table-data": ["Inter"],
+                        "header-app": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "header-section": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "status-bar": ["11px", { "lineHeight": "14px", "fontWeight": "400" }],
+                        "body-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "table-data": ["12px", { "lineHeight": "14px", "fontWeight": "400" }],
+                        "header-app": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "label-bold": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background text-on-surface h-screen flex flex-col overflow-hidden">
+    <!-- TopAppBar -->
+    <header
+        class="bg-primary dark:bg-primary-container text-on-primary flex justify-between items-center w-full px-md h-[48px] border-b border-outline-variant z-50">
+        <div class="flex items-center gap-md">
+            <span class="text-header-app font-header-app font-bold text-on-primary">SIM RSUD KARTINI KARANGANYAR</span>
+            <nav class="hidden md:flex gap-md ml-lg">
+                <a class="text-on-primary opacity-80 font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors px-2 py-1"
+                    href="#">File</a>
+                <a class="text-on-primary opacity-80 font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors px-2 py-1"
+                    href="#">Pendaftaran</a>
+                <a class="text-on-primary font-bold border-b-2 border-on-primary pb-1" href="#">Billing</a>
+                <a class="text-on-primary opacity-80 font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors px-2 py-1"
+                    href="#">Laporan</a>
+                <a class="text-on-primary opacity-80 font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors px-2 py-1"
+                    href="#">Utility</a>
+                <a class="text-on-primary opacity-80 font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors px-2 py-1"
+                    href="#">Help</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-sm">
+            <button class="p-1 hover:bg-primary-container transition-colors rounded"><span
+                    class="material-symbols-outlined">account_circle</span></button>
+            <button class="p-1 hover:bg-primary-container transition-colors rounded"><span
+                    class="material-symbols-outlined">settings</span></button>
+            <button class="p-1 hover:bg-primary-container transition-colors rounded"><span
+                    class="material-symbols-outlined">logout</span></button>
+        </div>
+    </header>
+    <div class="flex flex-1 overflow-hidden">
+        <!-- SideNavBar -->
+        <aside
+            class="hidden md:flex flex-col h-full sticky top-[48px] bg-surface-container-low dark:bg-surface-dim text-primary border-r border-outline-variant w-[240px]">
+            <div class="p-md border-b border-outline-variant">
+                <h2 class="font-header-section text-header-section text-primary">Transaksi Deposit</h2>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Rawat Inap</p>
+            </div>
+            <nav class="flex-1 py-sm">
+                <a class="flex items-center gap-sm bg-secondary-container text-on-secondary-container border-r-4 border-secondary px-md py-sm transition-transform scale-[0.98]"
+                    href="#">
+                    <span class="material-symbols-outlined">payments</span>
+                    <span class="font-label-bold text-label-bold">Deposit Pasien</span>
+                </a>
+                <a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-variant px-md py-sm transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">keyboard_return</span>
+                    <span class="font-label-bold text-label-bold">Refund Deposit</span>
+                </a>
+                <a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-variant px-md py-sm transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">swap_horiz</span>
+                    <span class="font-label-bold text-label-bold">Mutasi Deposit</span>
+                </a>
+            </nav>
+        </aside>
+        <!-- Main Workspace -->
+        <main class="flex-1 flex flex-col overflow-hidden bg-[#F0F0F0] p-sm">
+            <!-- Top Panels: Form & Summary -->
+            <div class="grid grid-cols-12 gap-sm mb-sm">
+                <!-- Entry Form -->
+                <section class="col-span-12 lg:col-span-8 bg-white border border-outline-variant rounded p-md">
+                    <div class="flex items-center gap-xs mb-md border-b border-outline-variant pb-xs">
+                        <span class="material-symbols-outlined text-primary">edit_note</span>
+                        <h3 class="font-header-section text-header-section">Input Deposit Pasien</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-lg gap-y-sm">
+                        <!-- Left Column Fields -->
+                        <div class="space-y-sm">
+                            <div class="flex items-center">
+                                <label class="w-32 text-right pr-sm font-label-bold text-label-bold">No. Rawat</label>
+                                <div class="flex flex-1">
+                                    <input
+                                        class="flex-1 h-8 border border-outline-variant px-2 text-body-sm swing-inset focus:outline-none focus:border-secondary"
+                                        type="text" value="2023/10/24/000012" />
+                                    <button
+                                        class="h-8 w-8 bg-surface-container-high border border-l-0 border-outline-variant hover:bg-surface-variant flex items-center justify-center">
+                                        <span class="material-symbols-outlined">search</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <label class="w-32 text-right pr-sm font-label-bold text-label-bold">No. RM</label>
+                                <input
+                                    class="flex-1 h-8 border border-outline-variant px-2 text-body-sm bg-surface-container-low swing-inset"
+                                    readonly="" type="text" value="00124532" />
+                            </div>
+                            <div class="flex items-center">
+                                <label class="w-32 text-right pr-sm font-label-bold text-label-bold">Nama Pasien</label>
+                                <input
+                                    class="flex-1 h-8 border border-outline-variant px-2 text-body-sm bg-surface-container-low swing-inset"
+                                    readonly="" type="text" value="SITI AMINAH NY" />
+                            </div>
+                            <div class="flex items-center">
+                                <label class="w-32 text-right pr-sm font-label-bold text-label-bold">Tanggal</label>
+                                <input class="flex-1 h-8 border border-outline-variant px-2 text-body-sm swing-inset"
+                                    type="date" value="2023-10-24" />
+                            </div>
+                        </div>
+                        <!-- Right Column Fields -->
+                        <div class="space-y-sm">
+                            <div class="flex items-center">
+                                <label class="w-32 text-right pr-sm font-label-bold text-label-bold">Akun Bayar</label>
+                                <select class="flex-1 h-8 border border-outline-variant px-2 text-body-sm swing-inset">
+                                    <option>Kasir 1 (Tunai)</option>
+                                    <option>Transfer BCA</option>
+                                    <option>Transfer Mandiri</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center">
+                                <label class="w-32 text-right pr-sm font-label-bold text-label-bold">Petugas</label>
+                                <input
+                                    class="flex-1 h-8 border border-outline-variant px-2 text-body-sm bg-surface-container-low swing-inset"
+                                    readonly="" type="text" value="ADM_SIMRS" />
+                            </div>
+                            <div class="flex items-center">
+                                <label class="w-32 text-right pr-sm font-label-bold text-label-bold">Keterangan</label>
+                                <input class="flex-1 h-8 border border-outline-variant px-2 text-body-sm swing-inset"
+                                    placeholder="Tambahkan catatan..." type="text" />
+                            </div>
+                            <div class="flex items-center">
+                                <label
+                                    class="w-32 text-right pr-sm font-label-bold text-label-bold text-primary">Nominal
+                                    (Rp)</label>
+                                <input
+                                    class="flex-1 h-8 border border-outline-variant px-2 text-body-sm swing-inset font-bold text-right"
+                                    type="text" value="500,000" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Summary Panel -->
+                <section
+                    class="col-span-12 lg:col-span-4 bg-white border border-outline-variant rounded p-md flex flex-col">
+                    <div class="flex items-center gap-xs mb-md border-b border-outline-variant pb-xs">
+                        <span class="material-symbols-outlined text-secondary">analytics</span>
+                        <h3 class="font-header-section text-header-section">Summary Deposit</h3>
+                    </div>
+                    <div class="space-y-xs flex-1">
+                        <div
+                            class="flex justify-between items-center p-sm bg-surface-container-low border-l-4 border-secondary">
+                            <span class="font-label-md text-label-md">Total Deposit</span>
+                            <span class="font-label-bold text-label-bold">Rp 2.500.000</span>
+                        </div>
+                        <div
+                            class="flex justify-between items-center p-sm bg-surface-container-low border-l-4 border-error">
+                            <span class="font-label-md text-label-md">Total Refund</span>
+                            <span class="font-label-bold text-label-bold text-error">Rp 0</span>
+                        </div>
+                        <div
+                            class="flex justify-between items-center p-sm bg-surface-container-low border-l-4 border-tertiary">
+                            <span class="font-label-md text-label-md">Deposit Terpakai</span>
+                            <span class="font-label-bold text-label-bold">Rp 1.250.000</span>
+                        </div>
+                        <div
+                            class="flex justify-between items-center p-sm bg-primary-fixed border-l-4 border-primary mt-sm">
+                            <span class="font-label-bold text-label-bold text-on-primary-fixed">Saldo Deposit</span>
+                            <span class="font-label-bold text-label-bold text-on-primary-fixed text-lg">Rp
+                                1.250.000</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- Middle Bar: Action Buttons -->
+            <div
+                class="bg-surface-container-high border border-outline-variant p-xs flex gap-sm mb-sm items-center shadow-sm">
+                <button
+                    class="flex items-center gap-xs bg-secondary text-on-secondary px-md h-8 rounded hover:opacity-90 transition-opacity">
+                    <span class="material-symbols-outlined">save</span>
+                    <span class="font-label-bold text-label-bold">Simpan</span>
+                </button>
+                <button
+                    class="flex items-center gap-xs bg-white border border-outline text-on-surface px-md h-8 rounded hover:bg-surface-container-low transition-colors">
+                    <span class="material-symbols-outlined">add</span>
+                    <span class="font-label-bold text-label-bold">Baru</span>
+                </button>
+                <button
+                    class="flex items-center gap-xs bg-white border border-outline text-error px-md h-8 rounded hover:bg-error-container transition-colors">
+                    <span class="material-symbols-outlined">delete</span>
+                    <span class="font-label-bold text-label-bold">Hapus</span>
+                </button>
+                <div class="h-6 w-[1px] bg-outline-variant mx-xs"></div>
+                <button
+                    class="flex items-center gap-xs bg-white border border-outline text-on-surface px-md h-8 rounded hover:bg-surface-container-low transition-colors">
+                    <span class="material-symbols-outlined">print</span>
+                    <span class="font-label-bold text-label-bold">Cetak Bukti</span>
+                </button>
+                <div class="flex-1"></div>
+                <div class="flex items-center gap-sm bg-white border border-outline-variant px-sm h-8 rounded">
+                    <span class="material-symbols-outlined text-on-surface-variant">search</span>
+                    <input class="border-none focus:ring-0 text-body-sm w-48" placeholder="Cari Riwayat..."
+                        type="text" />
+                </div>
+            </div>
+            <!-- Bottom: Riwayat Deposit Table -->
+            <div class="flex-1 bg-white border border-outline-variant overflow-hidden flex flex-col shadow-sm">
+                <div class="overflow-x-auto overflow-y-auto flex-1">
+                    <table class="w-full text-left border-collapse zebra-table">
+                        <thead class="sticky top-0 bg-surface-container-highest z-10">
+                            <tr class="border-b border-outline">
+                                <th class="p-sm text-label-bold font-label-bold border-r border-outline-variant w-10">No
+                                </th>
+                                <th class="p-sm text-label-bold font-label-bold border-r border-outline-variant">No
+                                    Deposit</th>
+                                <th class="p-sm text-label-bold font-label-bold border-r border-outline-variant">Tanggal
+                                </th>
+                                <th class="p-sm text-label-bold font-label-bold border-r border-outline-variant">No
+                                    Rawat</th>
+                                <th class="p-sm text-label-bold font-label-bold border-r border-outline-variant">Nama
+                                    Pasien</th>
+                                <th class="p-sm text-label-bold font-label-bold border-r border-outline-variant">Akun
+                                    Bayar</th>
+                                <th
+                                    class="p-sm text-label-bold font-label-bold border-r border-outline-variant text-right">
+                                    Nominal</th>
+                                <th class="p-sm text-label-bold font-label-bold border-r border-outline-variant">Petugas
+                                </th>
+                                <th class="p-sm text-label-bold font-label-bold">Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-table-data font-table-data">
+                            <tr class="border-b border-outline-variant">
+                                <td class="p-sm border-r border-outline-variant text-center">1</td>
+                                <td class="p-sm border-r border-outline-variant">DEP-20231024-001</td>
+                                <td class="p-sm border-r border-outline-variant">24/10/2023 09:12</td>
+                                <td class="p-sm border-r border-outline-variant">2023/10/24/000012</td>
+                                <td class="p-sm border-r border-outline-variant">SITI AMINAH NY</td>
+                                <td class="p-sm border-r border-outline-variant">Kasir 1 (Tunai)</td>
+                                <td class="p-sm border-r border-outline-variant text-right font-bold text-primary">
+                                    500.000</td>
+                                <td class="p-sm border-r border-outline-variant">ADM_SIMRS</td>
+                                <td class="p-sm">Pembayaran Awal Operasi</td>
+                            </tr>
+                            <tr class="border-b border-outline-variant">
+                                <td class="p-sm border-r border-outline-variant text-center">2</td>
+                                <td class="p-sm border-r border-outline-variant">DEP-20231023-045</td>
+                                <td class="p-sm border-r border-outline-variant">23/10/2023 15:45</td>
+                                <td class="p-sm border-r border-outline-variant">2023/10/23/000089</td>
+                                <td class="p-sm border-r border-outline-variant">BUDI SANTOSO TN</td>
+                                <td class="p-sm border-r border-outline-variant">Transfer BCA</td>
+                                <td class="p-sm border-r border-outline-variant text-right font-bold text-primary">
+                                    1.000.000</td>
+                                <td class="p-sm border-r border-outline-variant">ADM_SIMRS</td>
+                                <td class="p-sm">Deposit Rawat Inap Lt. 3</td>
+                            </tr>
+                            <tr class="border-b border-outline-variant">
+                                <td class="p-sm border-r border-outline-variant text-center">3</td>
+                                <td class="p-sm border-r border-outline-variant">DEP-20231023-012</td>
+                                <td class="p-sm border-r border-outline-variant">23/10/2023 10:20</td>
+                                <td class="p-sm border-r border-outline-variant">2023/10/24/000012</td>
+                                <td class="p-sm border-r border-outline-variant">SITI AMINAH NY</td>
+                                <td class="p-sm border-r border-outline-variant">Kasir 1 (Tunai)</td>
+                                <td class="p-sm border-r border-outline-variant text-right font-bold text-primary">
+                                    1.000.000</td>
+                                <td class="p-sm border-r border-outline-variant">KASIR_PAGI</td>
+                                <td class="p-sm">Tambahan Deposit</td>
+                            </tr>
+                            <tr class="border-b border-outline-variant">
+                                <td class="p-sm border-r border-outline-variant text-center">4</td>
+                                <td class="p-sm border-r border-outline-variant">DEP-20231022-098</td>
+                                <td class="p-sm border-r border-outline-variant">22/10/2023 19:10</td>
+                                <td class="p-sm border-r border-outline-variant">2023/10/22/000142</td>
+                                <td class="p-sm border-r border-outline-variant">RINA MARIANA NN</td>
+                                <td class="p-sm border-r border-outline-variant">Transfer Mandiri</td>
+                                <td class="p-sm border-r border-outline-variant text-right font-bold text-primary">
+                                    2.000.000</td>
+                                <td class="p-sm border-r border-outline-variant">ADM_SIMRS</td>
+                                <td class="p-sm">Deposit Kamar VVIP</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Table Footer/Pagination Simulation -->
+                <div
+                    class="p-xs bg-surface-container-high border-t border-outline-variant flex justify-between items-center">
+                    <span class="text-status-bar font-status-bar opacity-70">Showing 4 of 28 records</span>
+                    <div class="flex gap-xs">
+                        <button
+                            class="w-6 h-6 border border-outline-variant bg-white flex items-center justify-center hover:bg-surface-variant"><span
+                                class="material-symbols-outlined text-xs">chevron_left</span></button>
+                        <button
+                            class="w-6 h-6 border border-secondary bg-secondary-container text-on-secondary-container flex items-center justify-center font-status-bar">1</button>
+                        <button
+                            class="w-6 h-6 border border-outline-variant bg-white flex items-center justify-center hover:bg-surface-variant font-status-bar">2</button>
+                        <button
+                            class="w-6 h-6 border border-outline-variant bg-white flex items-center justify-center hover:bg-surface-variant font-status-bar">3</button>
+                        <button
+                            class="w-6 h-6 border border-outline-variant bg-white flex items-center justify-center hover:bg-surface-variant"><span
+                                class="material-symbols-outlined text-xs">chevron_right</span></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Footer -->
+    <footer
+        class="fixed bottom-0 left-0 w-full z-[100] flex justify-between items-center px-md py-xs bg-tertiary-container dark:bg-tertiary text-on-tertiary-container dark:text-on-tertiary border-t border-outline h-[28px]">
+        <div class="text-status-bar font-status-bar">
+            User: ADM_SIMRS | Server: 192.168.1.100 | Database: SIMRS_PROD | Time: <span
+                id="current-time">20:45:12</span>
+        </div>
+        <div class="flex gap-md">
+            <a class="text-status-bar font-status-bar hover:underline" href="#">System Status</a>
+            <a class="text-status-bar font-status-bar hover:underline" href="#">Helpdesk</a>
+        </div>
+    </footer>
+    <script>
+        // Micro-interaction: Live Time Update
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.getHours().toString().padStart(2, '0') + ':' +
+                now.getMinutes().toString().padStart(2, '0') + ':' +
+                now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('current-time').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // High-density table interactions
+        document.querySelectorAll('.zebra-table tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                document.querySelectorAll('.zebra-table tbody tr').forEach(r => r.classList.remove('bg-secondary-container', 'text-on-secondary-container'));
+                row.classList.add('bg-secondary-container', 'text-on-secondary-container');
+            });
+        });
+    </script>
+</body>
+
+</html>
