@@ -762,6 +762,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(455, 72, 70, 23);
 
+        NoResep.setEditable(false);
         NoResep.setHighlighter(null);
         NoResep.setName("NoResep"); // NOI18N
         NoResep.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -778,7 +779,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-01-2026" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-06-2026" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -1133,34 +1134,25 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 Sequel.AutoComitFalse();
                 sukses=true;
                 if(ubah==false){
-                    if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
-                        NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                        cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00",txtJadikanTemplateResep.getText()
-                        })==true){
+                    boolean saved = false;
+                    int attempts = 0;
+                    while (!saved && attempts < 100) {
+                        if (Sequel.menyimpantf2("resep_obat", "?,?,?,?,?,?,?,?,?,?,?", "Nomer Resep", 11, new String[]{
+                            NoResep.getText(), "0000-00-00", "00:00:00", TNoRw.getText(), KdDokter.getText(), Valid.SetTgl(DTPBeri.getSelectedItem() + ""),
+                            cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem(), status, "0000-00-00", "00:00:00", txtJadikanTemplateResep.getText()
+                        }) == true) {
                             simpandata();
-                            System.out.println("if pertama");
-                    }else{
-                        emptTeksobat();
-                        if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
-                            NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                            cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00",txtJadikanTemplateResep.getText()
-                            })==true){
-                                simpandata();
-                                System.out.println("if kedua");
-                        }else{
+                            saved = true;
+                            System.out.println("if ke-" + (attempts + 1));
+                        } else {
                             emptTeksobat();
-                            if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
-                                NoResep.getText(),"0000-00-00","00:00:00",TNoRw.getText(),KdDokter.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
-                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),status,"0000-00-00","00:00:00",txtJadikanTemplateResep.getText()
-                                })==true){
-                                    simpandata();
-                                    System.out.println("if ketiga");
-                            }else{
-                                emptTeksobat();
-                                sukses=false;
-                                System.out.println("if keempat");
-                            }
+                            attempts++;
                         }
+                    }
+                    if (!saved) {
+                        sukses = false;
+                        System.out.println("if keempat (gagal setelah 100 percobaan)");
+                        JOptionPane.showMessageDialog(null, "Gagal menyimpan resep setelah 100 kali percobaan. Silakan hubungi pihak IT untuk melakukan troubleshooting.", "Error Penyimpanan", JOptionPane.ERROR_MESSAGE);
                     }
                 }else if(ubah==true){
                     Sequel.meghapus("resep_dokter","no_resep",NoResep.getText());
