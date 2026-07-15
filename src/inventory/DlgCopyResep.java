@@ -392,6 +392,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{
             if(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString().equals("")){
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih No.Resep ..!!");
+            }else if(!tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),3).toString().equals(norawat)){
+                JOptionPane.showMessageDialog(rootPane,"Maaf, resep dari kunjungan/nomor rawat sebelumnya tidak boleh diedit. Silakan gunakan tombol Copy untuk membuat resep baru dari resep ini...!!");
             }else {
                 jmlparsial=0;
                 if(aktifkanparsial.equals("yes")){
