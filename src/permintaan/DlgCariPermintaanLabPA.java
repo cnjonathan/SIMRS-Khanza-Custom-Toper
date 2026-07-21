@@ -396,10 +396,10 @@ public class DlgCariPermintaanLabPA extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(dokter.getTable().getSelectedRow()!= -1){ 
                     if(TabPilihRawat.getSelectedIndex()==0){
-                        CrDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        CrDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         CrDokter.requestFocus();
                     }else if(TabPilihRawat.getSelectedIndex()==1){
-                        CrDokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        CrDokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         CrDokter2.requestFocus();
                     }                        
                 }                

@@ -413,7 +413,7 @@ public final class AsesmenAwalMedisRanapNeonatus extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     KdPetugas.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                    NmPetugas.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                    NmPetugas.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                     KdPetugas.requestFocus();
                 }
             }

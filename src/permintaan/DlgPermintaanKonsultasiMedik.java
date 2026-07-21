@@ -150,11 +150,11 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     if(i==1){
                         KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         BtnDokter.requestFocus();
                     }else if(i==2){
                         KdDokterDikonsuli.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        NmDokterDikonsuli.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        NmDokterDikonsuli.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         BtnDokterDIkonsuli.requestFocus();
                     }
                 }

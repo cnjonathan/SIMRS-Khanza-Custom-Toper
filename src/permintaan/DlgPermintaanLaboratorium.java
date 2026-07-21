@@ -333,7 +333,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     KodePerujuk.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                    NmPerujuk.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                    NmPerujuk.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                     KodePerujuk.requestFocus();                       
                 }  
             }

@@ -261,11 +261,11 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
                     if(dokter.getTable().getSelectedRow()!= -1){
                         if(pilihan.equals("perujuk")){
                             KodePerujuk.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            NmPerujuk.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            NmPerujuk.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             KodePerujuk.requestFocus();
                         }else if(pilihan.equals("penjab")){
                             KodePj.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            NmDokterPj.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            NmDokterPj.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             KodePj.requestFocus();
                         }                        
                     }  

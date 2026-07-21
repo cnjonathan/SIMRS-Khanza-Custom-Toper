@@ -938,11 +938,11 @@ public final class DlgReg extends javax.swing.JDialog {
                             isNumber();
                             KdDokter.requestFocus();
                         }else if(pilihan==2){
-                            CrDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            CrDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             CrDokter.requestFocus();
                             tampil();
                         }else if(pilihan==3){
-                            CrDokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            CrDokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             CrDokter3.requestFocus();
                         }
                     }                

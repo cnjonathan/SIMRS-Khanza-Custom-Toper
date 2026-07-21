@@ -91,7 +91,7 @@ public class DlgObatPeresep extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(dokter.getTable().getSelectedRow()!= -1){
-                    nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                    nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                     prosesCari();
                 }      
                 nmdokter.requestFocus();

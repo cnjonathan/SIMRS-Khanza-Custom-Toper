@@ -488,7 +488,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                 if(akses.getform().equals("DlgBilingRalan")){
                     if(dokter.getTable().getSelectedRow()!= -1){
                         kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                     }  
                     kddokter.requestFocus();
                 }                    

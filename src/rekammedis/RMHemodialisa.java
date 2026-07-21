@@ -184,7 +184,7 @@ public final class RMHemodialisa extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(dokter.getTable().getSelectedRow()!= -1){                   
                     kddok.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                    namadokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                    namadokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                 }  
                 kddok.requestFocus();
             }

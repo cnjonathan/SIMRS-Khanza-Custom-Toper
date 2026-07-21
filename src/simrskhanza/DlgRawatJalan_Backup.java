@@ -994,15 +994,15 @@ public final class DlgRawatJalan_Backup extends javax.swing.JDialog {
                     if(dokter.getTable().getSelectedRow()!= -1){
                         if(TabRawat.getSelectedIndex()==0){
                             KdDok.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             KdDok.requestFocus();
                         }else if(TabRawat.getSelectedIndex()==2){
                             KdDok2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            TDokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            TDokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             KdDok2.requestFocus();
                         }else if(TabRawat.getSelectedIndex()==7){
                             KdDok3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            TDokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            TDokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             KdDok3.requestFocus();
                         }                         
                     }                      

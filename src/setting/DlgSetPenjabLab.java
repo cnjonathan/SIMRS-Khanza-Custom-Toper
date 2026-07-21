@@ -99,27 +99,27 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){                    
                     if(pilihan==1){
                         kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kddokter.requestFocus();
                     }else if(pilihan==2){
                         kddokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        TDokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        TDokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kddokter2.requestFocus();
                     }else if(pilihan==3){
                         kddokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        TDokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        TDokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kddokter3.requestFocus();
                     }else if(pilihan==4){
                         kddokter4.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        TDokter4.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        TDokter4.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kddokter4.requestFocus();
                     }else if(pilihan==5){
                         kddokter5.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        TDokter5.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        TDokter5.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kddokter5.requestFocus();
                     }else if(pilihan==6){
                         kddokter6.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        TDokter6.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        TDokter6.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kddokter6.requestFocus();
                     }
                 }                

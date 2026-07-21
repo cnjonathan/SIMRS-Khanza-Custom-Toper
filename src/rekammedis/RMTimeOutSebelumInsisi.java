@@ -215,11 +215,11 @@ public final class RMTimeOutSebelumInsisi extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){      
                     if(pilihan==1){
                         KodeDokterBedah.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        NamaDokterBedah.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        NamaDokterBedah.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         btnDokterBedah.requestFocus();
                     }else if(pilihan==2){
                         KodeDokterAnestesi.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        NamaDokterAnestesi.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        NamaDokterAnestesi.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         btnDokterAnestesi.requestFocus();
                     }   
                 }  

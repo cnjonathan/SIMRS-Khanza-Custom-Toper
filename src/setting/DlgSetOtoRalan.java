@@ -254,11 +254,11 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     if(TabRawat.getSelectedIndex()==0){
                         kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kddokter.requestFocus();
                     }else if(TabRawat.getSelectedIndex()==2){
                         kddokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        nmdokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        nmdokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kddokter3.requestFocus();
                     }                        
                 }                       

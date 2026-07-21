@@ -274,11 +274,11 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     if(pilihan==1){
                         KdDok1.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        TDokter1.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        TDokter1.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         btnDokter1.requestFocus();
                     }else if(pilihan==2){
                         KdDok2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        TDokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        TDokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         btnDokter2.requestFocus();
                     }
                 }   

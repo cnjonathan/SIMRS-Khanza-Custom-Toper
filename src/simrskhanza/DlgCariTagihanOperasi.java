@@ -177,31 +177,31 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){                    
                     if(pilihan==1){
                         kdoperator1.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        nmoperator1.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        nmoperator1.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kdoperator1.requestFocus();
                     }else if(pilihan==2){
                         kdoperator2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        nmoperator2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        nmoperator2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kdoperator2.requestFocus();
                     }else if(pilihan==3){
                         kdoperator3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        nmoperator3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        nmoperator3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kdoperator3.requestFocus();
                     }else if(pilihan==4){
                         kdanestesi.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        nmanestesi.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        nmanestesi.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kdanestesi.requestFocus();
                     }else if(pilihan==5){
                         kddranak.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        nmdranak.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        nmdranak.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kddranak.requestFocus();
                     }else if(pilihan==6){
                         kdpjanak.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        nmpjanak.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        nmpjanak.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kdpjanak.requestFocus();
                     }else if(pilihan==7){
                         kddrumum.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                        nmdrumum.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        nmdrumum.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                         kddrumum.requestFocus();
                     }                   
                 }                

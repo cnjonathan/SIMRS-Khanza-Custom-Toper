@@ -894,42 +894,42 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
                     switch (TabRawat.getSelectedIndex()) {
                         case 0:
                             KdDokterRalanDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            NmDokterRalanDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            NmDokterRalanDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             BtnDokterRalanDokter.requestFocus();
                             break;
                         case 2:
                             KdDokterRalanDokterParamedis.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            NmDokterRalanDokterParamedis.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            NmDokterRalanDokterParamedis.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             BtnDokterRalanDokterParamedis.requestFocus();
                             break;
                         case 3:
                             KdOperatorOperasi.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            NmOperatorOperasi.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            NmOperatorOperasi.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             BtnOperatorOperasi.requestFocus();
                             break;
                         case 4:
                             KdDokterRanapDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            NmDokterRanapDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            NmDokterRanapDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             BtnDokterRanapDokter.requestFocus();
                             break;
                         case 6:
                             KdDokterRanapDokterParamedis.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            NmDokterRanapDokterParamedis.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            NmDokterRanapDokterParamedis.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             BtnDokterRanapDokterParamedis.requestFocus();
                             break;
                         case 7:
                             KdDokterPerujukRad.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            NmDokterPerujukRad.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            NmDokterPerujukRad.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             BtnDokterPerujukRad.requestFocus();
                             break;
                         case 8:
                             KdDokterPerujukLab.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            NmDokterPerujukLab.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            NmDokterPerujukLab.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             BtnDokterPerujukLab.requestFocus();
                             break;
                         case 9:
                             KdDokterPerujukDetailLab.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            NmDokterPerujukDetailLab.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                            NmDokterPerujukDetailLab.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                             BtnDokterPerujukDetailLab.requestFocus();
                             break;
                         default:
