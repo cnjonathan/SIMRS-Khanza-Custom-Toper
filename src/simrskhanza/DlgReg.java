@@ -328,42 +328,42 @@ public final class DlgReg extends javax.swing.JDialog {
         // System.out.println("Line Number: "+new Throwable().getStackTrace()[0].getLineNumber());
 
         tabMode=new DefaultTableModel(null,new Object[]{
-            "P",
-            "No.Reg",
-            "No.Rawat",
-            "Tanggal",
-            "Jam",
-            "Kode Dokter",
-            "Dokter Dituju",
-            "No.RM",
-            "Pasien",
-            "J.K.",
-            "Umur",
-            "Poliklinik",
-            "Kehadiran",
-            "SEP",
-            "Encounter",
-            "IHS",
-            "Jenis Bayar",
-            "Penanggung Jawab",
-            "Alamat P.J.",
-            "Hubungan P.J.",
-            "Biaya Regristrasi",
-            "Status",
-            "No.Telp",
-            "Stts Rawat",
-            "Stts Poli",
-            "Kode Poli",
-            "Kode PJ",
-            "Status Bayar",
-            "User Petugas",
-            "IP",
-            "Hostname",
-            "Practitioner IHS",
-            "Patient",
-            "Location",
-            "Patient IHS",
-            "Encounter ID"
+            "P", //0
+            "No.Reg", //1
+            "No.Rawat", //2
+            "Tanggal", //3
+            "Jam", //4
+            "Kode Dokter", //5
+            "Dokter Dituju", //6
+            "No.RM", //7
+            "Pasien", //8
+            "J.K.", //9
+            "Umur", //10
+            "Poliklinik", //11
+            "Kehadiran", //12
+            "SEP", //13
+            "Encounter", //14
+            "IHS", //15
+            "Jenis Bayar", //16
+            "Penanggung Jawab", //17
+            "Alamat P.J.", //18
+            "Hubungan P.J.", //19
+            "Biaya Regristrasi", //20
+            "Status", //21
+            "No.Telp", //22
+            "Stts Rawat", //23
+            "Stts Poli", //24
+            "Kode Poli", //25
+            "Kode PJ", //26
+            "Status Bayar", //27
+            "User Petugas", //28
+            "IP", //29
+            "Hostname", //30
+            "Practitioner IHS", //31
+            "Patient", //32
+            "Location", //33
+            "Patient IHS", //34
+            "Encounter ID" //35
         }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -4796,7 +4796,7 @@ private void MnKamarInapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             tbPetugas.requestFocus();
         }else{
             if(tbPetugas.getSelectedRow()!= -1){
-                if(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),19).toString().equals("Batal")){
+                if(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),23).toString().equals("Batal")){
                     JOptionPane.showMessageDialog(null,"Pasien berstatus batal periksa...!");
                 }else{
                     if(Sequel.cariRegistrasi(TNoRw.getText())>0){
@@ -4837,8 +4837,8 @@ private void MnRawatJalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         dlgrwjl.isCek();
                         dlgrwjl.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         dlgrwjl.setLocationRelativeTo(internalFrame1);
-                        dlgrwjl.SetPoli(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),21).toString());
-                        dlgrwjl.SetPj(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),22).toString());
+                        dlgrwjl.SetPoli(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),25).toString());
+                        dlgrwjl.SetPj(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),26).toString());
                         dlgrwjl.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());    
                         dlgrwjl.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
@@ -12147,32 +12147,34 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }
 
     private void getData() {
-        if(tbPetugas.getSelectedRow()!= -1){
-            Kd2.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
-            Valid.SetTgl(DTPReg,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),3).toString());
-            CmbJam.setSelectedItem(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),4).toString().substring(0,2));
-            CmbMenit.setSelectedItem(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),4).toString().substring(3,5));
-            CmbDetik.setSelectedItem(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),4).toString().substring(6,8));
-            KdDokter.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),5).toString());
-            TDokter.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),6).toString());
-            TNoRM.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString());
-            TPoli.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),11).toString());          
-            nmpnj.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),16).toString());
-            TPngJwb.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),17).toString());
-            TAlmt.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),18).toString());
-            THbngn.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),19).toString());
-            TBiaya.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),20).toString());
-            TStatus.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),21).toString());  
-            kdpoli.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),25).toString()); 
-            kdpnj.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),26).toString()); 
-            Sequel.cariIsi("select rujuk_masuk.perujuk from rujuk_masuk where rujuk_masuk.no_rawat=?", AsalRujukan,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
-            TNoRw.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
-            TNoReg.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),1).toString());
-            IHS_SatuSehat.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),34).toString());
-            Practitioner_SatuSehat.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),31).toString());
-            Patient_SatuSehat.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),32).toString());
-            Location_SatuSehat.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),33).toString());
+        int row = tbPetugas.getSelectedRow();
+        if(row != -1){
+            Kd2.setText(tbPetugas.getValueAt(row, 2).toString());
+            Valid.SetTgl(DTPReg, tbPetugas.getValueAt(row, 3).toString());
+            CmbJam.setSelectedItem(tbPetugas.getValueAt(row, 4).toString().substring(0, 2));
+            CmbMenit.setSelectedItem(tbPetugas.getValueAt(row, 4).toString().substring(3, 5));
+            CmbDetik.setSelectedItem(tbPetugas.getValueAt(row, 4).toString().substring(6, 8));
+            KdDokter.setText(tbPetugas.getValueAt(row, 5).toString());
+            TDokter.setText(tbPetugas.getValueAt(row, 6).toString());
+            TNoRM.setText(tbPetugas.getValueAt(row, 7).toString());
+            IHS_SatuSehat.setText(tbPetugas.getValueAt(row, 34) == null ? "" : tbPetugas.getValueAt(row, 34).toString());
+            Practitioner_SatuSehat.setText(tbPetugas.getValueAt(row, 31) == null ? "" : tbPetugas.getValueAt(row, 31).toString());
+            Patient_SatuSehat.setText(tbPetugas.getValueAt(row, 32) == null ? "" : tbPetugas.getValueAt(row, 32).toString());
+            Location_SatuSehat.setText(tbPetugas.getValueAt(row, 33) == null ? "" : tbPetugas.getValueAt(row, 33).toString());
             isCekPasien();
+            TPasien.setText(tbPetugas.getValueAt(row, 8).toString());
+            TPoli.setText(tbPetugas.getValueAt(row, 11).toString());          
+            nmpnj.setText(tbPetugas.getValueAt(row, 16).toString());
+            TPngJwb.setText(tbPetugas.getValueAt(row, 17).toString());
+            TAlmt.setText(tbPetugas.getValueAt(row, 18).toString());
+            THbngn.setText(tbPetugas.getValueAt(row, 19).toString());
+            TBiaya.setText(tbPetugas.getValueAt(row, 20).toString());
+            TStatus.setText(tbPetugas.getValueAt(row, 21).toString());  
+            kdpoli.setText(tbPetugas.getValueAt(row, 25).toString()); 
+            kdpnj.setText(tbPetugas.getValueAt(row, 26).toString()); 
+            Sequel.cariIsi("select rujuk_masuk.perujuk from rujuk_masuk where rujuk_masuk.no_rawat=?", AsalRujukan, tbPetugas.getValueAt(row, 2).toString());
+            TNoRw.setText(tbPetugas.getValueAt(row, 2).toString());
+            TNoReg.setText(tbPetugas.getValueAt(row, 1).toString());
         }
     }
 
@@ -13108,7 +13110,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         if(tbPetugas.getSelectedRow()!= -1){
             jmlparsial=0;
             if(aktifkanparsial.equals("yes")){
-                jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",tbPetugas.getValueAt(tbPetugas.getSelectedRow(),22).toString());
+                jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",tbPetugas.getValueAt(tbPetugas.getSelectedRow(),26).toString());
             }
             if(jmlparsial>0){
                 DlgBilingParsialRalan parsialralan=new DlgBilingParsialRalan(null,false);
@@ -13119,7 +13121,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 parsialralan.setNoRm(TNoRw.getText(),KdDokter.getText(),TDokter.getText(),kdpoli.getText());
                 parsialralan.setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(null,"Maaf, Cara bayar "+tbPetugas.getValueAt(tbPetugas.getSelectedRow(),12).toString()+" tidak diijinkan menggunakan Billing Parsial...!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Cara bayar "+tbPetugas.getValueAt(tbPetugas.getSelectedRow(),16).toString()+" tidak diijinkan menggunakan Billing Parsial...!!!");
             }
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");

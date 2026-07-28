@@ -7560,13 +7560,13 @@ public class frmUtama extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(50, 50, 50));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/file-edit-16x16.png"))); // NOI18N
-        jLabel7.setText(" Didesain & dibuat oleh Khanza.Soft Media A.K.A Tim IT RSUD Kartini Karanganyar Version 2026.01.01\n");
+        jLabel7.setText(" Didesain & dibuat oleh Khanza.Soft Media A.K.A Tim IT RSUD Kartini Karanganyar Version 3.0\n");
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel7.setIconTextGap(3);
         jLabel7.setName("jLabel7"); // NOI18N
         jLabel7.setPreferredSize(new java.awt.Dimension(550, 23));
         internalFrame4.add(jLabel7);
-        jLabel7.getAccessibleContext().setAccessibleName(" Didesain & dibuat oleh Khanza.Soft Media A.K.A Tim IT RSUD Kartini Karanganyar Version 2026.01.01");
+        jLabel7.getAccessibleContext().setAccessibleName(" Didesain & dibuat oleh Khanza.Soft Media A.K.A Tim IT RSUD Kartini Karanganyar Version 3.0");
 
         jSeparator8.setBackground(new java.awt.Color(255, 81, 102));
         jSeparator8.setForeground(new java.awt.Color(255, 81, 102));
