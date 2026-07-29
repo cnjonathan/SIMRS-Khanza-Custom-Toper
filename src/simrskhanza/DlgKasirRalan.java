@@ -406,14 +406,14 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     if(billing.dokter.getTable().getSelectedRow()!= -1){
                         if(pilihan==1){
                             kddokter.setText(billing.dokter.getTable().getValueAt(billing.dokter.getTable().getSelectedRow(),0).toString());
-                            TDokter.setText(billing.dokter.getTable().getValueAt(billing.dokter.getTable().getSelectedRow(),1).toString());
+                            TDokter.setText(billing.dokter.getTable().getValueAt(billing.dokter.getTable().getSelectedRow(),2).toString());
                             kddokter.requestFocus();
                         }else if(pilihan==2){
-                            CrPtg.setText(billing.dokter.getTable().getValueAt(billing.dokter.getTable().getSelectedRow(),1).toString());
+                            CrPtg.setText(billing.dokter.getTable().getValueAt(billing.dokter.getTable().getSelectedRow(),2).toString());
                             TabRawatMouseClicked(null);
                             CrPtg.requestFocus();
                         }else if(pilihan==3){
-                            CrDokter3.setText(billing.dokter.getTable().getValueAt(billing.dokter.getTable().getSelectedRow(),1).toString());
+                            CrDokter3.setText(billing.dokter.getTable().getValueAt(billing.dokter.getTable().getSelectedRow(),2).toString());
                             CrDokter3.requestFocus();
                         } 
                     }                
@@ -441,10 +441,10 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     if(billing.poli.getTable().getSelectedRow()!= -1){
                         if(pilihan==1){
                             kdpoli.setText(billing.poli.getTable().getValueAt(billing.poli.getTable().getSelectedRow(),0).toString());
-                            nmpoli.setText(billing.poli.getTable().getValueAt(billing.poli.getTable().getSelectedRow(),1).toString());
+                            nmpoli.setText(billing.poli.getTable().getValueAt(billing.poli.getTable().getSelectedRow(),2).toString());
                             kdpoli.requestFocus();
                         }else if(pilihan==2){
-                            CrPoli.setText(billing.poli.getTable().getValueAt(billing.poli.getTable().getSelectedRow(),1).toString());
+                            CrPoli.setText(billing.poli.getTable().getValueAt(billing.poli.getTable().getSelectedRow(),2).toString());
                             CrPoli.requestFocus();   
                             TabRawatMouseClicked(null);
                         }                        
