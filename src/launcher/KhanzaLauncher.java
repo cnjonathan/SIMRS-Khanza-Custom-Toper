@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -113,9 +114,22 @@ public class KhanzaLauncher extends JFrame {
         setContentPane(mainPanel);
     }
 
+    private File getAppDir() {
+        try {
+            File jarFile = new File(KhanzaLauncher.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            if (jarFile.isFile()) {
+                return jarFile.getParentFile();
+            }
+            if (jarFile.isDirectory()) {
+                return jarFile;
+            }
+        } catch (Exception e) {}
+        return new File(".");
+    }
+
     private String getLocalVersion() {
         try {
-            File vFile = new File("version.txt");
+            File vFile = new File(getAppDir(), "version.txt");
             if (vFile.exists()) {
                 try (BufferedReader br = new BufferedReader(new FileReader(vFile))) {
                     String v = br.readLine();
@@ -131,7 +145,7 @@ public class KhanzaLauncher extends JFrame {
     private void saveLocalVersion(String ver) {
         if (ver == null || ver.trim().isEmpty()) return;
         try {
-            File vFile = new File("version.txt");
+            File vFile = new File(getAppDir(), "version.txt");
             try (FileWriter fw = new FileWriter(vFile)) {
                 fw.write(ver.trim());
             }
@@ -140,7 +154,7 @@ public class KhanzaLauncher extends JFrame {
 
     private String getRMEBaseUrl() {
         try {
-            File xmlFile = new File("setting/database.xml");
+            File xmlFile = new File(getAppDir(), "setting/database.xml");
             if (xmlFile.exists()) {
                 Properties prop = new Properties();
                 try (InputStream is = new FileInputStream(xmlFile)) {
@@ -162,12 +176,13 @@ public class KhanzaLauncher extends JFrame {
     private void loadLogoAsync() {
         new Thread(() -> {
             try {
-                File localLogo = new File("icon.png");
+                File appDir = getAppDir();
+                File localLogo = new File(appDir, "icon.png");
                 if (!localLogo.exists()) {
-                    localLogo = new File("picture/logo.png");
+                    localLogo = new File(appDir, "picture/logo.png");
                 }
                 if (!localLogo.exists()) {
-                    localLogo = new File("rsudkartinikaranganyar.jpg");
+                    localLogo = new File(appDir, "rsudkartinikaranganyar.jpg");
                 }
 
                 // Jika belum ada di lokal, otomatis tarik icon.png dari RSUD RME
@@ -175,8 +190,8 @@ public class KhanzaLauncher extends JFrame {
                     try {
                         String baseUrl = getRMEBaseUrl();
                         String iconUrlStr = baseUrl + "/icon.png";
-                        downloadFileSimple(iconUrlStr, "icon.png");
-                        localLogo = new File("icon.png");
+                        downloadFileSimple(iconUrlStr, new File(appDir, "icon.png").getAbsolutePath());
+                        localLogo = new File(appDir, "icon.png");
                     } catch (Exception ex) {
                         System.out.println("AutoUpdater Info: Menggunakan logo default (" + ex.getMessage() + ")");
                     }
@@ -238,16 +253,53 @@ public class KhanzaLauncher extends JFrame {
         throw new Exception("Tidak dapat terhubung ke server " + primaryUrlStr);
     }
 
+    private String getFileMD5(File file) {
+        if (file == null || !file.exists() || !file.isFile()) return "";
+        try {
+            MessageDigest digest = MessageDigest.getInstance("MD5");
+            try (InputStream is = new FileInputStream(file)) {
+                byte[] buffer = new byte[8192];
+                int read;
+                while ((read = is.read(buffer)) > 0) {
+                    digest.update(buffer, 0, read);
+                }
+            }
+            byte[] md5sum = digest.digest();
+            StringBuilder sb = new StringBuilder();
+            for (byte b : md5sum) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private void logDebug(String msg) {
+        try {
+            File appDir = getAppDir();
+            File logFile = new File(appDir, "launcher_debug.log");
+            try (FileWriter fw = new FileWriter(logFile, true)) {
+                fw.write(new java.util.Date() + " - " + msg + "\r\n");
+            }
+        } catch (Exception e) {}
+    }
+
     private void startUpdateProcess() {
         new Thread(() -> {
             try {
                 updateStatus("Memeriksa informasi rilis terbaru...", 5);
                 
+                File appDir = getAppDir();
+                logDebug("=== LAUNCHER STARTING ===");
+                logDebug("AppDir: " + appDir.getAbsolutePath());
+
                 String localVer = getLocalVersion();
-                File jarFile = new File("SIMRSKhanza.jar");
+                File jarFile = new File(appDir, "SIMRSKhanza.jar");
 
                 String baseUrl = getRMEBaseUrl();
                 String apiUrl = baseUrl + "/api/updater/check?current_version=" + localVer;
+                logDebug("RME BaseUrl: " + baseUrl + " | LocalVer: " + localVer);
 
                 HttpURLConnection conn = connectWithFallback(apiUrl);
 
@@ -260,53 +312,54 @@ public class KhanzaLauncher extends JFrame {
                 in.close();
 
                 String json = response.toString();
+                logDebug("API Response: " + json);
+
                 boolean hasUpdate = parseJsonBool(json, "has_update");
                 String latestVersion = parseJsonVal(json, "latest_version");
 
-                // JIKA TIDAK ADA UPDATE DAN FILE JAR SUDAH ADA LOKAL: LANGSUNG JALANKAN TANPA DOWNLOAD
-                if (!hasUpdate && jarFile.exists() && jarFile.length() > 0) {
-                    String activeVer = latestVersion.isEmpty() ? localVer : latestVersion;
-                    updateStatus("SIMRS Khanza versi v" + activeVer + " sudah terbaru", 100);
-                    saveLocalVersion(activeVer);
-                    launchApplication();
-                    return;
+                // Step 1: Check & Download Report Files (jika ada yang baru / beda hash)
+                updateStatus("Memeriksa laporan (.jasper)...", 15);
+                boolean reportsUpdated = downloadReportsIfAny(json, baseUrl);
+
+                // Step 2: Check & Download Setting Files (seperti database.xml)
+                updateStatus("Memeriksa variabel setting (.xml)...", 30);
+                boolean settingsUpdated = downloadSettingsIfAny(json, baseUrl);
+
+                // Step 3: Check & Download SIMRSKhanza.jar (jika ada pembaruan versi / beda hash)
+                String serverJarHash = parseJsonVal(json, "jar_hash");
+                String localJarHash = getFileMD5(jarFile);
+
+                boolean jarNeedsUpdate = !jarFile.exists() || jarFile.length() == 0 ||
+                    (hasUpdate && !serverJarHash.isEmpty() && !localJarHash.equalsIgnoreCase(serverJarHash));
+
+                if (jarNeedsUpdate) {
+                    String jarUrlStr = parseJsonVal(json, "jar_url");
+                    if (jarUrlStr.isEmpty()) {
+                        jarUrlStr = baseUrl + "/api/updater/download/jar";
+                    }
+                    long jarSize = parseJsonLong(json, "jar_size");
+
+                    updateStatus("Mengunduh pembaruan SIMRSKhanza.jar (v" + latestVersion + ")...", 45);
+                    File tmpJar = new File(appDir, "SIMRSKhanza.jar.tmp");
+                    downloadFileWithFallback(jarUrlStr, tmpJar.getAbsolutePath(), jarSize, 45, 95);
+
+                    if (tmpJar.exists() && tmpJar.length() > 0) {
+                        updateSubStatus("Memperbarui file executable SIMRSKhanza.jar...");
+                        Files.move(tmpJar.toPath(), jarFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    }
                 }
 
-                // JIKA ADA UPDATE ATAU FILE JAR BELUM TERSEDIA: BARU MELAKUKAN DOWNLOAD
-                String jarUrlStr = parseJsonVal(json, "jar_url");
-                if (jarUrlStr.isEmpty()) {
-                    jarUrlStr = baseUrl + "/api/updater/download/jar";
-                }
-                long jarSize = parseJsonLong(json, "jar_size");
+                String activeVer = latestVersion.isEmpty() ? localVer : latestVersion;
+                saveLocalVersion(activeVer);
 
-                // Step 1: Download SIMRSKhanza.jar
-                updateStatus("Mengunduh pembaruan SIMRSKhanza.jar (v" + latestVersion + ")...", 10);
-                downloadFileWithFallback(jarUrlStr, "SIMRSKhanza.jar.tmp", jarSize, 10, 80);
-
-                // Replace file jar utama
-                File newJar = new File("SIMRSKhanza.jar.tmp");
-                if (newJar.exists() && newJar.length() > 0) {
-                    updateSubStatus("Memperbarui file executable SIMRSKhanza.jar...");
-                    Files.move(newJar.toPath(), jarFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                }
-
-                // Step 2: Download Report Files (jika ada)
-                updateStatus("Memeriksa laporan (.jasper)...", 85);
-                downloadReportsIfAny(json, baseUrl);
-
-                // Step 2b: Download & Smart-Merge Setting Files (seperti database.xml)
-                updateStatus("Memeriksa variabel setting (.xml)...", 92);
-                downloadSettingsIfAny(json, baseUrl);
-
-                // Simpan versi lokal yang baru
-                saveLocalVersion(latestVersion);
-
-                // Step 3: Selesai & Buka Aplikasi
-                updateStatus("Pembaruan Berhasil!", 100);
+                updateStatus("SIMRS Khanza v" + activeVer + " Siap Digunakan", 100);
                 launchApplication();
 
             } catch (Exception e) {
-                e.printStackTrace();
+                logDebug("EXCEPTION IN STARTUPDATE: " + e.toString());
+                for (StackTraceElement ste : e.getStackTrace()) {
+                    logDebug("  at " + ste.toString());
+                }
                 SwingUtilities.invokeLater(() -> {
                     int choice = JOptionPane.showConfirmDialog(this,
                         "Gagal melakukan pembaruan otomatis: " + e.getMessage() + "\n\nApakah Anda tetap ingin menjalankan SIMRS Khanza versi lokal?",
@@ -327,12 +380,16 @@ public class KhanzaLauncher extends JFrame {
             updateStatus("Membuka SIMRS Khanza...", 100);
             updateSubStatus("Menyiapkan aplikasi (Mohon tunggu)...");
 
+            File appDir = getAppDir();
             String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "javaw.exe";
             if (!new File(javaBin).exists()) {
                 javaBin = "javaw";
             }
 
-            Process p = new ProcessBuilder(javaBin, "-Xss2m", "-Xms32m", "-Xmx1024m", "-jar", "SIMRSKhanza.jar").start();
+            File targetJar = new File(appDir, "SIMRSKhanza.jar");
+            ProcessBuilder pb = new ProcessBuilder(javaBin, "-Xss2m", "-Xms32m", "-Xmx1024m", "-jar", targetJar.getAbsolutePath());
+            pb.directory(appDir);
+            Process p = pb.start();
 
             // Tahan tampilan Launcher selama 3.5 detik agar memberikan jeda transisi halus sampai GUI SIMRS Khanza muncul
             for (int i = 1; i <= 35; i++) {
@@ -395,91 +452,200 @@ public class KhanzaLauncher extends JFrame {
         inputStream.close();
     }
 
-    private void downloadReportsIfAny(String json, String baseUrl) {
-        try {
-            int reportsIdx = json.indexOf("\"reports\":[");
-            if (reportsIdx != -1) {
-                int endIdx = json.indexOf("]", reportsIdx);
-                if (endIdx != -1) {
-                    String reportsJson = json.substring(reportsIdx, endIdx + 1);
-                    
-                    File reportDir = new File("report");
-                    if (!reportDir.exists()) {
-                        reportDir.mkdirs();
-                    }
-
-                    int cur = 0;
-                    while ((cur = reportsJson.indexOf("\"filename\":\"", cur)) != -1) {
-                        cur += 12;
-                        int endName = reportsJson.indexOf("\"", cur);
-                        if (endName != -1) {
-                            String filename = reportsJson.substring(cur, endName);
-                            String downloadUrl = baseUrl + "/api/updater/download/report/" + filename;
-                            
-                            updateSubStatus("Mengunduh report: " + filename);
-                            
-                            try {
-                                downloadFileSimple(downloadUrl, "report/" + filename);
-                            } catch (Exception ex) {
-                                System.out.println("Gagal download report " + filename + ": " + ex.getMessage());
-                            }
-                        }
-                    }
+    private int findMatchingBracket(String json, int startBracket) {
+        boolean inString = false;
+        boolean escape = false;
+        int depth = 0;
+        for (int i = startBracket; i < json.length(); i++) {
+            char c = json.charAt(i);
+            if (escape) {
+                escape = false;
+                continue;
+            }
+            if (c == '\\' && inString) {
+                escape = true;
+                continue;
+            }
+            if (c == '"') {
+                inString = !inString;
+                continue;
+            }
+            if (!inString) {
+                if (c == '[') depth++;
+                else if (c == ']') {
+                    depth--;
+                    if (depth == 0) return i;
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Error parsing reports: " + e.getMessage());
         }
+        return -1;
     }
 
-    private void downloadSettingsIfAny(String json, String baseUrl) {
+    private boolean downloadReportsIfAny(String json, String baseUrl) {
+        boolean downloadedAny = false;
         try {
-            int settingsIdx = json.indexOf("\"settings\":[");
-            if (settingsIdx != -1) {
-                int endIdx = json.indexOf("]", settingsIdx);
-                if (endIdx != -1) {
-                    String settingsJson = json.substring(settingsIdx, endIdx + 1);
-                    
-                    File settingDir = new File("setting");
-                    if (!settingDir.exists()) {
-                        settingDir.mkdirs();
-                    }
+            int reportsIdx = json.indexOf("\"reports\"");
+            if (reportsIdx != -1) {
+                int startBracket = json.indexOf("[", reportsIdx);
+                if (startBracket != -1) {
+                    int endBracket = findMatchingBracket(json, startBracket);
+                    if (endBracket != -1) {
+                        String reportsJson = json.substring(startBracket, endBracket + 1);
+                        File appDir = getAppDir();
+                        File reportDir = new File(appDir, "report");
+                        if (!reportDir.exists()) {
+                            reportDir.mkdirs();
+                        }
 
-                    int cur = 0;
-                    while ((cur = settingsJson.indexOf("\"filename\":\"", cur)) != -1) {
-                        cur += 12;
-                        int endName = settingsJson.indexOf("\"", cur);
-                        if (endName != -1) {
-                            String filename = settingsJson.substring(cur, endName);
-                            String downloadUrl = baseUrl + "/api/updater/download/setting/" + filename;
-                            
-                            updateSubStatus("Mengunduh setting: " + filename);
-                            
-                            try {
-                                String tmpPath = "setting/" + filename + ".tmp";
-                                downloadFileSimple(downloadUrl, tmpPath);
+                        int cur = 0;
+                        while ((cur = reportsJson.indexOf("\"filename\"", cur)) != -1) {
+                            int colonIdx = reportsJson.indexOf(":", cur);
+                            if (colonIdx == -1) break;
+                            int startQuote = reportsJson.indexOf("\"", colonIdx);
+                            if (startQuote == -1) break;
+                            int endQuote = reportsJson.indexOf("\"", startQuote + 1);
+                            if (endQuote == -1) break;
 
-                                File tmpFile = new File(tmpPath);
-                                File targetFile = new File("setting/" + filename);
+                            String filename = reportsJson.substring(startQuote + 1, endQuote).trim();
+                            cur = endQuote + 1;
 
-                                if (tmpFile.exists()) {
-                                    if (filename.equalsIgnoreCase("database.xml") && targetFile.exists()) {
-                                        mergeXmlProperties(targetFile, tmpFile);
-                                        tmpFile.delete();
-                                    } else {
-                                        Files.move(tmpFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                            int nextFn = reportsJson.indexOf("\"filename\"", cur);
+                            int objEnd = nextFn != -1 ? nextFn : reportsJson.length();
+
+                            String serverHash = "";
+                            int hashIdx = reportsJson.indexOf("\"hash\"", endQuote);
+                            int hColon = -1, hStart = -1, hEnd = -1;
+                            if (hashIdx != -1 && hashIdx < objEnd) {
+                                hColon = reportsJson.indexOf(":", hashIdx);
+                                if (hColon != -1 && hColon < objEnd) {
+                                    hStart = reportsJson.indexOf("\"", hColon);
+                                    if (hStart != -1 && hStart < objEnd) {
+                                        hEnd = reportsJson.indexOf("\"", hStart + 1);
+                                        if (hEnd != -1 && hEnd <= objEnd) {
+                                            serverHash = reportsJson.substring(hStart + 1, hEnd).trim();
+                                        }
                                     }
                                 }
-                            } catch (Exception ex) {
-                                System.out.println("Gagal download setting " + filename + ": " + ex.getMessage());
+                            }
+                            logDebug("[HashTrace] file=" + filename + " hashIdx=" + hashIdx + " hColon=" + hColon + " hStart=" + hStart + " hEnd=" + hEnd + " objEnd=" + objEnd + " serverHash=" + serverHash);
+
+                            File localReport = new File(reportDir, filename);
+                            String localHash = getFileMD5(localReport);
+
+                            boolean needsDownload = !localReport.exists() || localReport.length() == 0 ||
+                                (!serverHash.isEmpty() && !localHash.equalsIgnoreCase(serverHash));
+
+                            logDebug("[ReportCheck] File: " + filename + " | Local MD5: " + localHash + " | Server MD5: " + serverHash + " | NeedsDownload: " + needsDownload);
+
+                            if (needsDownload) {
+                                String downloadUrl = baseUrl + "/api/updater/download/report/" + filename;
+                                updateSubStatus("Mengunduh report: " + filename);
+                                try {
+                                    downloadFileSimple(downloadUrl, localReport.getAbsolutePath());
+                                    downloadedAny = true;
+                                    logDebug("[ReportCheck] SUCCESS updated report: " + filename + " to " + localReport.getAbsolutePath());
+                                } catch (Exception ex) {
+                                    logDebug("[ReportCheck] ERROR download report " + filename + ": " + ex.getMessage());
+                                }
                             }
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error parsing settings: " + e.getMessage());
+            logDebug("Error parsing reports: " + e.getMessage());
+            e.printStackTrace();
         }
+        return downloadedAny;
+    }
+
+    private boolean downloadSettingsIfAny(String json, String baseUrl) {
+        boolean downloadedAny = false;
+        try {
+            int settingsIdx = json.indexOf("\"settings\"");
+            if (settingsIdx != -1) {
+                int startBracket = json.indexOf("[", settingsIdx);
+                if (startBracket != -1) {
+                    int endBracket = findMatchingBracket(json, startBracket);
+                    if (endBracket != -1) {
+                        String settingsJson = json.substring(startBracket, endBracket + 1);
+                        File appDir = getAppDir();
+                        File settingDir = new File(appDir, "setting");
+                        if (!settingDir.exists()) {
+                            settingDir.mkdirs();
+                        }
+
+                        int cur = 0;
+                        while ((cur = settingsJson.indexOf("\"filename\"", cur)) != -1) {
+                            int colonIdx = settingsJson.indexOf(":", cur);
+                            if (colonIdx == -1) break;
+                            int startQuote = settingsJson.indexOf("\"", colonIdx);
+                            if (startQuote == -1) break;
+                            int endQuote = settingsJson.indexOf("\"", startQuote + 1);
+                            if (endQuote == -1) break;
+
+                            String filename = settingsJson.substring(startQuote + 1, endQuote).trim();
+                            cur = endQuote + 1;
+
+                            int nextFn = settingsJson.indexOf("\"filename\"", cur);
+                            int objEnd = nextFn != -1 ? nextFn : settingsJson.length();
+
+                            String serverHash = "";
+                            int hashIdx = settingsJson.indexOf("\"hash\"", endQuote);
+                            if (hashIdx != -1 && hashIdx < objEnd) {
+                                int hColon = settingsJson.indexOf(":", hashIdx);
+                                if (hColon != -1 && hColon < objEnd) {
+                                    int hStart = settingsJson.indexOf("\"", hColon);
+                                    if (hStart != -1 && hStart < objEnd) {
+                                        int hEnd = settingsJson.indexOf("\"", hStart + 1);
+                                        if (hEnd != -1 && hEnd <= objEnd) {
+                                            serverHash = settingsJson.substring(hStart + 1, hEnd).trim();
+                                        }
+                                    }
+                                }
+                            }
+
+                            File localSetting = new File(settingDir, filename);
+                            String localHash = getFileMD5(localSetting);
+
+                            boolean needsDownload = !localSetting.exists() || localSetting.length() == 0 ||
+                                (!serverHash.isEmpty() && !localHash.equalsIgnoreCase(serverHash));
+
+                            logDebug("[SettingCheck] File: " + filename + " | Local MD5: " + localHash + " | Server MD5: " + serverHash + " | NeedsDownload: " + needsDownload);
+
+                            if (needsDownload) {
+                                String downloadUrl = baseUrl + "/api/updater/download/setting/" + filename;
+                                updateSubStatus("Mengunduh setting: " + filename);
+                                
+                                try {
+                                    File tmpFile = new File(settingDir, filename + ".tmp");
+                                    downloadFileSimple(downloadUrl, tmpFile.getAbsolutePath());
+
+                                    File targetFile = new File(settingDir, filename);
+
+                                    if (tmpFile.exists()) {
+                                        if (filename.equalsIgnoreCase("database.xml") && targetFile.exists()) {
+                                            mergeXmlProperties(targetFile, tmpFile);
+                                            tmpFile.delete();
+                                        } else {
+                                            Files.move(tmpFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                                        }
+                                        downloadedAny = true;
+                                        logDebug("[SettingCheck] SUCCESS updated setting: " + filename);
+                                    }
+                                } catch (Exception ex) {
+                                    logDebug("[SettingCheck] ERROR download setting " + filename + ": " + ex.getMessage());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            logDebug("Error parsing settings: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return downloadedAny;
     }
 
     private void mergeXmlProperties(File targetLocalFile, File newServerFile) {

@@ -1707,20 +1707,20 @@ public final class RMHasilPemeriksaanEKG extends javax.swing.JDialog {
     }
     
     public void isCek(){
-        BtnSimpan.setEnabled(akses.gethasil_pemeriksaan_ekg());
-        BtnHapus.setEnabled(akses.gethasil_pemeriksaan_ekg());
-        BtnEdit.setEnabled(akses.gethasil_pemeriksaan_ekg());
-        BtnEdit.setEnabled(akses.gethasil_pemeriksaan_ekg());
-        if(akses.getjml2()>=1){
-            KdDokter.setEditable(false);
-            BtnDokter.setEnabled(false);
-            KdDokter.setText(akses.getkode());
-            Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?", NmDokter,KdDokter.getText());
-            if(NmDokter.getText().equals("")){
-                KdDokter.setText("");
-                JOptionPane.showMessageDialog(null,"User login bukan Dokter...!!");
-            }
-        }            
+//        BtnSimpan.setEnabled(akses.gethasil_pemeriksaan_ekg());
+//        BtnHapus.setEnabled(akses.gethasil_pemeriksaan_ekg());
+//        BtnEdit.setEnabled(akses.gethasil_pemeriksaan_ekg());
+//        BtnEdit.setEnabled(akses.gethasil_pemeriksaan_ekg());
+//        if(akses.getjml2()>=1){
+//            KdDokter.setEditable(false);
+//            BtnDokter.setEnabled(false);
+//            KdDokter.setText(akses.getkode());
+//            Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?", NmDokter,KdDokter.getText());
+//            if(NmDokter.getText().equals("")){
+//                KdDokter.setText("");
+//                JOptionPane.showMessageDialog(null,"User login bukan Dokter...!!");
+//            }
+//        }            
     }
     
     public void setTampil(){

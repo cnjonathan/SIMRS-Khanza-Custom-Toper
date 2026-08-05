@@ -1,6 +1,8 @@
 @echo off
 title SIMRS Khanza - RSUD Kartini Karanganyar
 
+cd /d "%~dp0"
+
 :: Path ke Liberica JDK 15 Full (javaw tanpa CMD)
 set "JAVA_EXE=C:\Program Files\BellSoft\LibericaJDK-15-Full\bin\javaw.exe"
 
