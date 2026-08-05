@@ -11461,18 +11461,27 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         TNm.requestFocus();
     }
 
+    private String getValTbPasien(int col) {
+        try {
+            Object o = tbPasien.getValueAt(tbPasien.getSelectedRow(), col);
+            return o == null ? "" : o.toString();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     private void getData() {
         emptTeks();
         if(tbPasien.getSelectedRow()!= -1){                
             try {                
-                TNo.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),1).toString());
-                Kd2.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),1).toString());
-                TNm.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),3).toString());
-                NoRekamMedisDipilih.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),1).toString());
-                NamaPasienDipilih.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),3).toString());
-                TKtp.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),4).toString());
+                TNo.setText(getValTbPasien(1));
+                Kd2.setText(getValTbPasien(1));
+                TNm.setText(getValTbPasien(3));
+                NoRekamMedisDipilih.setText(getValTbPasien(1));
+                NamaPasienDipilih.setText(getValTbPasien(3));
+                TKtp.setText(getValTbPasien(4));
 
-                switch (tbPasien.getValueAt(tbPasien.getSelectedRow(),5).toString()) {
+                switch (getValTbPasien(5)) {
                     case "L":
                         CmbJk.setSelectedItem("LAKI-LAKI");
                         break;
@@ -11481,54 +11490,54 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
                         break;
                 }
 
-                TTmp.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),6).toString());
-                CMbGd.setSelectedItem(tbPasien.getValueAt(tbPasien.getSelectedRow(),10).toString());
-                Pekerjaan.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),11).toString());
-                CmbStts.setSelectedItem(tbPasien.getValueAt(tbPasien.getSelectedRow(),12).toString());
-                cmbAgama.setSelectedItem(tbPasien.getValueAt(tbPasien.getSelectedRow(),13).toString());
-                TTlp.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),15).toString());
-                Saudara.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),19).toString());
-                nmpnj.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),20).toString());
-                TNoPeserta.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),21).toString());
-                NmIbu.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),8).toString());
-                CMbPnd.setSelectedItem(tbPasien.getValueAt(tbPasien.getSelectedRow(),17).toString());
-                CmbKeluarga.setSelectedItem(tbPasien.getValueAt(tbPasien.getSelectedRow(),18).toString());
-                PekerjaanPj.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),23).toString()); 
-                kdsuku.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),25).toString());
-                nmsukubangsa.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),26).toString());
-                kdbahasa.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),27).toString());
-                nmbahasa.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),28).toString());
-                kdperusahaan.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),29).toString());
-                nmperusahaan.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),30).toString());
-                NIP.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),31).toString());
-                EMail.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),32).toString());
-                kdcacat.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),33).toString());
-                nmcacat.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),34).toString());
-                Kdpnj.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),35).toString());
-                AlamatSatuSehat.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),36).toString());
-                idProvinceSatuSehat.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),49).toString());
-                namaProvinceSatuSehat.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),40).toString());
-                idSatuSehatCity.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),48).toString());
-                namaCitySatuSehat.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),39).toString());
-                idSatuSehatDistrict.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),47).toString());
-                namaDistrictSatuSehat.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),38).toString());
-                idSatuSehatSubDistrict.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),46).toString());
-                namaSubDistrictSatuSehat.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),37).toString());
-                AlamatSatuSehatPJ.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),41).toString());
-                idProvinceSatuSehatPJ.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),53).toString());
-                namaProvinceSatuSehatPJ.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),45).toString());
-                idSatuSehatCityPJ.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),52).toString());
-                namaCitySatuSehatPJ.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),44).toString());
-                idSatuSehatDistrictPJ.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),51).toString());
-                namaDistrictSatuSehatPJ.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),43).toString());
-                idSatuSehatSubDistrictPJ.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),50).toString());
-                namaSubDistrictSatuSehatPJ.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),42).toString());
-                AlamatSatuSehatRW.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),55).toString());
-                AlamatSatuSehatRT.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),56).toString());
-                AlamatSatuSehatRWPJ.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),57).toString());
-                AlamatSatuSehatRTPJ.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),58).toString());
-                KodePos.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),54).toString());
-                TelpEmergencyContact.setText(tbPasien.getValueAt(tbPasien.getSelectedRow(),59).toString());
+                TTmp.setText(getValTbPasien(6));
+                CMbGd.setSelectedItem(getValTbPasien(10));
+                Pekerjaan.setText(getValTbPasien(11));
+                CmbStts.setSelectedItem(getValTbPasien(12));
+                cmbAgama.setSelectedItem(getValTbPasien(13));
+                TTlp.setText(getValTbPasien(15));
+                Saudara.setText(getValTbPasien(19));
+                nmpnj.setText(getValTbPasien(20));
+                TNoPeserta.setText(getValTbPasien(21));
+                NmIbu.setText(getValTbPasien(8));
+                CMbPnd.setSelectedItem(getValTbPasien(17));
+                CmbKeluarga.setSelectedItem(getValTbPasien(18));
+                PekerjaanPj.setText(getValTbPasien(23)); 
+                kdsuku.setText(getValTbPasien(25));
+                nmsukubangsa.setText(getValTbPasien(26));
+                kdbahasa.setText(getValTbPasien(27));
+                nmbahasa.setText(getValTbPasien(28));
+                kdperusahaan.setText(getValTbPasien(29));
+                nmperusahaan.setText(getValTbPasien(30));
+                NIP.setText(getValTbPasien(31));
+                EMail.setText(getValTbPasien(32));
+                kdcacat.setText(getValTbPasien(33));
+                nmcacat.setText(getValTbPasien(34));
+                Kdpnj.setText(getValTbPasien(35));
+                AlamatSatuSehat.setText(getValTbPasien(36));
+                idProvinceSatuSehat.setText(getValTbPasien(49));
+                namaProvinceSatuSehat.setText(getValTbPasien(40));
+                idSatuSehatCity.setText(getValTbPasien(48));
+                namaCitySatuSehat.setText(getValTbPasien(39));
+                idSatuSehatDistrict.setText(getValTbPasien(47));
+                namaDistrictSatuSehat.setText(getValTbPasien(38));
+                idSatuSehatSubDistrict.setText(getValTbPasien(46));
+                namaSubDistrictSatuSehat.setText(getValTbPasien(37));
+                AlamatSatuSehatPJ.setText(getValTbPasien(41));
+                idProvinceSatuSehatPJ.setText(getValTbPasien(53));
+                namaProvinceSatuSehatPJ.setText(getValTbPasien(45));
+                idSatuSehatCityPJ.setText(getValTbPasien(52));
+                namaCitySatuSehatPJ.setText(getValTbPasien(44));
+                idSatuSehatDistrictPJ.setText(getValTbPasien(51));
+                namaDistrictSatuSehatPJ.setText(getValTbPasien(43));
+                idSatuSehatSubDistrictPJ.setText(getValTbPasien(50));
+                namaSubDistrictSatuSehatPJ.setText(getValTbPasien(42));
+                AlamatSatuSehatRW.setText(getValTbPasien(55));
+                AlamatSatuSehatRT.setText(getValTbPasien(56));
+                AlamatSatuSehatRWPJ.setText(getValTbPasien(57));
+                AlamatSatuSehatRTPJ.setText(getValTbPasien(58));
+                KodePos.setText(getValTbPasien(54));
+                TelpEmergencyContact.setText(getValTbPasien(59));
 
                 chkTNI.setSelected(false);
                 kdgolongantni.setText("");
@@ -11557,13 +11566,19 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
                 BtnJabatanTNI.setEnabled(false);
                 BtnPangkatTNI.setEnabled(false);
 
-                Valid.SetTgl(DTPLahir,tbPasien.getValueAt(tbPasien.getSelectedRow(),7).toString());
-                Valid.SetTgl(DTPDaftar,tbPasien.getValueAt(tbPasien.getSelectedRow(),14).toString());  
+                if(!getValTbPasien(7).isEmpty()){
+                    Valid.SetTgl(DTPLahir, getValTbPasien(7));
+                }
+                if(!getValTbPasien(14).isEmpty()){
+                    Valid.SetTgl(DTPDaftar, getValTbPasien(14));  
+                }
                 panggilPhoto();
                 // tampilkan foto ektp melalui api rsudrme dan tampilkan di panel_ektp
                 tampil_ektp(TNo.getText());
                 
             } catch (Exception ex) {
+                System.out.println("Error in getData: " + ex);
+                ex.printStackTrace();
             }   
         }
     }
@@ -11662,6 +11677,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
             Valid.SetTgl(DTPLahir,tbPasien2.getValueAt(tbPasien2.getSelectedRow(),6).toString());
             Valid.SetTgl(DTPDaftar,tbPasien2.getValueAt(tbPasien2.getSelectedRow(),13).toString());   
             panggilPhoto();
+            tampil_ektp(TNo.getText());
         }
     }
     
@@ -11759,6 +11775,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
             Valid.SetTgl(DTPLahir,tbPasien3.getValueAt(tbPasien3.getSelectedRow(),6).toString());
             Valid.SetTgl(DTPDaftar,tbPasien3.getValueAt(tbPasien3.getSelectedRow(),13).toString());  
             panggilPhoto();
+            tampil_ektp(TNo.getText());
         }
     }
     
@@ -13447,6 +13464,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
                 AlamatSatuSehatRTPJ.setText(rs.getString("rt_pj"));
                 TelpEmergencyContact.setText(rs.getString("emergency_contact"));
                 TabRawat.setSelectedIndex(0);
+                tampil_ektp(rs.getString("no_rkm_medis"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DlgPasien.class.getName()).log(Level.SEVERE, null, ex);
@@ -13455,39 +13473,52 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
 
     public void tampil_ektp(String no_rkm_medis) {
         try {
-            System.out.println("Load EKTP");
+            System.out.println("Load EKTP untuk RM: " + no_rkm_medis);
             new Thread(() -> {
                 try {
-                    System.out.println("API EKTP: "+rsudrme_path+"anjungan/api_foto_ektp/" + no_rkm_medis);
+                    String base = rsudrme_path;
+                    if (base == null || base.trim().isEmpty()) {
+                        base = "http://rme.rsudkartini.local/";
+                    }
+                    String baseUrl = base.endsWith("/") ? base : (base + "/");
+                    String apiUrl = baseUrl + "anjungan_v4/api_foto_ektp/" + no_rkm_medis;
+                    System.out.println("API EKTP: " + apiUrl);
+                    
                     OkHttpClient client = getUnsafeOkHttpClient();
                     Request request = new Request.Builder()
-                            .url(rsudrme_path+"anjungan/api_foto_ektp/" + no_rkm_medis)
+                            .url(apiUrl)
                             .build();
                     Response response = client.newCall(request).execute();
-                    if (response.isSuccessful()) {
-                        System.out.println("Tampilkan EKTP");
-                        java.io.InputStream inputStream = response.body().byteStream();
-                        java.awt.image.BufferedImage originalImage = javax.imageio.ImageIO.read(inputStream);
-                        if (originalImage != null) {
-                            int width = panel_ektp.getWidth();
-                            int height = panel_ektp.getHeight();
-                            if (width <= 0) width = 150; 
-                            if (height <= 0) height = 200; 
-                            
-                            java.awt.Image scaledImage = originalImage.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
-                            javax.swing.ImageIcon icon = new javax.swing.ImageIcon(scaledImage);
-                            javax.swing.SwingUtilities.invokeLater(() -> {
-                                panel_ektp.removeAll();
-                                panel_ektp.setLayout(new java.awt.BorderLayout());
-                                panel_ektp.add(new javax.swing.JLabel(icon));
-                                panel_ektp.revalidate();
-                                panel_ektp.repaint();
-                            });
+                    if (response.isSuccessful() && response.body() != null) {
+                        System.out.println("Tampilkan EKTP Sukses");
+                        byte[] imageBytes = response.body().bytes();
+                        if (imageBytes != null && imageBytes.length > 0) {
+                            java.io.ByteArrayInputStream bis = new java.io.ByteArrayInputStream(imageBytes);
+                            java.awt.image.BufferedImage originalImage = javax.imageio.ImageIO.read(bis);
+                            if (originalImage != null) {
+                                int width = panel_ektp.getWidth();
+                                int height = panel_ektp.getHeight();
+                                if (width <= 20) width = 340; 
+                                if (height <= 20) height = 240; 
+                                
+                                java.awt.Image scaledImage = originalImage.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+                                javax.swing.ImageIcon icon = new javax.swing.ImageIcon(scaledImage);
+                                javax.swing.SwingUtilities.invokeLater(() -> {
+                                    panel_ektp.removeAll();
+                                    panel_ektp.setLayout(new java.awt.BorderLayout());
+                                    panel_ektp.add(new javax.swing.JLabel(icon));
+                                    panel_ektp.revalidate();
+                                    panel_ektp.repaint();
+                                });
+                            }
                         }
-                    }else{
-                        panel_ektp.removeAll();
-                        panel_ektp.revalidate();
-                        panel_ektp.repaint();
+                    } else {
+                        System.out.println("API EKTP Response error / not found: " + response.code());
+                        javax.swing.SwingUtilities.invokeLater(() -> {
+                            panel_ektp.removeAll();
+                            panel_ektp.revalidate();
+                            panel_ektp.repaint();
+                        });
                     }
                     response.close();
                 } catch (Exception ex) {

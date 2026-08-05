@@ -15,3 +15,5 @@ database/*
 export_pdf/*
 export_pdf_resume_medis_ralan/*
 merged_pdf/*
+*.jar
+build_launcher/

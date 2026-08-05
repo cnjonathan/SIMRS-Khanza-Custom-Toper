@@ -622,6 +622,7 @@ public class DlgBillingV2 extends javax.swing.JDialog {
                         uangdeposit=Sequel.cariIsiAngka("select ifnull(sum(nota_inap.Uang_Muka),0) from nota_inap where nota_inap.no_rawat=?",TNoRw.getText());
                     }
                     Deposit.setText(Valid.SetAngka(uangdeposit));
+                    refreshDepositRefundData();
                     isKembali();
                 }
             }
@@ -924,6 +925,11 @@ public class DlgBillingV2 extends javax.swing.JDialog {
         btnCariPiutang = new widget.Button();
         jLabel13 = new widget.Label();
         Deposit = new widget.TextBox();
+        jLabelTotDeposit = new widget.Label();
+        TotalDeposit = new widget.TextBox();
+        jLabelTotRefund = new widget.Label();
+        TotalRefund = new widget.TextBox();
+        BtnRefreshBayar = new widget.Button();
         BtnSeek2 = new widget.Button();
         ChkPiutang = new widget.CekBox();
         chkRalan = new widget.CekBox();
@@ -2232,7 +2238,7 @@ public class DlgBillingV2 extends javax.swing.JDialog {
         TKembali.setHighlighter(null);
         TKembali.setName("TKembali"); // NOI18N
         panelBayar.add(TKembali);
-        TKembali.setBounds(680, 380, 220, 23);
+        TKembali.setBounds(727, 380, 140, 23);
 
         jLabel5.setText("Bayar : Rp.");
         jLabel5.setName("jLabel5"); // NOI18N
@@ -2291,7 +2297,7 @@ public class DlgBillingV2 extends javax.swing.JDialog {
         jLabel6.setName("jLabel6"); // NOI18N
         jLabel6.setPreferredSize(new java.awt.Dimension(95, 23));
         panelBayar.add(jLabel6);
-        jLabel6.setBounds(590, 380, 90, 23);
+        jLabel6.setBounds(657, 380, 70, 23);
 
         scrollPane5.setComponentPopupMenu(PopupPiutang);
         scrollPane5.setName("scrollPane5"); // NOI18N
@@ -2387,17 +2393,43 @@ public class DlgBillingV2 extends javax.swing.JDialog {
         panelBayar.add(btnCariPiutang);
         btnCariPiutang.setBounds(847, 210, 25, 23);
 
-        jLabel13.setText("Deposit : Rp.");
+        jLabelTotDeposit.setText("Tot.Deposit : Rp.");
+        jLabelTotDeposit.setName("jLabelTotDeposit"); // NOI18N
+        jLabelTotDeposit.setPreferredSize(new java.awt.Dimension(95, 23));
+        panelBayar.add(jLabelTotDeposit);
+        jLabelTotDeposit.setBounds(0, 380, 100, 23);
+
+        TotalDeposit.setEditable(false);
+        TotalDeposit.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        TotalDeposit.setName("TotalDeposit"); // NOI18N
+        TotalDeposit.setText("0");
+        panelBayar.add(TotalDeposit);
+        TotalDeposit.setBounds(100, 380, 115, 23);
+
+        jLabelTotRefund.setText("Tot.Refund : Rp.");
+        jLabelTotRefund.setName("jLabelTotRefund"); // NOI18N
+        jLabelTotRefund.setPreferredSize(new java.awt.Dimension(95, 23));
+        panelBayar.add(jLabelTotRefund);
+        jLabelTotRefund.setBounds(220, 380, 90, 23);
+
+        TotalRefund.setEditable(false);
+        TotalRefund.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        TotalRefund.setName("TotalRefund"); // NOI18N
+        TotalRefund.setText("0");
+        panelBayar.add(TotalRefund);
+        TotalRefund.setBounds(310, 380, 115, 23);
+
+        jLabel13.setText("Sisa Dep. : Rp.");
         jLabel13.setName("jLabel13"); // NOI18N
         jLabel13.setPreferredSize(new java.awt.Dimension(95, 23));
         panelBayar.add(jLabel13);
-        jLabel13.setBounds(0, 380, 110, 23);
+        jLabel13.setBounds(430, 380, 80, 23);
 
         Deposit.setEditable(false);
         Deposit.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         Deposit.setName("Deposit"); // NOI18N
         panelBayar.add(Deposit);
-        Deposit.setBounds(110, 380, 220, 23);
+        Deposit.setBounds(510, 380, 115, 23);
 
         BtnSeek2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnSeek2.setMnemonic('3');
@@ -2410,7 +2442,20 @@ public class DlgBillingV2 extends javax.swing.JDialog {
             }
         });
         panelBayar.add(BtnSeek2);
-        BtnSeek2.setBounds(332, 380, 25, 23);
+        BtnSeek2.setBounds(627, 380, 25, 23);
+
+        BtnRefreshBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
+        BtnRefreshBayar.setMnemonic('R');
+        BtnRefreshBayar.setToolTipText("Refresh / Perbarui Pembayaran (Alt+R)");
+        BtnRefreshBayar.setName("BtnRefreshBayar"); // NOI18N
+        BtnRefreshBayar.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnRefreshBayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRefreshBayarActionPerformed(evt);
+            }
+        });
+        panelBayar.add(BtnRefreshBayar);
+        BtnRefreshBayar.setBounds(872, 380, 28, 23);
 
         ChkPiutang.setText("Piutang : Rp.");
         ChkPiutang.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -4474,9 +4519,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 tampilAkunBankMandiri2();
             }
             
-            jLabel13.setVisible(false);
-            Deposit.setVisible(false);
-            BtnSeek2.setVisible(false);
+            jLabelTotDeposit.setVisible(true);
+            TotalDeposit.setVisible(true);
+            jLabelTotRefund.setVisible(true);
+            TotalRefund.setVisible(true);
+            jLabel13.setVisible(true);
+            Deposit.setVisible(true);
+            BtnSeek2.setVisible(true);
+            BtnRefreshBayar.setVisible(true);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_formWindowOpened
@@ -4566,7 +4616,27 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnView;
     private widget.CekBox ChkPiutang;
     private widget.Tanggal DTPTgl;
+    private void BtnRefreshBayarActionPerformed(java.awt.event.ActionEvent evt) {
+        if (status.equals("belum")) {
+            TCari.setText("");
+            TCari1.setText("");
+            tampilAkunBayar2();
+            tampilAkunPiutang2();
+        } else if (status.equals("sudah")) {
+            tampilAkunBayarTersimpan();
+            tampilAkunPiutangTersimpan();
+        }
+        isHitung();
+        isKembali();
+        refreshDepositRefundData();
+    }
+
+    public widget.Button BtnRefreshBayar;
     public widget.TextBox Deposit;
+    public widget.TextBox TotalDeposit;
+    public widget.TextBox TotalRefund;
+    private widget.Label jLabelTotDeposit;
+    private widget.Label jLabelTotRefund;
     private javax.swing.JMenu MnBayi;
     private javax.swing.JMenuItem MnCariPeriksaLab;
     private javax.swing.JMenuItem MnCariPeriksaLab1;
@@ -5692,6 +5762,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             uangdeposit=getNetDeposit(TNoRw.getText());
             Deposit.setText(Valid.SetAngka(uangdeposit));
         }
+        double totDep = Sequel.cariIsiAngka("select ifnull(sum(besar_deposit),0) from deposit where no_rawat=?", TNoRw.getText());
+        double totRefOld = Sequel.cariIsiAngka("select ifnull(sum(besar_pengembalian),0) from pengembalian_deposit where no_rawat=?", TNoRw.getText());
+        double totRefNew = Sequel.cariIsiAngka("select ifnull(sum(total_refund),0) from pengembalian_deposit_v2 where no_rawat=?", TNoRw.getText());
+        if (TotalDeposit != null) TotalDeposit.setText(Valid.SetAngka(totDep));
+        if (TotalRefund != null) TotalRefund.setText(Valid.SetAngka(totRefOld + totRefNew));
         row2=tabModeAkunBayar.getRowCount();
         for(r=0;r<row2;r++){ 
             if(!tabModeAkunBayar.getValueAt(r,2).toString().equals("")){
@@ -8284,9 +8359,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
     public void refreshDepositRefundData() {
         try {
-            if (panelDepositRefund == null) return;
             String noRawat = TNoRw.getText().trim();
             if (noRawat.isEmpty()) {
+                if (TotalDeposit != null) TotalDeposit.setText("0");
+                if (TotalRefund != null) TotalRefund.setText("0");
+                if (panelDepositRefund == null) return;
                 TTotalDepositRef.setText("0");
                 TRefundSebelumnyaRef.setText("0");
                 TTerpakaiBillingRef.setText("0");
@@ -8303,14 +8380,20 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 return;
             }
 
-            TNoRwDep.setText(noRawat);
-            TNoRMDep.setText(TNoRM.getText());
-            TPasienDep.setText(TPasien.getText());
-
             double totalDeposit = Sequel.cariIsiAngka("select ifnull(sum(besar_deposit),0) from deposit where no_rawat=?", noRawat);
             double totalRefundOld = Sequel.cariIsiAngka("select ifnull(sum(besar_pengembalian),0) from pengembalian_deposit where no_rawat=?", noRawat);
             double totalRefundNew = Sequel.cariIsiAngka("select ifnull(sum(total_refund),0) from pengembalian_deposit_v2 where no_rawat=?", noRawat);
             double totalRefund = totalRefundOld + totalRefundNew;
+
+            if (TotalDeposit != null) TotalDeposit.setText(Valid.SetAngka(totalDeposit));
+            if (TotalRefund != null) TotalRefund.setText(Valid.SetAngka(totalRefund));
+
+            if (panelDepositRefund == null) return;
+
+            TNoRwDep.setText(noRawat);
+            TNoRMDep.setText(TNoRM.getText());
+            TPasienDep.setText(TPasien.getText());
+
             double totalPemakaian = Sequel.cariIsiAngka("select ifnull(sum(Uang_Muka),0) from nota_inap where no_rawat=?", noRawat);
             double saldoSaatIni = totalDeposit - totalPemakaian - totalRefund;
 

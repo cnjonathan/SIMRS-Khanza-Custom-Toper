@@ -1218,6 +1218,14 @@ public class frmUtama extends javax.swing.JFrame {
             }     
         }catch(Exception e){            
         } 
+
+        myInstance = this;
+
+        // Auto Updater Check (Saat Pertama Buka & Periodik Setiap 1 Menit untuk Uji Coba)
+        try {
+            simrskhanza.AutoUpdaterChecker.checkUpdateAsync(false);
+            simrskhanza.AutoUpdaterChecker.startPeriodicCheck(1);
+        } catch (Exception e) {}
     }
     
     public static frmUtama getInstance() {
@@ -1225,6 +1233,14 @@ public class frmUtama extends javax.swing.JFrame {
             myInstance = new frmUtama();
 
         return myInstance;
+    }
+
+    public static void setVersionText(String versionStr) {
+        if (myInstance != null && myInstance.jLabel7 != null && versionStr != null && !versionStr.isEmpty()) {
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                myInstance.jLabel7.setText(" Didesain & dibuat oleh Khanza.Soft Media A.K.A Tim IT RSUD Kartini Karanganyar Version " + versionStr + "\n");
+            });
+        }
     }
      
 
@@ -7560,13 +7576,21 @@ public class frmUtama extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(50, 50, 50));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/file-edit-16x16.png"))); // NOI18N
-        jLabel7.setText(" Didesain & dibuat oleh Khanza.Soft Media A.K.A Tim IT RSUD Kartini Karanganyar Version 3.0\n");
+        jLabel7.setText(" Didesain & dibuat oleh Khanza.Soft Media A.K.A Tim IT RSUD Kartini Karanganyar Version " + simrskhanza.AutoUpdaterChecker.getClientVersion() + "\n");
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel7.setIconTextGap(3);
         jLabel7.setName("jLabel7"); // NOI18N
         jLabel7.setPreferredSize(new java.awt.Dimension(550, 23));
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel7.setToolTipText("Klik untuk mengecek pembaruan SIMRS Khanza");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                simrskhanza.AutoUpdaterChecker.checkUpdateAsync(true);
+            }
+        });
         internalFrame4.add(jLabel7);
-        jLabel7.getAccessibleContext().setAccessibleName(" Didesain & dibuat oleh Khanza.Soft Media A.K.A Tim IT RSUD Kartini Karanganyar Version 3.0");
+        jLabel7.getAccessibleContext().setAccessibleName(" Didesain & dibuat oleh Khanza.Soft Media A.K.A Tim IT RSUD Kartini Karanganyar Version " + simrskhanza.AutoUpdaterChecker.CURRENT_VERSION);
 
         jSeparator8.setBackground(new java.awt.Color(255, 81, 102));
         jSeparator8.setForeground(new java.awt.Color(255, 81, 102));
