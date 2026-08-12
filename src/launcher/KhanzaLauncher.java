@@ -152,6 +152,20 @@ public class KhanzaLauncher extends JFrame {
         } catch (Exception e) {}
     }
 
+    private String getClientHostName() {
+        try {
+            return java.net.InetAddress.getLocalHost().getHostName();
+        } catch (Exception e) {}
+        return "PC-Client";
+    }
+
+    private String getClientIpAddress() {
+        try {
+            return java.net.InetAddress.getLocalHost().getHostAddress();
+        } catch (Exception e) {}
+        return "127.0.0.1";
+    }
+
     private String getRMEBaseUrl() {
         try {
             File xmlFile = new File(getAppDir(), "setting/database.xml");
@@ -297,9 +311,14 @@ public class KhanzaLauncher extends JFrame {
                 String localVer = getLocalVersion();
                 File jarFile = new File(appDir, "SIMRSKhanza.jar");
 
+                String hostName = getClientHostName();
+                String ipAddr = getClientIpAddress();
+
                 String baseUrl = getRMEBaseUrl();
-                String apiUrl = baseUrl + "/api/updater/check?current_version=" + localVer;
-                logDebug("RME BaseUrl: " + baseUrl + " | LocalVer: " + localVer);
+                String apiUrl = baseUrl + "/api/updater/check?current_version=" + localVer
+                              + "&hostname=" + java.net.URLEncoder.encode(hostName, "UTF-8")
+                              + "&ip=" + java.net.URLEncoder.encode(ipAddr, "UTF-8");
+                logDebug("RME BaseUrl: " + baseUrl + " | LocalVer: " + localVer + " | Host: " + hostName + " | IP: " + ipAddr);
 
                 HttpURLConnection conn = connectWithFallback(apiUrl);
 
@@ -614,7 +633,9 @@ public class KhanzaLauncher extends JFrame {
                             logDebug("[SettingCheck] File: " + filename + " | Local MD5: " + localHash + " | Server MD5: " + serverHash + " | NeedsDownload: " + needsDownload);
 
                             if (needsDownload) {
-                                String downloadUrl = baseUrl + "/api/updater/download/setting/" + filename;
+                                String downloadUrl = baseUrl + "/api/updater/download/setting/" + filename
+                                                   + "?hostname=" + java.net.URLEncoder.encode(getClientHostName(), "UTF-8")
+                                                   + "&ip=" + java.net.URLEncoder.encode(getClientIpAddress(), "UTF-8");
                                 updateSubStatus("Mengunduh setting: " + filename);
                                 
                                 try {

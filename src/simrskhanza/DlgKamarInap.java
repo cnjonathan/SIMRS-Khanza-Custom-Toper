@@ -98,7 +98,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import keuangan.DlgBilingRanap;
-import keuangan.DlgBillingV2;
+import keuangan.DlgBillingRanapV2;
 import keuangan.DlgIDRG;
 import keuangan.DlgIDRGProses;
 import keuangan.DlgLhtPiutang;
@@ -221,7 +221,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     public  DlgKamar kamar=new DlgKamar(null,false);
     private DlgCariReg reg=new DlgCariReg(null,false);
     public  DlgBilingRanap billing=new DlgBilingRanap( null,false);
-    public  DlgBillingV2 billingv2=new DlgBillingV2( null,false);
+    public  DlgBillingRanapV2 billingv2=new DlgBillingRanapV2( null,false);
     public  DlgDiagnosaPenyakit diagnosa=new DlgDiagnosaPenyakit(null,false);
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
     private SimpleDateFormat dateformat2 = new SimpleDateFormat("dd-MM-yyyy");
@@ -5046,7 +5046,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnBillingV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnBillingV2.setForeground(new java.awt.Color(50, 50, 50));
         MnBillingV2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnBillingV2.setText("Billing/Pembayaran Pasien");
+        MnBillingV2.setText("Billing Ranap V2");
         MnBillingV2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnBillingV2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnBillingV2.setName("MnBillingV2"); // NOI18N
@@ -18417,6 +18417,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         MnHemodialisa.setEnabled(akses.gethemodialisa()); 
         MnPenjualan1.setEnabled(akses.getpenjualan_obat()); 
         MnBilling.setEnabled(akses.getbilling_ranap()); 
+        MnBillingV2.setEnabled(akses.getbilling_ranap()); 
         MnCekKepesertaan.setEnabled(akses.getbpjs_cek_kartu());
         MnCekNIK.setEnabled(akses.getbpjs_cek_nik());
         MnRujukSisrute.setEnabled(akses.getsisrute_rujukan_keluar());

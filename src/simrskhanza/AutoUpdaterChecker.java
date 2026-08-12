@@ -126,7 +126,17 @@ public class AutoUpdaterChecker {
             try {
                 String baseUrl = getRMEBaseUrl();
                 String currentVer = getClientVersion();
-                String apiUrl = baseUrl + "/api/updater/check?current_version=" + currentVer;
+
+                String hostName = "PC-Client";
+                String ipAddr = "";
+                try {
+                    hostName = java.net.InetAddress.getLocalHost().getHostName();
+                    ipAddr = java.net.InetAddress.getLocalHost().getHostAddress();
+                } catch (Exception e) {}
+
+                String apiUrl = baseUrl + "/api/updater/check?current_version=" + currentVer
+                              + "&hostname=" + java.net.URLEncoder.encode(hostName, "UTF-8")
+                              + "&ip=" + java.net.URLEncoder.encode(ipAddr, "UTF-8");
 
                 HttpURLConnection conn = connectWithFallback(apiUrl);
 
