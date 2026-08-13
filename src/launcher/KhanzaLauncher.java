@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import javax.imageio.ImageIO;
+import javax.net.ssl.*;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -24,6 +27,31 @@ public class KhanzaLauncher extends JFrame {
     private JLabel lblSubStatus;
     private JProgressBar progressBar;
     private JLabel lblLogo;
+
+    static {
+        disableSSLVerification();
+    }
+
+    private static void disableSSLVerification() {
+        try {
+            TrustManager[] trustAllCerts = new TrustManager[]{
+                new X509TrustManager() {
+                    public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }
+                    public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+                    public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+                }
+            };
+
+            SSLContext sc = SSLContext.getInstance("TLS");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+
+            HostnameVerifier allHostsValid = (hostname, session) -> true;
+            HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+        } catch (Exception e) {
+            System.out.println("Warning: Gagal inisialisasi SSL bypass: " + e.getMessage());
+        }
+    }
 
     public KhanzaLauncher() {
         initUI();
@@ -251,6 +279,20 @@ public class KhanzaLauncher extends JFrame {
             try {
                 URL url = new URL(urlStr);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                if (conn instanceof HttpsURLConnection) {
+                    try {
+                        SSLContext sc = SSLContext.getInstance("TLS");
+                        sc.init(null, new TrustManager[]{
+                            new X509TrustManager() {
+                                public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }
+                                public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+                                public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+                            }
+                        }, new SecureRandom());
+                        ((HttpsURLConnection) conn).setSSLSocketFactory(sc.getSocketFactory());
+                        ((HttpsURLConnection) conn).setHostnameVerifier((hostname, session) -> true);
+                    } catch (Exception ignored) {}
+                }
                 conn.setRequestMethod("GET");
                 conn.setConnectTimeout(8000);
                 conn.setReadTimeout(12000);
