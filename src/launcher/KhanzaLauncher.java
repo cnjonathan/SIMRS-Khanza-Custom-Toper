@@ -799,8 +799,10 @@ public class KhanzaLauncher extends JFrame {
     private void mergeXmlProperties(File targetLocalFile, File newServerFile) {
         try {
             Properties localProps = new Properties();
-            try (InputStream is = new FileInputStream(targetLocalFile)) {
-                localProps.loadFromXML(is);
+            if (targetLocalFile.exists() && targetLocalFile.length() > 0) {
+                try (InputStream is = new FileInputStream(targetLocalFile)) {
+                    localProps.loadFromXML(is);
+                }
             }
 
             Properties serverProps = new Properties();
@@ -809,12 +811,14 @@ public class KhanzaLauncher extends JFrame {
             }
 
             boolean modified = false;
+            int changeCount = 0;
 
             for (String key : serverProps.stringPropertyNames()) {
-                // If local properties does not contain key, add new key
                 if (!localProps.containsKey(key)) {
                     localProps.setProperty(key, serverProps.getProperty(key));
                     modified = true;
+                    changeCount++;
+                    logDebug("[MergeXML] Added new key: " + key + " = " + serverProps.getProperty(key));
                 } else if (!key.equalsIgnoreCase("HOST") && 
                            !key.equalsIgnoreCase("DATABASE") && 
                            !key.equalsIgnoreCase("PORT") && 
@@ -823,12 +827,13 @@ public class KhanzaLauncher extends JFrame {
                            !key.equalsIgnoreCase("PORTWEB") && 
                            !key.equalsIgnoreCase("HOSTHYBRIDWEB") && 
                            !key.equalsIgnoreCase("URLRSUDRME")) {
-                    // For non-local database connection keys, update value if changed
                     String serverVal = serverProps.getProperty(key);
                     String localVal = localProps.getProperty(key);
                     if (serverVal != null && !serverVal.equals(localVal)) {
                         localProps.setProperty(key, serverVal);
                         modified = true;
+                        changeCount++;
+                        logDebug("[MergeXML] Updated key: " + key + " ('" + localVal + "' -> '" + serverVal + "')");
                     }
                 }
             }
@@ -837,10 +842,14 @@ public class KhanzaLauncher extends JFrame {
                 try (OutputStream os = new FileOutputStream(targetLocalFile)) {
                     localProps.storeToXML(os, "SIMRS Khanza Database Properties - Auto Updated", "UTF-8");
                 }
-                updateSubStatus("Variabel setting/database.xml berhasil diperbarui!");
+                updateSubStatus("Variabel setting/database.xml berhasil diperbarui (" + changeCount + " variabel)!");
+                logDebug("[MergeXML] SUCCESS wrote " + changeCount + " changes to " + targetLocalFile.getAbsolutePath());
+            } else {
+                logDebug("[MergeXML] No property changes needed.");
             }
         } catch (Exception e) {
-            System.out.println("Gagal merge xml properties: " + e.getMessage());
+            logDebug("[MergeXML] ERROR: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
