@@ -336,15 +336,19 @@ public class KhanzaLauncher extends JFrame {
                 boolean hasUpdate = parseJsonBool(json, "has_update");
                 String latestVersion = parseJsonVal(json, "latest_version");
 
-                // Step 1: Check & Download Report Files (jika ada yang baru / beda hash)
-                updateStatus("Memeriksa laporan (.jasper)...", 15);
+                // Step 1: Check & Download Libs (jika ada library .jar baru / beda hash)
+                updateStatus("Memeriksa pustaka library (.jar)...", 10);
+                boolean libsUpdated = downloadLibsIfAny(json, baseUrl);
+
+                // Step 2: Check & Download Report Files (jika ada yang baru / beda hash)
+                updateStatus("Memeriksa laporan (.jasper)...", 20);
                 boolean reportsUpdated = downloadReportsIfAny(json, baseUrl);
 
-                // Step 2: Check & Download Setting Files (seperti database.xml)
-                updateStatus("Memeriksa variabel setting (.xml)...", 30);
+                // Step 3: Check & Download Setting Files (seperti database.xml)
+                updateStatus("Memeriksa variabel setting (.xml)...", 35);
                 boolean settingsUpdated = downloadSettingsIfAny(json, baseUrl);
 
-                // Step 3: Check & Download SIMRSKhanza.jar (jika ada pembaruan versi / beda hash)
+                // Step 4: Check & Download SIMRSKhanza.jar (jika ada pembaruan versi / beda hash)
                 String serverJarHash = parseJsonVal(json, "jar_hash");
                 String localJarHash = getFileMD5(jarFile);
 
@@ -500,6 +504,87 @@ public class KhanzaLauncher extends JFrame {
         return -1;
     }
 
+    private boolean downloadLibsIfAny(String json, String baseUrl) {
+        boolean downloadedAny = false;
+        try {
+            int libsIdx = json.indexOf("\"libs\"");
+            if (libsIdx != -1) {
+                int startBracket = json.indexOf("[", libsIdx);
+                if (startBracket != -1) {
+                    int endBracket = findMatchingBracket(json, startBracket);
+                    if (endBracket != -1) {
+                        String libsJson = json.substring(startBracket, endBracket + 1);
+                        File appDir = getAppDir();
+                        File libDir = new File(appDir, "lib");
+                        if (!libDir.exists()) {
+                            libDir.mkdirs();
+                        }
+
+                        int cur = 0;
+                        while ((cur = libsJson.indexOf("\"filename\"", cur)) != -1) {
+                            int colonIdx = libsJson.indexOf(":", cur);
+                            if (colonIdx == -1) break;
+                            int startQuote = libsJson.indexOf("\"", colonIdx);
+                            if (startQuote == -1) break;
+                            int endQuote = libsJson.indexOf("\"", startQuote + 1);
+                            if (endQuote == -1) break;
+
+                            String filename = libsJson.substring(startQuote + 1, endQuote).trim();
+                            cur = endQuote + 1;
+
+                            int nextFn = libsJson.indexOf("\"filename\"", cur);
+                            int objEnd = nextFn != -1 ? nextFn : libsJson.length();
+
+                            String serverHash = "";
+                            int hashIdx = libsJson.indexOf("\"hash\"", endQuote);
+                            if (hashIdx != -1 && hashIdx < objEnd) {
+                                int hColon = libsJson.indexOf(":", hashIdx);
+                                if (hColon != -1 && hColon < objEnd) {
+                                    int hStart = libsJson.indexOf("\"", hColon);
+                                    if (hStart != -1 && hStart < objEnd) {
+                                        int hEnd = libsJson.indexOf("\"", hStart + 1);
+                                        if (hEnd != -1 && hEnd <= objEnd) {
+                                            serverHash = libsJson.substring(hStart + 1, hEnd).trim();
+                                        }
+                                    }
+                                }
+                            }
+                            logDebug("[LibHashTrace] file=" + filename + " hashIdx=" + hashIdx + " serverHash=" + serverHash);
+
+                            File localLib = new File(libDir, filename);
+                            String localHash = getFileMD5(localLib);
+
+                            boolean needsDownload = !localLib.exists() || localLib.length() == 0 ||
+                                (!serverHash.isEmpty() && !localHash.equalsIgnoreCase(serverHash));
+
+                            logDebug("[LibCheck] File: " + filename + " | Local MD5: " + localHash + " | Server MD5: " + serverHash + " | NeedsDownload: " + needsDownload);
+
+                            if (needsDownload) {
+                                String downloadUrl = baseUrl + "/api/updater/download/lib/" + filename;
+                                updateSubStatus("Mengunduh library: " + filename);
+                                try {
+                                    File tmpFile = new File(libDir, filename + ".tmp");
+                                    downloadFileSimple(downloadUrl, tmpFile.getAbsolutePath());
+                                    if (tmpFile.exists() && tmpFile.length() > 0) {
+                                        Files.move(tmpFile.toPath(), localLib.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                                        downloadedAny = true;
+                                        logDebug("[LibCheck] SUCCESS updated lib: " + filename + " to " + localLib.getAbsolutePath());
+                                    }
+                                } catch (Exception ex) {
+                                    logDebug("[LibCheck] ERROR download lib " + filename + ": " + ex.getMessage());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            logDebug("Error parsing libs: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return downloadedAny;
+    }
+
     private boolean downloadReportsIfAny(String json, String baseUrl) {
         boolean downloadedAny = false;
         try {
@@ -546,7 +631,7 @@ public class KhanzaLauncher extends JFrame {
                                     }
                                 }
                             }
-                            logDebug("[HashTrace] file=" + filename + " hashIdx=" + hashIdx + " hColon=" + hColon + " hStart=" + hStart + " hEnd=" + hEnd + " objEnd=" + objEnd + " serverHash=" + serverHash);
+                            logDebug("[HashTrace] file=" + filename + " hashIdx=" + hashIdx + " serverHash=" + serverHash);
 
                             File localReport = new File(reportDir, filename);
                             String localHash = getFileMD5(localReport);
