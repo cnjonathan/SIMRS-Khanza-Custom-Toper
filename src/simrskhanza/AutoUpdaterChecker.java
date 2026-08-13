@@ -14,6 +14,9 @@ import java.util.Properties;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import javax.net.ssl.*;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -25,6 +28,31 @@ public class AutoUpdaterChecker {
     public static final String CURRENT_VERSION = "3.0.0";
     private static boolean isChecking = false;
     private static ScheduledExecutorService scheduler;
+
+    static {
+        disableSSLVerification();
+    }
+
+    private static void disableSSLVerification() {
+        try {
+            TrustManager[] trustAllCerts = new TrustManager[]{
+                new X509TrustManager() {
+                    public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }
+                    public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+                    public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+                }
+            };
+
+            SSLContext sc = SSLContext.getInstance("TLS");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+
+            HostnameVerifier allHostsValid = (hostname, session) -> true;
+            HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+        } catch (Exception e) {
+            System.out.println("Warning: Gagal inisialisasi SSL bypass di AutoUpdaterChecker: " + e.getMessage());
+        }
+    }
 
     /**
      * Memulai timer periodik untuk mengecek update di background secara berkala
@@ -98,6 +126,20 @@ public class AutoUpdaterChecker {
             try {
                 URL url = new URL(urlStr);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                if (conn instanceof HttpsURLConnection) {
+                    try {
+                        SSLContext sc = SSLContext.getInstance("TLS");
+                        sc.init(null, new TrustManager[]{
+                            new X509TrustManager() {
+                                public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }
+                                public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+                                public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+                            }
+                        }, new SecureRandom());
+                        ((HttpsURLConnection) conn).setSSLSocketFactory(sc.getSocketFactory());
+                        ((HttpsURLConnection) conn).setHostnameVerifier((hostname, session) -> true);
+                    } catch (Exception ignored) {}
+                }
                 conn.setRequestMethod("GET");
                 conn.setConnectTimeout(6000);
                 conn.setReadTimeout(6000);
