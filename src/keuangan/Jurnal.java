@@ -110,7 +110,8 @@ public class Jurnal {
                             } 
                         }
                     }else{
-                        System.out.println("Notif : Debet dan Kredit tidak sama");
+                        System.out.println("Notif : Debet dan Kredit tidak sama (No. Jurnal: " + nojur + ")");
+                        simrskhanza.AutoUpdaterChecker.logError("Jurnal Tidak Balance (No. Jurnal: " + nojur + "): Debet dan Kredit tidak sama");
                         sukses=false;
                     }
                 }

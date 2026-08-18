@@ -226,8 +226,104 @@ public class AutoUpdaterChecker {
         }).start();
     }
 
-    private static void sendErrorToRME(String errorMsg, Throwable t) {
+    private static final java.util.concurrent.ConcurrentHashMap<String, Long> lastErrorMap = new java.util.concurrent.ConcurrentHashMap<>();
+    private static final ThreadLocal<Boolean> isSendingLog = ThreadLocal.withInitial(() -> Boolean.FALSE);
+    private static boolean isGlobalHandlerInstalled = false;
+
+    /**
+     * Memasang Global Uncaught Exception Handler dan PrintStream Interceptor
+     * agar semua System.out.println("Notifikasi : ...") dan exception otomatis terkirim ke RSUD RME.
+     */
+    public static synchronized void installGlobalErrorHandler() {
+        if (isGlobalHandlerInstalled) return;
+        isGlobalHandlerInstalled = true;
+
+        try {
+            // 1. Tangkap unhandled exception di semua thread
+            Thread.setDefaultUncaughtExceptionHandler((thread, ex) -> {
+                logError("Uncaught Exception in Thread [" + thread.getName() + "]: " + ex.getMessage(), ex);
+            });
+
+            // 2. Pasang PrintStream interceptor untuk System.out dan System.err
+            java.io.PrintStream origOut = System.out;
+            java.io.PrintStream origErr = System.err;
+
+            System.setOut(new java.io.PrintStream(origOut) {
+                @Override
+                public void println(String x) {
+                    super.println(x);
+                    checkAndInterceptLog(x);
+                }
+                @Override
+                public void print(String s) {
+                    super.print(s);
+                }
+            });
+
+            System.setErr(new java.io.PrintStream(origErr) {
+                @Override
+                public void println(String x) {
+                    super.println(x);
+                    checkAndInterceptLog(x);
+                }
+            });
+        } catch (Exception e) {
+            System.out.println("Warning: Gagal memasang Global Error Handler: " + e.getMessage());
+        }
+    }
+
+    private static void checkAndInterceptLog(String msg) {
+        if (msg == null || msg.trim().isEmpty()) return;
+        if (isSendingLog.get() == Boolean.TRUE) return;
+
+        // Abaikan log internal updater / lisensi / notifikasi normal
+        if (msg.contains("Gagal mengirim log error") || 
+            msg.contains("AutoUpdater Warning") || 
+            msg.contains("Koneksi Berhasil") || 
+            msg.contains("Licensi yang dianut") || 
+            msg.contains("Software ini adalah") ||
+            msg.contains("query_cari_nota") ||
+            msg.contains("sql autonomer")) {
+            return;
+        }
+
+        // Tangkap pola error khas Khanza & SQL
+        boolean isError = false;
+        if (msg.startsWith("Notifikasi :") || 
+            msg.startsWith("Notif :") || 
+            msg.startsWith("Error load") || 
+            msg.startsWith("Error :") || 
+            msg.contains("MySQLSyntaxErrorException") || 
+            msg.contains("MySQLIntegrityConstraintViolationException") || 
+            msg.contains("SQLException") || 
+            msg.contains("Duplicate entry") || 
+            msg.contains("Debet dan Kredit tidak sama") ||
+            msg.contains("Table '") && msg.contains("doesn't exist")) {
+            isError = true;
+        }
+
+        if (isError) {
+            logError(msg, null);
+        }
+    }
+
+    public static void logError(String errorMsg) {
+        logError(errorMsg, null);
+    }
+
+    public static void logError(String errorMsg, Throwable t) {
+        if (errorMsg == null || errorMsg.trim().isEmpty()) return;
+
+        // Debounce: Abaikan pesan error yang sama persis jika terjadi dalam kurun waktu 3 detik
+        long now = System.currentTimeMillis();
+        Long lastTime = lastErrorMap.get(errorMsg);
+        if (lastTime != null && (now - lastTime < 3000)) {
+            return;
+        }
+        lastErrorMap.put(errorMsg, now);
+
         new Thread(() -> {
+            isSendingLog.set(Boolean.TRUE);
             try {
                 String baseUrl = getRMEBaseUrl();
                 String apiUrl = baseUrl + "/api/updater/log_error";
@@ -252,21 +348,55 @@ public class AutoUpdaterChecker {
                     stackTrace.replace("\"", "\\\"").replace("\r", "").replace("\n", "\\n")
                 );
 
-                HttpURLConnection conn = connectWithFallback(apiUrl);
-                conn.setRequestMethod("POST");
-                conn.setDoOutput(true);
-                conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-
-                try (java.io.OutputStream os = conn.getOutputStream()) {
-                    byte[] input = jsonPayload.getBytes("UTF-8");
-                    os.write(input, 0, input.length);
-                }
-
-                conn.getResponseCode();
+                sendPostJson(apiUrl, jsonPayload);
             } catch (Exception ex) {
-                System.out.println("Gagal mengirim log error: " + ex.getMessage());
+                // Ignore failure silently to prevent infinite loop
+            } finally {
+                isSendingLog.set(Boolean.FALSE);
             }
         }).start();
+    }
+
+    private static void sendPostJson(String urlStr, String jsonPayload) throws Exception {
+        URL url = new URL(urlStr);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        if (conn instanceof HttpsURLConnection) {
+            try {
+                SSLContext sc = SSLContext.getInstance("TLS");
+                sc.init(null, new TrustManager[]{
+                    new X509TrustManager() {
+                        public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }
+                        public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+                        public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+                    }
+                }, new SecureRandom());
+                ((HttpsURLConnection) conn).setSSLSocketFactory(sc.getSocketFactory());
+                ((HttpsURLConnection) conn).setHostnameVerifier((hostname, session) -> true);
+            } catch (Exception ignored) {}
+        }
+        conn.setRequestMethod("POST");
+        conn.setConnectTimeout(6000);
+        conn.setReadTimeout(6000);
+        conn.setDoOutput(true);
+        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+
+        try (java.io.OutputStream os = conn.getOutputStream()) {
+            byte[] input = jsonPayload.getBytes("UTF-8");
+            os.write(input, 0, input.length);
+            os.flush();
+        }
+
+        int respCode = conn.getResponseCode();
+        try (InputStream is = (respCode >= 200 && respCode < 300) ? conn.getInputStream() : conn.getErrorStream()) {
+            if (is != null) {
+                byte[] buf = new byte[1024];
+                while (is.read(buf) != -1) {}
+            }
+        }
+    }
+
+    private static void sendErrorToRME(String errorMsg, Throwable t) {
+        logError(errorMsg, t);
     }
 
     private static void promptUpdate(String latestVersion, String changelog, boolean isMandatory) {

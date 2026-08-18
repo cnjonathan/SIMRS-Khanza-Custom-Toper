@@ -1221,8 +1221,9 @@ public class frmUtama extends javax.swing.JFrame {
 
         myInstance = this;
 
-        // Auto Updater Check (Saat Pertama Buka & Periodik Setiap 1 Menit untuk Uji Coba)
+        // Auto Updater Check & Global Error Handler (Saat Pertama Buka & Periodik Setiap 1 Menit)
         try {
+            simrskhanza.AutoUpdaterChecker.installGlobalErrorHandler();
             simrskhanza.AutoUpdaterChecker.checkUpdateAsync(false);
             simrskhanza.AutoUpdaterChecker.startPeriodicCheck(1);
         } catch (Exception e) {}

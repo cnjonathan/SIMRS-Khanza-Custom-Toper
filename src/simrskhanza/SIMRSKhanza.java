@@ -17,6 +17,7 @@ public class SIMRSKhanza {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        AutoUpdaterChecker.installGlobalErrorHandler();
         WidgetUtilities.invokeLater(() -> {
            frmUtama utama=frmUtama.getInstance();
            utama.isWall();
