@@ -23,7 +23,7 @@ public class ButtonRendererRegPeriksa extends JButton implements TableCellRender
     }
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         setText((value == null) ? nama_button : value.toString());
-        if(value == null){
+        if(value == null || value.toString().equals("Tidak Valid") || value.toString().equals("Belum Diset") || value.toString().equals("Sync") || value.toString().equals("Edit Pasien")){
             setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png")));
         }else{
             setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png")));

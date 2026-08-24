@@ -344,26 +344,27 @@ public final class DlgReg extends javax.swing.JDialog {
             "SEP", //13
             "Encounter", //14
             "IHS", //15
-            "Jenis Bayar", //16
-            "Penanggung Jawab", //17
-            "Alamat P.J.", //18
-            "Hubungan P.J.", //19
-            "Biaya Regristrasi", //20
-            "Status", //21
-            "No.Telp", //22
-            "Stts Rawat", //23
-            "Stts Poli", //24
-            "Kode Poli", //25
-            "Kode PJ", //26
-            "Status Bayar", //27
-            "User Petugas", //28
-            "IP", //29
-            "Hostname", //30
-            "Practitioner IHS", //31
-            "Patient", //32
-            "Location", //33
-            "Patient IHS", //34
-            "Encounter ID" //35
+            "Whatsapp", //16
+            "Jenis Bayar", //17
+            "Penanggung Jawab", //18
+            "Alamat P.J.", //19
+            "Hubungan P.J.", //20
+            "Biaya Regristrasi", //21
+            "Status", //22
+            "No.Telp", //23
+            "Stts Rawat", //24
+            "Stts Poli", //25
+            "Kode Poli", //26
+            "Kode PJ", //27
+            "Status Bayar", //28
+            "User Petugas", //29
+            "IP", //30
+            "Hostname", //31
+            "Practitioner IHS", //32
+            "Patient", //33
+            "Location", //34
+            "Patient IHS", //35
+            "Encounter ID" //36
         }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -387,6 +388,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 java.lang.Object.class, 
                 java.lang.Object.class, 
                 java.lang.Object.class,
+                java.lang.Object.class, 
                 java.lang.Object.class, 
                 java.lang.Object.class, 
                 java.lang.Object.class, 
@@ -605,6 +607,15 @@ public final class DlgReg extends javax.swing.JDialog {
                         isPas();
                         isNumber();                                                    
                     }  
+                    if(!TNoRM.getText().trim().equals("")){
+                        String no_tlp = NoTelp.getText();
+                        if(no_tlp.equals("")){
+                            no_tlp = Sequel.cariIsi("select pasien.no_tlp from pasien where pasien.no_rkm_medis=?", TNoRM.getText());
+                        }
+                        if(!checkWhatsappStatus(no_tlp).equals("Valid")){
+                            notif_auto_close("Nomor WhatsApp Pasien Tidak Valid.<br>Data Nomor WhatsApp Harus Valid!");
+                        }
+                    }
                     TNoRM.requestFocus();
                 }
             }
@@ -3684,7 +3695,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         tanggal = tbPetugas.getValueAt(tbPetugas.getSelectedRow(),3).toString();
-        kode_poli_sebelum = tbPetugas.getValueAt(tbPetugas.getSelectedRow(),25).toString();
+        kode_poli_sebelum = tbPetugas.getValueAt(tbPetugas.getSelectedRow(),26).toString();
         kode_dokter_sebelum = tbPetugas.getValueAt(tbPetugas.getSelectedRow(),5).toString();
         if(TNoReg.getText().trim().equals("")){
             Valid.textKosong(TNoReg,"No.Regristrasi");
@@ -4630,7 +4641,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 }else if(i==14){
                      kirim_satu_sehat_encounter();
                      notif_auto_close("Hasil kirim encounter: "+status_kirim_encounter);
-                }else if(i==15){
+                }else if(i==15 || i==16){
                      pasien.emptTeks();
                      pasien.isCek();
                      pasien.edit_pasien(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),tbPetugas.getColumnModel().getColumnIndex("No.RM")).toString());
@@ -11633,6 +11644,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 where_kehadiran = "";
         }
         Valid.tabelKosong(tabMode);   
+        waStatusCache.clear();
         try {
             if(CrPoli.getText().trim().equals("")&&CrDokter.getText().equals("")&&TCari.equals("")){
                 ps=koneksi.prepareStatement("select "+
@@ -11893,6 +11905,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                         rs.getString("no_sep"),
                         encounter,
                         ihs_pasien,
+                        checkWhatsappStatus(rs.getString("no_tlp")),
                         rs.getString("png_jawab"),
                         rs.getString("p_jawab"),
                         rs.getString("almt_pj"),
@@ -11918,6 +11931,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 
                 tbPetugas.getColumn("Encounter").setCellRenderer(new ButtonRendererRegPeriksa("Sync"));
                 tbPetugas.getColumn("IHS").setCellRenderer(new ButtonRendererRegPeriksa("Edit Pasien"));
+                tbPetugas.getColumn("Whatsapp").setCellRenderer(new ButtonRendererRegPeriksa("Edit Pasien"));
                 // tbPetugas.getColumn("IHS").setCellEditor(new ButtonEditorIHSPasien(new JCheckBox(), tabMode, tbPetugas));
                 
                 // table autofit
@@ -12157,25 +12171,124 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             KdDokter.setText(tbPetugas.getValueAt(row, 5).toString());
             TDokter.setText(tbPetugas.getValueAt(row, 6).toString());
             TNoRM.setText(tbPetugas.getValueAt(row, 7).toString());
-            IHS_SatuSehat.setText(tbPetugas.getValueAt(row, 34) == null ? "" : tbPetugas.getValueAt(row, 34).toString());
-            Practitioner_SatuSehat.setText(tbPetugas.getValueAt(row, 31) == null ? "" : tbPetugas.getValueAt(row, 31).toString());
-            Patient_SatuSehat.setText(tbPetugas.getValueAt(row, 32) == null ? "" : tbPetugas.getValueAt(row, 32).toString());
-            Location_SatuSehat.setText(tbPetugas.getValueAt(row, 33) == null ? "" : tbPetugas.getValueAt(row, 33).toString());
+            IHS_SatuSehat.setText(tbPetugas.getValueAt(row, 35) == null ? "" : tbPetugas.getValueAt(row, 35).toString());
+            Practitioner_SatuSehat.setText(tbPetugas.getValueAt(row, 32) == null ? "" : tbPetugas.getValueAt(row, 32).toString());
+            Patient_SatuSehat.setText(tbPetugas.getValueAt(row, 33) == null ? "" : tbPetugas.getValueAt(row, 33).toString());
+            Location_SatuSehat.setText(tbPetugas.getValueAt(row, 34) == null ? "" : tbPetugas.getValueAt(row, 34).toString());
             isCekPasien();
             TPasien.setText(tbPetugas.getValueAt(row, 8).toString());
             TPoli.setText(tbPetugas.getValueAt(row, 11).toString());          
-            nmpnj.setText(tbPetugas.getValueAt(row, 16).toString());
-            TPngJwb.setText(tbPetugas.getValueAt(row, 17).toString());
-            TAlmt.setText(tbPetugas.getValueAt(row, 18).toString());
-            THbngn.setText(tbPetugas.getValueAt(row, 19).toString());
-            TBiaya.setText(tbPetugas.getValueAt(row, 20).toString());
-            TStatus.setText(tbPetugas.getValueAt(row, 21).toString());  
-            kdpoli.setText(tbPetugas.getValueAt(row, 25).toString()); 
-            kdpnj.setText(tbPetugas.getValueAt(row, 26).toString()); 
+            nmpnj.setText(tbPetugas.getValueAt(row, 17).toString());
+            TPngJwb.setText(tbPetugas.getValueAt(row, 18).toString());
+            TAlmt.setText(tbPetugas.getValueAt(row, 19).toString());
+            THbngn.setText(tbPetugas.getValueAt(row, 20).toString());
+            TBiaya.setText(tbPetugas.getValueAt(row, 21).toString());
+            TStatus.setText(tbPetugas.getValueAt(row, 22).toString());  
+            kdpoli.setText(tbPetugas.getValueAt(row, 26).toString()); 
+            kdpnj.setText(tbPetugas.getValueAt(row, 27).toString()); 
             Sequel.cariIsi("select rujuk_masuk.perujuk from rujuk_masuk where rujuk_masuk.no_rawat=?", AsalRujukan, tbPetugas.getValueAt(row, 2).toString());
             TNoRw.setText(tbPetugas.getValueAt(row, 2).toString());
             TNoReg.setText(tbPetugas.getValueAt(row, 1).toString());
         }
+    }
+
+    private java.util.Map<String, String> waStatusCache = new java.util.HashMap<>();
+
+    private void bypassSSLConnection(java.net.HttpURLConnection conn) {
+        if (conn instanceof javax.net.ssl.HttpsURLConnection) {
+            try {
+                javax.net.ssl.TrustManager[] trustAllCerts = new javax.net.ssl.TrustManager[]{
+                    new javax.net.ssl.X509TrustManager() {
+                        public java.security.cert.X509Certificate[] getAcceptedIssuers() { return new java.security.cert.X509Certificate[0]; }
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) {}
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) {}
+                    }
+                };
+                javax.net.ssl.SSLContext sc = javax.net.ssl.SSLContext.getInstance("SSL");
+                sc.init(null, trustAllCerts, new java.security.SecureRandom());
+                ((javax.net.ssl.HttpsURLConnection) conn).setSSLSocketFactory(sc.getSocketFactory());
+                ((javax.net.ssl.HttpsURLConnection) conn).setHostnameVerifier((hostname, session) -> true);
+            } catch (Exception e) {
+                System.out.println("Gagal bypass SSL: " + e);
+            }
+        }
+    }
+
+    private String checkWhatsappStatus(String noHp) {
+        if (noHp == null || noHp.trim().isEmpty()) {
+            return "Tidak Valid";
+        }
+        
+        String noHpClean = noHp.replaceAll("[^0-9]", "");
+        if (noHpClean.startsWith("8")) {
+            noHpClean = "0" + noHpClean;
+        }
+        
+        if (noHpClean.length() < 8) {
+            return "Tidak Valid";
+        }
+        
+        if (waStatusCache.containsKey(noHpClean)) {
+            return waStatusCache.get(noHpClean);
+        }
+        
+        String urlRme = koneksiDB.URLRSUDRME();
+        if (urlRme == null || urlRme.trim().isEmpty()) {
+            waStatusCache.put(noHpClean, "Belum Diset");
+            return "Belum Diset";
+        }
+        
+        String statusResult = "Belum Diset";
+        try {
+            String urlStr = urlRme.trim();
+            if (urlStr.endsWith("/")) {
+                urlStr = urlStr.substring(0, urlStr.length() - 1);
+            }
+            if (!urlStr.contains("anjungan_v4/check_whatsapp_status")) {
+                urlStr += "/anjungan_v4/check_whatsapp_status";
+            }
+            
+            java.net.URL url = new java.net.URL(urlStr);
+            java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
+            bypassSSLConnection(conn);
+            conn.setRequestMethod("POST");
+            conn.setConnectTimeout(3000);
+            conn.setReadTimeout(3000);
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setDoOutput(true);
+            
+            String postData = "no_hp=" + java.net.URLEncoder.encode(noHpClean, "UTF-8");
+            try (java.io.OutputStream os = conn.getOutputStream()) {
+                byte[] input = postData.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+            
+            if (conn.getResponseCode() == 200) {
+                try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.InputStreamReader(conn.getInputStream(), "utf-8"))) {
+                    StringBuilder responseStr = new StringBuilder();
+                    String responseLine;
+                    while ((responseLine = br.readLine()) != null) {
+                        responseStr.append(responseLine.trim());
+                    }
+                    com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+                    com.fasterxml.jackson.databind.JsonNode node = mapper.readTree(responseStr.toString());
+                    if (node.has("success") && node.get("success").asBoolean()) {
+                        if (node.has("data") && node.get("data").has("status") && node.get("data").get("status").asBoolean()) {
+                            statusResult = "Valid";
+                        } else {
+                            statusResult = "Tidak Valid";
+                        }
+                    } else {
+                        statusResult = "Belum Diset";
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi checkWhatsappStatus : " + e);
+        }
+        
+        waStatusCache.put(noHpClean, statusResult);
+        return statusResult;
     }
 
 

@@ -1573,4 +1573,14 @@ public class koneksiDB {
         }
         return var;
     }
+
+    public static String URLRSUDRME(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("URLRSUDRME");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
 }
