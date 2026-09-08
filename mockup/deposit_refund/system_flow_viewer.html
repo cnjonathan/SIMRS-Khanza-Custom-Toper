@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>System Flow Viewer - Deposit & Refund Pasien SIMRS Khanza</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#b0004a",
+                        "on-primary": "#ffffff",
+                        "primary-hover": "#90003b",
+                        "surface": "#f9f9f9",
+                        "surface-container": "#eeeeee",
+                        "on-surface": "#1a1c1c",
+                        "outline": "#8e6f74"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F4F6F9;
+            color: #1a1c1c;
+        }
+
+        .material-symbols-outlined {
+            font-size: 20px;
+            vertical-align: middle;
+        }
+
+        .tab-btn.active {
+            border-bottom: 3px solid #b0004a;
+            color: #b0004a;
+            font-weight: 700;
+            background-color: #ffffff;
+        }
+
+        .mermaid-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #E5E7EB;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="bg-[#b0004a] text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-2xl">account_tree</span>
+                <div>
+                    <h1 class="text-lg font-bold leading-tight">System Flow Diagram Deposit & Refund Pasien</h1>
+                    <p class="text-xs text-pink-100">SIMRS Khanza - Integrasi DlgBilingRanap, DlgDeposit & DlgPengembalianDepositPasien</p>
+                </div>
+            </div>
+
+            <!-- Quick Links to Mockup Pages -->
+            <nav class="flex items-center gap-2 text-xs">
+                <a href="deposit.html" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded flex items-center gap-1 transition">
+                    <span class="material-symbols-outlined text-sm">payments</span> Form Deposit
+                </a>
+                <a href="refund.html" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded flex items-center gap-1 transition">
+                    <span class="material-symbols-outlined text-sm">price_check</span> Form Refund
+                </a>
+                <a href="mutasi.html" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded flex items-center gap-1 transition">
+                    <span class="material-symbols-outlined text-sm">history</span> Mutasi Deposit
+                </a>
+                <a href="system_flow_deposit_refund.md" target="_blank" class="px-3 py-1.5 bg-yellow-400 text-slate-900 font-semibold rounded flex items-center gap-1 hover:bg-yellow-300 transition">
+                    <span class="material-symbols-outlined text-sm">description</span> Read Spec Markdown
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
+
+        <!-- Navigation Tabs -->
+        <div class="bg-white rounded-t-lg shadow-sm border-b border-gray-200 flex flex-wrap gap-1 px-2 pt-2 text-sm font-medium text-gray-600">
+            <button onclick="switchTab('tab-flowchart')" id="btn-tab-flowchart" class="tab-btn active px-4 py-3 rounded-t-md flex items-center gap-2 transition">
+                <span class="material-symbols-outlined">schema</span> System Flowchart Utama
+            </button>
+            <button onclick="switchTab('tab-sequence')" id="btn-tab-sequence" class="tab-btn px-4 py-3 rounded-t-md flex items-center gap-2 transition">
+                <span class="material-symbols-outlined">format_list_numbered</span> Sequence Diagrams
+            </button>
+            <button onclick="switchTab('tab-state')" id="btn-tab-state" class="tab-btn px-4 py-3 rounded-t-md flex items-center gap-2 transition">
+                <span class="material-symbols-outlined">move_down</span> State Transitions
+            </button>
+            <button onclick="switchTab('tab-accounting')" id="btn-tab-accounting" class="tab-btn px-4 py-3 rounded-t-md flex items-center gap-2 transition">
+                <span class="material-symbols-outlined">table_chart</span> Matriks Jurnal Akuntansi
+            </button>
+            <button onclick="switchTab('tab-db')" id="btn-tab-db" class="tab-btn px-4 py-3 rounded-t-md flex items-center gap-2 transition">
+                <span class="material-symbols-outlined">database</span> Skema Database ERD
+            </button>
+        </div>
+
+        <!-- TAB 1: System Flowchart -->
+        <section id="tab-flowchart" class="tab-content block py-6">
+            <div class="mermaid-card">
+                <div class="border-b pb-3 mb-4 flex justify-between items-center">
+                    <div>
+                        <h2 class="text-base font-bold text-gray-800">System Flowchart: End-to-End Process Deposit & Refund Pasien</h2>
+                        <p class="text-xs text-gray-500">Alur transaksi penerimaan deposit, kalkulasi pada billing ranap, hingga auto/manual refund.</p>
+                    </div>
+                    <span class="bg-pink-100 text-pink-800 text-xs px-2.5 py-1 rounded font-medium">Flowchart</span>
+                </div>
+                <div class="mermaid flex justify-center overflow-x-auto">flowchart TD
+    Start([Mulai Transaksi Pasien]) --> InputDeposit["Petugas Kasir Buka DlgDeposit.java"]
+    InputDeposit --> CekBillingVerified{"Apakah Billing Sudah Terverifikasi / Lunas?"}
+    
+    CekBillingVerified -- Ya --> BlockDeposit["Gagal: Transaksi Terkunci / Billing Terverifikasi"]
+    BlockDeposit --> EndFail([Selesai - Pembatalan])
+    
+    CekBillingVerified -- Tidak --> EntryDeposit["Input No.Rawat, Akun Bayar, Nominal Deposit & Keterangan"]
+    EntryDeposit --> ValidasiInput{"Validasi Nominal Lebih Dari 0 & Akun Bayar Valid?"}
+    
+    ValidasiInput -- Tidak --> AlertValidasi["Tampilkan Alert Form Tidak Lengkap"]
+    AlertValidasi --> EntryDeposit
+    
+    ValidasiInput -- Ya --> SimpanDepositDB["Simpan Record ke Tabel deposit & tagihan_sadewa"]
+    SimpanDepositDB --> PostJurnalDeposit["Posting Jurnal: Debet Kas/Bank, Kredit Uang Muka Ranap"]
+    PostJurnalDeposit --> CetakKwitansiDep["Cetak Kwitansi Deposit Pasien"]
+    CetakKwitansiDep --> ProsesPerawatan["Pasien Menjalani Perawatan Inap / Jalan"]
+    
+    ProsesPerawatan --> PenutupanBilling["Penanganan Billing: DlgBilingRanap.java / DlgBillingRanapV2.java"]
+    PenutupanBilling --> HitungTotal["Sistem Hitung Tagihan & Sum Deposit"]
+    
+    HitungTotal --> Bandingkan{"Bandingkan uangdeposit vs Total Tagihan"}
+    
+    Bandingkan -- "Deposit Kurang Dari Tagihan" --> Kekurangan["Hitung Kekurangan = Tagihan - Deposit"]
+    Kekurangan --> PasienBayarSisa["Pasien Bayar Sisa Kekurangan via Cash / QRIS / Transfer / Piutang"]
+    PasienBayarSisa --> JurnalPelunasan["Jurnal Billing: Debet Uang Muka Ranap & Kas, Kredit Pendapatan Layanan"]
+    JurnalPelunasan --> CloseBilling([Billing Selesai / Lunas])
+
+    Bandingkan -- "Deposit Sama Dengan Tagihan" --> PasienPass["Kekurangan = 0, Sisa Deposit = 0"]
+    PasienPass --> JurnalPelunasan
+
+    Bandingkan -- "Deposit Lebih Dari Tagihan" --> Kelebihan["Hitung Sisa Deposit = Deposit - Tagihan"]
+    Kelebihan --> AutoRefund{"Metode Refund?"}
+    
+    AutoRefund -- Automatic pada Billing --> SimpanAutoRefund["Simpan ke pengembalian_deposit / pengembalian_deposit_v2"]
+    AutoRefund -- Manual oleh Kasir --> KasirFormRefund["Buka DlgPengembalianDepositPasien.java"]
+    KasirFormRefund --> SimpanAutoRefund
+    
+    SimpanAutoRefund --> JurnalRefund["Jurnal Refund: Debet Uang Muka Ranap, Kredit Kas/Bank & Sisa Uang Muka"]
+    JurnalRefund --> CetakKwitansiRefund["Cetak Kwitansi Refund / Pengembalian Deposit Pasien"]
+    CetakKwitansiRefund --> CloseBilling</div>
+            </div>
+        </section>
+
+        <!-- TAB 2: Sequence Diagrams -->
+        <section id="tab-sequence" class="tab-content hidden py-6 space-y-6">
+            <!-- Sub-Sequence 1 -->
+            <div class="mermaid-card">
+                <h3 class="text-base font-bold text-gray-800 border-b pb-2 mb-4">1. Sequence Diagram: Input Deposit Pasien (DlgDeposit.java)</h3>
+                <div class="mermaid flex justify-center overflow-x-auto">sequenceDiagram
+    autonumber
+    actor Kasir as Petugas Kasir
+    participant Form as DlgDeposit.java
+    participant Sequel as SQL Engine
+    participant DB as MySQL Database
+    participant Jurnal as Jurnal Engine
+
+    Kasir->>Form: Pilih No. Rawat Pasien & Input Nominal Deposit
+    Form->>Sequel: cariRegistrasi(TNoRw)
+    Sequel->>DB: SELECT count(*) FROM reg_periksa WHERE no_rawat=? AND stts='Lunas'
+    DB-->>Sequel: Return Count
+
+    alt Billing Sudah Terverifikasi
+        Sequel-->>Form: Count > 0
+        Form-->>Kasir: Show Alert Data billing terverifikasi
+    else Billing Masih Open
+        Sequel-->>Form: Count == 0
+        Kasir->>Form: Klik BtnSimpan
+        Form->>Sequel: AutoCommitFalse()
+        Form->>Sequel: menyimpantf2(deposit, values...)
+        Sequel->>DB: INSERT INTO deposit
+        
+        Form->>Form: Read cache/akunbayar.iyem
+        Form->>Sequel: menyimpantf2(tampjurnal, Debet, Kredit)
+        Sequel->>DB: INSERT INTO tampjurnal
+        
+        Form->>Jurnal: simpanJurnal(no_deposit, U, DEPOSIT PASIEN)
+        Jurnal->>DB: Transfer tampjurnal -> jurnal & detailjurnal
+        
+        Form->>Sequel: menyimpantf2(tagihan_sadewa, values...)
+        Sequel->>DB: INSERT INTO tagihan_sadewa
+        
+        alt Transaksi Sukses
+            Form->>Sequel: Commit()
+            Sequel-->>Form: Success
+            Form-->>Kasir: Refresh Table & Reset Form
+            Kasir->>Form: Klik Print Kwitansi
+            Form->>DB: Query Kwitansi Data
+            Form-->>Kasir: Tampilkan rptKwitansiDeposit.jasper
+        else Terjadi Error
+            Form->>Sequel: RollBack()
+            Form-->>Kasir: Show Alert Transaksi dibatalkan
+        end
+        Form->>Sequel: AutoCommitTrue()
+    end</div>
+            </div>
+
+            <!-- Sub-Sequence 2 -->
+            <div class="mermaid-card">
+                <h3 class="text-base font-bold text-gray-800 border-b pb-2 mb-4">2. Sequence Diagram: Perhitungan Billing Ranap & Refund (DlgBilingRanap.java)</h3>
+                <div class="mermaid flex justify-center overflow-x-auto">sequenceDiagram
+    autonumber
+    actor Kasir as Petugas Kasir Billing
+    participant BillForm as DlgBilingRanap.java
+    participant DB as MySQL Database
+    participant Jurnal as Jurnal Engine
+
+    Kasir->>BillForm: Buka Billing Pasien (Set No. Rawat)
+    BillForm->>DB: SELECT SUM(besar_deposit) FROM deposit WHERE no_rawat=?
+    DB-->>BillForm: Return total uangdeposit
+    
+    BillForm->>DB: Query Total Rincian Biaya Tagihan Pasien
+    DB-->>BillForm: Return total tagihanppn
+    
+    BillForm->>BillForm: Hitung Selisih: sisadeposit = uangdeposit - tagihanppn
+
+    Kasir->>BillForm: Klik Tombol Simpan / Closing Billing
+
+    alt Kelebihan Deposit (uangdeposit > tagihanppn)
+        BillForm->>DB: INSERT INTO tampjurnal (Sisa_Uang_Muka_Ranap, Kredit, sisadeposit)
+        BillForm->>DB: INSERT INTO pengembalian_deposit (no_rawat, tanggal, nip, besar_pengembalian)
+        BillForm->>Jurnal: simpanJurnal(no_rawat, U, PENGEMBALIAN DEPOSIT)
+    else Deposit Memotong Tagihan (uangdeposit <= tagihanppn)
+        BillForm->>DB: INSERT INTO tampjurnal (Uang_Muka_Ranap, Debet, uangdeposit)
+        BillForm->>Jurnal: simpanJurnal(no_rawat, U, PELUNASAN BILLING RANAP)
+    end
+
+    BillForm->>DB: UPDATE reg_periksa SET status_bayar='Lunas'
+    BillForm-->>Kasir: Billing Berhasil Disimpan & Nota Terbit</div>
+            </div>
+        </section>
+
+        <!-- TAB 3: State Transitions -->
+        <section id="tab-state" class="tab-content hidden py-6">
+            <div class="mermaid-card">
+                <h3 class="text-base font-bold text-gray-800 border-b pb-2 mb-4">State Transition Diagram: Siklus Hidup Uang Deposit Pasien</h3>
+                <div class="mermaid flex justify-center overflow-x-auto">flowchart TD
+    S0([Mulai]) --> S1["Draft: Form Input Deposit"]
+    S1 --> S2["Validated: Check Billing Passed"]
+    S1 --> S3["Cancelled: Batal Input"]
+    S2 --> S4["Deposited: Simpan DB dan Post Jurnal"]
+    S4 --> S5["Partial Refunded: Refund Sebagian"]
+    S5 --> S4
+    S4 --> S6["Voided: Hapus Deposit"]
+    S6 --> S7([Selesai Batal])
+    S4 --> S8["Settled: Deposit Kurang Dari Tagihan"]
+    S4 --> S9["Settled: Deposit Pas Dengan Tagihan"]
+    S4 --> S10["Settled: Deposit Lebih Dari Tagihan"]
+    S10 --> S11["Full Refunded: Pengembalian Sisa Deposit"]
+    S8 --> S12["Closed: Billing Lunas Final"]
+    S9 --> S12
+    S11 --> S12
+    S12 --> S13([Selesai Lunas])</div>
+            </div>
+        </section>
+
+        <!-- TAB 4: Accounting Journal Matrix -->
+        <section id="tab-accounting" class="tab-content hidden py-6">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden p-6">
+                <h3 class="text-base font-bold text-gray-800 mb-2">Matriks Posting Jurnal Akuntansi (Double-Entry)</h3>
+                <p class="text-xs text-gray-500 mb-4">Penjelasan posisi Debet dan Kredit untuk setiap alur transaksi deposit dan refund pada SIMRS Khanza.</p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border-collapse border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700 font-semibold border-b border-gray-200">
+                                <th class="p-3 border">No</th>
+                                <th class="p-3 border">Alur Transaksi</th>
+                                <th class="p-3 border">Form / Code Location</th>
+                                <th class="p-3 border">Posisi Debet</th>
+                                <th class="p-3 border">Posisi Kredit</th>
+                                <th class="p-3 border">Deskripsi Ringkas</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr class="hover:bg-yellow-50">
+                                <td class="p-3 border text-center font-medium">1</td>
+                                <td class="p-3 border font-semibold text-pink-900">Penerimaan Deposit Baru</td>
+                                <td class="p-3 border font-mono">DlgDeposit.java</td>
+                                <td class="p-3 border font-mono text-blue-700 font-semibold">[KodeRek Bayar]<br>(Kas Kasir / Bank)</td>
+                                <td class="p-3 border font-mono text-emerald-700 font-semibold">Uang_Muka_Ranap<br>(Kontra Akun Deposit)</td>
+                                <td class="p-3 border">Pencatatan kas masuk dari setoran deposit pasien sebelum/selama perawatan.</td>
+                            </tr>
+                            <tr class="hover:bg-yellow-50">
+                                <td class="p-3 border text-center font-medium">2</td>
+                                <td class="p-3 border font-semibold text-pink-900">Penggunaan Deposit pada Billing</td>
+                                <td class="p-3 border font-mono">DlgBilingRanap.java</td>
+                                <td class="p-3 border font-mono text-blue-700 font-semibold">Uang_Muka_Ranap</td>
+                                <td class="p-3 border font-mono text-emerald-700 font-semibold">[KodeRek Pendapatan]<br>(Kamar, Tindakan, Obat, Lab)</td>
+                                <td class="p-3 border">Pelunasan sebagian/seluruh tagihan layanan RS menggunakan saldo deposit pasien.</td>
+                            </tr>
+                            <tr class="hover:bg-yellow-50">
+                                <td class="p-3 border text-center font-medium">3</td>
+                                <td class="p-3 border font-semibold text-pink-900">Pembayaran Kekurangan Billing</td>
+                                <td class="p-3 border font-mono">DlgBilingRanap.java</td>
+                                <td class="p-3 border font-mono text-blue-700 font-semibold">[KodeRek Bayar]<br>/ Piutang Pasien</td>
+                                <td class="p-3 border font-mono text-emerald-700 font-semibold">[KodeRek Pendapatan]</td>
+                                <td class="p-3 border">Terjadi jika Deposit &lt; Tagihan. Sisa kekurangan dibayar tunai/non-tunai oleh pasien.</td>
+                            </tr>
+                            <tr class="hover:bg-yellow-50">
+                                <td class="p-3 border text-center font-medium">4</td>
+                                <td class="p-3 border font-semibold text-pink-900">Refund Sisa Deposit Pasien</td>
+                                <td class="p-3 border font-mono">DlgPengembalianDepositPasien.java<br>/ DlgBillingRanapV2.java</td>
+                                <td class="p-3 border font-mono text-blue-700 font-semibold">Uang_Muka_Ranap /<br>Sisa_Uang_Muka_Ranap</td>
+                                <td class="p-3 border font-mono text-emerald-700 font-semibold">[KodeRek Kas/Bank Pengembalian]<br>+ [KodeRek Admin (jika ada)]</td>
+                                <td class="p-3 border">Terjadi jika Deposit &gt; Tagihan (Auto Refund) atau pengembalian manual sisa deposit ke pasien.</td>
+                            </tr>
+                            <tr class="hover:bg-yellow-50">
+                                <td class="p-3 border text-center font-medium">5</td>
+                                <td class="p-3 border font-semibold text-pink-900">Pembatalan Deposit (Void)</td>
+                                <td class="p-3 border font-mono">DlgDeposit.java (BtnHapus)</td>
+                                <td class="p-3 border font-mono text-blue-700 font-semibold">Uang_Muka_Ranap</td>
+                                <td class="p-3 border font-mono text-emerald-700 font-semibold">[KodeRek Bayar]</td>
+                                <td class="p-3 border">Membalikkan jurnal (Reversal) ketika transaksi deposit dibatalkan/dihapus oleh kasir.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: Database ERD -->
+        <section id="tab-db" class="tab-content hidden py-6">
+            <div class="mermaid-card">
+                <h3 class="text-base font-bold text-gray-800 border-b pb-2 mb-4">Entity Relationship Diagram (ERD): Tabel Terkait Deposit & Refund</h3>
+                <div class="mermaid flex justify-center overflow-x-auto">erDiagram
+    REGPERIKSA ||--o{ DEPOSITPASIEN : memiliki
+    REGPERIKSA ||--o{ PENGEMBALIAN : memiliki
+    REGPERIKSA ||--o| NOTAINAP : memiliki
+    REGPERIKSA ||--o{ TAGIHANSADEWA : rincian
+    JURNAL ||--o{ DETAILJURNAL : memuat
+
+    REGPERIKSA {
+        string no_rawat PK
+        string no_rkm_medis
+        string status_bayar
+    }
+
+    DEPOSITPASIEN {
+        string no_deposit PK
+        string no_rawat FK
+        string tgl_deposit
+        number besar_deposit
+        string nip
+    }
+
+    PENGEMBALIAN {
+        string no_refund PK
+        string no_rawat FK
+        string tanggal
+        number total_refund
+        string nip
+    }
+
+    NOTAINAP {
+        string no_nota PK
+        string no_rawat FK
+        string tanggal
+        number total_pasien
+    }
+
+    TAGIHANSADEWA {
+        string no_nota PK
+        string no_rkm_medis
+        number total_tagihan
+    }
+
+    JURNAL {
+        string no_jurnal PK
+        string no_bukti
+        string tgl_jurnal
+    }
+
+    DETAILJURNAL {
+        string no_jurnal FK
+        string kd_rek FK
+        number debet
+        number kredit
+    }</div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-3 text-center text-xs text-gray-500">
+        SIMRS Khanza Custom Toper - System Flow Diagram & Documentation Mockup &copy; 2026
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        // Disable startOnLoad to prevent rendering hidden tabs on initial load
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'default',
+            flowchart: { curve: 'basis' }
+        });
+
+        const renderedTabs = new Set();
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Render initial visible tab
+            const initialTab = 'tab-flowchart';
+            renderedTabs.add(initialTab);
+            mermaid.run({
+                nodes: document.querySelectorAll('#' + initialTab + ' .mermaid')
+            });
+        });
+
+        // Tab Switching Logic - Render Mermaid ON DEMAND when tab becomes visible
+        function switchTab(tabId) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            // Show target tab
+            const target = document.getElementById(tabId);
+            if (target) {
+                target.classList.remove('hidden');
+                target.classList.add('block');
+
+                // Render mermaid if not rendered yet for this tab
+                if (!renderedTabs.has(tabId)) {
+                    renderedTabs.add(tabId);
+                    const nodes = target.querySelectorAll('.mermaid');
+                    if (nodes.length > 0) {
+                        mermaid.run({ nodes: nodes });
+                    }
+                }
+            }
+
+            // Set button active
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+        }
+    </script>
+</body>
+
+</html>

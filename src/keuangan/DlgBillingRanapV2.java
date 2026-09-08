@@ -3538,12 +3538,32 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         } catch (Exception e) {
             System.out.println(e);
         }         
-        double deposit_terpakai_val = Math.max(0, Math.min(uangdeposit, tagihanppn - bayar - piutang));
-        double kekurangan_validation = 0;
-        if(piutang<=0){
-            kekurangan_validation = (bayar + deposit_terpakai_val + besarppn) - tagihanppn;
-        }else{
-            kekurangan_validation = (tagihanppn - (bayar + deposit_terpakai_val + besarppn) - piutang) * -1;
+        double piutang_klaim = 0;
+        double piutang_umum = 0;
+        row2 = tabModeAkunPiutang.getRowCount();
+        for (r = 0; r < row2; r++) {
+            if (tabModeAkunPiutang.getValueAt(r, 3) != null && !tabModeAkunPiutang.getValueAt(r, 3).toString().trim().equals("")) {
+                double val = 0;
+                try {
+                    val = Double.parseDouble(tabModeAkunPiutang.getValueAt(r, 3).toString());
+                } catch (Exception e) {
+                    val = 0;
+                }
+                if (val > 0) {
+                    String namaAkun = tabModeAkunPiutang.getValueAt(r, 0) != null ? tabModeAkunPiutang.getValueAt(r, 0).toString() : "";
+                    String kdPj = tabModeAkunPiutang.getValueAt(r, 2) != null ? tabModeAkunPiutang.getValueAt(r, 2).toString() : "";
+                    if (isAkunPiutangPasienUmum(namaAkun, kdPj)) {
+                        piutang_umum += val;
+                    } else {
+                        piutang_klaim += val;
+                    }
+                }
+            }
+        }
+
+        double selisih = tagihanppn - (bayar + piutang);
+        if (Math.abs(selisih) < 0.001) {
+            selisih = 0;
         }
 
         if(TNoRw.getText().trim().equals("")||TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
@@ -3551,38 +3571,32 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }else if(i>0){
             JOptionPane.showMessageDialog(null,"Maaf, data tagihan pasien dengan No.Rawat tersebut sudah pernah disimpan...!!!");
         }else if(i==0){ 
-            if(piutang<=0){
-                if(kekurangan_validation<0){
-                    JOptionPane.showMessageDialog(null,"Maaf, pembayaran pasien masih kurang ...!!!");
-                }else if(kekurangan_validation>0){
-                    if(countbayar>1){
-                        JOptionPane.showMessageDialog(null,"Maaf, kembali harus bernilai 0 untuk cara bayar lebih dari 1...!!!");
-                    }else{
-                        if(ChkPiutang.isSelected()==true){
-                            JOptionPane.showMessageDialog(null,"Maaf, matikan centang di piutang ...!!!");
-                        }else{
-                            isSimpan();
-                        }                            
-                    }                        
-                }else if(kekurangan_validation==0){
-                    if(ChkPiutang.isSelected()==true){
-                        JOptionPane.showMessageDialog(null,"Maaf, matikan centang di piutang ...!!!");
-                    }else{
+            if (uangdeposit > 0 && piutang_umum > 0 && (tagihanppn - piutang_klaim) <= uangdeposit) {
+                JOptionPane.showMessageDialog(null, "Deposit pasien mencukupi seluruh tagihan RS. Piutang Pasien Umum hanya diperbolehkan jika tagihan RS melebihi deposit pasien!");
+            } else if (piutang > 0 && ChkPiutang.isSelected() == false) {
+                JOptionPane.showMessageDialog(rootPane, "Silahkan centang terlebih dahulu pada pilihan piutang...!!");
+            } else if (piutang <= 0 && ChkPiutang.isSelected() == true) {
+                JOptionPane.showMessageDialog(null, "Maaf, matikan centang di piutang ...!!!");
+            } else if (selisih > 0) {
+                if (piutang > 0) {
+                    JOptionPane.showMessageDialog(null, "Maaf, piutang/pembayaran belum genap. Silahkan isi di jumlah piutang atau pembayaran...!!!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Maaf, pembayaran pasien masih kurang ...!!!");
+                }
+            } else if (selisih < 0) {
+                if (uangdeposit > 0) {
+                    JOptionPane.showMessageDialog(null, "Maaf, pembayaran melebihi jumlah tagihan...!!!");
+                } else {
+                    if (piutang > 0) {
+                        JOptionPane.showMessageDialog(null, "Maaf, terjadi kelebihan piutang ...!!!");
+                    } else if (countbayar > 1) {
+                        JOptionPane.showMessageDialog(null, "Maaf, kembali harus bernilai 0 untuk cara bayar lebih dari 1...!!!");
+                    } else {
                         isSimpan();
-                    } 
-                }                
-            }else if(piutang>=1){
-                if(ChkPiutang.isSelected()==true){
-                    if(kekurangan_validation<0){
-                        JOptionPane.showMessageDialog(null,"Maaf, piutang belum genap. Silahkan isi di jumlah piutang ...!!!");
-                    }else if(kekurangan_validation>0){
-                        JOptionPane.showMessageDialog(null,"Maaf, terjadi kelebihan piutang ...!!!");
-                    }else{
-                        isSimpan();
-                    }    
-                }else if(ChkPiutang.isSelected()==false){
-                    JOptionPane.showMessageDialog(rootPane,"Silahkan centang terlebih dahulu pada pilihan piutang...!!");
-                }                
+                    }
+                }
+            } else {
+                isSimpan();
             }
         }           
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -3797,25 +3811,37 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     }                
                 }                
                 
-                double deposit_terpakai_print = Math.max(0, Math.min(uangdeposit, tagihanppn - bayar - piutang));
+                double deposit_terpakai_print = Math.min(uangdeposit, bayar);
+                double sisadeposit_print = Math.max(0, uangdeposit - bayar);
                 if(ChkPiutang.isSelected()==false){                        
                     Sequel.menyimpan("temporary_bayar_ranap","'0','','','','','','','','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','TOTAL TAGIHAN',':','','','','','<b>"+TtlSemua.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','PPN',':','','','','','<b>"+Valid.SetAngka(besarppn)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','TAGIHAN+PPN',':','','','','','<b>"+TagihanPPn.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','','','','','','','','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
-                    Sequel.menyimpan("temporary_bayar_ranap","'0','DEPOSIT',':','','','','','<b>"+Valid.SetAngka(deposit_terpakai_print)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                    if(uangdeposit>0){
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','DEPOSIT',':','','','','','<b>"+Valid.SetAngka(uangdeposit)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                    }
                     Sequel.menyimpan("temporary_bayar_ranap","'0','BAYAR',':','','','','','<b>"+Valid.SetAngka(bayar)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
-                    Sequel.menyimpan("temporary_bayar_ranap","'0','KEMBALI',':','','','','','<b>"+Valid.SetAngka((bayar + deposit_terpakai_print) - tagihanppn)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                    if(uangdeposit>0 && sisadeposit_print>0){
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','REFUND',':','','','','','<b>"+Valid.SetAngka(sisadeposit_print)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                    }else{
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','KEMBALI',':','','','','','<b>"+Valid.SetAngka(Math.max(0, bayar - tagihanppn))+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                    }
                 }else if(ChkPiutang.isSelected()==true){                                            
                     Sequel.menyimpan("temporary_bayar_ranap","'0','','','','','','','','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','TOTAL TAGIHAN',':','','','','','<b>"+TtlSemua.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','PPN',':','','','','','<b>"+Valid.SetAngka(besarppn)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','TAGIHAN + PPN',':','','','','','<b>"+TagihanPPn.getText()+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','','','','','','','','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
-                    Sequel.menyimpan("temporary_bayar_ranap","'0','DEPOSIT',':','','','','','<b>"+Valid.SetAngka(deposit_terpakai_print)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
-                    Sequel.menyimpan("temporary_bayar_ranap","'0','EKSES',':','','','','','<b>"+Valid.SetAngka(bayar)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                    if(uangdeposit>0){
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','DEPOSIT',':','','','','','<b>"+Valid.SetAngka(uangdeposit)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                    }
+                    Sequel.menyimpan("temporary_bayar_ranap","'0','BAYAR',':','','','','','<b>"+Valid.SetAngka(bayar)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
                     Sequel.menyimpan("temporary_bayar_ranap","'0','SISA PIUTANG',':','','','','','<b>"+Valid.SetAngka(piutang)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter");                                      
+                    if(uangdeposit>0 && sisadeposit_print>0){
+                        Sequel.menyimpan("temporary_bayar_ranap","'0','REFUND',':','','','','','<b>"+Valid.SetAngka(sisadeposit_print)+"</b>','Tagihan','','','','','','','','',''","Rekap Harian Tindakan Dokter"); 
+                    }
                 }                
 
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -5691,6 +5717,21 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }
     
+    private boolean isAkunPiutangPasienUmum(String namaAkun, String kdPj) {
+        if (namaAkun != null) {
+            String nama = namaAkun.toUpperCase();
+            if (nama.contains("PASIEN UMUM") || nama.contains("PIUTANG UMUM") || nama.contains("KURANG BAYAR")) {
+                return true;
+            }
+        }
+        if (kdPj != null) {
+            if ("01".equals(kdPj) || "-".equals(kdPj)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void isKembali(){
         TtlSemua.setText(Valid.SetAngka3(ttl));
         bayar=0;total=0;besarppn=0;tagihanppn=0;y=0;piutang=0;kekurangan=0;countbayar=0;sisadeposit=0;
@@ -5741,37 +5782,63 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         tagihanppn=besarppn+total;
         TagihanPPn.setText(Valid.SetAngka3(tagihanppn));
         
-        double deposit_terpakai = Math.max(0, Math.min(uangdeposit, tagihanppn - bayar - piutang));
-        sisadeposit = uangdeposit - deposit_terpakai;
-        
-        // cek penamaan label kekurangan dan kembali
-        if(piutang<=0){
-            kekurangan=(bayar+uangdeposit+besarppn)-tagihanppn;
-            if(Math.abs(kekurangan) < 0.001){
-                kekurangan = 0;
+        if (uangdeposit > 0) {
+            double deposit_terpakai = Math.min(uangdeposit, bayar);
+            sisadeposit = Math.max(0, uangdeposit - bayar);
+            double selisih = tagihanppn - (bayar + piutang);
+            if (Math.abs(selisih) < 0.001) {
+                selisih = 0;
             }
+
             jLabel5.setText("Bayar : Rp.");
-            if(kekurangan<0){
+            if (sisadeposit > 0) {
+                jLabel6.setText("Refund : Rp.");
+                TKembali.setText(Valid.SetAngka3(sisadeposit));
+                kekurangan = sisadeposit;
+            } else if (selisih > 0) {
                 jLabel6.setText("Kekurangan : Rp.");
-            }else{
+                TKembali.setText(Valid.SetAngka3(-selisih));
+                kekurangan = -selisih;
+            } else if (selisih < 0) {
+                jLabel6.setText("Kelebihan : Rp.");
+                TKembali.setText(Valid.SetAngka3(-selisih));
+                kekurangan = -selisih;
+            } else {
                 jLabel6.setText("Kembali : Rp.");
-            }
-                 
-            TKembali.setText(Valid.SetAngka3(kekurangan));            
-        }else{
-            kekurangan=(tagihanppn-(bayar+uangdeposit+besarppn)-piutang)* -1;
-            if(Math.abs(kekurangan) < 0.001){
+                TKembali.setText(Valid.SetAngka3(0));
                 kekurangan = 0;
             }
-            jLabel5.setText("Uang Muka : Rp.");
-            if(kekurangan>0){
-                jLabel6.setText("Kelebihan : Rp.");
+        } else {
+            sisadeposit = 0;
+            // cek penamaan label kekurangan dan kembali saat tidak ada deposit
+            if(piutang<=0){
+                kekurangan=(bayar+besarppn)-tagihanppn;
+                if(Math.abs(kekurangan) < 0.001){
+                    kekurangan = 0;
+                }
+                jLabel5.setText("Bayar : Rp.");
+                if(kekurangan<0){
+                    jLabel6.setText("Kekurangan : Rp.");
+                }else{
+                    jLabel6.setText("Kembali : Rp.");
+                }
+                     
+                TKembali.setText(Valid.SetAngka3(kekurangan));            
             }else{
-                jLabel6.setText("Kekurangan : Rp.");
-            }
-                
-            TKembali.setText(Valid.SetAngka3(kekurangan));  
-        }  
+                kekurangan=(tagihanppn-(bayar+besarppn)-piutang)* -1;
+                if(Math.abs(kekurangan) < 0.001){
+                    kekurangan = 0;
+                }
+                jLabel5.setText("Uang Muka : Rp.");
+                if(kekurangan>0){
+                    jLabel6.setText("Kelebihan : Rp.");
+                }else{
+                    jLabel6.setText("Kekurangan : Rp.");
+                }
+                    
+                TKembali.setText(Valid.SetAngka3(kekurangan));  
+            }  
+        }
     }   
 
     private void prosesCariTindakan(String norawat){
@@ -7018,7 +7085,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }
 
     private void isSimpan() {
-        double deposit_terpakai = Math.max(0, Math.min(uangdeposit, tagihanppn - bayar - piutang));
+        double deposit_terpakai = Math.min(uangdeposit, bayar);
+        sisadeposit = Math.max(0, uangdeposit - bayar);
         try {  
             try {
                 Sequel.meghapus("nota_inap","no_rawat",TNoRw.getText());    
@@ -7134,7 +7202,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             
             if(sukses==true){
                 Sequel.queryu2("delete from tampjurnal");
-                double remaining_payment_needed = Math.max(0, tagihanppn - deposit_terpakai - piutang);
+                double remaining_payment_needed = Math.max(0, tagihanppn - piutang);
                 itembayar=0;besarppn=0;
                 row2=tbAkunBayar.getRowCount();                
                 for(r=0;r<row2;r++){
@@ -7235,6 +7303,18 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     if(deposit_terpakai>0){  
                         Sequel.menyimpan("tampjurnal","'"+Uang_Muka_Ranap+"','Kontra Akun Uang Muka','"+deposit_terpakai+"','0'",
                                          "debet=debet+"+deposit_terpakai,"kd_rek='"+Uang_Muka_Ranap+"'"); 
+                        String akunBayarDepositAsal = Sequel.cariIsi("select nama_bayar from deposit where no_rawat=? order by tgl_deposit desc limit 1", TNoRw.getText());
+                        if (akunBayarDepositAsal.equals("")) {
+                            akunBayarDepositAsal = "1. Bayar Cash";
+                        }
+                        String kdRekDepositAsal = Sequel.cariIsi("select kd_rek from akun_bayar where nama_bayar=?", akunBayarDepositAsal);
+                        if (kdRekDepositAsal.equals("")) {
+                            kdRekDepositAsal = Sequel.cariIsi("select kd_rek from rekening where kd_rek like '1110%' or nm_rek like '%kas%' limit 1");
+                        }
+                        if (!kdRekDepositAsal.equals("")) {
+                            Sequel.menyimpan("tampjurnal","'"+kdRekDepositAsal+"','"+akunBayarDepositAsal+"','0','"+deposit_terpakai+"'",
+                                             "kredit=kredit+"+deposit_terpakai,"kd_rek='"+kdRekDepositAsal+"'");
+                        }
                     }
                     
                     if((-1*ttlPotongan)>0){
@@ -7310,13 +7390,13 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             }
                         }
                         if(Sequel.queryutf2("insert into piutang_pasien values ('"+TNoRw.getText()+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"','"+
-                                TNoRM.getText()+"','Belum Lunas','"+total+"','"+(bayar+deposit_terpakai)+"','"+piutang+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"')")==false){
+                                TNoRM.getText()+"','Belum Lunas','"+total+"','"+(bayar)+"','"+piutang+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"')")==false){
                             sukses=false;
                         }
                     }else if(piutang<=0){
                         sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBAYARAN PASIEN RAWAT INAP "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
                         if(deposit_terpakai>0){
-                            if(Sequel.menyimpantf2("tagihan_sadewa","'"+TNoRw.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','"+alamat.replaceAll("'","")+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+DTPTgl.getSelectedItem().toString().substring(11,19)+"','Pelunasan','"+total+"','"+(total-deposit_terpakai)+"','Sudah','"+akses.getkode()+"'","No.Rawat")==false){
+                            if(Sequel.menyimpantf2("tagihan_sadewa","'"+TNoRw.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','"+alamat.replaceAll("'","")+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+DTPTgl.getSelectedItem().toString().substring(11,19)+"','Pelunasan','"+total+"','"+total+"','Sudah','"+akses.getkode()+"'","No.Rawat")==false){
                                 sukses=false;
                             }
                         }else{
