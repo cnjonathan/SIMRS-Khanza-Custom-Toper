@@ -17849,7 +17849,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 "  kamar_inap.ttl_biaya, \n" +
                 "  kamar_inap.stts_pulang, \n" +
                 "  kamar_inap.lama, \n" +
-                "  (SELECT GROUP_CONCAT(d.nm_dokter ORDER BY FIELD(dr.status, 'Utama', 'Pendukung') ASC SEPARATOR ', ') \n" +
+                "  (SELECT GROUP_CONCAT(d.nm_dokter SEPARATOR ', ') \n" +
                 "   FROM dpjp_ranap dr \n" +
                 "   JOIN dokter d ON dr.kd_dokter = d.kd_dokter \n" +
                 "   WHERE dr.no_rawat = kamar_inap.no_rawat) as nm_dokter,\n" +
@@ -17916,7 +17916,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 "  kamar_inap.stts_pulang, \n" +
                 "  kamar_inap.lama, \n" +
                 "  IFNULL(\n" +
-                "    (SELECT GROUP_CONCAT(d.nm_dokter ORDER BY FIELD(dr.status, 'Utama', 'Pendukung') ASC SEPARATOR ', ') \n" +
+                "    (SELECT GROUP_CONCAT(d.nm_dokter SEPARATOR ', ') \n" +
                 "     FROM dpjp_ranap dr \n" +
                 "     JOIN dokter d ON dr.kd_dokter = d.kd_dokter \n" +
                 "     WHERE dr.no_rawat = kamar_inap.no_rawat), \n" +
@@ -18760,8 +18760,8 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 "    kamar_inap.ttl_biaya, \n" +
                                 "    kamar_inap.stts_pulang, \n" +
                                 "    kamar_inap.lama, \n" +
-                                "    /* Ambil nama dokter Utama secara dinamis */\n" +
-                                "    IFNULL((SELECT GROUP_CONCAT(d.nm_dokter ORDER BY FIELD(dr.status, 'Utama', 'Pendukung') ASC SEPARATOR ', ') \n" +
+                                "    /* Ambil nama dokter DPJP secara dinamis */\n" +
+                                "    IFNULL((SELECT GROUP_CONCAT(d.nm_dokter SEPARATOR ', ') \n" +
                                 "            FROM dpjp_ranap dr \n" +
                                 "            JOIN dokter d ON dr.kd_dokter = d.kd_dokter \n" +
                                 "            WHERE dr.no_rawat = kamar_inap.no_rawat), 'Belum ada DPJP') as nm_dokter,\n" +
@@ -18937,7 +18937,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     "  (SELECT d.nm_dokter \n" +
                     "   FROM dpjp_ranap dr \n" +
                     "   JOIN dokter d ON dr.kd_dokter = d.kd_dokter \n" +
-                    "   WHERE dr.no_rawat = kamar_inap.no_rawat AND dr.status = 'Utama') as nm_dokter,\n" +
+                    "   WHERE dr.no_rawat = kamar_inap.no_rawat LIMIT 1) as nm_dokter,\n" +
                     "  resume_pasien_ranap_idrg.alasan_dirawat, \n" +
                     "  resume_pasien_ranap_idrg.diagnosa_masuk, \n" +
                     "  resume_pasien_ranap_idrg.anamnesa, \n" +

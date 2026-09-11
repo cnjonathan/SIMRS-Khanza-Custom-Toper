@@ -2556,6 +2556,30 @@ public class DlgBillingRalanV2 extends javax.swing.JDialog {
                         }
                     }
 
+                    String[] options = {"Nota Billing", "Kwitansi Kasir", "Kwitansi Piutang", "Nota & Kwitansi (2 Lembar)", "Tidak Cetak / Batal"};
+                    String pilihan = (String) javax.swing.JOptionPane.showInputDialog(
+                        rootPane,
+                        "Pilih jenis dokumen billing yang akan dicetak:",
+                        "Cetak Dokumen Billing",
+                        javax.swing.JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[0]
+                    );
+
+                    if (pilihan == null || pilihan.equals("Tidak Cetak / Batal")) {
+                        return;
+                    }
+
+                    String mode = "nota";
+                    if (pilihan.equals("Kwitansi Kasir")) {
+                        mode = "kwitansi";
+                    } else if (pilihan.equals("Kwitansi Piutang")) {
+                        mode = "kwitansi_piutang";
+                    } else if (pilihan.equals("Nota & Kwitansi (2 Lembar)")) {
+                        mode = "gabung";
+                    }
+
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     try {
                         java.util.Properties prop = new java.util.Properties();
@@ -2567,12 +2591,10 @@ public class DlgBillingRalanV2 extends javax.swing.JDialog {
                         if (!urlRme.endsWith("/")) {
                             urlRme = urlRme + "/";
                         }
-                        Valid.panggilUrl2(urlRme + "cetak_nota?no_rawat=" + java.net.URLEncoder.encode(TNoRw.getText(), "UTF-8") + "&petugas=" + java.net.URLEncoder.encode(akses.getkode(), "UTF-8"));
+                        Valid.panggilUrl2(urlRme + "cetak_nota?no_rawat=" + java.net.URLEncoder.encode(TNoRw.getText(), "UTF-8") + "&petugas=" + java.net.URLEncoder.encode(akses.getkode(), "UTF-8") + "&mode=" + mode);
                     } catch (Exception e) {
                         System.out.println("Error load/open RME URL: " + e.getMessage());
                     }
-                    this.setCursor(Cursor.getDefaultCursor());
-                    
                     this.setCursor(Cursor.getDefaultCursor());
                 }catch(Exception ex){
                     System.out.println(ex);
