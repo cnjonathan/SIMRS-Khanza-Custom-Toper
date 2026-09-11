@@ -52,7 +52,20 @@ public class koneksiDB {
     
     public koneksiDB(){} 
     public static Connection condb(){ 
+        boolean isNeedConnect = false;
         if(connection == null){
+            isNeedConnect = true;
+        } else {
+            try {
+                if(connection.isClosed() || !connection.isValid(2)){
+                    isNeedConnect = true;
+                }
+            } catch (Exception e) {
+                isNeedConnect = true;
+            }
+        }
+
+        if(isNeedConnect){
             try{
                 prop.loadFromXML(new FileInputStream("setting/database.xml"));
                 dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useCompression=true&useSSL=false");
@@ -81,13 +94,11 @@ public class koneksiDB {
             }catch(Exception e){
                 System.out.println("Notif : "+e);
                 try {
-                    if(connection.isClosed()){
-                        prop.loadFromXML(new FileInputStream("setting/database.xml"));
-                        dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;cachePrepStmts=true");
-                        dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
-                        dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
-                        connection=dataSource.getConnection();  
-                    }
+                    prop.loadFromXML(new FileInputStream("setting/database.xml"));
+                    dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useCompression=true&useSSL=false");
+                    dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
+                    dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
+                    connection=dataSource.getConnection();  
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null,"Koneksi Putus : "+e);
                 }
