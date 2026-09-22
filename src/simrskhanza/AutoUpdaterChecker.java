@@ -241,6 +241,7 @@ public class AutoUpdaterChecker {
         try {
             // 1. Tangkap unhandled exception di semua thread
             Thread.setDefaultUncaughtExceptionHandler((thread, ex) -> {
+                ex.printStackTrace(System.err);
                 logError("Uncaught Exception in Thread [" + thread.getName() + "]: " + ex.getMessage(), ex);
             });
 

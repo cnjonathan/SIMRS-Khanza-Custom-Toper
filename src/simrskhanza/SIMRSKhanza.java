@@ -19,9 +19,14 @@ public class SIMRSKhanza {
     public static void main(String[] args) {
         AutoUpdaterChecker.installGlobalErrorHandler();
         WidgetUtilities.invokeLater(() -> {
-           frmUtama utama=frmUtama.getInstance();
-           utama.isWall();
-           utama.setVisible(true);
+            try {
+                frmUtama utama=frmUtama.getInstance();
+                utama.isWall();
+                utama.setVisible(true);
+            } catch (Throwable t) {
+                System.err.println("Gagal meluncurkan form utama SIMRS Khanza: " + t.getMessage());
+                t.printStackTrace(System.err);
+            }
         }); 
     }
     

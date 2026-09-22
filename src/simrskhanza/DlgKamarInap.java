@@ -17805,152 +17805,85 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }
         
         // cek login dokter
-        String login_dokter = "", query_ranap = "";
+        String login_dokter = "";
         int cek_dokter = Sequel.cariInteger("SELECT COUNT(*) FROM dokter WHERE kd_dokter = '"+akses.getkode()+"';");
         if(cek_dokter > 0){
-            query_ranap = 
-                "select \n" +
-                "  kamar_inap.no_rawat, \n" +
-                "  reg_periksa.no_rkm_medis, \n" +
-                "  pasien.nm_pasien, \n" +
-                "  pasien.alamat, \n" +
-                "  pasien.kd_kel, \n" +
-                "  pasien.kd_kec, \n" +
-                "  pasien.kd_kab, \n" +
-                "  pasien.kd_prop, \n" +
-                "  pasien.alamatpj, \n" +
-                "  pasien.kelurahanpj, \n" +
-                "  pasien.kecamatanpj, \n" +
-                "  pasien.kabupatenpj, \n" +
-                "  pasien.propinsipj, \n" +
-                "  concat(\n" +
-                "    pasien.alamat, ', ', kelurahan.nm_kel, \n" +
-                "    ', ', kecamatan.nm_kec, ', ', kabupaten.nm_kab\n" +
-                "  ) as alamat_lengkap, \n" +
-                "  reg_periksa.p_jawab, \n" +
-                "  reg_periksa.hubunganpj, \n" +
-                "  penjab.png_jawab, \n" +
-                "  concat(\n" +
-                "    kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal\n" +
-                "  ) as kamar, \n" +
-                "  kamar_inap.trf_kamar, \n" +
-                "  kamar_inap.diagnosa_awal, \n" +
-                "  kamar_inap.diagnosa_akhir, \n" +
-                "  kamar_inap.tgl_masuk, \n" +
-                "  kamar_inap.jam_masuk, \n" +
-                "  if(\n" +
-                "    kamar_inap.tgl_keluar = '0000-00-00', \n" +
-                "    '', kamar_inap.tgl_keluar\n" +
-                "  ) as tgl_keluar, \n" +
-                "  if(\n" +
-                "    kamar_inap.jam_keluar = '00:00:00', \n" +
-                "    '', kamar_inap.jam_keluar\n" +
-                "  ) as jam_keluar, \n" +
-                "  kamar_inap.ttl_biaya, \n" +
-                "  kamar_inap.stts_pulang, \n" +
-                "  kamar_inap.lama, \n" +
-                "  (SELECT GROUP_CONCAT(d.nm_dokter SEPARATOR ', ') \n" +
-                "   FROM dpjp_ranap dr \n" +
-                "   JOIN dokter d ON dr.kd_dokter = d.kd_dokter \n" +
-                "   WHERE dr.no_rawat = kamar_inap.no_rawat) as nm_dokter,\n" +
-                "  kamar_inap.kd_kamar, \n" +
-                "  reg_periksa.kd_pj, \n" +
-                "  concat(\n" +
-                "    reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur\n" +
-                "  ) as umur, \n" +
-                "  reg_periksa.status_bayar, \n" +
-                "  pasien.agama \n" +
-                "from \n" +
-                "  kamar_inap \n" +
-                "  inner join reg_periksa on kamar_inap.no_rawat = reg_periksa.no_rawat \n" +
-                "  inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis \n" +
-                "  inner join kamar on kamar_inap.kd_kamar = kamar.kd_kamar \n" +
-                "  inner join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal \n" +
-                "  left join kelurahan on pasien.kd_kel = kelurahan.kd_kel \n" +
-                "  left join kecamatan on pasien.kd_kec = kecamatan.kd_kec \n" +
-                "  left join kabupaten on pasien.kd_kab = kabupaten.kd_kab \n" +
-                "  left join dokter on reg_periksa.kd_dokter = dokter.kd_dokter \n" +
-                "  left join penjab on reg_periksa.kd_pj = penjab.kd_pj\n" +
-                "  inner join dpjp_ranap on kamar_inap.no_rawat = dpjp_ranap.no_rawat\n";
-            login_dokter = " and dpjp_ranap.kd_dokter = '"+akses.getkode()+"'";
-        }else{
-            query_ranap = 
-                "select \n" +
-                "  kamar_inap.no_rawat, \n" +
-                "  reg_periksa.no_rkm_medis, \n" +
-                "  pasien.nm_pasien, \n" +
-                "  pasien.alamat, \n" +
-                "  pasien.kd_kel, \n" +
-                "  pasien.kd_kec, \n" +
-                "  pasien.kd_kab, \n" +
-                "  pasien.kd_prop, \n" +
-                "  pasien.alamatpj, \n" +
-                "  pasien.kelurahanpj, \n" +
-                "  pasien.kecamatanpj, \n" +
-                "  pasien.kabupatenpj, \n" +
-                "  pasien.propinsipj, \n" +
-                "  concat(\n" +
-                "    pasien.alamat, ', ', kelurahan.nm_kel, \n" +
-                "    ', ', kecamatan.nm_kec, ', ', kabupaten.nm_kab\n" +
-                "  ) as alamat, \n" +
-                "  reg_periksa.p_jawab, \n" +
-                "  reg_periksa.hubunganpj, \n" +
-                "  penjab.png_jawab, \n" +
-                "  concat(\n" +
-                "    kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal\n" +
-                "  ) as kamar, \n" +
-                "  kamar_inap.trf_kamar, \n" +
-                "  kamar_inap.diagnosa_awal, \n" +
-                "  kamar_inap.diagnosa_akhir, \n" +
-                "  kamar_inap.tgl_masuk, \n" +
-                "  kamar_inap.jam_masuk, \n" +
-                "  if(\n" +
-                "    kamar_inap.tgl_keluar = '0000-00-00', \n" +
-                "    '', kamar_inap.tgl_keluar\n" +
-                "  ) as tgl_keluar, \n" +
-                "  if(\n" +
-                "    kamar_inap.jam_keluar = '00:00:00', \n" +
-                "    '', kamar_inap.jam_keluar\n" +
-                "  ) as jam_keluar, \n" +
-                "  kamar_inap.ttl_biaya, \n" +
-                "  kamar_inap.stts_pulang, \n" +
-                "  kamar_inap.lama, \n" +
-                "  IFNULL(\n" +
-                "    (SELECT GROUP_CONCAT(d.nm_dokter SEPARATOR ', ') \n" +
-                "     FROM dpjp_ranap dr \n" +
-                "     JOIN dokter d ON dr.kd_dokter = d.kd_dokter \n" +
-                "     WHERE dr.no_rawat = kamar_inap.no_rawat), \n" +
-                "    'Belum ada DPJP'\n" +
-                "  ) as nm_dokter, \n" +
-                "  kamar_inap.kd_kamar, \n" +
-                "  reg_periksa.kd_pj, \n" +
-                "  concat(\n" +
-                "    reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur\n" +
-                "  ) as umur, \n" +
-                "  reg_periksa.status_bayar, \n" +
-                "  pasien.agama \n" +
-                "from \n" +
-                "  kamar_inap \n" +
-                "  inner join reg_periksa on kamar_inap.no_rawat = reg_periksa.no_rawat \n" +
-                "  inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis \n" +
-                "  inner join kamar on kamar_inap.kd_kamar = kamar.kd_kamar \n" +
-                "  inner join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal \n" +
-                "  left join kelurahan on pasien.kd_kel = kelurahan.kd_kel \n" +
-                "  left join kecamatan on pasien.kd_kec = kecamatan.kd_kec \n" +
-                "  left join kabupaten on pasien.kd_kab = kabupaten.kd_kab \n" +
-                "  left join dokter on reg_periksa.kd_dokter = dokter.kd_dokter \n" +
-                "  left join penjab on reg_periksa.kd_pj = penjab.kd_pj \n"+
-                "  left join dpjp_ranap on kamar_inap.no_rawat = dpjp_ranap.no_rawat \n";
-            login_dokter = "";
+            login_dokter = " and exists(select 1 from dpjp_ranap where dpjp_ranap.no_rawat = kamar_inap.no_rawat and dpjp_ranap.kd_dokter = '"+akses.getkode()+"') ";
         }
+        
+        String query_ranap = 
+            "select \n" +
+            "  kamar_inap.no_rawat, \n" +
+            "  reg_periksa.no_rkm_medis, \n" +
+            "  pasien.nm_pasien, \n" +
+            "  pasien.alamat, \n" +
+            "  pasien.kd_kel, \n" +
+            "  pasien.kd_kec, \n" +
+            "  pasien.kd_kab, \n" +
+            "  pasien.kd_prop, \n" +
+            "  pasien.alamatpj, \n" +
+            "  pasien.kelurahanpj, \n" +
+            "  pasien.kecamatanpj, \n" +
+            "  pasien.kabupatenpj, \n" +
+            "  pasien.propinsipj, \n" +
+            "  concat(\n" +
+            "    pasien.alamat, ', ', kelurahan.nm_kel, \n" +
+            "    ', ', kecamatan.nm_kec, ', ', kabupaten.nm_kab\n" +
+            "  ) as alamat_lengkap, \n" +
+            "  reg_periksa.p_jawab, \n" +
+            "  reg_periksa.hubunganpj, \n" +
+            "  penjab.png_jawab, \n" +
+            "  concat(\n" +
+            "    kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal\n" +
+            "  ) as kamar, \n" +
+            "  kamar_inap.trf_kamar, \n" +
+            "  kamar_inap.diagnosa_awal, \n" +
+            "  kamar_inap.diagnosa_akhir, \n" +
+            "  kamar_inap.tgl_masuk, \n" +
+            "  kamar_inap.jam_masuk, \n" +
+            "  if(\n" +
+            "    kamar_inap.tgl_keluar = '0000-00-00', \n" +
+            "    '', kamar_inap.tgl_keluar\n" +
+            "  ) as tgl_keluar, \n" +
+            "  if(\n" +
+            "    kamar_inap.jam_keluar = '00:00:00', \n" +
+            "    '', kamar_inap.jam_keluar\n" +
+            "  ) as jam_keluar, \n" +
+            "  kamar_inap.ttl_biaya, \n" +
+            "  kamar_inap.stts_pulang, \n" +
+            "  kamar_inap.lama, \n" +
+            "  IFNULL(\n" +
+            "    (SELECT GROUP_CONCAT(d.nm_dokter SEPARATOR ', ') \n" +
+            "     FROM dpjp_ranap dr \n" +
+            "     JOIN dokter d ON dr.kd_dokter = d.kd_dokter \n" +
+            "     WHERE dr.no_rawat = kamar_inap.no_rawat), \n" +
+            "    'Belum ada DPJP'\n" +
+            "  ) as nm_dokter, \n" +
+            "  kamar_inap.kd_kamar, \n" +
+            "  reg_periksa.kd_pj, \n" +
+            "  concat(\n" +
+            "    reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur\n" +
+            "  ) as umur, \n" +
+            "  reg_periksa.status_bayar, \n" +
+            "  pasien.agama \n" +
+            "from \n" +
+            "  kamar_inap \n" +
+            "  inner join reg_periksa on kamar_inap.no_rawat = reg_periksa.no_rawat \n" +
+            "  inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis \n" +
+            "  inner join kamar on kamar_inap.kd_kamar = kamar.kd_kamar \n" +
+            "  inner join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal \n" +
+            "  left join kelurahan on pasien.kd_kel = kelurahan.kd_kel \n" +
+            "  left join kecamatan on pasien.kd_kec = kecamatan.kd_kec \n" +
+            "  left join kabupaten on pasien.kd_kab = kabupaten.kd_kab \n" +
+            "  left join dokter on reg_periksa.kd_dokter = dokter.kd_dokter \n" +
+            "  left join penjab on reg_periksa.kd_pj = penjab.kd_pj \n";
         
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
                 query_ranap+
                 "where "+key+" "+login_dokter+"\n"+
-                "group by \n" +
-                "  kamar_inap.no_rawat "+order);
+                order);
             try {
                 System.out.println("query kamar inap: "+ps.toString());
                 rs=ps.executeQuery();
@@ -18077,7 +18010,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
-        reset_input_all();
+        // reset_input_all();
     }
 
     public void emptTeks() {       

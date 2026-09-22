@@ -5460,6 +5460,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 MnBillingRalanV2ActionPerformed(evt);
             }
         });
+        jPopupMenu1.add(MnBillingRalanV2);
     }
 
     private void initPanelsAndControls() {
@@ -6891,7 +6892,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Belum", "Sudah", "Batal", "Berkas Diterima", "Dirujuk", "Meninggal", "Dirawat", "Pulang Paksa" }));
         cmbStatus.setName("cmbStatus"); // NOI18N
         cmbStatus.setPreferredSize(new java.awt.Dimension(150, 23));
-        panelGlass8.add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 140, -1));
+        panelGlass8.add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, 140, -1));
 
         jLabel20.setText("Status Bayar :");
         jLabel20.setName("jLabel20"); // NOI18N
@@ -6921,7 +6922,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 cmbStatusSepActionPerformed(evt);
             }
         });
-        panelGlass8.add(cmbStatusSep, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, 140, -1));
+        panelGlass8.add(cmbStatusSep, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 140, -1));
 
         jLabel23.setText("Tracking:");
         jLabel23.setName("jLabel23"); // NOI18N

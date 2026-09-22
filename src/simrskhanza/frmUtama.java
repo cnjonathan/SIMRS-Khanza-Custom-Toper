@@ -22772,8 +22772,10 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                     akses.setkodeppkbpjs(rs.getString("kode_ppk"));
                     if(rs.getString(5).equals("Yes")){
                         Blob blob = rs.getBlob(6);
-                        PanelWall.setBackgroundImage(new javax.swing.ImageIcon(blob.getBytes(1, (int) (blob.length()))));
-                        repaint();
+                        if(blob != null){
+                            PanelWall.setBackgroundImage(new javax.swing.ImageIcon(blob.getBytes(1, (int) (blob.length()))));
+                            repaint();
+                        }
                     }
                 }  
             } catch (Exception e) {

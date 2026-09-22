@@ -116,7 +116,7 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(poli.getTable().getSelectedRow()!= -1){
                     KdPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
-                    NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
+                    NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
                 }      
                 BtnCaraBayar.requestFocus();
             }
