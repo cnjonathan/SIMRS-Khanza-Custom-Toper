@@ -393,44 +393,45 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
 
         jPanel3.setName("jPanel3"); // NOI18N
         jPanel3.setOpaque(false);
-        jPanel3.setPreferredSize(new java.awt.Dimension(44, 100));
+        jPanel3.setPreferredSize(new java.awt.Dimension(44, 130));
         jPanel3.setLayout(new java.awt.BorderLayout(1, 1));
 
+        panelGlass8.setMinimumSize(new java.awt.Dimension(628, 88));
         panelGlass8.setName("panelGlass8"); // NOI18N
-        panelGlass8.setPreferredSize(new java.awt.Dimension(44, 44));
-        panelGlass8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+        panelGlass8.setPreferredSize(new java.awt.Dimension(44, 88));
+        panelGlass8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setText("Tgl.Rujuk :");
         jLabel19.setName("jLabel19"); // NOI18N
         jLabel19.setPreferredSize(new java.awt.Dimension(67, 23));
-        panelGlass8.add(jLabel19);
+        panelGlass8.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 13, -1, -1));
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-11-2021" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-10-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
         DTPCari1.setPreferredSize(new java.awt.Dimension(95, 23));
-        panelGlass8.add(DTPCari1);
+        panelGlass8.add(DTPCari1, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 13, -1, -1));
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("s.d.");
         jLabel21.setName("jLabel21"); // NOI18N
         jLabel21.setPreferredSize(new java.awt.Dimension(23, 23));
-        panelGlass8.add(jLabel21);
+        panelGlass8.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 13, -1, -1));
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-11-2021" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-10-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
         DTPCari2.setPreferredSize(new java.awt.Dimension(95, 23));
-        panelGlass8.add(DTPCari2);
+        panelGlass8.add(DTPCari2, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 13, -1, -1));
 
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setName("jLabel22"); // NOI18N
         jLabel22.setPreferredSize(new java.awt.Dimension(73, 23));
-        panelGlass8.add(jLabel22);
+        panelGlass8.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 13, -1, -1));
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
         BtnHapus.setMnemonic('H');
@@ -448,7 +449,7 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
                 BtnHapusKeyPressed(evt);
             }
         });
-        panelGlass8.add(BtnHapus);
+        panelGlass8.add(BtnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
         BtnEdit.setMnemonic('G');
@@ -466,7 +467,7 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
                 BtnEditKeyPressed(evt);
             }
         });
-        panelGlass8.add(BtnEdit);
+        panelGlass8.add(BtnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
         BtnPrint.setMnemonic('T');
@@ -484,7 +485,7 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
                 BtnPrintKeyPressed(evt);
             }
         });
-        panelGlass8.add(BtnPrint);
+        panelGlass8.add(BtnPrint, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -502,7 +503,7 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
                 BtnKeluarKeyPressed(evt);
             }
         });
-        panelGlass8.add(BtnKeluar);
+        panelGlass8.add(BtnKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, -1, -1));
 
         jPanel3.add(panelGlass8, java.awt.BorderLayout.CENTER);
 
@@ -583,7 +584,7 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
         jLabel30.setBounds(0, 12, 102, 23);
 
         TanggalRujukKeluar.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujukKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-11-2021" }));
+        TanggalRujukKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-10-2026" }));
         TanggalRujukKeluar.setDisplayFormat("dd-MM-yyyy");
         TanggalRujukKeluar.setName("TanggalRujukKeluar"); // NOI18N
         TanggalRujukKeluar.setOpaque(false);
@@ -766,7 +767,7 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
         jLabel50.setBounds(638, 42, 80, 23);
 
         TanggalKunjungRujukan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKunjungRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-11-2021" }));
+        TanggalKunjungRujukan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-10-2026" }));
         TanggalKunjungRujukan.setDisplayFormat("dd-MM-yyyy");
         TanggalKunjungRujukan.setName("TanggalKunjungRujukan"); // NOI18N
         TanggalKunjungRujukan.setOpaque(false);
