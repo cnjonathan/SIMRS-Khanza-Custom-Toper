@@ -612,7 +612,7 @@ public final class DlgReg extends javax.swing.JDialog {
                         if(no_tlp.equals("")){
                             no_tlp = Sequel.cariIsi("select pasien.no_tlp from pasien where pasien.no_rkm_medis=?", TNoRM.getText());
                         }
-                        if(!checkWhatsappStatus(no_tlp).equals("Valid")){
+                        if(checkWhatsappStatus(no_tlp).equals("Tidak Valid")){
                             notif_auto_close("Nomor WhatsApp Pasien Tidak Valid.<br>Data Nomor WhatsApp Harus Valid!");
                         }
                     }
@@ -1660,6 +1660,7 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnAll = new widget.Button();
         jLabel10 = new widget.Label();
         LCount = new widget.Label();
+        labelStatusWA = new widget.Label();
         BtnKeluar = new widget.Button();
         panelGlass7 = new widget.panelisi();
         jLabel15 = new widget.Label();
@@ -2626,6 +2627,12 @@ public final class DlgReg extends javax.swing.JDialog {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                stopWaCheck();
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                stopWaCheck();
+            }
         });
 
         internalFrame1.setBorder(null);
@@ -2758,6 +2765,14 @@ public final class DlgReg extends javax.swing.JDialog {
         LCount.setName("LCount"); // NOI18N
         LCount.setPreferredSize(new java.awt.Dimension(72, 30));
         panelGlass6.add(LCount);
+
+        labelStatusWA.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelStatusWA.setText("");
+        labelStatusWA.setName("labelStatusWA"); // NOI18N
+        labelStatusWA.setPreferredSize(new java.awt.Dimension(260, 30));
+        labelStatusWA.setFont(new java.awt.Font("Tahoma", java.awt.Font.BOLD, 11));
+        labelStatusWA.setVisible(false);
+        panelGlass6.add(labelStatusWA);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -3664,6 +3679,7 @@ public final class DlgReg extends javax.swing.JDialog {
         DlgDemografi.dispose();
         DlgCatatan.dispose();
         akses.setAktif(false);
+        stopWaCheck();
         dispose();
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
@@ -11221,6 +11237,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.TextBox Kecamatan2;
     private widget.TextBox Kelurahan2;
     private widget.Label LCount;
+    private widget.Label labelStatusWA;
     private widget.Label LabelCatatan;
     private widget.TextBox Location_SatuSehat;
     private javax.swing.JMenu MenuInputData;
@@ -11644,7 +11661,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 where_kehadiran = "";
         }
         Valid.tabelKosong(tabMode);   
-        waStatusCache.clear();
+        stopWaCheck();
+        java.util.List<WaCheckTask> tasksToVerify = new java.util.ArrayList<>();
         try {
             if(CrPoli.getText().trim().equals("")&&CrDokter.getText().equals("")&&TCari.equals("")){
                 ps=koneksi.prepareStatement("select "+
@@ -11888,6 +11906,29 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                         ihs_pasien = "Ada";
                     }
                     
+                    String no_tlp = rs.getString("no_tlp");
+                    String waStatusInitial = "Mengecek";
+                    String noHpClean = "";
+                    if (no_tlp == null || no_tlp.trim().isEmpty()) {
+                        waStatusInitial = "Tidak Valid";
+                    } else {
+                        noHpClean = no_tlp.replaceAll("[^0-9]", "");
+                        if (noHpClean.startsWith("62")) {
+                            noHpClean = "0" + noHpClean.substring(2);
+                        } else if (noHpClean.startsWith("8")) {
+                            noHpClean = "0" + noHpClean;
+                        }
+                        if (!noHpClean.startsWith("08") || noHpClean.length() < 10 || noHpClean.length() > 15) {
+                            waStatusInitial = "Tidak Valid";
+                        } else if (waStatusCache.containsKey(noHpClean)) {
+                            waStatusInitial = waStatusCache.get(noHpClean);
+                        }
+                    }
+
+                    if (waStatusInitial.equals("Mengecek")) {
+                        tasksToVerify.add(new WaCheckTask(rs.getString("no_rawat"), noHpClean));
+                    }
+
                     tabMode.addRow(new Object[] {
                         false,
                         rs.getString("no_reg"),
@@ -11905,7 +11946,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                         rs.getString("no_sep"),
                         encounter,
                         ihs_pasien,
-                        checkWhatsappStatus(rs.getString("no_tlp")),
+                        waStatusInitial,
                         rs.getString("png_jawab"),
                         rs.getString("p_jawab"),
                         rs.getString("almt_pj"),
@@ -11946,6 +11987,10 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     }
 
                     column.setPreferredWidth(maxWidth);
+                }
+                
+                if (!tasksToVerify.isEmpty()) {
+                    startWaCheckWorker(tasksToVerify);
                 }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
@@ -12192,7 +12237,132 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }
 
-    private java.util.Map<String, String> waStatusCache = new java.util.HashMap<>();
+    private static java.util.Map<String, String> waStatusCache = new java.util.HashMap<>();
+    private static long lastWaServiceFailureTime = 0;
+    private static boolean waServiceOffline = false;
+    private javax.swing.Timer waBlinkTimer;
+    private javax.swing.SwingWorker<Void, Object[]> waCheckWorker;
+
+    private static class WaCheckTask {
+        String noRawat;
+        String noHpClean;
+        public WaCheckTask(String noRawat, String noHpClean) {
+            this.noRawat = noRawat;
+            this.noHpClean = noHpClean;
+        }
+    }
+
+    private void stopWaCheck() {
+        if (waCheckWorker != null && !waCheckWorker.isDone()) {
+            waCheckWorker.cancel(true);
+        }
+        if (waBlinkTimer != null) {
+            waBlinkTimer.stop();
+        }
+        if (labelStatusWA != null) {
+            labelStatusWA.setVisible(false);
+            labelStatusWA.setText("");
+        }
+    }
+
+    private void startWaCheckWorker(final java.util.List<WaCheckTask> tasks) {
+        if (tasks == null || tasks.isEmpty()) {
+            if (labelStatusWA != null) labelStatusWA.setVisible(false);
+            return;
+        }
+        
+        if (labelStatusWA != null) {
+            labelStatusWA.setVisible(true);
+            labelStatusWA.setText("● Memeriksa Status WA (0/" + tasks.size() + ")...");
+            labelStatusWA.setForeground(new java.awt.Color(0, 120, 215));
+        }
+        
+        if (waBlinkTimer != null) {
+            waBlinkTimer.stop();
+        }
+        
+        waBlinkTimer = new javax.swing.Timer(500, new java.awt.event.ActionListener() {
+            private boolean blink = false;
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                blink = !blink;
+                if (labelStatusWA != null && labelStatusWA.isVisible()) {
+                    labelStatusWA.setForeground(blink ? new java.awt.Color(0, 120, 215) : new java.awt.Color(128, 128, 128));
+                }
+            }
+        });
+        waBlinkTimer.start();
+        
+        waCheckWorker = new javax.swing.SwingWorker<Void, Object[]>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                int total = tasks.size();
+                int current = 0;
+                for (WaCheckTask task : tasks) {
+                    if (isCancelled()) break;
+                    String status = checkWhatsappStatus(task.noHpClean);
+                    current++;
+                    publish(new Object[]{task.noRawat, status, current, total});
+                }
+                return null;
+            }
+            
+            @Override
+            protected void process(java.util.List<Object[]> chunks) {
+                if (chunks == null || chunks.isEmpty() || isCancelled()) return;
+                
+                Object[] lastChunk = chunks.get(chunks.size() - 1);
+                int current = (int) lastChunk[2];
+                int total = (int) lastChunk[3];
+                if (labelStatusWA != null) {
+                    labelStatusWA.setText("● Memeriksa Status WA (" + current + "/" + total + ")...");
+                }
+                
+                int colWa = 16;
+                int colNoRawat = 2;
+                int rowCount = tabMode.getRowCount();
+                
+                for (Object[] chunk : chunks) {
+                    String targetNoRawat = (String) chunk[0];
+                    String targetStatus = (String) chunk[1];
+                    
+                    for (int r = 0; r < rowCount; r++) {
+                        Object valNoRawat = tabMode.getValueAt(r, colNoRawat);
+                        if (valNoRawat != null && valNoRawat.toString().equals(targetNoRawat)) {
+                            tabMode.setValueAt(targetStatus, r, colWa);
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            @Override
+            protected void done() {
+                if (waBlinkTimer != null) {
+                    waBlinkTimer.stop();
+                }
+                if (!isCancelled() && labelStatusWA != null) {
+                    labelStatusWA.setText("✔ Verifikasi WA Selesai");
+                    labelStatusWA.setForeground(new java.awt.Color(40, 167, 69));
+                    
+                    javax.swing.Timer hideTimer = new javax.swing.Timer(3000, new java.awt.event.ActionListener() {
+                        @Override
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            if (labelStatusWA != null) {
+                                labelStatusWA.setVisible(false);
+                            }
+                            ((javax.swing.Timer) evt.getSource()).stop();
+                        }
+                    });
+                    hideTimer.setRepeats(false);
+                    hideTimer.start();
+                } else if (labelStatusWA != null) {
+                    labelStatusWA.setVisible(false);
+                }
+            }
+        };
+        waCheckWorker.execute();
+    }
 
     private void bypassSSLConnection(java.net.HttpURLConnection conn) {
         if (conn instanceof javax.net.ssl.HttpsURLConnection) {
@@ -12220,16 +12390,25 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
         
         String noHpClean = noHp.replaceAll("[^0-9]", "");
-        if (noHpClean.startsWith("8")) {
+        if (noHpClean.startsWith("62")) {
+            noHpClean = "0" + noHpClean.substring(2);
+        } else if (noHpClean.startsWith("8")) {
             noHpClean = "0" + noHpClean;
         }
         
-        if (noHpClean.length() < 8) {
+        // Nomor HP Indonesia harus diawali 08 dan memiliki panjang 10-15 digit
+        if (!noHpClean.startsWith("08") || noHpClean.length() < 10 || noHpClean.length() > 15) {
             return "Tidak Valid";
         }
         
         if (waStatusCache.containsKey(noHpClean)) {
             return waStatusCache.get(noHpClean);
+        }
+        
+        // Circuit breaker: jika service sebelumnya offline/gagal, tunggu 60 detik sebelum mencoba lagi
+        if (waServiceOffline && (System.currentTimeMillis() - lastWaServiceFailureTime < 60000)) {
+            waStatusCache.put(noHpClean, "Belum Diset");
+            return "Belum Diset";
         }
         
         String urlRme = koneksiDB.URLRSUDRME();
@@ -12252,8 +12431,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
             bypassSSLConnection(conn);
             conn.setRequestMethod("POST");
-            conn.setConnectTimeout(3000);
-            conn.setReadTimeout(3000);
+            conn.setConnectTimeout(800);
+            conn.setReadTimeout(1200);
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setDoOutput(true);
             
@@ -12282,9 +12461,17 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                         statusResult = "Belum Diset";
                     }
                 }
+                waServiceOffline = false;
+            } else {
+                statusResult = "Belum Diset";
             }
         } catch (Exception e) {
-            System.out.println("Notifikasi checkWhatsappStatus : " + e);
+            if (!waServiceOffline) {
+                System.out.println("Notifikasi checkWhatsappStatus : " + e);
+            }
+            waServiceOffline = true;
+            lastWaServiceFailureTime = System.currentTimeMillis();
+            statusResult = "Belum Diset";
         }
         
         waStatusCache.put(noHpClean, statusResult);

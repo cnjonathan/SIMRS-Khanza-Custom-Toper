@@ -5813,6 +5813,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 BtnNota.setVisible(false);
             }            
         }
+        if (btnHapusDep != null) {
+            btnHapusDep.setVisible(akses.getadmin());
+        }
+        if (btnHapusRef != null) {
+            btnHapusRef.setVisible(akses.getadmin());
+        }
     }
     
     private boolean isAkunPiutangPasienUmum(String namaAkun, String kdPj) {
@@ -7869,6 +7875,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         btnHapusDep.setText("Hapus");
         btnHapusDep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png")));
         btnHapusDep.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnHapusDep.setVisible(akses.getadmin());
         buttonsDeposit.add(btnHapusDep);
 
         btnCetakDep = new widget.Button();
@@ -8052,6 +8059,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         btnHapusRef.setText("Hapus");
         btnHapusRef.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png")));
         btnHapusRef.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnHapusRef.setVisible(akses.getadmin());
         buttonsRefund.add(btnHapusRef);
 
         btnCetakRef = new widget.Button();
@@ -8294,6 +8302,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         btnHapusDep.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (!akses.getadmin()) {
+                    JOptionPane.showMessageDialog(null, "Hanya Administrator Utama yang berhak menghapus data deposit!");
+                    return;
+                }
                 if (tbDepositDep.getSelectedRow() == -1) {
                     JOptionPane.showMessageDialog(null, "Pilih data deposit yang ingin dihapus pada tabel!");
                     return;
@@ -8303,12 +8315,23 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     return;
                 }
 
+                String noDep = tbDepositDep.getValueAt(tbDepositDep.getSelectedRow(), 0).toString();
+                double nominal = Valid.SetAngka(tbDepositDep.getValueAt(tbDepositDep.getSelectedRow(), 3).toString());
+                String akunBayar = tbDepositDep.getValueAt(tbDepositDep.getSelectedRow(), 2).toString();
+
+                double totalDeposit = Sequel.cariIsiAngka("select ifnull(sum(besar_deposit),0) from deposit where no_rawat=?", TNoRw.getText().trim());
+                double totalRefundOld = Sequel.cariIsiAngka("select ifnull(sum(besar_pengembalian),0) from pengembalian_deposit where no_rawat=?", TNoRw.getText().trim());
+                double totalRefundNew = Sequel.cariIsiAngka("select ifnull(sum(total_refund),0) from pengembalian_deposit_v2 where no_rawat=?", TNoRw.getText().trim());
+                double totalRefund = totalRefundOld + totalRefundNew;
+                double totalPemakaian = Sequel.cariIsiAngka("select ifnull(sum(Uang_Muka),0) from nota_inap where no_rawat=?", TNoRw.getText().trim());
+
+                if ((totalDeposit - nominal) < (totalRefund + totalPemakaian)) {
+                    JOptionPane.showMessageDialog(null, "Deposit tidak dapat dihapus karena sisa deposit sudah digunakan untuk refund atau billing!");
+                    return;
+                }
+
                 int confirm = JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus deposit ini?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-                    String noDep = tbDepositDep.getValueAt(tbDepositDep.getSelectedRow(), 0).toString();
-                    double nominal = Valid.SetAngka(tbDepositDep.getValueAt(tbDepositDep.getSelectedRow(), 3).toString());
-                    String akunBayar = tbDepositDep.getValueAt(tbDepositDep.getSelectedRow(), 2).toString();
-
                     Sequel.AutoComitFalse();
                     boolean sukses = Sequel.queryu2tf("delete from deposit where no_deposit=?", 1, new String[]{noDep});
                     if (sukses) {
@@ -8451,8 +8474,16 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         btnHapusRef.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (!akses.getadmin()) {
+                    JOptionPane.showMessageDialog(null, "Hanya Administrator Utama yang berhak menghapus data refund!");
+                    return;
+                }
                 if (tbRefundRef.getSelectedRow() == -1) {
                     JOptionPane.showMessageDialog(null, "Pilih data refund yang ingin dihapus pada tabel!");
+                    return;
+                }
+                if (Sequel.cariRegistrasi(TNoRw.getText()) > 0) {
+                    JOptionPane.showMessageDialog(null, "Data billing sudah terverifikasi. Tidak dapat menghapus refund!");
                     return;
                 }
 

@@ -9426,7 +9426,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             if(tbKasirRalan.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 DlgCatatan catatan=new DlgCatatan(null,true);
-                catatan.setNoRm(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString());
+                catatan.setNoRm(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),3).toString());
                 catatan.setSize(720,330);
                 catatan.setLocationRelativeTo(internalFrame1);
                 catatan.setVisible(true);
